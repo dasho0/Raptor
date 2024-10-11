@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.10.2)  11 OCT 2024 17:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024/Arch Linux) (preloaded format=pdflatex 2024.10.2)  11 OCT 2024 18:35
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -937,24 +937,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[2{/usr/share/texmf-dist/fonts/enc/dvips/pl/plit.enc}] (./tex/rozdzial1.tex
-<rys/ans.png, id=79, 240.9pt x 67.75313pt>
-File: rys/ans.png Graphic file (type png)
-<use rys/ans.png>
-Package pdftex.def Info: rys/ans.png  used on input line 26.
-(pdftex.def)             Requested size: 227.62204pt x 64.02081pt.
- (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2024/02/21 1.10 listings language file
-) (/usr/share/texmf-dist/tex/latex/listings/lstlang1.sty
-File: lstlang1.sty 2024/02/21 1.10 listings language file
-) (/usr/share/texmf-dist/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2024/02/21 1.10 (Carsten Heinz)
-)
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 54.
-LaTeX Font Info:    Trying to load font information for OT4+cmtt on input line 54.
- (/usr/share/texmf-dist/tex/latex/polski/ot4cmtt.fd
-File: ot4cmtt.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
-)
+[2{/usr/share/texmf-dist/fonts/enc/dvips/pl/plit.enc}] (./tex/rozdzial1.tex) (./tex/rozdzial2.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.48892pt, for example:
@@ -962,7 +945,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[3{/usr/share/texmf-dist/fonts/enc/dvips/pl/pltt.enc} <./rys/ans.png>] (./kod/main.cpp
+[3{/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]) (./tex/rozdzial3.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.48892pt, for example:
@@ -970,13 +953,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[4])
-<rys/ustawienie.png, id=168, 918.43124pt x 581.92406pt>
-File: rys/ustawienie.png Graphic file (type png)
-<use rys/ustawienie.png>
-Package pdftex.def Info: rys/ustawienie.png  used on input line 110.
-(pdftex.def)             Requested size: 426.79135pt x 270.42317pt.
-) (./tex/rozdzial2.tex
+[4]) (./tex/rozdzial4.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.48892pt, for example:
@@ -984,7 +961,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[5]) (./tex/rozdzial3.tex
+[5]) (./tex/rozdzial5.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.48892pt, for example:
@@ -992,7 +969,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[6 <./rys/ustawienie.png>]) (./tex/rozdzial4.tex
+[6]) (./tex/rozdzial6.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.48892pt, for example:
@@ -1000,7 +977,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[7]) (./tex/rozdzial5.tex
+[7])
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 22.48892pt, for example:
@@ -1008,31 +985,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[8]) (./tex/rozdzial6.tex
+[8]
 
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 22.48892pt, for example:
-(fancyhdr)                \setlength{\headheight}{22.48892pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
+LaTeX Warning: Empty bibliography on input line 78.
 
-[9])
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 22.48892pt, for example:
-(fancyhdr)                \setlength{\headheight}{22.48892pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
-
-[10]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 22.48892pt, for example:
-(fancyhdr)                \setlength{\headheight}{22.48892pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
-
-[11{/usr/share/texmf-dist/fonts/enc/dvips/pl/plsc.enc}] (./dokument.lof)
+(./dokument.lof)
 \tf@lof=\write7
 \openout7 = `dokument.lof'.
 
@@ -1044,7 +1001,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[12
+[9
 
 ] (./dokument.lot)
 \tf@lot=\write8
@@ -1058,7 +1015,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[13] (./dokument.lol)
+[10] (./dokument.lol)
 \tf@lol=\write9
 \openout9 = `dokument.lol'.
 
@@ -1073,30 +1030,30 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[14] (./dokument.aux)
+[11] (./dokument.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-02-20>
  ***********
 Package rerunfilecheck Info: File `dokument.out' has not changed.
-(rerunfilecheck)             Checksum: 74446E7CA451968CCDE7356751E58168;1624.
+(rerunfilecheck)             Checksum: 5A50C92C6D5CDDF4CD89482B053EF883;1748.
 Package logreq Info: Writing requests to 'dokument.run.xml'.
 \openout1 = `dokument.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 24953 strings out of 476041
- 419010 string characters out of 5792971
- 2089187 words of memory out of 5000000
- 46578 multiletter control sequences out of 15000+600000
- 576493 words of font info for 91 fonts, out of 8000000 for 9000
+ 24140 strings out of 476041
+ 407594 string characters out of 5792971
+ 1933187 words of memory out of 5000000
+ 45863 multiletter control sequences out of 15000+600000
+ 570996 words of font info for 73 fonts, out of 8000000 for 9000
  35 hyphenation exceptions out of 8191
- 80i,12n,84p,866b,2039s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plbx10.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plbx12.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plcsc10.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plr10.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plr12.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plr17.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plr6.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plr7.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plr8.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plss12.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plssbx10.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plti10.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plti12.pfb></usr/share/texmf-dist/fonts/type1/public/pl/pltt10.pfb></usr/share/texmf-dist/fonts/type1/public/pl/pltt12.pfb>
-Output written on dokument.pdf (14 pages, 327010 bytes).
+ 80i,11n,84p,738b,1744s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf-dist/fonts/type1/public/pl/plbx12.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plr12.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plr17.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plr8.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plss12.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plssbx10.pfb></usr/share/texmf-dist/fonts/type1/public/pl/plti10.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on dokument.pdf (11 pages, 85109 bytes).
 PDF statistics:
- 340 PDF objects out of 1000 (max. 8388607)
- 283 compressed objects within 3 object streams
- 93 named destinations out of 1000 (max. 500000)
- 107 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 160 PDF objects out of 1000 (max. 8388607)
+ 129 compressed objects within 2 object streams
+ 20 named destinations out of 1000 (max. 500000)
+ 97 words of extra memory for PDF output out of 10000 (max. 10000000)
 
