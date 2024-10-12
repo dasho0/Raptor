@@ -5,3 +5,15 @@
 \subsection{Ogólny zarys narzędzi użytych w projekcie}
 
 Aplikacja jest zaprojektowana w Android Studio w języku Kotlin. Całe UI aplikacji będzie zbudowane na podstawie Frameworka Jetpack Compose\footnote{https://developer.android.com/compose} Używając wbudowanych bibliotek w SDK Androida, będzie mogła odczytywać pliki ze wskazanego folderu. Odczytywanie tagów z plików odbędzie się za pomocą biblioteki Taglib\footnote{https://github.com/timusus/KTagLib}, która posiada nieoficjalne bindingi do Kotlina. Wszelki processing audio np. na potrzeby wizualizacji może zostać wykonany za pomocą SDK i wbudowanego modułu AudioProcessor\footnote{https://developer.android.com/reference/androidx/media3/common/audio/AudioProcessor}. Odtwarzaniem pliku będzie się zajmował moduł MediaPlayer\footnote{https://developer.android.com/media/platform/mediaplayer}.
+
+\subsection{Wykorzystanie czujników}
+
+\begin{itemize}
+	\item Żyroskop - Z racji, że każdy element interfejsu w Jetpack jest generowany kodem, można, przynajmniej na początku, ustawić każdą wersję interfejsu jako osobną funkcję. Następnie, w zależności od wykrytej orientacji, przy użyciu API sensorów\footnote{https://developer.android.com/develop/sensors-and-location/sensors/sensors\_overview}, można wywoływać odpowiednią funkcję.
+	
+	\item Mikrofon - Funkcja dyktafonu najprawdopodobniej będzie całkiem oddzielnym Activity. Funkcjonalność ta, z natury, jest dosyć oddzielna od reszty aplikacji. Nagrania dyktafonem powinny być zapisywane do osobnego folderu. Można by zintegrować nagrania z resztą aplikacji jako osobnego wykonawcę w widoku biblioteki. Mikrofon będzie nagrywany poprzez moduł MediaRecorder\footnote{https://developer.android.com/media/platform/mediarecorder}
+
+	\item Czujnik światła - Android Studio oferuje możliwość definiowania własnych klas zajmujących się kolorystyką. Oznacza to że można używać różnych obiektów w zależności od warunków. Wykrywanie światła będzie się odbywało używając API sensorów\footnote{Patrz, przypis 5} % FIXME: badziewne rozwiazenie, naprawic
+\end{itemize}
+
+% TODO: opisac interfejs
