@@ -1,0 +1,13 @@
+\babel@toc {polish}{}\relax 
+\contentsline {section}{\numberline {1}Ogólne określenie wymagań}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Ogólny zarys wymagań}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Wykorzystane czujniki}{3}{subsection.1.2}%
+\contentsline {section}{\numberline {2}Określenie wymagań szczegółowych}{4}{section.2}%
+\contentsline {section}{\numberline {3}Projektowanie}{5}{section.3}%
+\contentsline {section}{\numberline {4}Implementacja}{6}{section.4}%
+\contentsline {section}{\numberline {5}Testowanie}{7}{section.5}%
+\contentsline {section}{\numberline {6}Podręcznik użytkownika}{8}{section.6}%
+\contentsline {section}{Literatura}{9}{section.6}%
+\contentsline {section}{Spis rysunków}{9}{section.6}%
+\contentsline {section}{Spis tabel}{10}{section.6}%
+\contentsline {section}{Spis listingów}{11}{section.6}%
