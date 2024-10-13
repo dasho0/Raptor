@@ -16,4 +16,36 @@ Aplikacja jest zaprojektowana w Android Studio w języku Kotlin. Całe UI aplika
 	\item Czujnik światła - Android Studio oferuje możliwość definiowania własnych klas zajmujących się kolorystyką. Oznacza to że można używać różnych obiektów w zależności od warunków. Wykrywanie światła będzie się odbywało używając API sensorów\footnote{Patrz, przypis 5} % FIXME: badziewne rozwiazenie, naprawic
 \end{itemize}
 
-% TODO: opisac interfejs
+\subsection{Zarys interfejsu}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/mockup_artysta.png}
+	\caption{\centering{Mockup widoku biblioteki - listing wykonawców}}
+\end{figure}
+
+Widok wykonawców będzie ekranem startowym aplikacji. "Kafelki" będa zdjęciami wykonawców. Klikanie na jeden z nich przejdzie do widoku albumów danego wykonawcy
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/mockup_albumy.png}
+	\caption{\centering{Mockup widoku albumów danego wykonawcy}}
+\end{figure}
+
+Widok albumów jest identyczny jak widok wykonawców. Jedyna różnica polega tym, że zdjęcia na kafelkach będą zdjęciami albumów.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/mockup_utwory.png}
+	\caption{\centering{Mockup widoku wyboru utworu}}
+\end{figure}
+
+Po wejściu na jakiś album zaprezentowane zostaną zawarte w nim utwory. W lewym górnym jest zdjęcie danego albumu, a obok niego jest kilka informacji o albumie jak wykonawca, data, tytuł. Dłuższe paski to lista tytułów piosenek, które można kliknąć, aby daną piosenkę włączyć.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\textwidth]{images/mockup_odtwarzacz.png}
+	\caption{\centering{Mockup odtwarzacza}}
+\end{figure}
+
+Odtwarzacz będzie działał następująco: duże koło będzie stylizowane na płytę, gdzie wypełniona ona będzie obrazem albumu. Płyta ta będzie się kręcić w czasie gdy gra piosenka. Kąt płyty (od 0\degree, do 360\degree) będzie określał jak duża część piosenki została odtworzona. Kąt ten będzie określony jeszcze niezdefiniowanym efektem graficznym. Prostokąty wokół płyty to tytuł piosenki, a na dole czas grania. Kółko i wokół niego trójkąty to przyciski odtwarzania - graj/pauza, następny, poprzedni. 
