@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.20)  20 OCT 2024 13:09
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.20)  20 OCT 2024 16:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1074,7 +1074,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
 [2{d:/Programy/texlive/2024/texmf-dist/fonts/enc/dvips/pl/plit.enc}]
-(./tex/rozdzial1.tex) (./tex/rozdzial2.tex
+(./tex/rozdzial1.tex
+<images/mockup_artysta.png, id=101, 710.655pt x 370.38374pt>
+File: images/mockup_artysta.png Graphic file (type png)
+<use images/mockup_artysta.png>
+Package pdftex.def Info: images/mockup_artysta.png  used on input line 25.
+(pdftex.def)             Requested size: 426.79135pt x 222.44106pt.
+
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1085,35 +1091,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
 [3{d:/Programy/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.en
-c}]
-<images/mockup_artysta.png, id=113, 710.655pt x 370.38374pt>
-File: images/mockup_artysta.png Graphic file (type png)
-<use images/mockup_artysta.png>
-Package pdftex.def Info: images/mockup_artysta.png  used on input line 23.
-(pdftex.def)             Requested size: 426.79135pt x 222.44106pt.
-
-Underfull \vbox (badness 7308) has occurred while \output is active []
-
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 22.48892pt, for example:
-(fancyhdr)                \setlength{\headheight}{22.48892pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
-
-[4]
-<images/mockup_albumy.png, id=128, 791.20593pt x 397.485pt>
+c} <./images/mockup_artysta.png>]
+<images/mockup_albumy.png, id=113, 791.20593pt x 397.485pt>
 File: images/mockup_albumy.png Graphic file (type png)
 <use images/mockup_albumy.png>
-Package pdftex.def Info: images/mockup_albumy.png  used on input line 31.
+Package pdftex.def Info: images/mockup_albumy.png  used on input line 33.
 (pdftex.def)             Requested size: 426.79135pt x 214.41429pt.
-<images/mockup_utwory.png, id=129, 764.10469pt x 428.35031pt>
+<images/mockup_utwory.png, id=114, 764.10469pt x 428.35031pt>
 File: images/mockup_utwory.png Graphic file (type png)
 <use images/mockup_utwory.png>
-Package pdftex.def Info: images/mockup_utwory.png  used on input line 39.
+Package pdftex.def Info: images/mockup_utwory.png  used on input line 41.
 (pdftex.def)             Requested size: 426.79135pt x 239.2536pt.
 
 
@@ -1125,30 +1112,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[5 <./images/mockup_artysta.png> <./images/mockup_albumy.png>]
-<images/mockup_odtwarzacz.png, id=139, 645.91313pt x 328.22626pt>
+[4 <./images/mockup_albumy.png> <./images/mockup_utwory.png>]
+<images/mockup_odtwarzacz.png, id=123, 645.91313pt x 328.22626pt>
 File: images/mockup_odtwarzacz.png Graphic file (type png)
 <use images/mockup_odtwarzacz.png>
-Package pdftex.def Info: images/mockup_odtwarzacz.png  used on input line 47.
+Package pdftex.def Info: images/mockup_odtwarzacz.png  used on input line 49.
 (pdftex.def)             Requested size: 426.79135pt x 216.8754pt.
-
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 22.48892pt, for example:
-(fancyhdr)                \setlength{\headheight}{22.48892pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
-
-[6 <./images/mockup_utwory.png> <./images/mockup_odtwarzacz.png>]
-<images/mockup_dyktafon.png, id=149, 733.23938pt x 364.36125pt>
+<images/mockup_dyktafon.png, id=124, 733.23938pt x 364.36125pt>
 File: images/mockup_dyktafon.png Graphic file (type png)
 <use images/mockup_dyktafon.png>
-Package pdftex.def Info: images/mockup_dyktafon.png  used on input line 55.
+Package pdftex.def Info: images/mockup_dyktafon.png  used on input line 57.
 (pdftex.def)             Requested size: 426.79135pt x 212.08578pt.
 )
-(./tex/rozdzial3.tex
+(./tex/rozdzial2.tex
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1158,7 +1134,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[7 <./images/mockup_dyktafon.png>]) (./tex/rozdzial4.tex
+[5 <./images/mockup_odtwarzacz.png> <./images/mockup_dyktafon.png>]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1168,7 +1144,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[8]) (./tex/rozdzial5.tex
+[6]
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1178,7 +1154,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[9]) (./tex/rozdzial6.tex
+[7]) (./tex/rozdzial3.tex
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1188,7 +1164,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[10])
+[8]) (./tex/rozdzial4.tex
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1198,7 +1174,37 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[11]
+[9]) (./tex/rozdzial5.tex
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.48892pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.48892pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
+
+[10]) (./tex/rozdzial6.tex
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.48892pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.48892pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
+
+[11])
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.48892pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.48892pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
+
+[12]
 
 LaTeX Warning: Empty bibliography on input line 78.
 
@@ -1216,7 +1222,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[12
+[13
 
 ] (./dokument.lot)
 \tf@lot=\write8
@@ -1232,7 +1238,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[13] (./dokument.lol)
+[14] (./dokument.lol)
 \tf@lol=\write9
 \openout9 = `dokument.lol'.
 
@@ -1251,7 +1257,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[14] (./dokument.aux)
+[15] (./dokument.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
@@ -1263,35 +1269,39 @@ Package rerunfilecheck Warning: File `dokument.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `dokument.out':
-(rerunfilecheck)             Before: 5175F0B0ED1DC1E57460A83FF9727D48;2857
-(rerunfilecheck)             After:  CA71CCC4CC6A8417554874121499B982;2905.
+(rerunfilecheck)             Before: 8980D28E7AAE8801D0E81740BC672DBA;2922
+(rerunfilecheck)             After:  9520C86813AFD8322D32164FBB8A3D62;2905.
 Package logreq Info: Writing requests to 'dokument.run.xml'.
 \openout1 = `dokument.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 24481 strings out of 473578
- 418159 string characters out of 5727714
- 1262168 words of memory out of 5000000
+ 24483 strings out of 473578
+ 418180 string characters out of 5727714
+ 1263168 words of memory out of 5000000
  46963 multiletter control sequences out of 15000+600000
  574690 words of font info for 87 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
  80i,11n,84p,888b,1760s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
-><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plbx10.pfb><d:/Prog
-ramy/texlive/2024/texmf-dist/fonts/type1/public/pl/plbx12.pfb><d:/Programy/texl
-ive/2024/texmf-dist/fonts/type1/public/pl/plr10.pfb><d:/Programy/texlive/2024/t
-exmf-dist/fonts/type1/public/pl/plr12.pfb><d:/Programy/texlive/2024/texmf-dist/
-fonts/type1/public/pl/plr17.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type
-1/public/pl/plr7.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl
-/plr8.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plss12.pfb
-><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plssbx10.pfb><d:/Pr
-ogramy/texlive/2024/texmf-dist/fonts/type1/public/pl/plti10.pfb><d:/Programy/te
-xlive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on dokument.pdf (14 pages, 163990 bytes).
+
+pdfTeX warning (dest): name{subsection.2.5} has been referenced but does not ex
+ist, replaced by a fixed one
+
+<d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><
+d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plbx10.pfb><d:/Progra
+my/texlive/2024/texmf-dist/fonts/type1/public/pl/plbx12.pfb><d:/Programy/texliv
+e/2024/texmf-dist/fonts/type1/public/pl/plr10.pfb><d:/Programy/texlive/2024/tex
+mf-dist/fonts/type1/public/pl/plr12.pfb><d:/Programy/texlive/2024/texmf-dist/fo
+nts/type1/public/pl/plr17.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type1/
+public/pl/plr7.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/p
+lr8.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plss12.pfb><
+d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plssbx10.pfb><d:/Prog
+ramy/texlive/2024/texmf-dist/fonts/type1/public/pl/plti10.pfb><d:/Programy/texl
+ive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
+Output written on dokument.pdf (15 pages, 164505 bytes).
 PDF statistics:
- 259 PDF objects out of 1000 (max. 8388607)
- 206 compressed objects within 3 object streams
- 40 named destinations out of 1000 (max. 500000)
+ 264 PDF objects out of 1000 (max. 8388607)
+ 210 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
  162 words of extra memory for PDF output out of 10000 (max. 10000000)
 

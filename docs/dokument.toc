@@ -2,17 +2,17 @@
 \contentsline {section}{\numberline {1}Ogólne określenie wymagań projektu}{3}{section.1}%
 \contentsline {subsection}{\numberline {1.1}Ogólny zarys wymagań}{3}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Wykorzystane czujniki}{3}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Określenie wymagań szczegółowych}{4}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Ogólny zarys narzędzi użytych w projekcie}{4}{subsection.2.1}%
-\contentsline {subsection}{\numberline {2.2}Wykorzystanie czujników}{4}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}Zarys interfejsu}{5}{subsection.2.3}%
-\contentsline {subsection}{\numberline {2.4}Zachowanie w niepożądanych sytuacjach}{7}{subsection.2.4}%
-\contentsline {subsection}{\numberline {2.5}Dalszy rozwój}{7}{subsection.2.5}%
-\contentsline {section}{\numberline {3}Projektowanie}{8}{section.3}%
-\contentsline {section}{\numberline {4}Implementacja}{9}{section.4}%
-\contentsline {section}{\numberline {5}Testowanie}{10}{section.5}%
-\contentsline {section}{\numberline {6}Podręcznik użytkownika}{11}{section.6}%
-\contentsline {section}{Literatura}{12}{section.6}%
-\contentsline {section}{Spis rysunków}{12}{section.6}%
-\contentsline {section}{Spis tabel}{13}{section.6}%
-\contentsline {section}{Spis listingów}{14}{section.6}%
+\contentsline {subsection}{\numberline {1.3}Zarys interfejsu}{3}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Określenie wymagań szczegółowych}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Ogólny zarys narzędzi użytych w projekcie}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Wykorzystanie czujników}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Zachowanie w niepożądanych sytuacjach}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Dalszy rozwój}{8}{subsection.2.4}%
+\contentsline {section}{\numberline {3}Projektowanie}{9}{section.3}%
+\contentsline {section}{\numberline {4}Implementacja}{10}{section.4}%
+\contentsline {section}{\numberline {5}Testowanie}{11}{section.5}%
+\contentsline {section}{\numberline {6}Podręcznik użytkownika}{12}{section.6}%
+\contentsline {section}{Literatura}{13}{section.6}%
+\contentsline {section}{Spis rysunków}{13}{section.6}%
+\contentsline {section}{Spis tabel}{14}{section.6}%
+\contentsline {section}{Spis listingów}{15}{section.6}%
