@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.20)  20 OCT 2024 18:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.26 (TeX Live 2024) (preloaded format=pdflatex 2024.10.20)  21 OCT 2024 17:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -908,7 +908,11 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 LaTeX Warning: Unused global option(s):
     [openany].
 
-(./dokument.aux)
+(./dokument.aux
+
+LaTeX Warning: Label `lst:listing-k' multiply defined.
+
+)
 \openout1 = `dokument.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 36.
@@ -1075,7 +1079,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [2{d:/Programy/texlive/2024/texmf-dist/fonts/enc/dvips/pl/plit.enc}]
 (./tex/rozdzial1.tex
-<images/mockup2_artysta.png, id=102, 579.52359pt x 285.67104pt>
+<images/mockup2_artysta.png, id=111, 579.52359pt x 285.67104pt>
 File: images/mockup2_artysta.png Graphic file (type png)
 <use images/mockup2_artysta.png>
 Package pdftex.def Info: images/mockup2_artysta.png  used on input line 25.
@@ -1092,17 +1096,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [3{d:/Programy/texlive/2024/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.en
 c} <./images/mockup2_artysta.PNG>]
-<images/mockup2_albumy.png, id=113, 617.70396pt x 317.71529pt>
+<images/mockup2_albumy.png, id=122, 617.70396pt x 317.71529pt>
 File: images/mockup2_albumy.png Graphic file (type png)
 <use images/mockup2_albumy.png>
 Package pdftex.def Info: images/mockup2_albumy.png  used on input line 34.
 (pdftex.def)             Requested size: 426.79135pt x 219.52434pt.
-<images/mockup2_utwory.png, id=114, 619.74934pt x 293.17076pt>
+<images/mockup2_utwory.png, id=123, 619.74934pt x 293.17076pt>
 File: images/mockup2_utwory.png Graphic file (type png)
 <use images/mockup2_utwory.png>
 Package pdftex.def Info: images/mockup2_utwory.png  used on input line 44.
 (pdftex.def)             Requested size: 426.79135pt x 201.89885pt.
-<images/mockup2_odtwarzacz.png, id=115, 627.93085pt x 311.57915pt>
+<images/mockup2_odtwarzacz.png, id=124, 627.93085pt x 311.57915pt>
 File: images/mockup2_odtwarzacz.png Graphic file (type png)
 <use images/mockup2_odtwarzacz.png>
 Package pdftex.def Info: images/mockup2_odtwarzacz.png  used on input line 55.
@@ -1118,7 +1122,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
 [4 <./images/mockup2_albumy.PNG> <./images/mockup2_utwory.PNG>]
-<images/mockup2_dyktafon.png, id=124, 638.83952pt x 323.85141pt>
+<images/mockup2_dyktafon.png, id=133, 638.83952pt x 323.85141pt>
 File: images/mockup2_dyktafon.png Graphic file (type png)
 <use images/mockup2_dyktafon.png>
 Package pdftex.def Info: images/mockup2_dyktafon.png  used on input line 65.
@@ -1145,7 +1149,106 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
 [6]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+LaTeX Font Info:    Trying to load font information for OT4+cmtt on input line 
+14.
+ (d:/Programy/texlive/2024/texmf-dist/tex/latex/polski/ot4cmtt.fd
+File: ot4cmtt.fd 2008/02/24 v1.2.1 Font defs for fonts PL (MW)
+)
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.48892pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.48892pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
+
+[7{d:/Programy/texlive/2024/texmf-dist/fonts/enc/dvips/pl/pltt.enc}]
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 22.48892pt, for example:
+(fancyhdr)                \setlength{\headheight}{22.48892pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
+
+[8]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 78.
+
+
+Package xcolor Warning: Incompatible color definition on input line 79.
+
+
+LaTeX Font Warning: Font shape `OT4/cmtt/bx/n' in size <10> not available
+(Font)              Font shape `OT4/cmtt/m/n' tried instead on input line 79.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 80.
+
+
+Package xcolor Warning: Incompatible color definition on input line 88.
+
+
+Package xcolor Warning: Incompatible color definition on input line 89.
+
+
+Package xcolor Warning: Incompatible color definition on input line 89.
+
+
+Package xcolor Warning: Incompatible color definition on input line 89.
+
+
+Package xcolor Warning: Incompatible color definition on input line 89.
+
+
+Package xcolor Warning: Incompatible color definition on input line 89.
+
+
+Package xcolor Warning: Incompatible color definition on input line 89.
+
+
+Package xcolor Warning: Incompatible color definition on input line 90.
+
+
+Package xcolor Warning: Incompatible color definition on input line 90.
+
+
+Package xcolor Warning: Incompatible color definition on input line 90.
+
+
+Package xcolor Warning: Incompatible color definition on input line 90.
 
 
 
@@ -1157,10 +1260,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[7]
-Underfull \vbox (badness 2556) has occurred while \output is active []
-
-
+[9]) (./tex/rozdzial3.tex
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1170,7 +1270,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[8]) (./tex/rozdzial3.tex
+[10]) (./tex/rozdzial4.tex
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1180,7 +1280,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[9]) (./tex/rozdzial4.tex
+[11]) (./tex/rozdzial5.tex
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1190,7 +1290,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[10]) (./tex/rozdzial5.tex
+[12]) (./tex/rozdzial6.tex
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1200,7 +1300,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[11]) (./tex/rozdzial6.tex
+[13])
 
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1210,17 +1310,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[12])
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 22.48892pt, for example:
-(fancyhdr)                \setlength{\headheight}{22.48892pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
-
-[13]
+[14]
 
 LaTeX Warning: Empty bibliography on input line 78.
 
@@ -1238,7 +1328,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[14
+[15
 
 ] (./dokument.lot)
 \tf@lot=\write8
@@ -1254,7 +1344,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[15] (./dokument.lol)
+[16] (./dokument.lol)
 \tf@lol=\write9
 \openout9 = `dokument.lol'.
 
@@ -1273,44 +1363,47 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-10.48892pt}.
 
-[16] (./dokument.aux)
+[17] (./dokument.aux)
  ***********
 LaTeX2e <2024-06-01> patch level 2
 L3 programming layer <2024-09-10>
  ***********
+
+
+LaTeX Warning: There were multiply-defined labels.
+
 Package rerunfilecheck Info: File `dokument.out' has not changed.
-(rerunfilecheck)             Checksum: 9520C86813AFD8322D32164FBB8A3D62;2905.
+(rerunfilecheck)             Checksum: BCDFA3D04FF873927D1CE28AD7888A3C;3210.
 Package logreq Info: Writing requests to 'dokument.run.xml'.
 \openout1 = `dokument.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 24505 strings out of 473578
- 418884 string characters out of 5727714
- 1263499 words of memory out of 5000000
- 46988 multiletter control sequences out of 15000+600000
- 574690 words of font info for 87 fonts, out of 8000000 for 9000
+ 24939 strings out of 473578
+ 423245 string characters out of 5727714
+ 1290673 words of memory out of 5000000
+ 47404 multiletter control sequences out of 15000+600000
+ 575781 words of font info for 90 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 80i,11n,84p,1034b,1760s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{section*.6} has been referenced but does not exist,
- replaced by a fixed one
-
-<d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><
-d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plbx10.pfb><d:/Progra
-my/texlive/2024/texmf-dist/fonts/type1/public/pl/plbx12.pfb><d:/Programy/texliv
-e/2024/texmf-dist/fonts/type1/public/pl/plr10.pfb><d:/Programy/texlive/2024/tex
-mf-dist/fonts/type1/public/pl/plr12.pfb><d:/Programy/texlive/2024/texmf-dist/fo
-nts/type1/public/pl/plr17.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type1/
-public/pl/plr7.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/p
-lr8.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plss12.pfb><
-d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plssbx10.pfb><d:/Prog
-ramy/texlive/2024/texmf-dist/fonts/type1/public/pl/plti10.pfb><d:/Programy/texl
-ive/2024/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb>
-Output written on dokument.pdf (16 pages, 158463 bytes).
+ 80i,11n,84p,738b,1760s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
+><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plbx10.pfb><d:/Prog
+ramy/texlive/2024/texmf-dist/fonts/type1/public/pl/plbx12.pfb><d:/Programy/texl
+ive/2024/texmf-dist/fonts/type1/public/pl/plr10.pfb><d:/Programy/texlive/2024/t
+exmf-dist/fonts/type1/public/pl/plr12.pfb><d:/Programy/texlive/2024/texmf-dist/
+fonts/type1/public/pl/plr17.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type
+1/public/pl/plr6.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl
+/plr7.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plr8.pfb><
+d:/Programy/texlive/2024/texmf-dist/fonts/type1/public/pl/plss12.pfb><d:/Progra
+my/texlive/2024/texmf-dist/fonts/type1/public/pl/plssbx10.pfb><d:/Programy/texl
+ive/2024/texmf-dist/fonts/type1/public/pl/plti10.pfb><d:/Programy/texlive/2024/
+texmf-dist/fonts/type1/public/pl/pltt10.pfb><d:/Programy/texlive/2024/texmf-dis
+t/fonts/type1/public/pl/pltt12.pfb><d:/Programy/texlive/2024/texmf-dist/fonts/t
+ype1/public/cm-super/sfrm1200.pfb>
+Output written on dokument.pdf (17 pages, 180606 bytes).
 PDF statistics:
- 260 PDF objects out of 1000 (max. 8388607)
- 205 compressed objects within 3 object streams
- 39 named destinations out of 1000 (max. 500000)
- 162 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 302 PDF objects out of 1000 (max. 8388607)
+ 240 compressed objects within 3 object streams
+ 50 named destinations out of 1000 (max. 500000)
+ 178 words of extra memory for PDF output out of 10000 (max. 10000000)
 

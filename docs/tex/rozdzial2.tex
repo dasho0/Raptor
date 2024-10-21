@@ -23,6 +23,76 @@ Wady korzystania z Android Studio to m.in.
 
 \subsubsection{Kotlin}
 
+\textbf{Wstęp}
+Kotlin został stworzony w 2010 roku przez firmę JetBrains oraz jest on przez nią rozwijany. Kotlin jest wieloplatformowym językiem typowanym statystycznie który został zaprojektowany aby współpracować z maszyną wirtualną Javy. Swoją nazwę zawdzięcza wyspie Kotlin która znajduje się w zatoce finlandzkiej.
+
+\textbf{Wykorzystanie kotlina}
+Kotlin jest językiem który jest wykorzystywany między innymi do:
+\begin{itemize}
+	\item Tworzenia i aktualizowania aplikacji mobilnych, szczególnie aplikacji na androida ale obsługuje też inne mobilne systemy operacyjne, takie ja na przykład IOS.
+	\item Rozwoju aplikacji WEB, ich utrzymania oraz aktualizacji.
+	\item Tworzenia, utrzymania i rozwoju aplikacji działających po stronie serwera.
+\end{itemize}
+
+\textbf{Dlaczego kotlin}
+
+Kotlina warto używać między innymi dlatego że jest on kompatybilny z językiem Java. Oprócz tego, współpracuje on z wieloma platformami takimi jak:
+\begin{itemize}
+	\item Windows
+	\item Mac
+	\item Linux
+	\item Raspberry Pi
+\end{itemize}
+Kotlin jest ponadto językiem łatwym do nauki dla niedoświadczonego programisty. Jeżeli ma się wcześniejsze doświadczenie z Javą to jest jeszcze łatwiejszy.
+
+Jest językiem darmowym w użytkowaniu, nie potrzeba żadnych opłat ani subskrypcji.
+
+Posiada dużą, prężnie rozwijającą się społeczność oferującą wsparcie w wykonywanych projektach, bogatość zasobów do nauki oraz bibliotek do wykorzystania.
+
+Wsparcie bibliotek Jetpack, jak na przykład Jetpack Compose który jest bardzo dobrym wyborem przy tworzeniu natywnego UI do aplikacji android.
+
+\textbf{Rozwój i historia kotlina}
+
+Kotlin został zaprojektowany w 2010 roku przez Firmę JetBrains. Według głównego programisty JetBrains, Dimitrija Jemerova, jedynym językiem który posiadał porządane funkcje był język Scala, aczkolwiek czas kompilacji był zbyt wysoki.
+
+Pierwszy commit do repozytorium kotlina został wypuszczony 8 listopada 2010 roku.
+W 15 lutego 2016 została wydana pierwsza oficjalna wersja kotlina – kotlin 1.0.
+
+W 2017 wraz z wydaniem Android Studio 3.0 oraz wypuszczeniem wersji 1.2 kotlina został on dodany przez Google jako alternatywa dla Javy
+
+29 października 2018 roku ogłoszono wersję 1.3 kotlina a już 7 maja 2019 Google ogłosiło kotlin preferowanym językiem do pisania aplikacji mobilnych na androida.
+
+Wraz z aktualizacją 1.4 we wrześniu 2020 kotlin otrzymał wsparcie do platform Apple.
+
+W Maju 2021 wydano wersję 1.5 a już parę miesięcy później w listopadzie wydano wersję 1.6.
+
+W czerwcu 2022 wydano wersję 1.7 dodając wersję alfa nowego kompilera Kotlin K2 compiler. Parę miesięcy później w grudniu wydano wersję 1.8.
+
+Kotlin 1.9 został wydany w czerwcu 2023
+
+Kotlin 2.0 – najnowsza wersja, została wydana w maju 2024.
+
+\textbf{Przykładowa składnia}
+
+Przykładowa składnia funkcji main
+\begin{lstlisting}[caption=kotlin001 - Funkcje, label={lst:listing-k}, language=kotlin]
+fun main() {
+	printf("Czesc to ja, kotlin!")
+}
+\end{lstlisting}
+Definicja funkcji wykonywana jest za pomocą "fun".
+
+Zmienne w kotlinie deklarowane są za pomocą val i var. Różnica polega na tym, że zmienne oznaczone "var" mogą zostać modyfikowane natomiast zmienne oznaczone "val" już nie.
+
+\begin{lstlisting}[caption=kotlin002 - Zmienne, label={lst:listing-k}, language=kotlin]
+	fun main() {
+		var nazwa = "Projekt Android"
+		val liczba = "777"
+	}
+\end{lstlisting}
+
+Typ zmiennej jest wykrywahy automatycznie i nie trzebas go podawać, można ale nie trzeba.
+
 \subsection{Wykorzystanie czujników}
 
 \begin{itemize}
