@@ -6,6 +6,21 @@
 
 \subsubsection{Android Studio}
 
+Android Studio jest IDE stworzonym przez Google, na bazie InteliJ IDEA od JetBrains. Jest ono przystosowane, jak z nazwy wynika, do tworzenia aplikacji na Androida. Ku temu celu posiada wiele udogodnień, odróżniających program od typowego edytora jak np. wbudowany emulator Androida, integrujący się z całym środowiskiem, czy preview różnych elementów interfejsu - gdzie elementy te generowane są w kodzie, a nie w osobnym języku jak np. xml - bez potrzeby dekompilacji całej aplikacji. 
+
+Android Studio został użyty w projekcie, ponieważ:
+
+\begin{itemize}
+	\item Sam program jest crossplatformowy - nasz zespól ozywa wielu systemów operacyjnych. Platformy takie jak \texttt{MAUI}, są zespolone z Visual Stdio, czyli z Windowsem. Android Studio jest dostępny na wszystkie większe systemy operacyjne, co ułatwia nam pracę.
+	\item Jest to program, zbudowany na podstawie IdeaJ, czyli zagłębiony jest w tym ekosystemie. Oznacza to dostęp do większej ilości pluginów niż np. Visual Studio, nie wspominając o ogólnej możliwości dostosowania ustawień.
+\end{itemize}
+
+Wady korzystania z Android Studio to m.in.
+
+\begin{itemize}
+	\item Duże wykorzystanie zasobów - program lubi zżerać duże ilości RAMu. W tym momencie, mając otwarty mały projekt + emulator, program wykorzystuje ponad 9GB RAMu. 
+\end{itemize}
+
 \subsubsection{Kotlin}
 
 \subsection{Wykorzystanie czujników}
