@@ -4,7 +4,54 @@
 
 \subsection{Ogólny zarys narzędzi użytych w projekcie}
 
-Aplikacja jest zaprojektowana w Android Studio w języku Kotlin. Całe UI aplikacji będzie zbudowane na podstawie Frameworka Jetpack Compose\cite{doc_compose} Używając wbudowanych bibliotek w SDK Androida, będzie mogła odczytywać pliki ze wskazanego folderu. Odczytywanie tagów z plików odbędzie się za pomocą biblioteki Taglib\cite{doc_ktaglib}, która posiada nieoficjalne bindingi do Kotlina. Wszelki processing audio np. na potrzeby wizualizacji może zostać wykonany za pomocą SDK i wbudowanego modułu AudioProcessor\cite{doc_audioproc}. Odtwarzaniem pliku będzie się zajmował moduł MediaPlayer\cite{doc_mediaplayer}.
+\subsubsection{Android Studio}
+
+Android Studio jest IDE stworzonym przez Google, na bazie InteliJ IDEA od JetBrains. Jest ono przystosowane, jak z nazwy wynika, do tworzenia aplikacji na Androida. Ku temu celu posiada wiele udogodnień, odróżniających program od typowego edytora jak np. wbudowany emulator Androida, integrujący się z całym środowiskiem, czy preview różnych elementów interfejsu - gdzie elementy te generowane są w kodzie, a nie w osobnym języku jak np. xml - bez potrzeby dekompilacji całej aplikacji. 
+
+Android Studio został użyty w projekcie, ponieważ:
+
+\begin{itemize}
+	\item Sam program jest crossplatformowy - nasz zespół używa wielu systemów operacyjnych. Platformy takie jak \texttt{MAUI}, są zespolone z Visual Stdio, czyli z Windowsem. Android Studio jest dostępny na wszystkie większe systemy operacyjne, co ułatwia nam pracę.
+	\item Jest to program, zbudowany na podstawie IdeaJ, czyli zagłębiony jest w tym ekosystemie. Oznacza to dostęp do większej ilości pluginów niż np. Visual Studio, nie wspominając o ogólnej możliwości dostosowania ustawień.
+\end{itemize}
+
+Wady korzystania z Android Studio to m.in.
+
+\begin{itemize}
+	\item Duże wykorzystanie zasobów - program lubi zżerać duże ilości RAMu. W tym momencie, mając otwarty mały projekt + emulator, program wykorzystuje ponad 9GB RAMu. 
+\end{itemize}
+
+\subsubsection{Kotlin}
+
+Kotlin został stworzony w 2010 roku przez firmę JetBrains oraz jest on przez nią rozwijany. Kotlin jest wieloplatformowym językiem typowanym statystycznie który został zaprojektowany aby współpracować z maszyną wirtualną Javy. Swoją nazwę zawdzięcza wyspie Kotlin która znajduje się w zatoce finlandzkiej.
+
+Kotlin jest wykorzystywany w projekcie ze względów:
+
+\begin{itemize}
+	\item Jest on wspierany przez Android Studio, razem z Javą i C++. Kotlin ponadto, ma dostęp do nowoczesnych frameworków jak Jetpack Compose
+	
+	\item Jest on \textit{defakto} językiem do programowania na Androida - do niedawna Java mogła cieszyć się tym tytułem, ale od 2019 r. Google ogłosiło Kotlina jako rekomendowany język do tworzenia aplikacji na Android.
+\end{itemize}
+
+Składnia Kotlina wygląda następująco:
+
+\begin{lstlisting}[caption=kotlin001 - Funkcje, label={lst:listing-k}, language=kotlin]
+fun main() {
+	printf("Czesc to ja, kotlin!")
+}
+\end{lstlisting}
+Definicja funkcji wykonywana jest za pomocą "fun".
+
+Zmienne w Kotlinie deklarowane są za pomocą \texttt{val} i \texttt{var}. Różnica polega na tym, że zmienne oznaczone \texttt{val} mogą zostać modyfikowane natomiast zmienne oznaczone \texttt{val} już nie.
+
+\begin{lstlisting}[caption=kotlin002 - Zmienne, label={lst:listing-k}, language=kotlin]
+	fun main() {
+		var nazwa = "Projekt Android"
+		val liczba = "777"
+	}
+\end{lstlisting}
+
+Kompilator Kotlina posiada funkcję autodedukcji typów, więc w wielu wypadkach typu zmiennej nie trzeba adnotować.
 
 \subsection{Wykorzystanie czujników}
 
@@ -16,47 +63,6 @@ Aplikacja jest zaprojektowana w Android Studio w języku Kotlin. Całe UI aplika
 	\item Czujnik światła - Android Studio oferuje możliwość definiowania własnych klas zajmujących się kolorystyką. Oznacza to że można używać różnych obiektów w zależności od warunków. Wykrywanie światła będzie się odbywało używając API sensorów\cite{doc_sensorapi}
 \end{itemize}
 
-\subsection{Zarys interfejsu}
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{images/mockup_artysta.png}
-	\caption{\centering{Mockup widoku biblioteki - listing wykonawców}}
-\end{figure}
-
-Widok wykonawców będzie ekranem startowym aplikacji. "Kafelki" będa zdjęciami wykonawców. Klikanie na jeden z nich przejdzie do widoku albumów danego wykonawcy
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{images/mockup_albumy.png}
-	\caption{\centering{Mockup widoku albumów danego wykonawcy}}
-\end{figure}
-
-Widok albumów jest identyczny jak widok wykonawców. Jedyna różnica polega tym, że zdjęcia na kafelkach będą zdjęciami albumów.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{images/mockup_utwory.png}
-	\caption{\centering{Mockup widoku wyboru utworu}}
-\end{figure}
-
-Po wejściu na jakiś album zaprezentowane zostaną zawarte w nim utwory. W lewym górnym jest zdjęcie danego albumu, a obok niego jest kilka informacji o albumie jak wykonawca, data, tytuł. Dłuższe paski to lista tytułów piosenek, które można kliknąć, aby daną piosenkę włączyć.
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{images/mockup_odtwarzacz.png}
-	\caption{\centering{Mockup odtwarzacza}}
-\end{figure}
-
-Odtwarzacz będzie działał następująco: duże koło będzie stylizowane na płytę, gdzie wypełniona ona będzie obrazem albumu. Płyta ta będzie się kręcić w czasie gdy gra piosenka. Kąt płyty (od 0\degree, do 360\degree) będzie określał jak duża część piosenki została odtworzona. Kąt ten będzie określony jeszcze niezdefiniowanym efektem graficznym. Prostokąty wokół płyty to tytuł piosenki, a na dole czas grania. Kółko i wokół niego trójkąty to przyciski odtwarzania - graj/pauza, następny, poprzedni. 
-
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=1\textwidth]{images/mockup_dyktafon.png}
-	\caption{\centering{Mockup dyktafonu}}
-\end{figure}
-
-Do dyktafonu będzie można się dostać przesuwając palcem w prawo na ekranie wykonawców. Dyktafon jest aktywowany wielkim okrągłym przyciskiem. Te kreski obok niego to wizualizacja dźwięku z mikrofonu. Menu w rogu będzie pozwalało na m.in. skonfigurowanie folderu zapisu nagrań.
 
 \subsection{Zachowanie w niepożądanych sytuacjach}
 
