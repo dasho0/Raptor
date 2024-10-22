@@ -2,6 +2,10 @@
 \section{Określenie wymagań szczegółowych}		%2
 %Dokładne określenie wymagań aplikacji (cel, zakres, dane wejściowe) – np. opisać przyciski, czujniki, wygląd layautu, wyświetlenie okienek. Opisać zachowanie aplikacji – co po kliknięciu, zdarzenia automatyczne. Opisać możliwość dalszego rozwoju oprogramowania. Opisać zachowania aplikacji w niepożądanych sytuacjach.
 
+\subsection{Ogólny opis wymagań projektu}
+
+Aplikacja jest zaprojektowana w Android Studio w języku Kotlin. Całe UI aplikacji będzie zbudowane na podstawie Frameworka Jetpack Compose\cite{doc_compose} Używając wbudowanych bibliotek w SDK Androida, będzie mogła odczytywać pliki ze wskazanego folderu. Odczytywanie tagów z plików odbędzie się za pomocą biblioteki Taglib\cite{doc_ktaglib}, która posiada nieoficjalne bindingi do Kotlina. Wszelki processing audio np. na potrzeby wizualizacji może zostać wykonany za pomocą SDK i wbudowanego modułu AudioProcessor\cite{doc_audioproc}. Odtwarzaniem pliku będzie się zajmował moduł MediaPlayer\cite{doc_mediaplayer}.
+
 \subsection{Ogólny zarys narzędzi użytych w projekcie}
 
 \subsubsection{Android Studio}
