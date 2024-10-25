@@ -16,8 +16,11 @@ import androidx.compose.ui.platform.LocalContext
 class FilePicker() {
     private lateinit var launcher : ManagedActivityResultLauncher<Uri?, Uri?>
     @Composable fun PrepareFilePicker() {
+        data class SongFile(val filename: String, val documentId : String, val mimeType : String)
+
         val context = LocalContext.current
         val contentResolver = context.contentResolver
+        var songFileList = mutableListOf<SongFile>()
 
         launcher = rememberLauncherForActivityResult(
             contract = ActivityResultContracts.OpenDocumentTree()
@@ -45,12 +48,16 @@ class FilePicker() {
                     null
                 )?.use { cursor ->
                     while (cursor.moveToNext()) {
-                        val displayName = cursor.getString(0)
-                        val documentId = cursor.getString(1)
-                        val mimeType = cursor.getString(2)
+                        songFileList.add(SongFile(
+                            cursor.getString(0),
+                            cursor.getString(1),
+                            cursor.getString(2))
+                        )
 
-                        Log.d("MusicFilePicker", "Music File: $displayName, Type: $mimeType")
-                        // Process the music file as needed
+                        Log.d("MusicFilePicker", "Music File: ${songFileList.last().filename}, " +
+                                "ID: ${songFileList.last().documentId}," +
+                                "Type: ${songFileList.last().mimeType}"
+                        )
                     }
                 }
             }
