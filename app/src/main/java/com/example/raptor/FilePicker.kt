@@ -7,6 +7,7 @@ import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.platform.LocalContext
 
 //TODO: make this a singleton somehow
@@ -14,13 +15,15 @@ import androidx.compose.ui.platform.LocalContext
 // this class is probably temporary. The intention is for it to scan the folder (maybe
 // recursively sometime) and then prepare the data to feed it to some other database class.
 class FilePicker() {
+    data class SongFile(val filename: String, val documentId: String, val mimeType: String)
+    var songFileList = mutableListOf<SongFile>()
+        private set
+
     private lateinit var launcher : ManagedActivityResultLauncher<Uri?, Uri?>
     @Composable fun PrepareFilePicker() {
-        data class SongFile(val filename: String, val documentId : String, val mimeType : String)
 
         val context = LocalContext.current
         val contentResolver = context.contentResolver
-        var songFileList = mutableListOf<SongFile>()
 
         launcher = rememberLauncherForActivityResult(
             contract = ActivityResultContracts.OpenDocumentTree()
