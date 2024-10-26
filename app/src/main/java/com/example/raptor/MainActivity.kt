@@ -12,6 +12,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.raptor.ui.theme.RaptorTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.ui.graphics.Color
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,13 +27,61 @@ class MainActivity : ComponentActivity() {
         setContent {
             RaptorTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    Surface(modifier = Modifier.fillMaxSize().padding(innerPadding), color = MaterialTheme.colorScheme.background) {
+                        SwipeControl()
+                    }
                 }
             }
         }
+    }
+}
+
+@OptIn(ExperimentalPagerApi::class)
+@Composable
+fun SwipeControl() {
+    val pagerState = rememberPagerState(initialPage = 1)
+
+    HorizontalPager(
+        count = 3, // Number of screens
+        state = pagerState,
+        modifier = Modifier.fillMaxSize()
+    ) { page ->
+        when (page) {
+            0 -> Recorder()
+            1 -> Aut()
+            2 -> Album()
+        }
+    }
+}
+
+@Composable
+fun Aut() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color.Red
+    ) {
+        // Content for the first screen
+    }
+}
+
+
+@Composable
+fun Recorder() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color.Black
+    ) {
+        // Content for the first screen
+    }
+}
+
+@Composable
+fun Album() {
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = Color.Cyan
+    ) {
+        // Content for the second screen
     }
 }
 
