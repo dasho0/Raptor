@@ -9,15 +9,16 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.ui.platform.LocalContext
+import kotlinx.coroutines.CompletableDeferred
 
 //TODO: make this a singleton somehow
 
 // this class is probably temporary. The intention is for it to scan the folder (maybe
 // recursively sometime) and then prepare the data to feed it to some other database class.
-class FilePicker() {
+class MusicFileLoader(/**val onFilesPicked: () -> Unit**/) {
     data class SongFile(val filename: String, val documentId: String, val mimeType: String)
-    var songFileList = mutableListOf<SongFile>()
-        private set
+    private var songFileList = mutableStateListOf<SongFile>()
+    private var hasPickedFiles = CompletableDeferred<Unit>()
 
     private lateinit var launcher : ManagedActivityResultLauncher<Uri?, Uri?>
     @Composable fun PrepareFilePicker() {
@@ -62,6 +63,8 @@ class FilePicker() {
                                 "Type: ${songFileList.last().mimeType}"
                         )
                     }
+
+                    hasPickedFiles.complete(Unit)
                 }
             }
         }
@@ -69,5 +72,10 @@ class FilePicker() {
 
     fun launch() {
         launcher.launch(null)
+    }
+
+    suspend fun getSongFiles(): List<SongFile> {
+        hasPickedFiles.await()
+        return songFileList
     }
 }
