@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -14,7 +16,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.raptor.ui.theme.RaptorTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
@@ -47,41 +51,52 @@ fun SwipeControl() {
         modifier = Modifier.fillMaxSize()
     ) { page ->
         when (page) {
-            0 -> Recorder()
-            1 -> Aut()
-            2 -> Album()
+            0 -> RecorderView()
+            1 -> AuthorsView()
+            2 -> AlbumView()
         }
     }
 }
 
 @Composable
-fun Aut() {
+fun AuthorsView() {
     Surface(
         modifier = Modifier.fillMaxSize(),
-        color = Color.Red
+        color = Color.Gray
     ) {
-        // Content for the first screen
     }
 }
 
 
 @Composable
-fun Recorder() {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color.Black
+fun RecorderView() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black),
+        contentAlignment = Alignment.Center
     ) {
-        // Content for the first screen
+        Text(
+            text = "Dyktafon",
+            color = Color.White,
+            fontSize = 42.sp
+        )
     }
 }
 
 @Composable
-fun Album() {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color.Cyan
+fun AlbumView() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White),
+        contentAlignment = Alignment.Center
     ) {
-        // Content for the second screen
+        Text(
+            text = "Albumy",
+            color = Color.Black,
+            fontSize = 42.sp
+        )
     }
 }
 
