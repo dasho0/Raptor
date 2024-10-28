@@ -40,4 +40,8 @@ class TagExtractor(private val fileList: List<MusicFileLoader.SongFile>) {
 
         extractor.release()
     }
+
+    fun getUniqueAlbums(): List<SongTags> {
+        return songTagsList.distinctBy { it.album }
+    }
 }
