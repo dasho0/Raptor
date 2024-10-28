@@ -3,6 +3,7 @@ package com.example.raptor
 import android.content.Context
 import android.media.MediaMetadataRetriever
 import android.util.Log
+import kotlin.math.log
 
 //this class handles metadata extraction from a list of music files
 
@@ -21,21 +22,20 @@ class TagExtractor(private val fileList: List<MusicFileLoader.SongFile>) {
     fun extractTags(context: Context) {
         Log.d("TagExtractor", "-TEST-")
         for(file in fileList) {
-            if(file.mimeType == "vnd.android.document/directory") {
-                Log.d("${TagExtractor::class.simpleName}", "Directory handling not implemented " +
-                        "yet") //TODO: change all logging to be like that
-                continue
+            try {
+                extractor.setDataSource(context.contentResolver.openFileDescriptor(file.uri, "r")?.fileDescriptor)
+                songTagsList.add(SongTags(
+                    artist = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST),
+                    title = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
+                    releaseYear = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_YEAR),
+                    album = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM),
+                ))
+
+                Log.d("TagExtractor", "Extracting from ${file.filename}: ${songTagsList.last()}")
+            } catch(exception: Exception) {
+                Log.e("${TagExtractor::class.simpleName}", "Can't extract tags from file: " +
+                        "${file.filename}, type: ${file.mimeType}, uri: ${file.uri}", exception)
             }
-
-            extractor.setDataSource(context.contentResolver.openFileDescriptor(file.uri, "r")?.fileDescriptor)
-            songTagsList.add(SongTags(
-                artist = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST),
-                title = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
-                releaseYear = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_YEAR),
-                album = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM),
-            ))
-
-            Log.d("TagExtractor", "Extracting from ${file.filename}: ${songTagsList.last()}")
         }
 
         extractor.release()
