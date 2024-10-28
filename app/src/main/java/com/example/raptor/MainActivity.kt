@@ -1,6 +1,7 @@
 package com.example.raptor
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -8,6 +9,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -16,12 +18,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.raptor.ui.theme.RaptorTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ComponentActivity() {
@@ -60,10 +65,28 @@ fun SwipeControl() {
 
 @Composable
 fun AuthorsView() {
-    Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = Color.Gray
+    val context = LocalContext.current
+    LibraryManager.prepareFilePicker(context)
+    val coroutineScope = rememberCoroutineScope()
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Gray)
     ) {
+        Button(
+            onClick = {
+                LibraryManager.pickFiles()
+                coroutineScope.launch {
+                    LibraryManager.processFiles(context)
+                }
+                Log.d("MusicFilePicker", "-TEST-")
+            },
+            modifier = Modifier
+                .align(Alignment.Center)
+        ) {
+            Text("Select Folder")
+        }
     }
 }
 
