@@ -6,8 +6,7 @@ import android.util.Log
 
 //this class handles metadata extraction from a list of music files
 
-class TagExtractor(private val fileList: List<MusicFileLoader.SongFile>, private val context:
-Context) {
+class TagExtractor(private val fileList: List<MusicFileLoader.SongFile>) {
     data class SongTags(
         val artist: String?, // will have to handle multiple artist on a single song somewhere
         val title: String?,
@@ -19,7 +18,7 @@ Context) {
     var songTagsList = mutableListOf<SongTags>()
         private set
 
-    init {
+    fun extractTags(context: Context) {
         Log.d("TagExtractor", "-TEST-")
         for(file in fileList) {
             if(file.mimeType == "vnd.android.document/directory") {

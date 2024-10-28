@@ -8,10 +8,11 @@ import androidx.compose.runtime.Composable
 
 object LibraryManager {
     private var picker = MusicFileLoader()
-    lateinit var tagExtractor: TagExtractor //FIXME: this leaks memory lmao
+    private lateinit var tagExtractor: TagExtractor //FIXME: this leaks memory lmao
 
     private fun obtainTags(fileList: List<MusicFileLoader.SongFile>, context: Context) {
-        tagExtractor = TagExtractor(fileList, context)
+        tagExtractor = TagExtractor(fileList)
+        tagExtractor.extractTags(context)
     }
 
     @Composable fun prepareFilePicker(context: Context) { //TODO: refer to MusicFileLoader
