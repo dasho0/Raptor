@@ -2,9 +2,6 @@ package com.example.raptor
 
 import android.content.Context
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 // This class is responsible - for now - for the initial loading and processing of music files
 // into the library
@@ -29,10 +26,5 @@ object LibraryManager {
     suspend fun processFiles(context: Context) {
         val files = picker.getSongFiles()
         obtainTags(files, context)
-    }
-
-    // FIXME: temporary, delete later
-    suspend fun getFileList(): List<MusicFileLoader.SongFile> {
-        return picker.getSongFiles()
     }
 }
