@@ -7,7 +7,7 @@ import kotlin.math.log
 
 //this class handles metadata extraction from a list of music files
 
-class TagExtractor(private val fileList: List<MusicFileLoader.SongFile>) {
+class TagExtractor() {
     data class SongTags(
         val artist: String?, // will have to handle multiple artist on a single song somewhere
         val title: String?,
@@ -19,7 +19,7 @@ class TagExtractor(private val fileList: List<MusicFileLoader.SongFile>) {
     var songTagsList = mutableListOf<SongTags>()
         private set
 
-    fun extractTags(context: Context) {
+    fun extractTags(fileList: List<MusicFileLoader.SongFile>, context: Context) {
         Log.d("TagExtractor", "-TEST-")
         for(file in fileList) {
             try {

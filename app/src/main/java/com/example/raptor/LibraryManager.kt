@@ -8,17 +8,14 @@ import androidx.compose.runtime.setValue
 
 object LibraryManager {
     private var picker = MusicFileLoader()
-    private lateinit var tagExtractor: TagExtractor
-    var isDataLoaded by mutableStateOf(false) // New loading state variable
+    private var tagExtractor = TagExtractor()
 
     private fun obtainTags(fileList: List<MusicFileLoader.SongFile>, context: Context) {
-        tagExtractor = TagExtractor(fileList)
-        tagExtractor.extractTags(context)
-        isDataLoaded = true // Set data as loaded once processing is complete
+        tagExtractor.extractTags(fileList, context)
     }
 
     @Composable
-    fun prepareFilePicker(context: Context) {
+    fun PrepareFilePicker(context: Context) {
         picker.PrepareFilePicker(context)
     }
 
@@ -32,9 +29,9 @@ object LibraryManager {
     }
 
     fun getAlbums(): List<TagExtractor.SongTags> {
-        return if (isDataLoaded) tagExtractor.getUniqueAlbums() else emptyList()
+        return tagExtractor.getUniqueAlbums()
     }
     fun getAllTags(): List<TagExtractor.SongTags> {
-        return if (isDataLoaded) tagExtractor.songTagsList else emptyList()
+        return tagExtractor.songTagsList
     }
 }

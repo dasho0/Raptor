@@ -76,7 +76,7 @@ fun SwipeControl() {
 @Composable
 fun AuthorsView() {
     val context = LocalContext.current
-    LibraryManager.prepareFilePicker(context)
+    LibraryManager.PrepareFilePicker(context)
     val coroutineScope = rememberCoroutineScope()
 
     Box(
