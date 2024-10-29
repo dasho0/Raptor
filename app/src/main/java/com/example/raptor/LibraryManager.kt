@@ -31,7 +31,7 @@ object LibraryManager {
     fun getAlbums(): List<TagExtractor.SongTags> {
         return tagExtractor.getUniqueAlbums()
     }
-    fun getAllTags(): List<TagExtractor.SongTags> {
+    fun getAllTags(): List<TagExtractor.SongTags> { //TODO: This is also getting removed
         return tagExtractor.songTagsList
     }
 }

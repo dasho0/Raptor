@@ -3,6 +3,7 @@ package com.example.raptor
 import android.content.Context
 import android.media.MediaMetadataRetriever
 import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import kotlin.math.log
 
 //this class handles metadata extraction from a list of music files
@@ -16,7 +17,7 @@ class TagExtractor() {
     )
 
     private val extractor: MediaMetadataRetriever = MediaMetadataRetriever()
-    var songTagsList = mutableListOf<SongTags>()
+    var songTagsList = mutableStateListOf<SongTags>() // TODO: this shouldn't be observable,remove later
         private set
 
     fun extractTags(fileList: List<MusicFileLoader.SongFile>, context: Context) {

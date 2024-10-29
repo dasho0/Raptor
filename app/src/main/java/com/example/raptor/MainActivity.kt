@@ -36,6 +36,10 @@ import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.toMutableStateList
 
 
 class MainActivity : ComponentActivity() {
@@ -119,7 +123,8 @@ fun RecorderView() {
 
 @Composable
 fun AlbumView() {
-    val songs = LibraryManager.getAllTags()
+    val songs = remember { LibraryManager.getAllTags() }
+    // val songs = LibraryManager.getAllTags()
 
     Box(
         modifier = Modifier
