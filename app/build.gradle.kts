@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    id("com.google.devtools.ksp") version "1.9.0-1.0.13"
 }
 
 android {
@@ -79,4 +80,6 @@ dependencies {
 
     // optional - Test helpers
     testImplementation(libs.androidx.room.testing)
+
+    ksp("androidx.room:room-compiler:$room_version")
 }
