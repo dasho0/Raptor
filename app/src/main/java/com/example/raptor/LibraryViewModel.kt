@@ -2,11 +2,9 @@ package com.example.raptor
 
 import android.content.Context
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.ViewModel
 
-object LibraryManager {
+class LibraryViewModel: ViewModel() {
     private var picker = MusicFileLoader()
     private var tagExtractor = TagExtractor()
 
