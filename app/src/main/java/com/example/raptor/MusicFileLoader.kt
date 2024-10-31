@@ -44,9 +44,6 @@ class MusicFileLoader(/**val onFilesPicked: () -> Unit**/) {
 
                 Log.d("FolderPicker", "Children: $childrenUri")
 
-                val selection = "${DocumentsContract.Document.COLUMN_MIME_TYPE} LIKE 'audio/%'" +
-                        "AND ${DocumentsContract.Document.COLUMN_MIME_TYPE} != " +
-                        "'vnd.android.document/directory'" // FIXME: why is this not working
                 contentResolver.query(
                     childrenUri,
                     arrayOf(
@@ -54,11 +51,14 @@ class MusicFileLoader(/**val onFilesPicked: () -> Unit**/) {
                         DocumentsContract.Document.COLUMN_DOCUMENT_ID,
                         DocumentsContract.Document.COLUMN_MIME_TYPE,
                     ),
-                    selection,
+                    null,
                     null,
                     null
                 )?.use { cursor ->
-                    while (cursor.moveToNext()) {
+                    while(cursor.moveToNext()) {
+                        if(cursor.getString(2).slice(0..4) != "audio") { continue } // of course
+                        // google cant design a good API and of course it has 6 year old bugs in
+                        // it, so mimetype filtering has to be done manually
 
                         songFileList.add(SongFile(
                             cursor.getString(0),
