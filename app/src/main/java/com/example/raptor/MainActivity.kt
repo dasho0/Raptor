@@ -37,7 +37,7 @@ import androidx.compose.runtime.remember
 
 
 class MainActivity : ComponentActivity() {
-    private val libraryViewModel = LibraryViewModel()
+    private lateinit var libraryViewModel : LibraryViewModel
 
     @OptIn(ExperimentalPagerApi::class)
     @Composable
@@ -177,6 +177,7 @@ class MainActivity : ComponentActivity() {
         }
     }
     override fun onCreate(savedInstanceState: Bundle?) {
+        libraryViewModel = LibraryViewModel(application)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {

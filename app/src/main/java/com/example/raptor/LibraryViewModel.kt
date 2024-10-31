@@ -1,11 +1,17 @@
 package com.example.raptor
 
+import android.annotation.SuppressLint
+import android.app.Application
 import android.content.Context
 import androidx.compose.runtime.Composable
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
 
-class LibraryViewModel: ViewModel() {
-    private var picker = MusicFileLoader()
+class LibraryViewModel(application: Application): AndroidViewModel(application) {
+    @SuppressLint("StaticFieldLeak")
+    private val context = application.applicationContext //this is bad practice
+    // i think
+    private var picker = MusicFileLoader(context)
     private var tagExtractor = TagExtractor()
 
     private fun obtainTags(fileList: List<MusicFileLoader.SongFile>, context: Context) {
@@ -14,7 +20,7 @@ class LibraryViewModel: ViewModel() {
 
     @Composable
     fun PrepareFilePicker(context: Context) {
-        picker.PrepareFilePicker(context)
+        picker.PrepareFilePicker()
     }
 
     fun pickFiles() {
