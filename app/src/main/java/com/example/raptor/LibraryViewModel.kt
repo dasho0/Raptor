@@ -6,6 +6,7 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class LibraryViewModel(application: Application): AndroidViewModel(application) {
     @SuppressLint("StaticFieldLeak")
@@ -13,6 +14,8 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     // i think
     private var picker = MusicFileLoader(context)
     private var tagExtractor = TagExtractor()
+    var songTags = tagExtractor.songTagsList
+        private set
 
     private fun obtainTags(fileList: List<MusicFileLoader.SongFile>, context: Context) {
         tagExtractor.extractTags(fileList, context)
@@ -30,12 +33,5 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     suspend fun processFiles(context: Context) {
         val files = picker.getSongFiles()
         obtainTags(files, context)
-    }
-
-    fun getAlbums(): List<TagExtractor.SongTags> {
-        return tagExtractor.getUniqueAlbums()
-    }
-    fun getAllTags(): List<TagExtractor.SongTags> { //TODO: This is also getting removed
-        return tagExtractor.songTagsList
     }
 }

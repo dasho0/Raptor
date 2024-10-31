@@ -33,6 +33,7 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 
 
@@ -103,7 +104,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AlbumView() {
-        val songs = remember { libraryViewModel.getAllTags() }
+        val songTags = libraryViewModel.songTags.collectAsState(initial = emptyList())
         // val songs = libraryViewModel.getAllTags()
 
         Box(
@@ -124,7 +125,7 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
-                if (songs.isEmpty()) {
+                if (songTags.value.isEmpty()) {
                     item {
                         Text(
                             text = "Brak danych do wyświetlenia",
@@ -133,8 +134,8 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 } else {
-                    items(songs.size) { index ->
-                        val song = songs[index]
+                    items(songTags.value.size) { index ->
+                        val song = songTags.value[index]
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
