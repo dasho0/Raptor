@@ -14,8 +14,8 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     // i think
     private var picker = MusicFileLoader(context)
     private var tagExtractor = TagExtractor()
-    var songTags = tagExtractor.songTagsList
-        private set
+    val songTags = tagExtractor.songTagsList
+    val songFileList = picker.songFileList
 
     private fun obtainTags(fileList: List<MusicFileLoader.SongFile>, context: Context) {
         tagExtractor.extractTags(fileList, context)

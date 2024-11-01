@@ -11,6 +11,8 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
 import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 //TODO: make this a singleton somehow
 
@@ -18,7 +20,9 @@ import kotlinx.coroutines.CompletableDeferred
 // recursively sometime) and then prepare the data to feed it to some other database class.
 class MusicFileLoader(val context: Context) {
     data class SongFile(val filename: String, val uri: Uri, val mimeType: String)
-    private var songFileList = mutableStateListOf<SongFile>()
+
+    private val _songFileList = MutableStateFlow<List<SongFile>>(emptyList())
+    val songFileList: StateFlow<List<SongFile>> get() = _songFileList
     private var hasPickedFiles = CompletableDeferred<Unit>()
 
     private lateinit var launcher : ManagedActivityResultLauncher<Uri?, Uri?>
@@ -35,14 +39,10 @@ class MusicFileLoader(val context: Context) {
                         Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                 contentResolver.takePersistableUriPermission(treeUri, permissions)
 
-                Log.d("FolderPicker", "Selected: $it")
-
                 val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(
                     treeUri,
                     DocumentsContract.getTreeDocumentId(treeUri)
                 )
-
-                Log.d("FolderPicker", "Children: $childrenUri")
 
                 contentResolver.query(
                     childrenUri,
@@ -55,12 +55,11 @@ class MusicFileLoader(val context: Context) {
                     null,
                     null
                 )?.use { cursor ->
+                    val files = mutableListOf<SongFile>()
                     while(cursor.moveToNext()) {
-                        if(cursor.getString(2).slice(0..4) != "audio") { continue } // of course
-                        // google cant design a good API and of course it has 6 year old bugs in
-                        // it, so mimetype filtering has to be done manually
+                        if(cursor.getString(2).slice(0..4) != "audio") continue
 
-                        songFileList.add(SongFile(
+                        files.add(SongFile(
                             cursor.getString(0),
                             DocumentsContract.buildDocumentUriUsingTree(
                                 treeUri,
@@ -68,13 +67,8 @@ class MusicFileLoader(val context: Context) {
                             ),
                             cursor.getString(2))
                         )
-
-                        Log.d("MusicFilePicker", "Music File: ${songFileList.last().filename}, " +
-                                "ID: ${songFileList.last().uri}," +
-                                "Type: ${songFileList.last().mimeType}"
-                        )
                     }
-
+                    _songFileList.value = files
                     hasPickedFiles.complete(Unit)
                 }
             }
@@ -87,6 +81,6 @@ class MusicFileLoader(val context: Context) {
 
     suspend fun getSongFiles(): List<SongFile> {
         hasPickedFiles.await()
-        return songFileList
+        return _songFileList.value
     }
 }

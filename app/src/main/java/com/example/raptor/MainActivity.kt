@@ -105,7 +105,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun AlbumView() {
         val songTags = libraryViewModel.songTags.collectAsState(initial = emptyList())
-        // val songs = libraryViewModel.getAllTags()
+        val songFiles = libraryViewModel.songFileList.collectAsState(initial = emptyList())
 
         Box(
             modifier = Modifier
@@ -125,7 +125,7 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
-                if (songTags.value.isEmpty()) {
+                if (songFiles.value.isEmpty()) {
                     item {
                         Text(
                             text = "Brak danych do wyświetlenia",
@@ -134,8 +134,8 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 } else {
-                    items(songTags.value.size) { index ->
-                        val song = songTags.value[index]
+                    items(songFiles.value.size) { index ->
+                        val song = songFiles.value[index]
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -147,10 +147,9 @@ class MainActivity : ComponentActivity() {
                         ) {
                             Text(
                                 text = buildString {
-                                    append("Album: ${song.album ?: "Unknown"}\n")
-                                    append("Wykonawca: ${song.artist ?: "Unknown"}\n")
-                                    append("Tytuł: ${song.title ?: "Unknown"}\n")
-                                    append("Rok Wydania: ${song.releaseYear ?: "Unknown"}")
+                                    append("Plik: ${song.filename}\n")
+                                    append("URI: ${song.uri}\n")
+                                    append("Typ: ${song.mimeType}")
                                 },
                                 fontSize = 18.sp,
                                 color = Color.DarkGray
