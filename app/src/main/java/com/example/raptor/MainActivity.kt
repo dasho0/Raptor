@@ -60,8 +60,6 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AuthorsView() {
-        val context = LocalContext.current
-        libraryViewModel.PrepareFilePicker(context)
         val coroutineScope = rememberCoroutineScope()
 
         Box(
@@ -71,14 +69,12 @@ class MainActivity : ComponentActivity() {
         ) {
             Button(
                 onClick = {
-                    libraryViewModel.pickFiles()
                     coroutineScope.launch {
-                        libraryViewModel.processFiles(context)
+                        libraryViewModel.pickFiles()
                     }
                     Log.d("MusicFilePicker", "-TEST-")
                 },
-                modifier = Modifier
-                    .align(Alignment.Center)
+                modifier = Modifier.align(Alignment.Center)
             ) {
                 Text("Select Folder")
             }
@@ -105,7 +101,6 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun AlbumView() {
         val songTags = libraryViewModel.songTags.collectAsState(initial = emptyList())
-        val songFiles = libraryViewModel.songFileList.collectAsState(initial = emptyList())
 
         Box(
             modifier = Modifier
@@ -125,7 +120,7 @@ class MainActivity : ComponentActivity() {
                     )
                 }
 
-                if (songFiles.value.isEmpty()) {
+                if (songTags.value.isEmpty()) {
                     item {
                         Text(
                             text = "Brak danych do wyświetlenia",
@@ -134,8 +129,8 @@ class MainActivity : ComponentActivity() {
                         )
                     }
                 } else {
-                    items(songFiles.value.size) { index ->
-                        val song = songFiles.value[index]
+                    items(songTags.value.size) { index ->
+                        val song = songTags.value[index]
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -147,9 +142,10 @@ class MainActivity : ComponentActivity() {
                         ) {
                             Text(
                                 text = buildString {
-                                    append("Plik: ${song.filename}\n")
-                                    append("URI: ${song.uri}\n")
-                                    append("Typ: ${song.mimeType}")
+                                    append("Artysta: ${song.artist ?: "Unknown"}\n")
+                                    append("Tytuł: ${song.title ?: "Unknown"}\n")
+                                    append("Rok Wydania: ${song.releaseYear ?: "Unknown"}\n")
+                                    append("Album: ${song.album ?: "Unknown"}")
                                 },
                                 fontSize = 18.sp,
                                 color = Color.DarkGray
@@ -183,7 +179,13 @@ class MainActivity : ComponentActivity() {
         setContent {
             RaptorTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Surface(modifier = Modifier.fillMaxSize().padding(innerPadding), color = MaterialTheme.colorScheme.background) {
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        libraryViewModel.PrepareFilePicker() // Upewnij się, że picker jest skonfigurowany
                         SwipeControl()
                     }
                 }

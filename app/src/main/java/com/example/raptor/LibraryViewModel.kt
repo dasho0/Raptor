@@ -6,32 +6,31 @@ import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
-class LibraryViewModel(application: Application): AndroidViewModel(application) {
-    @SuppressLint("StaticFieldLeak")
-    private val context = application.applicationContext //this is bad practice
-    // i think
-    private var picker = MusicFileLoader(context)
-    private var tagExtractor = TagExtractor()
+class LibraryViewModel(application: Application) : AndroidViewModel(application) {
+    private val picker = MusicFileLoader(application.applicationContext)
+    private val tagExtractor = TagExtractor()
+
     val songTags = tagExtractor.songTagsList
-    val songFileList = picker.songFileList
 
-    private fun obtainTags(fileList: List<MusicFileLoader.SongFile>, context: Context) {
-        tagExtractor.extractTags(fileList, context)
+    init {
+        viewModelScope.launch {
+            picker.songFileList.collectLatest { files ->
+                tagExtractor.extractTags(files, application.applicationContext)
+            }
+        }
     }
 
     @Composable
-    fun PrepareFilePicker(context: Context) {
+    fun PrepareFilePicker() {
         picker.PrepareFilePicker()
     }
 
     fun pickFiles() {
         picker.launch()
-    }
-
-    suspend fun processFiles(context: Context) {
-        val files = picker.getSongFiles()
-        obtainTags(files, context)
     }
 }
