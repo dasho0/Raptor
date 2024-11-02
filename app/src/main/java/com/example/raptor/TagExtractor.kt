@@ -3,9 +3,7 @@ package com.example.raptor
 import android.content.Context
 import android.media.MediaMetadataRetriever
 import android.util.Log
-import androidx.compose.runtime.mutableStateListOf
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlin.math.log
 
 //this class handles metadata extraction from a list of music files
 
@@ -18,11 +16,8 @@ class TagExtractor() {
     )
 
     private val extractor: MediaMetadataRetriever = MediaMetadataRetriever()
-    var songTagsList =
-        MutableStateFlow<List<SongTags>>(emptyList<SongTags>())
-        private set
 
-    fun extractTags(fileList: List<MusicFileLoader.SongFile>, context: Context) {
+    fun extractTags(fileList: List<MusicFileLoader.SongFile>, context: Context): List<SongTags> {
         Log.d("TagExtractor", "-TEST-")
 
         var tagsList = mutableListOf<SongTags>()
@@ -43,8 +38,8 @@ class TagExtractor() {
             }
         }
 
-        songTagsList.value = tagsList
-
         extractor.release()
+
+        return tagsList
     }
 }

@@ -9,8 +9,7 @@ import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.flow.MutableStateFlow
 
 //TODO: make this a singleton somehow
 
@@ -18,8 +17,8 @@ import kotlinx.coroutines.CompletableDeferred
 // recursively sometime) and then prepare the data to feed it to some other database class.
 class MusicFileLoader(val context: Context) {
     data class SongFile(val filename: String, val uri: Uri, val mimeType: String)
-    private var songFileList = mutableStateListOf<SongFile>()
-    private var hasPickedFiles = CompletableDeferred<Unit>()
+    public var songFileList = MutableStateFlow<List<SongFile>>(emptyList())
+        private set
 
     private lateinit var launcher : ManagedActivityResultLauncher<Uri?, Uri?>
 
@@ -55,12 +54,14 @@ class MusicFileLoader(val context: Context) {
                     null,
                     null
                 )?.use { cursor ->
+                    var _songFiles = mutableListOf<SongFile>()
+
                     while(cursor.moveToNext()) {
                         if(cursor.getString(2).slice(0..4) != "audio") { continue } // of course
                         // google cant design a good API and of course it has 6 year old bugs in
                         // it, so mimetype filtering has to be done manually
 
-                        songFileList.add(SongFile(
+                        _songFiles.add(SongFile(
                             cursor.getString(0),
                             DocumentsContract.buildDocumentUriUsingTree(
                                 treeUri,
@@ -69,13 +70,13 @@ class MusicFileLoader(val context: Context) {
                             cursor.getString(2))
                         )
 
-                        Log.d("MusicFilePicker", "Music File: ${songFileList.last().filename}, " +
-                                "ID: ${songFileList.last().uri}," +
-                                "Type: ${songFileList.last().mimeType}"
+                        Log.d("MusicFilePicker", "Music File: ${_songFiles.last().filename}, " +
+                                "ID: ${_songFiles.last().uri}," +
+                                "Type: ${_songFiles.last().mimeType}"
                         )
                     }
 
-                    hasPickedFiles.complete(Unit)
+                    songFileList.value = _songFiles
                 }
             }
         }
@@ -83,10 +84,5 @@ class MusicFileLoader(val context: Context) {
 
     fun launch() {
         launcher.launch(null)
-    }
-
-    suspend fun getSongFiles(): List<SongFile> {
-        hasPickedFiles.await()
-        return songFileList
     }
 }

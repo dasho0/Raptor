@@ -5,8 +5,12 @@ import android.app.Application
 import android.content.Context
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.WhileSubscribed
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 
 class LibraryViewModel(application: Application): AndroidViewModel(application) {
     @SuppressLint("StaticFieldLeak")
@@ -14,12 +18,14 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     // i think
     private var picker = MusicFileLoader(context)
     private var tagExtractor = TagExtractor()
-    var songTags = tagExtractor.songTagsList
-        private set
 
-    private fun obtainTags(fileList: List<MusicFileLoader.SongFile>, context: Context) {
-        tagExtractor.extractTags(fileList, context)
-    }
+    val libraryState = picker.songFileList.map { file ->
+        tagExtractor.extractTags(file, context)
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = emptyList<TagExtractor.SongTags>()
+    )
 
     @Composable
     fun PrepareFilePicker(context: Context) {
@@ -28,10 +34,5 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
 
     fun pickFiles() {
         picker.launch()
-    }
-
-    suspend fun processFiles(context: Context) {
-        val files = picker.getSongFiles()
-        obtainTags(files, context)
     }
 }

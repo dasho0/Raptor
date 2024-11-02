@@ -72,9 +72,9 @@ class MainActivity : ComponentActivity() {
             Button(
                 onClick = {
                     libraryViewModel.pickFiles()
-                    coroutineScope.launch {
-                        libraryViewModel.processFiles(context)
-                    }
+                    // coroutineScope.launch {
+                    //     libraryViewModel.processFiles(context)
+                    // }
                     Log.d("MusicFilePicker", "-TEST-")
                 },
                 modifier = Modifier
@@ -104,8 +104,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AlbumView() {
-        val songTags = libraryViewModel.songTags.collectAsState(initial = emptyList())
-        // val songs = libraryViewModel.getAllTags()
+        val songTags = libraryViewModel.libraryState.collectAsState()
 
         Box(
             modifier = Modifier
@@ -136,6 +135,7 @@ class MainActivity : ComponentActivity() {
                 } else {
                     items(songTags.value.size) { index ->
                         val song = songTags.value[index]
+                        songTags.value
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
