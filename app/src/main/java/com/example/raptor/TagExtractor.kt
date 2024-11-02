@@ -13,7 +13,7 @@ class TagExtractor() {
         val title: String?,
         val releaseYear: String?, //TODO: seems like you can't obtain the release date with MediaMetadataExtractor, only the modified date of the file wtf
         val album: String?,
-    )
+)
 
     private val extractor: MediaMetadataRetriever = MediaMetadataRetriever()
 
@@ -38,7 +38,9 @@ class TagExtractor() {
             }
         }
 
-        extractor.release()
+        if(tagsList.isNotEmpty()) {
+            extractor.release() //FIXME: This looks retarted dont know if it is
+        }
 
         return tagsList
     }
