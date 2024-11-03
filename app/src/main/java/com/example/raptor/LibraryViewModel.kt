@@ -28,7 +28,7 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     )
 
     @Composable
-    fun PrepareFilePicker(context: Context) {
+    fun PrepareFilePicker() {
         picker.PrepareFilePicker()
     }
 

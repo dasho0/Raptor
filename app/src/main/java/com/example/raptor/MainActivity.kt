@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun AuthorsView() {
         val context = LocalContext.current
-        libraryViewModel.PrepareFilePicker(context)
+        libraryViewModel.PrepareFilePicker()
         val coroutineScope = rememberCoroutineScope()
 
         Box(
