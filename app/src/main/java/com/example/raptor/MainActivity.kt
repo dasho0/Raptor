@@ -104,7 +104,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun AlbumView() {
-        val songTags = libraryViewModel.libraryState.collectAsState()
+        val songTags = libraryViewModel.libraryState.collectAsState(initial = emptyList())
 
         Box(
             modifier = Modifier
@@ -150,7 +150,7 @@ class MainActivity : ComponentActivity() {
                                     append("Album: ${song.album ?: "Unknown"}\n")
                                     append("Wykonawca: ${song.artist ?: "Unknown"}\n")
                                     append("Tytuł: ${song.title ?: "Unknown"}\n")
-                                    append("Rok Wydania: ${song.releaseYear ?: "Unknown"}")
+                                    append("Rok Wydania: ${null ?: "Unknown"}")
                                 },
                                 fontSize = 18.sp,
                                 color = Color.DarkGray

@@ -1,16 +1,21 @@
 package com.example.raptor
 
 import android.content.Context
+import android.util.Log
+import androidx.annotation.MainThread
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.map
+import kotlin.concurrent.thread
 
 @Entity
 data class SongTable(
@@ -23,7 +28,7 @@ data class SongTable(
 @Dao
 interface SongDao {
     @Query("SELECT * FROM SongTable")
-    fun getAllSongs(): List<SongTable>
+    fun getAllSongs(): Flow<List<SongTable>>
 
     @Insert
     fun insert(songTable: SongTable)
@@ -34,22 +39,20 @@ abstract class LibraryDb : RoomDatabase() {
     abstract fun songDao(): SongDao
 }
 
-class DatabaseManager {
-    private lateinit var database: LibraryDb
-
-    fun prepareDatabase(context: Context) {
-        database = Room.databaseBuilder(
+class DatabaseManager(context: Context) {
+    private val database: LibraryDb = Room.databaseBuilder(
             context,
             LibraryDb::class.java, "Library"
         ).build()
-    }
 
-    fun fetchAllSongs(): List<SongTable> { //TODO: should change this to something
+    fun fetchAllSongs(): Flow<List<SongTable>> { //TODO: should change this to something
         // more universal
+        Log.d(javaClass.simpleName, "Collecting songs on thread ${Thread.currentThread().name}")
         return database.songDao().getAllSongs()
     }
 
     fun populateDatabase(songs: List<TagExtractor.SongTags>) {
+        assert(Thread.currentThread().name != "main")
         songs.forEach { songTags ->
             database.songDao().insert(SongTable(
                 title = songTags.title,
