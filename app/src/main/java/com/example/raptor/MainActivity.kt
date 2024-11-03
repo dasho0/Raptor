@@ -7,9 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -35,15 +33,152 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.toMutableStateList
 
 
 class MainActivity : ComponentActivity() {
+    private lateinit var libraryViewModel : LibraryViewModel
+
+    @OptIn(ExperimentalPagerApi::class)
+    @Composable
+    fun SwipeControl() {
+        val pagerState = rememberPagerState(initialPage = 1)
+
+        HorizontalPager(
+            count = 3, // Number of screens
+            state = pagerState,
+            modifier = Modifier.fillMaxSize()
+        ) { page ->
+            when (page) {
+                0 -> RecorderView()
+                1 -> AuthorsView()
+                2 -> AlbumView()
+            }
+        }
+    }
+
+    @Composable
+    fun AuthorsView() {
+        val context = LocalContext.current
+        libraryViewModel.PrepareFilePicker()
+        val coroutineScope = rememberCoroutineScope()
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Gray)
+        ) {
+            Button(
+                onClick = {
+                    libraryViewModel.pickFiles()
+                    // coroutineScope.launch {
+                    //     libraryViewModel.processFiles(context)
+                    // }
+                    Log.d("MusicFilePicker", "-TEST-")
+                },
+                modifier = Modifier
+                    .align(Alignment.Center)
+            ) {
+                Text("Select Folder")
+            }
+        }
+    }
+
+
+    @Composable
+    fun RecorderView() {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black),
+            contentAlignment = Alignment.Center
+        ) {
+            Text(
+                text = "Dyktafon",
+                color = Color.White,
+                fontSize = 42.sp
+            )
+        }
+    }
+
+    @Composable
+    fun AlbumView() {
+        val songTags = libraryViewModel.libraryState.collectAsState()
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White),
+            contentAlignment = Alignment.TopCenter
+        ) {
+            LazyColumn(
+                modifier = Modifier.padding(16.dp)
+            ) {
+                item {
+                    Text(
+                        text = "Lista Utworów",
+                        color = Color.Black,
+                        fontSize = 42.sp,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                }
+
+                if (songTags.value.isEmpty()) {
+                    item {
+                        Text(
+                            text = "Brak danych do wyświetlenia",
+                            fontSize = 18.sp,
+                            color = Color.Gray
+                        )
+                    }
+                } else {
+                    items(songTags.value.size) { index ->
+                        val song = songTags.value[index]
+                        songTags.value
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .border(1.dp, Color.Black, RoundedCornerShape(8.dp))
+                                .background(Color(0xff3aa8c1))
+                                .padding(8.dp)
+                        ) {
+                            Text(
+                                text = buildString {
+                                    append("Album: ${song.album ?: "Unknown"}\n")
+                                    append("Wykonawca: ${song.artist ?: "Unknown"}\n")
+                                    append("Tytuł: ${song.title ?: "Unknown"}\n")
+                                    append("Rok Wydania: ${song.releaseYear ?: "Unknown"}")
+                                },
+                                fontSize = 18.sp,
+                                color = Color.DarkGray
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @Composable
+    fun Greeting(name: String, modifier: Modifier = Modifier) {
+        Text(
+            text = "Hello $name!",
+            modifier = modifier
+        )
+    }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        RaptorTheme {
+            Greeting("Android")
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
+        libraryViewModel = LibraryViewModel(application)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
@@ -58,140 +193,3 @@ class MainActivity : ComponentActivity() {
     }
 }
 
-
-@OptIn(ExperimentalPagerApi::class)
-@Composable
-fun SwipeControl() {
-    val pagerState = rememberPagerState(initialPage = 1)
-
-    HorizontalPager(
-        count = 3, // Number of screens
-        state = pagerState,
-        modifier = Modifier.fillMaxSize()
-    ) { page ->
-        when (page) {
-            0 -> RecorderView()
-            1 -> AuthorsView()
-            2 -> AlbumView()
-        }
-    }
-}
-
-@Composable
-fun AuthorsView() {
-    val context = LocalContext.current
-    LibraryManager.PrepareFilePicker(context)
-    val coroutineScope = rememberCoroutineScope()
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Gray)
-    ) {
-        Button(
-            onClick = {
-                LibraryManager.pickFiles()
-                coroutineScope.launch {
-                    LibraryManager.processFiles(context)
-                }
-                Log.d("MusicFilePicker", "-TEST-")
-            },
-            modifier = Modifier
-                .align(Alignment.Center)
-        ) {
-            Text("Select Folder")
-        }
-    }
-}
-
-
-@Composable
-fun RecorderView() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.Black),
-        contentAlignment = Alignment.Center
-    ) {
-        Text(
-            text = "Dyktafon",
-            color = Color.White,
-            fontSize = 42.sp
-        )
-    }
-}
-
-@Composable
-fun AlbumView() {
-    val songs = remember { LibraryManager.getAllTags() }
-    // val songs = LibraryManager.getAllTags()
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color.White),
-        contentAlignment = Alignment.TopCenter
-    ) {
-        LazyColumn(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            item {
-                Text(
-                    text = "Lista Utworów",
-                    color = Color.Black,
-                    fontSize = 42.sp,
-                    modifier = Modifier.padding(bottom = 16.dp)
-                )
-            }
-
-            if (songs.isEmpty()) {
-                item {
-                    Text(
-                        text = "Brak danych do wyświetlenia",
-                        fontSize = 18.sp,
-                        color = Color.Gray
-                    )
-                }
-            } else {
-                items(songs) { song ->
-                    Box(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 4.dp)
-                            .clip(RoundedCornerShape(8.dp))
-                            .border(1.dp, Color.Black, RoundedCornerShape(8.dp))
-                            .background(Color(0xff3aa8c1))
-                            .padding(8.dp)
-                    ) {
-                        Text(
-                            text = buildString {
-                                append("Album: ${song.album ?: "Unknown"}\n")
-                                append("Wykonawca: ${song.artist ?: "Unknown"}\n")
-                                append("Tytuł: ${song.title ?: "Unknown"}\n")
-                                append("Rok Wydania: ${song.releaseYear ?: "Unknown"}")
-                            },
-                            fontSize = 18.sp,
-                            color = Color.DarkGray
-                        )
-                    }
-                }
-            }
-        }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    RaptorTheme {
-        Greeting("Android")
-    }
-}
