@@ -35,6 +35,8 @@ import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.layout.ContentScale
 
 
 class MainActivity : ComponentActivity() {
@@ -67,8 +69,10 @@ class MainActivity : ComponentActivity() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Gray)
-        ) {
+                .background(painter = painterResource(id = R.drawable.background1),
+                    contentScale = ContentScale.Crop //picture scaling
+                )
+                {
             Button(
                 onClick = {
                     libraryViewModel.pickFiles()
