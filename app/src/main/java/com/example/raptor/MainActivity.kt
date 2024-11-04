@@ -36,7 +36,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 
-
+//głowna clasa programu
 class MainActivity : ComponentActivity() {
     private lateinit var libraryViewModel : LibraryViewModel
 
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
         val pagerState = rememberPagerState(initialPage = 1)
 
         HorizontalPager(
-            count = 3, // Number of screens
+            count = 3, // Ilość stron w aplikacji
             state = pagerState,
             modifier = Modifier.fillMaxSize()
         ) { page ->
@@ -57,14 +57,15 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
+    //Funkca oraz pierwsza strona aplikacji, jest pusta i zawiera pojedynczy guzik obsługujący
+    //program filepicker używany w reszcie aplikacji
     @Composable
     fun AuthorsView() {
         val context = LocalContext.current
         libraryViewModel.PrepareFilePicker()
         val coroutineScope = rememberCoroutineScope()
 
-        Box(
+        Box( //graficzny wygląd strony
             modifier = Modifier
                 .fillMaxSize()
                 .background(Color.Gray)
@@ -85,7 +86,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-
+    //strona 2, interfejs aplikacji odpowiedzialnej za dyktafon, który na razie nie istnieje
     @Composable
     fun RecorderView() {
         Box(
@@ -102,6 +103,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    //strona 3, tu wyświetlają się informacje o plikach uzyskanych przez aplikację
     @Composable
     fun AlbumView() {
         val songTags = libraryViewModel.libraryState.collectAsState(initial = emptyList())
@@ -132,7 +134,7 @@ class MainActivity : ComponentActivity() {
                             color = Color.Gray
                         )
                     }
-                } else {
+                } else { //kod odpowiedzialny za wyciąganie metadaty z plików
                     items(songTags.value.size) { index ->
                         val song = songTags.value[index]
                         songTags.value
@@ -161,7 +163,7 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
+    //hello world czemu to tu jest
     @Composable
     fun Greeting(name: String, modifier: Modifier = Modifier) {
         Text(
@@ -177,6 +179,7 @@ class MainActivity : ComponentActivity() {
             Greeting("Android")
         }
     }
+    //bełkot który powoduje że aplikacja formatuje się do odpowiedniego rozmairu
     override fun onCreate(savedInstanceState: Bundle?) {
         libraryViewModel = LibraryViewModel(application)
         super.onCreate(savedInstanceState)
