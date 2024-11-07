@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.Log
 import androidx.room.Room
 import com.example.raptor.TagExtractor
-import com.example.raptor.database.entities.SongTable
+import com.example.raptor.database.entities.Song
 import kotlinx.coroutines.flow.Flow
 import java.io.File
 
@@ -22,7 +22,7 @@ class DatabaseManager(context: Context) {
         }
     }
 
-    fun fetchAllSongs(): Flow<List<SongTable>> { //TODO: should change this to something
+    fun fetchAllSongs(): Flow<List<Song>> { //TODO: should change this to something
         // more universal
         Log.d(javaClass.simpleName, "Collecting songs on thread ${Thread.currentThread().name}")
         return database.songDao().getAllSongs()
@@ -32,7 +32,7 @@ class DatabaseManager(context: Context) {
         assert(Thread.currentThread().name != "main")
         songs.forEach { songTags ->
             database.songDao().insert(
-                SongTable(
+                Song(
                     title = songTags.title,
                     artist = songTags.artist,
                     album = songTags.album
