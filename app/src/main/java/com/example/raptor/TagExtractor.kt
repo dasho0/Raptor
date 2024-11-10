@@ -1,47 +1,95 @@
 package com.example.raptor
 
 import android.content.Context
-import android.media.MediaMetadataRetriever
+import androidx.media3.common.Metadata
 import android.util.Log
-import kotlinx.coroutines.flow.MutableStateFlow
+import androidx.annotation.OptIn
+import androidx.media3.common.MediaItem
+import androidx.media3.common.util.UnstableApi
+import androidx.media3.exoplayer.MetadataRetriever
+import androidx.media3.extractor.metadata.vorbis.VorbisComment
 
 //this class handles metadata extraction from a list of music files
 
 class TagExtractor() {
     data class SongTags(
-        val artist: String?, // will have to handle multiple artist on a single song somewhere
+        val artists: List<String>?, // will have to handle multiple artist on a single song somewhere
         val title: String?,
-        val releaseYear: String?, //TODO: seems like you can't obtain the release date with MediaMetadataExtractor, only the modified date of the file wtf
+        val releaseDate: String?,
         val album: String?,
 )
 
-    private val extractor: MediaMetadataRetriever = MediaMetadataRetriever()
+    @OptIn(UnstableApi::class)
+    private fun convertMetadataToTags(metadata: Metadata): SongTags {
+        return metadata.let {
+            val metadataList = mutableListOf<Metadata.Entry>()
+            for(i in 0 until it.length()) {
+                metadataList.add(it.get(i))
+            }
+            Log.d("${javaClass.simpleName}", "Metadata list: $metadataList")
 
-    fun extractTags(fileList: List<MusicFileLoader.SongFile>, context: Context): List<SongTags> {
-        Log.d("TagExtractor", "-TEST-")
+            // the last element `picture` screws up the logic and it only has a mimetype value
+            // which i think is useless
+            val entryMap: MutableMap<String?, Any?> = mutableMapOf()
 
-        var tagsList = mutableListOf<SongTags>()
+            for(_entry in metadataList.take(metadataList.size - 1)) {
+                val entry = _entry as? VorbisComment
+                val key = entry?.key
+                val value = entry?.value
+
+                when(key) {
+                    "ALBUMARTIST", "ARTIST" -> {
+                        if(!entryMap.containsKey(key)) {
+                            entryMap[key] = mutableListOf<String?>(value)
+                        } else {
+                            (entryMap[key] as? MutableList<String?>)?.add(value)
+                        }
+                    }
+
+                    else -> {
+                        assert(!entryMap.containsKey(key))
+                        entryMap[key] = value
+                    }
+                }
+            }
+
+            SongTags(
+                artists = entryMap["ARTIST"] as? List<String>?,
+                title = entryMap["TITLE"] as? String?,
+                album = entryMap["ALBUM"] as String?,
+                releaseDate = entryMap["DATE"] as? String?,
+
+            )
+        }
+    }
+
+    @OptIn(UnstableApi::class)
+    fun extractTags(fileList: List<MusicFileLoader.SongFile>, context: Context): List<Any> {
+
+        val tagsList = mutableListOf<SongTags>()
+
         for(file in fileList) {
-            try {
-                extractor.setDataSource(context.contentResolver.openFileDescriptor(file.uri, "r")?.fileDescriptor)
-                tagsList.add(SongTags(
-                    artist = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST),
-                    title = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE),
-                    releaseYear = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_YEAR),
-                    album = extractor.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM),
-                ))
+            val mediaItem = MediaItem.fromUri("${file.uri}")
 
-                Log.d("TagExtractor", "Extracting from ${file.filename}: ${tagsList.last()}")
-            } catch(exception: Exception) {
-                Log.e("${TagExtractor::class.simpleName}", "Can't extract tags from file: " +
-                        "${file.filename}, type: ${file.mimeType}, uri: ${file.uri}", exception)
+// Retrieve metadata asynchronously
+            //FIXME: probably shouldnt block the thread with get() every time a song is scanned
+            // but whatever, im not syncing this thing manually
+            val trackGroups = MetadataRetriever.retrieveMetadata(context, mediaItem).get()
+
+            if (trackGroups != null) {
+                // Parse and handle metadata
+                assert(trackGroups.length == 1)
+
+                val tags = trackGroups[0]
+                    .getFormat(0)
+                    .metadata
+                    .let { convertMetadataToTags(it!!) } // assuming that a file without metadata
+                // is invalid, so forcing a crash here is not a bad idea
+
+                tagsList.add(tags)
             }
         }
-
-        if(tagsList.isNotEmpty()) {
-            extractor.release() //FIXME: This looks retarted dont know if it is
-        }
-
+        // return tagsList
         return tagsList
     }
 }

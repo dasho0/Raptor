@@ -68,10 +68,10 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    val room_version = "2.6.1"
+    val roomVersion = "2.6.1"
 
     implementation(libs.androidx.room.runtime)
-    annotationProcessor("androidx.room:room-compiler:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$roomVersion")
 
     // optional - Kotlin Extensions and Coroutines support for Room
     implementation(libs.androidx.room.ktx)
@@ -79,5 +79,9 @@ dependencies {
     // optional - Test helpers
     testImplementation(libs.androidx.room.testing)
 
-    ksp("androidx.room:room-compiler:$room_version")
+    implementation(libs.androidx.media3.exoplayer)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.extractor)
+
+    ksp("androidx.room:room-compiler:$roomVersion")
 }
