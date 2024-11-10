@@ -2,20 +2,15 @@ package com.example.raptor
 
 import android.content.Context
 import android.util.Log
-import androidx.annotation.MainThread
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import androidx.room.Dao
 import androidx.room.Database
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.map
-import kotlin.concurrent.thread
 
 @Entity
 data class SongTable(
@@ -54,9 +49,11 @@ class DatabaseManager(context: Context) {
     fun populateDatabase(songs: List<TagExtractor.SongTags>) {
         assert(Thread.currentThread().name != "main")
         songs.forEach { songTags ->
+            Log.d(javaClass.simpleName, "populating database with: $songTags")
             database.songDao().insert(SongTable(
                 title = songTags.title,
-                artist = songTags.artist,
+                //artist = songTags.artists,
+                artist = null,
                 album = songTags.album
             ))
         }
