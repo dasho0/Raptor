@@ -1,6 +1,7 @@
 package com.example.raptor
 
 import android.content.Context
+import android.provider.MediaStore
 import androidx.media3.common.Metadata
 import android.util.Log
 import androidx.annotation.OptIn
@@ -14,6 +15,7 @@ import androidx.media3.extractor.metadata.vorbis.VorbisComment
 class TagExtractor() {
     data class SongTags(
         val artists: List<String>?, // will have to handle multiple artist on a single song somewhere
+        val albumArtists: List<String>?,
         val title: String?,
         val releaseDate: String?,
         val album: String?,
@@ -55,6 +57,7 @@ class TagExtractor() {
 
             SongTags(
                 artists = entryMap["ARTIST"] as? List<String>?,
+                albumArtists = entryMap["ALBUMARTIST"] as? List<String>?,
                 title = entryMap["TITLE"] as? String?,
                 album = entryMap["ALBUM"] as String?,
                 releaseDate = entryMap["DATE"] as? String?,

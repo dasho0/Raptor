@@ -1,12 +1,24 @@
 package com.example.raptor.database.entities
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
+import androidx.room.Index
 
-@Entity
+@Entity(
+    foreignKeys = [
+        ForeignKey(
+            entity = Album::class,
+            parentColumns = ["albumId"],
+            childColumns = ["albumId"],
+            onDelete = ForeignKey.CASCADE
+        )
+    ],
+
+    indices = [Index(value = ["albumId"])]
+)
 data class Song(
-    @PrimaryKey(autoGenerate = true) val id: Int = 0,
+    @PrimaryKey(autoGenerate = true) val songId: Long = 0,
     val title: String?,
-    val artists: String?,
-    val album: String?
+    val albumId: Long
 )
