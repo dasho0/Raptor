@@ -25,11 +25,14 @@ interface LibraryDao {
     @Insert
     fun insertAuthor(author: Author )
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     fun insertAlbumAuthorCrossRef(albumAuthorCrossRef: AlbumAuthorCrossRef)
 
     @Query("SELECT * FROM Song")
     fun getAllSongs(): Flow<List<Song>>
+
+    @Query("SELECT * FROM Author")
+    fun getAllAuthors(): List<Author>
 
     // Get an album with its songs
     @Transaction
@@ -39,7 +42,7 @@ interface LibraryDao {
     // Get an album with its authors
     @Transaction
     @Query("SELECT * FROM album WHERE albumId = :albumId")
-    fun getAlbumWithAuthors(albumId: Long): Flow<List<AlbumWithAuthors>>
+    fun getAlbumWithAuthors(albumId: Long): List<AlbumWithAuthors>
 
     // Get an author with their albums
     @Transaction
@@ -50,5 +53,9 @@ interface LibraryDao {
     fun getAuthor(name: String): Author?
 
     @Query("SELECT * FROM album WHERE title = :name")
-    fun getAlbumsByName(name: String): List<Album>
+    fun getAlbumsByName(name: String): List<Album>?
+
+    @Query("SELECT * FROM AlbumAuthorCrossRef WHERE albumId = :albumId AND name = :authorName " +
+            "LIMIT 1")
+    fun getCrossRefByAlbumAndAuthor(albumId: Long, authorName: String): AlbumAuthorCrossRef?
 }

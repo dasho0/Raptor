@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import androidx.room.Index
+import org.jetbrains.annotations.NotNull
 
 @Entity(
     foreignKeys = [
@@ -20,5 +21,5 @@ import androidx.room.Index
 data class Song(
     @PrimaryKey(autoGenerate = true) val songId: Long = 0,
     val title: String?,
-    val albumId: Long
+    val albumId: Long?
 )
