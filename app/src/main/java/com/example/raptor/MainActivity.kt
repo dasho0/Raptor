@@ -1,5 +1,10 @@
 package com.example.raptor
 
+import android.content.Context
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -7,38 +12,33 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.raptor.ui.theme.RaptorTheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.raptor.ui.theme.RaptorTheme
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.remember
+
+class MainActivity : ComponentActivity(), SensorEventListener {
+    private lateinit var libraryViewModel: LibraryViewModel
+    private lateinit var sensorManager: SensorManager
+    private var lightSensor: Sensor? = null
+    private val _isDarkTheme = mutableStateOf(false)
+    private val isDarkTheme: State<Boolean> = _isDarkTheme
 
 
-class MainActivity : ComponentActivity() {
-    private lateinit var libraryViewModel : LibraryViewModel
 
     @OptIn(ExperimentalPagerApi::class)
     @Composable
@@ -46,7 +46,7 @@ class MainActivity : ComponentActivity() {
         val pagerState = rememberPagerState(initialPage = 1)
 
         HorizontalPager(
-            count = 3, // Number of screens
+            count = 3,
             state = pagerState,
             modifier = Modifier.fillMaxSize()
         ) { page ->
@@ -67,36 +67,34 @@ class MainActivity : ComponentActivity() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Gray)
+                .background(MaterialTheme.colorScheme.background)
         ) {
             Button(
                 onClick = {
                     libraryViewModel.pickFiles()
-                    // coroutineScope.launch {
-                    //     libraryViewModel.processFiles(context)
-                    // }
                     Log.d("MusicFilePicker", "-TEST-")
                 },
-                modifier = Modifier
-                    .align(Alignment.Center)
+                modifier = Modifier.align(Alignment.Center),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                )
             ) {
-                Text("Select Folder")
+                Text("Select Folder", color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }
-
 
     @Composable
     fun RecorderView() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Black),
+                .background(MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.Center
         ) {
             Text(
                 text = "Dyktafon",
-                color = Color.White,
+                color = MaterialTheme.colorScheme.onBackground,
                 fontSize = 42.sp
             )
         }
@@ -109,7 +107,7 @@ class MainActivity : ComponentActivity() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.White),
+                .background(MaterialTheme.colorScheme.background),
             contentAlignment = Alignment.TopCenter
         ) {
             LazyColumn(
@@ -118,7 +116,7 @@ class MainActivity : ComponentActivity() {
                 item {
                     Text(
                         text = "Lista Utworów",
-                        color = Color.Black,
+                        color = MaterialTheme.colorScheme.onBackground,
                         fontSize = 42.sp,
                         modifier = Modifier.padding(bottom = 16.dp)
                     )
@@ -129,20 +127,19 @@ class MainActivity : ComponentActivity() {
                         Text(
                             text = "Brak danych do wyświetlenia",
                             fontSize = 18.sp,
-                            color = Color.Gray
+                            color = MaterialTheme.colorScheme.onSurface
                         )
                     }
                 } else {
                     items(songTags.value.size) { index ->
                         val song = songTags.value[index]
-                        songTags.value
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .padding(vertical = 4.dp)
                                 .clip(RoundedCornerShape(8.dp))
-                                .border(1.dp, Color.Black, RoundedCornerShape(8.dp))
-                                .background(Color(0xff3aa8c1))
+                                .border(1.dp, MaterialTheme.colorScheme.onSurface, RoundedCornerShape(8.dp))
+                                .background(MaterialTheme.colorScheme.secondaryContainer)
                                 .padding(8.dp)
                         ) {
                             Text(
@@ -153,7 +150,7 @@ class MainActivity : ComponentActivity() {
                                     append("Rok Wydania: ${null ?: "Unknown"}")
                                 },
                                 fontSize = 18.sp,
-                                color = Color.DarkGray
+                                color = MaterialTheme.colorScheme.onSecondaryContainer
                             )
                         }
                     }
@@ -166,7 +163,8 @@ class MainActivity : ComponentActivity() {
     fun Greeting(name: String, modifier: Modifier = Modifier) {
         Text(
             text = "Hello $name!",
-            modifier = modifier
+            modifier = modifier,
+            color = MaterialTheme.colorScheme.onBackground
         )
     }
 
@@ -177,19 +175,61 @@ class MainActivity : ComponentActivity() {
             Greeting("Android")
         }
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         libraryViewModel = LibraryViewModel(application)
         super.onCreate(savedInstanceState)
+
+        // Initialize sensor manager and light sensor
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
+
         enableEdgeToEdge()
+
         setContent {
-            RaptorTheme {
+            // Observe _isDarkTheme state and update theme dynamically
+            val darkTheme by isDarkTheme
+            RaptorTheme(darkTheme = darkTheme) {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Surface(modifier = Modifier.fillMaxSize().padding(innerPadding), color = MaterialTheme.colorScheme.background) {
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
                         SwipeControl()
                     }
                 }
             }
         }
     }
-}
+    // Sensor while in the foreground(app is on)
+    override fun onResume() {
+        super.onResume()
+        lightSensor?.let { sensor ->
+            sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL)
+        }
+    }
+    // Sensor while not in the foreground(pauses the sensor)
+    override fun onPause() {
+        super.onPause()
+        sensorManager.unregisterListener(this)
+    }
 
+    // Sensor controls(light intensity)
+    override fun onSensorChanged(event: SensorEvent?) {
+        if (event?.sensor?.type == Sensor.TYPE_LIGHT) {
+            val lightLevel = event.values[0]
+            // Max light detection range, optimized for general use(outdoor + indoor)
+            val maxLightLevel = lightSensor?.maximumRange ?: 10000f
+
+            // Updates theme based on light level being below or above 50% of maximum
+            // The level needs to be adjusted
+            _isDarkTheme.value = lightLevel < 0.5 * maxLightLevel
+        }
+    }
+
+    override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
+        // Here be nothing
+    }
+}
