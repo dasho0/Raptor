@@ -35,6 +35,13 @@ import kotlinx.coroutines.launch
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.icons.Icons
+import androidx.compose.material3.icons.filled.Menu
 
 
 class MainActivity : ComponentActivity() {
@@ -57,6 +64,39 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+    @Composable
+    override fun onCreate(savedInstanceState: Bundle?) {
+        libraryViewModel = LibraryViewModel(application)
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            RaptorTheme {
+                Scaffold(
+                    topBar = {
+                        TopAppBar(
+                            title = { Text(text = "Raptor") },
+                            actions = {
+                                IconButton(onClick = { /* Handle click event */ }) {
+                                    Icon(Icons.Filled.Menu, contentDescription = "Menu")
+                                }
+                            }
+                        )
+                    },
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
+                    Surface(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .padding(innerPadding),
+                        color = MaterialTheme.colorScheme.background
+                    ) {
+                        SwipeControl()
+                    }
+                }
+            }
+        }
+    }
+
 
     @Composable
     fun AuthorsView() {

@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Raptor"
 include(":app")
+include(":raptor")
