@@ -2,7 +2,6 @@ package com.example.raptor.database
 
 import android.content.Context
 import android.util.Log
-import androidx.compose.ui.util.fastFilter
 import androidx.compose.ui.util.fastForEach
 import androidx.room.Room
 import com.example.raptor.TagExtractor
@@ -10,9 +9,8 @@ import com.example.raptor.database.entities.Album
 import com.example.raptor.database.entities.AlbumAuthorCrossRef
 import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
-import com.example.raptor.database.relations.AlbumWithAuthors
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.yield
+import kotlinx.coroutines.flow.emptyFlow
 import java.io.File
 
 class DatabaseManager(context: Context) {
@@ -29,16 +27,16 @@ class DatabaseManager(context: Context) {
         }
     }
 
-    fun fetchAllSongs(): Flow<List<Song>> { //TODO: should change this to something
-        // more universal
+    fun fetchAllSongs(): Flow<List<Song>> { //TODO: should change this to something more universal
         Log.d(javaClass.simpleName, "Collecting songs on thread ${Thread.currentThread().name}")
-        return database.libraryDao().getAllSongs()
+        // return database.logicDao().getAllSongs()
+        return emptyFlow()
     }
 
     fun populateDatabase(songs: List<TagExtractor.SongTags>) {
         assert(Thread.currentThread().name != "main")
 
-        val dao = database.libraryDao()
+        val dao = database.logicDao()
 
         fun addAuthors() {
             songs.fastForEach { song ->
@@ -81,7 +79,7 @@ class DatabaseManager(context: Context) {
                 val albumWithAuthorCandidates = dao
                     .getAlbumsByName(song.album.toString())
                     ?.map { it.albumId }
-                    ?.flatMap { dao.getAlbumWithAuthors(it) }
+                    ?.map { dao.getAlbumWithAuthors(it) }
                 Log.d(javaClass.simpleName, "$albumWithAuthorCandidates")
 
                 var correctAlbum: Album? = null

@@ -10,12 +10,10 @@ import com.example.raptor.database.entities.AlbumAuthorCrossRef
 import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
 import com.example.raptor.database.relations.AlbumWithAuthors
-import com.example.raptor.database.relations.AlbumWithSongs
 import com.example.raptor.database.relations.AuthorWithAlbums
-import kotlinx.coroutines.flow.Flow
 
 @Dao
-interface LibraryDao {
+interface LogicDao {
     @Insert
     fun insertSong(song: Song)
 
@@ -28,21 +26,13 @@ interface LibraryDao {
     @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     fun insertAlbumAuthorCrossRef(albumAuthorCrossRef: AlbumAuthorCrossRef)
 
-    @Query("SELECT * FROM Song")
-    fun getAllSongs(): Flow<List<Song>>
-
     @Query("SELECT * FROM Author")
     fun getAllAuthors(): List<Author>
-
-    // Get an album with its songs
-    @Transaction
-    @Query("SELECT * FROM album WHERE albumId = :albumId")
-    fun getAlbumWithSongs(albumId: Long): Flow<List<AlbumWithSongs>>
 
     // Get an album with its authors
     @Transaction
     @Query("SELECT * FROM album WHERE albumId = :albumId")
-    fun getAlbumWithAuthors(albumId: Long): List<AlbumWithAuthors>
+    fun getAlbumWithAuthors(albumId: Long): AlbumWithAuthors
 
     // Get an author with their albums
     @Transaction

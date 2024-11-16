@@ -9,5 +9,6 @@ import com.example.raptor.database.entities.Song
 @Database(entities = [Song::class, Author::class, Album::class, AlbumAuthorCrossRef::class], version
 = 1)
 abstract class LibraryDb : RoomDatabase() {
-    abstract fun libraryDao(): LibraryDao
+    abstract fun logicDao(): LogicDao
+    abstract fun uiDao(): UIDao
 }
