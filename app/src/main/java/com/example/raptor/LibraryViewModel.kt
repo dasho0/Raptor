@@ -24,7 +24,7 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     private val fileProcessingFlow = picker.songFileList
         .map { fileList -> tagExtractor.extractTags(fileList, context) }
         .onEach {
-            databaseManager.populateDatabase(it as List<TagExtractor.SongTags>)
+            databaseManager.populateDatabase(it as List<TagExtractor.SongInfo>)
         }
         .flowOn(Dispatchers.IO)
 

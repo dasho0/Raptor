@@ -1,7 +1,6 @@
 package com.example.raptor
 
 import android.content.Context
-import android.provider.MediaStore
 import androidx.media3.common.Metadata
 import android.util.Log
 import androidx.annotation.OptIn
@@ -13,8 +12,8 @@ import androidx.media3.extractor.metadata.vorbis.VorbisComment
 //this class handles metadata extraction from a list of music files
 
 class TagExtractor() {
-    data class SongTags(
-        val artists: List<String>?, // will have to handle multiple artist on a single song somewhere
+    data class SongInfo(
+        val artists: List<String>?,
         val albumArtists: List<String>?,
         val title: String?,
         val releaseDate: String?,
@@ -22,7 +21,7 @@ class TagExtractor() {
 )
 
     @OptIn(UnstableApi::class)
-    private fun convertMetadataToTags(metadata: Metadata): SongTags {
+    private fun convertMetadataToTags(metadata: Metadata): SongInfo {
         return metadata.let {
             val metadataList = mutableListOf<Metadata.Entry>()
             for(i in 0 until it.length()) {
@@ -55,7 +54,7 @@ class TagExtractor() {
                 }
             }
 
-            SongTags(
+            SongInfo(
                 artists = entryMap["ARTIST"] as? List<String>?,
                 albumArtists = entryMap["ALBUMARTIST"] as? List<String>?,
                 title = entryMap["TITLE"] as? String?,
@@ -69,7 +68,7 @@ class TagExtractor() {
     @OptIn(UnstableApi::class)
     fun extractTags(fileList: List<MusicFileLoader.SongFile>, context: Context): List<Any> {
 
-        val tagsList = mutableListOf<SongTags>()
+        val tagsList = mutableListOf<SongInfo>()
 
         for(file in fileList) {
             val mediaItem = MediaItem.fromUri("${file.uri}")

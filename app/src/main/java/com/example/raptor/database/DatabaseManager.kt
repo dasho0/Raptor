@@ -33,7 +33,7 @@ class DatabaseManager(context: Context) {
         return emptyFlow()
     }
 
-    fun populateDatabase(songs: List<TagExtractor.SongTags>) {
+    fun populateDatabase(songs: List<TagExtractor.SongInfo>) {
         assert(Thread.currentThread().name != "main")
 
         val dao = database.logicDao()
