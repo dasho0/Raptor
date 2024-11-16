@@ -13,9 +13,9 @@ class AudioPlayer(val context: Context) {
             .build()
     }
 
-    fun playUri(uri: Uri) {
+    fun playUri(uri: Uri?) {
         player.apply {
-            setDataSource(context, uri)
+            setDataSource(context, uri!!) // FIXME: we ball
             prepare()
             start()
         }

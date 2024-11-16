@@ -21,8 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.raptor.ui.theme.RaptorTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -33,6 +31,10 @@ import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import com.example.raptor.database.entities.Song
+import com.example.raptor.viewmodels.LibraryViewModel
+import com.example.raptor.viewmodels.PlayerViewModel
 
 
 class MainActivity : ComponentActivity() {
@@ -60,8 +62,8 @@ class MainActivity : ComponentActivity() {
     fun AuthorsView() {
         val context = LocalContext.current
         libraryViewModel.PrepareFilePicker()
-        val coroutineScope = rememberCoroutineScope()
 
+        val playerViewModel = PlayerViewModel(application)
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -79,6 +81,15 @@ class MainActivity : ComponentActivity() {
                     .align(Alignment.Center)
             ) {
                 Text("Select Folder")
+            }
+
+            Button(
+                modifier = Modifier.align(Alignment.BottomCenter),
+                onClick = {
+                    playerViewModel.playSong(Song(0, null, null, null))
+                }
+            ) {
+                Text(text = "Zagraj piosenkę")
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.raptor
+package com.example.raptor.viewmodels
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -6,6 +6,8 @@ import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.raptor.MusicFileLoader
+import com.example.raptor.TagExtractor
 import com.example.raptor.database.DatabaseManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
