@@ -1,6 +1,7 @@
 package com.example.raptor
 
 import android.content.Context
+import android.net.Uri
 import androidx.media3.common.Metadata
 import android.util.Log
 import androidx.annotation.OptIn
@@ -18,10 +19,11 @@ class TagExtractor() {
         val title: String?,
         val releaseDate: String?,
         val album: String?,
+        val fileUri: Uri?
 )
 
     @OptIn(UnstableApi::class)
-    private fun convertMetadataToTags(metadata: Metadata): SongInfo {
+    private fun buildSongInfo(metadata: Metadata, uri: Uri?): SongInfo {
         return metadata.let {
             val metadataList = mutableListOf<Metadata.Entry>()
             for(i in 0 until it.length()) {
@@ -60,7 +62,7 @@ class TagExtractor() {
                 title = entryMap["TITLE"] as? String?,
                 album = entryMap["ALBUM"] as String?,
                 releaseDate = entryMap["DATE"] as? String?,
-
+                fileUri = uri
             )
         }
     }
@@ -85,13 +87,12 @@ class TagExtractor() {
                 val tags = trackGroups[0]
                     .getFormat(0)
                     .metadata
-                    .let { convertMetadataToTags(it!!) } // assuming that a file without metadata
+                    .let { buildSongInfo(it!!, file.uri) } // assuming that a file without metadata
                 // is invalid, so forcing a crash here is not a bad idea
 
                 tagsList.add(tags)
             }
         }
-        // return tagsList
         return tagsList
     }
 }

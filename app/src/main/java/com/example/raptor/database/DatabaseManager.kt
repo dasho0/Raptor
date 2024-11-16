@@ -94,7 +94,8 @@ class DatabaseManager(context: Context) {
 
                 dao.insertSong(Song(
                     title = song.title,
-                    albumId = correctAlbum?.albumId
+                    albumId = correctAlbum?.albumId,
+                    fileUri = song.fileUri.toString(),
                 ))
             }
         }
