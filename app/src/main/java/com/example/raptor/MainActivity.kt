@@ -30,8 +30,11 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.rememberPagerState
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.media3.common.Player
 import com.example.raptor.database.entities.Song
 import com.example.raptor.viewmodels.LibraryViewModel
 import com.example.raptor.viewmodels.PlayerViewModel
@@ -54,6 +57,7 @@ class MainActivity : ComponentActivity() {
                 0 -> RecorderView()
                 1 -> AuthorsView()
                 2 -> AlbumView()
+                3 -> AlbumView()
             }
         }
     }
@@ -64,6 +68,8 @@ class MainActivity : ComponentActivity() {
         libraryViewModel.PrepareFilePicker()
 
         val playerViewModel = PlayerViewModel(application)
+
+        val isPlaying = remember { playerViewModel.isPlaying }
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -85,6 +91,9 @@ class MainActivity : ComponentActivity() {
 
             Button(
                 modifier = Modifier.align(Alignment.BottomCenter),
+                colors = ButtonDefaults.buttonColors(
+                    if(isPlaying.value) Color.Blue else Color.Red
+                ),
                 onClick = {
                     playerViewModel.playSong(Song(0, null, null, null))
                 }
@@ -202,3 +211,6 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Composable
+fun SongPlayUI(player: AudioPlayer) {
+}
