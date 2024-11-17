@@ -12,10 +12,10 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application) 
     private val context = application.applicationContext
     private val audioPlayer = AudioPlayer(context)
 
-    private val temp_uri = "content://com.android.externalstorage.documents/tree/14ED-2303%3AMusic/document/14ED-2303%3AMusic%2F06.%20Knife's%20Edge.flac"
+    private val tempUri = "content://com.android.externalstorage.documents/tree/14ED-2303%3AMusic/document/14ED-2303%3AMusic%2F06.%20Knife's%20Edge.flac"
 
     fun playSong(song: Song) {
         // audioPlayer.playUri(song.fileUri?.toUri())
-        audioPlayer.playUri(temp_uri.toUri())
+        audioPlayer.playUri(tempUri.toUri())
     }
 }
