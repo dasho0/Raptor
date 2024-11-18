@@ -26,4 +26,12 @@ interface UIDao {
     @Transaction
     @Query("SELECT * FROM album WHERE albumId = :albumId")
     fun getAlbumWithAuthors(albumId: Long): Flow<List<AlbumWithAuthors>>
+
+    @Transaction
+    @Query("""
+        SELECT s.* FROM Song s
+        INNER JOIN Album a ON s.albumId = a.albumId
+        WHERE a.title = :album
+    """)
+    fun getSongsByAlbum(album: String): Flow<List<Song>>
 }
