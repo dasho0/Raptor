@@ -2,8 +2,8 @@ package com.example.raptor.viewmodels
 
 import android.annotation.SuppressLint
 import android.app.Application
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
-import androidx.core.net.toUri
 import androidx.lifecycle.AndroidViewModel
 import com.example.raptor.AudioPlayer
 import com.example.raptor.database.entities.Song
@@ -20,10 +20,11 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application) 
         fileUri = "content://com.android.externalstorage.documents/tree/14ED-2303%3AMusic/document/14ED-2303%3AMusic%2F06.%20Knife's%20Edge.flac"
     )
 
-    val isPlaying = audioPlayer.playerState.isPlaying
+    private val _isPlaying get() = mutableStateOf(audioPlayer.isPlaying)
+    val isPlaying: State<Boolean> get() =  _isPlaying
 
-    fun playSong(song: Song) {
-        // audioPlayer.playSong(song.fileUri?.toUri())
-        audioPlayer.playSong(tempSong)
+    fun playPauseSong(song: Song) {
+        assert(_isPlaying.value == audioPlayer.isPlaying)
+        if(!_isPlaying.value) audioPlayer.playSong(tempSong) else audioPlayer.pause()
     }
 }

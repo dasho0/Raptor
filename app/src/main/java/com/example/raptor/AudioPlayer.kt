@@ -24,29 +24,59 @@ class AudioPlayer(val context: Context) {
         )
     }
 
+    private var currentSong: Song? = null
+
     private fun updateListeners(song: Song) {
+        if(currentSong == song) {
+            return
+        }
+
+        currentSong = song
+
         player.addListener(
             object: Player.Listener {
                 override fun onIsPlayingChanged(isPlaying: Boolean) {
-                    Log.d(javaClass.simpleName, if (isPlaying) "player is playing $song" else "player is not playing")
+                    Log.d(AudioPlayer::class.simpleName, if (isPlaying) "player is playing $song"
+                    else "player is not playing")
                     playerState.isPlaying.value = isPlaying
+                }
+
+                override fun onPlaybackStateChanged(playbackState: Int) {
+                    Log.d(AudioPlayer::class.simpleName, "Playback State: ${playbackState}")
                 }
             }
         )
     }
 
     data class PlayerState(
-        var isPlaying: MutableState<Boolean> = mutableStateOf(false)
+        val isPlaying: MutableState<Boolean> = mutableStateOf(false)
     )
 
     val playerState = PlayerState()
+    val isPlaying get() = player.isPlaying
 
     fun playSong(song: Song) {
+        assert(isPlaying == false)
+        assert(!player.isPlaying)
+        Log.d(javaClass.simpleName, "calling playSong")
         updateListeners(song)
-        player.apply {
-            setMediaItem(MediaItem.fromUri(song.fileUri!!.toUri())) //FIXME: we ball
-            prepare()
-            play()
+
+        if(player.currentMediaItem.hashCode() != MediaItem.fromUri(song.fileUri!!.toUri())
+                .hashCode()) {
+            player.apply {
+                setMediaItem(MediaItem.fromUri(song.fileUri!!.toUri())) //FIXME: we ball
+                prepare()
+            }
         }
+
+        player.play()
+
+    }
+
+    fun pause() {
+        assert(playerState.isPlaying.value == true)
+        assert(player.isPlaying)
+        Log.d(javaClass.simpleName, "calling pause")
+        player.pause()
     }
 }

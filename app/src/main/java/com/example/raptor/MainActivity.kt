@@ -1,5 +1,6 @@
 package com.example.raptor
 
+import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -34,7 +35,6 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.media3.common.Player
 import com.example.raptor.database.entities.Song
 import com.example.raptor.viewmodels.LibraryViewModel
 import com.example.raptor.viewmodels.PlayerViewModel
@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
         val pagerState = rememberPagerState(initialPage = 1)
 
         HorizontalPager(
-            count = 3, // Number of screens
+            count = 4, // Number of screens
             state = pagerState,
             modifier = Modifier.fillMaxSize()
         ) { page ->
@@ -57,7 +57,7 @@ class MainActivity : ComponentActivity() {
                 0 -> RecorderView()
                 1 -> AuthorsView()
                 2 -> AlbumView()
-                3 -> AlbumView()
+                3 -> SongPlayUI(application)
             }
         }
     }
@@ -87,18 +87,6 @@ class MainActivity : ComponentActivity() {
                     .align(Alignment.Center)
             ) {
                 Text("Select Folder")
-            }
-
-            Button(
-                modifier = Modifier.align(Alignment.BottomCenter),
-                colors = ButtonDefaults.buttonColors(
-                    if(isPlaying.value) Color.Blue else Color.Red
-                ),
-                onClick = {
-                    playerViewModel.playSong(Song(0, null, null, null))
-                }
-            ) {
-                Text(text = "Zagraj piosenkę")
             }
         }
     }
@@ -212,5 +200,25 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun SongPlayUI(player: AudioPlayer) {
+fun SongPlayUI(application: Application) {
+    val playerViewModel = PlayerViewModel(application = application)
+    val isPlaying = remember { playerViewModel.isPlaying }
+
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.DarkGray)
+    ) {
+        Button(
+            modifier = Modifier.align(Alignment.BottomCenter),
+            colors = ButtonDefaults.buttonColors(
+                if(isPlaying.value) Color.Blue else Color.Red
+            ),
+            onClick = {
+                playerViewModel.playPauseSong(Song(0, null, null, null))
+            }
+        ) {
+            Text(text = if(isPlaying.value) "Zapauzuj piosenkę" else "Zagraj piosenkę")
+        }
+    }
 }
