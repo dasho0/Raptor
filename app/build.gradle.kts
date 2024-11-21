@@ -2,7 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    id("com.google.devtools.ksp") version "2.0.21-1.0.26"
+    id("com.google.devtools.ksp")
 }
 
 android {
@@ -84,4 +84,8 @@ dependencies {
     implementation(libs.androidx.media3.extractor)
 
     ksp("androidx.room:room-compiler:$roomVersion")
+
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    ksp("com.google.dagger:hilt-android-compiler:2.51.1") // add
+    ksp("com.google.dagger:dagger-compiler:2.51.1") // add
 }
