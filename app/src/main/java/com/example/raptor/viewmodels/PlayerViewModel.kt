@@ -7,8 +7,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import com.example.raptor.AudioPlayer
 import com.example.raptor.database.entities.Song
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class PlayerViewModel(application: Application) : AndroidViewModel(application) {
+// this has to use dependency injection
+@HiltViewModel
+class PlayerViewModel @Inject constructor (application: Application) : AndroidViewModel(application) {
     @SuppressLint("StaticFieldLeak")
     private val context = application.applicationContext
     private val audioPlayer = AudioPlayer(context)

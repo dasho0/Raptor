@@ -40,8 +40,14 @@ import com.example.raptor.viewmodels.LibraryViewModel
 import com.example.raptor.viewmodels.PlayerViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+import dagger.hilt.android.internal.lifecycle.HiltViewModelFactory
+import dagger.hilt.android.lifecycle.HiltViewModel
 import org.w3c.dom.Text
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var libraryViewModel : LibraryViewModel
 
@@ -203,8 +209,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun SongPlayUI(application: Application) {
-    val playerViewModel = PlayerViewModel(application = application)
-    val isPlaying by  remember { playerViewModel.isPlayingUI }
+    val playerViewModel = hiltViewModel<PlayerViewModel>()
+    val isPlaying by playerViewModel.isPlayingUI
 
     Box(
         modifier = Modifier
@@ -214,13 +220,13 @@ fun SongPlayUI(application: Application) {
         Button(
             modifier = Modifier.align(Alignment.BottomCenter),
             colors = ButtonDefaults.buttonColors(
-             //   if(isPlaying) Color.Blue else Color.Red
+             if(isPlaying) Color.Blue else Color.Red
             ),
             onClick = {
                 playerViewModel.playPauseSong(Song(0, null, null, null))
             }
         ) {
-            // Text(text = if(isPlaying) "Zapauzuj piosenkę" else "Zagraj piosenkę")
+            Text(text = if(isPlaying) "Zapauzuj piosenkę" else "Zagraj piosenkę")
         }
 
         Text(text = isPlaying.toString())
