@@ -20,11 +20,11 @@ class PlayerViewModel(application: Application) : AndroidViewModel(application) 
         fileUri = "content://com.android.externalstorage.documents/tree/14ED-2303%3AMusic/document/14ED-2303%3AMusic%2F06.%20Knife's%20Edge.flac"
     )
 
-    private val _isPlaying get() = mutableStateOf(audioPlayer.isPlayingInternal)
-    val isPlaying: State<Boolean> get() =  _isPlaying
+    private val isPlaying get() = audioPlayer.isPlayingInternal
+    val isPlayingUI: State<Boolean> = audioPlayer.uiState.isPlaying
 
     fun playPauseSong(song: Song) {
-        assert(_isPlaying.value == audioPlayer.isPlayingInternal)
-        if(!_isPlaying.value) audioPlayer.playSong(tempSong) else audioPlayer.pause()
+        assert(isPlaying == audioPlayer.isPlayingInternal)
+        if(!isPlaying) audioPlayer.playSong(tempSong) else audioPlayer.pause()
     }
 }

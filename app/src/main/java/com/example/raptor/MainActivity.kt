@@ -38,7 +38,9 @@ import androidx.compose.ui.Alignment
 import com.example.raptor.database.entities.Song
 import com.example.raptor.viewmodels.LibraryViewModel
 import com.example.raptor.viewmodels.PlayerViewModel
-
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import org.w3c.dom.Text
 
 class MainActivity : ComponentActivity() {
     private lateinit var libraryViewModel : LibraryViewModel
@@ -69,7 +71,7 @@ class MainActivity : ComponentActivity() {
 
         val playerViewModel = PlayerViewModel(application)
 
-        val isPlaying = remember { playerViewModel.isPlaying }
+        val isPlaying by remember { playerViewModel.isPlayingUI }
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -202,7 +204,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SongPlayUI(application: Application) {
     val playerViewModel = PlayerViewModel(application = application)
-    val isPlaying = remember { playerViewModel.isPlaying }
+    val isPlaying by  remember { playerViewModel.isPlayingUI }
 
     Box(
         modifier = Modifier
@@ -212,13 +214,15 @@ fun SongPlayUI(application: Application) {
         Button(
             modifier = Modifier.align(Alignment.BottomCenter),
             colors = ButtonDefaults.buttonColors(
-                if(isPlaying.value) Color.Blue else Color.Red
+             //   if(isPlaying) Color.Blue else Color.Red
             ),
             onClick = {
                 playerViewModel.playPauseSong(Song(0, null, null, null))
             }
         ) {
-            Text(text = if(isPlaying.value) "Zapauzuj piosenkę" else "Zagraj piosenkę")
+            // Text(text = if(isPlaying) "Zapauzuj piosenkę" else "Zagraj piosenkę")
         }
+
+        Text(text = isPlaying.toString())
     }
 }

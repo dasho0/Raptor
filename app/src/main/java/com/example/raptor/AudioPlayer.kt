@@ -11,6 +11,7 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.example.raptor.database.entities.Song
+
 class AudioPlayer(val context: Context) {
     private val player = ExoPlayer.Builder(context).build().apply {
         setAudioAttributes(
@@ -67,6 +68,8 @@ class AudioPlayer(val context: Context) {
                 setMediaItem(MediaItem.fromUri(song.fileUri!!.toUri())) //FIXME: we ball
                 prepare()
             }
+
+            Log.d(javaClass.simpleName, "playSong(), songs don't match")
         }
 
         player.play()
