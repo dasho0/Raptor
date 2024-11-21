@@ -2,7 +2,6 @@ package com.example.raptor
 
 import android.content.Context
 import androidx.media3.common.AudioAttributes
-import android.net.Uri
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
@@ -12,7 +11,6 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.example.raptor.database.entities.Song
-
 class AudioPlayer(val context: Context) {
     private val player = ExoPlayer.Builder(context).build().apply {
         setAudioAttributes(
@@ -38,7 +36,7 @@ class AudioPlayer(val context: Context) {
                 override fun onIsPlayingChanged(isPlaying: Boolean) {
                     Log.d(AudioPlayer::class.simpleName, if (isPlaying) "player is playing $song"
                     else "player is not playing")
-                    playerState.isPlaying.value = isPlaying
+                    uiState.isPlaying.value = isPlaying
                 }
 
                 override fun onPlaybackStateChanged(playbackState: Int) {
@@ -48,17 +46,19 @@ class AudioPlayer(val context: Context) {
         )
     }
 
-    data class PlayerState(
+    data class UIState(
         val isPlaying: MutableState<Boolean> = mutableStateOf(false)
     )
 
-    val playerState = PlayerState()
-    val isPlaying get() = player.isPlaying
+    val uiState = UIState()
+    val isPlayingInternal get() = player.isPlaying
 
     fun playSong(song: Song) {
-        assert(isPlaying == false)
+        assert(isPlayingInternal == false)
         assert(!player.isPlaying)
+        assert(uiState.isPlaying.value == isPlayingInternal)
         Log.d(javaClass.simpleName, "calling playSong")
+
         updateListeners(song)
 
         if(player.currentMediaItem.hashCode() != MediaItem.fromUri(song.fileUri!!.toUri())
@@ -74,8 +74,10 @@ class AudioPlayer(val context: Context) {
     }
 
     fun pause() {
-        assert(playerState.isPlaying.value == true)
-        assert(player.isPlaying)
+        assert(uiState.isPlaying.value == true)
+        assert(isPlayingInternal)
+        assert(uiState.isPlaying.value == isPlayingInternal)
+
         Log.d(javaClass.simpleName, "calling pause")
         player.pause()
     }
