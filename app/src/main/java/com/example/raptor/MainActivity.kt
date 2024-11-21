@@ -72,7 +72,7 @@ class MainActivity : ComponentActivity() {
 
         val playerViewModel = PlayerViewModel(application)
 
-        val isPlaying by remember { playerViewModel.isPlayingUI }
+        val isPlaying by remember { playerViewModel.isPlaying }
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -205,7 +205,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SongPlayUI(application: Application) {
     val playerViewModel = hiltViewModel<PlayerViewModel>()
-    val isPlaying by playerViewModel.isPlayingUI
+    val isPlaying by playerViewModel.isPlaying
 
     Box(
         modifier = Modifier

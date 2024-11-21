@@ -52,7 +52,7 @@ class AudioPlayer(val context: Context) {
     )
 
     val uiState = UIState()
-    val isPlayingInternal get() = player.isPlaying
+    private val isPlayingInternal get() = player.isPlaying
 
     fun playSong(song: Song) {
         assert(isPlayingInternal == false)

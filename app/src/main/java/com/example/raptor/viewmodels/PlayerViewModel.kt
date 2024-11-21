@@ -3,7 +3,6 @@ package com.example.raptor.viewmodels
 import android.annotation.SuppressLint
 import android.app.Application
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import com.example.raptor.AudioPlayer
 import com.example.raptor.database.entities.Song
@@ -11,6 +10,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 // this has to use dependency injection
+//TODO: since we now use dep injection we can stop passing application around and rely on
+// locaContext in each composable function
 @HiltViewModel
 class PlayerViewModel @Inject constructor (application: Application) : AndroidViewModel(application) {
     @SuppressLint("StaticFieldLeak")
@@ -24,11 +25,9 @@ class PlayerViewModel @Inject constructor (application: Application) : AndroidVi
         fileUri = "content://com.android.externalstorage.documents/tree/14ED-2303%3AMusic/document/14ED-2303%3AMusic%2F06.%20Knife's%20Edge.flac"
     )
 
-    private val isPlaying get() = audioPlayer.isPlayingInternal
-    val isPlayingUI: State<Boolean> = audioPlayer.uiState.isPlaying
+    val isPlaying: State<Boolean> = audioPlayer.uiState.isPlaying
 
     fun playPauseSong(song: Song) {
-        assert(isPlaying == audioPlayer.isPlayingInternal)
-        if(!isPlaying) audioPlayer.playSong(tempSong) else audioPlayer.pause()
+        if(!isPlaying.value) audioPlayer.playSong(tempSong) else audioPlayer.pause()
     }
 }
