@@ -8,78 +8,81 @@ import android.util.Log
 import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import kotlinx.coroutines.flow.MutableStateFlow
 
-class MusicFileLoader(private val context: Context) {
+//TODO: make this a singleton somehow
+
+// this class is probably temporary. The intention is for it to scan the folder (maybe
+// recursively sometime) and then prepare the data to feed it to some other database class.
+class MusicFileLoader(val context: Context) {
     data class SongFile(val filename: String, val uri: Uri, val mimeType: String)
-    var songFileList = MutableStateFlow<List<SongFile>>(emptyList())
+    public var songFileList = MutableStateFlow<List<SongFile>>(emptyList())
         private set
 
-    private var launcher: ManagedActivityResultLauncher<Uri?, Uri?>? = null
+    private lateinit var launcher : ManagedActivityResultLauncher<Uri?, Uri?>
 
     @Composable
     fun PrepareFilePicker() {
-        // This ensures Compose lifecycle correctly initializes the launcher
-        val localLauncher = rememberLauncherForActivityResult(
+        val contentResolver = context.contentResolver
+
+        launcher = rememberLauncherForActivityResult(
             contract = ActivityResultContracts.OpenDocumentTree()
         ) { treeUri: Uri? ->
             treeUri?.let {
-                handleFolderSelection(it)
-            }
-        }
+                val permissions = Intent.FLAG_GRANT_READ_URI_PERMISSION or
+                        Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                contentResolver.takePersistableUriPermission(treeUri, permissions)
 
-        DisposableEffect(Unit) {
-            launcher = localLauncher
-            onDispose {
-                launcher = null
-            }
-        }
-    }
+                Log.d("FolderPicker", "Selected: $it")
 
-    private fun handleFolderSelection(treeUri: Uri) {
-        val contentResolver = context.contentResolver
-        val permissions = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
-        contentResolver.takePersistableUriPermission(treeUri, permissions)
-
-        val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(
-            treeUri,
-            DocumentsContract.getTreeDocumentId(treeUri)
-        )
-
-        val _songFiles = mutableListOf<SongFile>()
-
-        contentResolver.query(
-            childrenUri,
-            arrayOf(
-                DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-                DocumentsContract.Document.COLUMN_DOCUMENT_ID,
-                DocumentsContract.Document.COLUMN_MIME_TYPE
-            ),
-            null,
-            null,
-            null
-        )?.use { cursor ->
-            while (cursor.moveToNext()) {
-                if (!cursor.getString(2).startsWith("audio")) continue
-                _songFiles.add(
-                    SongFile(
-                        filename = cursor.getString(0),
-                        uri = DocumentsContract.buildDocumentUriUsingTree(
-                            treeUri,
-                            cursor.getString(1)
-                        ),
-                        mimeType = cursor.getString(2)
-                    )
+                val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(
+                    treeUri,
+                    DocumentsContract.getTreeDocumentId(treeUri)
                 )
+
+                Log.d("FolderPicker", "Children: $childrenUri")
+
+                contentResolver.query(
+                    childrenUri,
+                    arrayOf(
+                        DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+                        DocumentsContract.Document.COLUMN_DOCUMENT_ID,
+                        DocumentsContract.Document.COLUMN_MIME_TYPE,
+                    ),
+                    null,
+                    null,
+                    null
+                )?.use { cursor ->
+                    var _songFiles = mutableListOf<SongFile>()
+
+                    while(cursor.moveToNext()) {
+                        if(cursor.getString(2).slice(0..4) != "audio") { continue } // of course
+                        // google cant design a good API and of course it has 6 year old bugs in
+                        // it, so mimetype filtering has to be done manually
+
+                        _songFiles.add(SongFile(
+                            cursor.getString(0),
+                            DocumentsContract.buildDocumentUriUsingTree(
+                                treeUri,
+                                cursor.getString(1)
+                            ),
+                            cursor.getString(2))
+                        )
+
+                        Log.d("MusicFilePicker", "Music File: ${_songFiles.last().filename}, " +
+                                "ID: ${_songFiles.last().uri}," +
+                                "Type: ${_songFiles.last().mimeType}"
+                        )
+                    }
+
+                    songFileList.value = _songFiles
+                }
             }
         }
-
-        songFileList.value = _songFiles
-        Log.d("MusicFileLoader", "Loaded ${_songFiles.size} songs from $treeUri")
     }
 
     fun launch() {
-        launcher?.launch(null) ?: Log.e("MusicFileLoader", "Launcher not initialized")
+        launcher.launch(null)
     }
 }

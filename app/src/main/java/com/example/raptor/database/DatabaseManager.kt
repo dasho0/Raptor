@@ -33,14 +33,6 @@ class DatabaseManager(context: Context) {
         return emptyFlow()
     }
 
-    fun fetchAuthors(): Flow<List<Author>> = database.logicDao().getAllAuthorsFlow()
-
-    fun fetchAlbumsByAuthor(author: String): Flow<List<Album>> = database.logicDao().getAlbumsByAuthor(author)
-
-    fun fetchSongsByAlbum(album: String): Flow<List<Song>> = database.uiDao().getSongsByAlbum(album)
-
-
-
     fun populateDatabase(songs: List<TagExtractor.SongTags>) {
         assert(Thread.currentThread().name != "main")
 

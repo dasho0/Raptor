@@ -1,220 +1,193 @@
 package com.example.raptor
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.*
-import androidx.compose.ui.platform.LocalConfiguration
-import android.content.res.Configuration
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import com.example.raptor.database.entities.Song
+import androidx.compose.ui.tooling.preview.Preview
 import com.example.raptor.ui.theme.RaptorTheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.google.accompanist.pager.HorizontalPager
+import com.google.accompanist.pager.rememberPagerState
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.runtime.collectAsState
+
 
 class MainActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContent {
-            RaptorTheme {
-                MainScreen()
+    private lateinit var libraryViewModel : LibraryViewModel
+
+    @OptIn(ExperimentalPagerApi::class)
+    @Composable
+    fun SwipeControl() {
+        val pagerState = rememberPagerState(initialPage = 1)
+
+        HorizontalPager(
+            count = 3, // Number of screens
+            state = pagerState,
+            modifier = Modifier.fillMaxSize()
+        ) { page ->
+            when (page) {
+                0 -> RecorderView()
+                1 -> AuthorsView()
+                2 -> AlbumView()
             }
         }
     }
-}
 
-@Composable
-fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
-    val navController = rememberNavController()
+    @Composable
+    fun AuthorsView() {
+        val context = LocalContext.current
+        libraryViewModel.PrepareFilePicker()
+        val coroutineScope = rememberCoroutineScope()
 
-    NavHost(
-        navController = navController,
-        startDestination = "main"
-    ) {
-        composable("main") {
-            MainScreenContent(navController, libraryViewModel)
-        }
-        composable("albums/{author}") { backStackEntry ->
-            val author = backStackEntry.arguments?.getString("author") ?: ""
-            AlbumsScreen(navController, libraryViewModel, author)
-        }
-        composable("songs/{album}") { backStackEntry ->
-            val album = backStackEntry.arguments?.getString("album") ?: ""
-            SongsScreen(navController, libraryViewModel, album)
-        }
-    }
-}
-
-@Composable
-fun MainScreenContent(navController: NavHostController, libraryViewModel: LibraryViewModel) {
-    libraryViewModel.PrepareFilePicker() // Ensures launcher is ready
-
-    val folderSelected by libraryViewModel.folderSelected
-    val authors by libraryViewModel.authors.collectAsState(initial = emptyList())
-    val configuration = LocalConfiguration.current
-
-    // Determine the number of columns based on orientation
-    val columns = if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        4 // 4 tiles in a row for horizontal mode
-    } else {
-        3 // 3 tiles in a row for vertical mode
-    }
-
-    if (!folderSelected) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Gray),
-            contentAlignment = Alignment.Center
+                .background(Color.Gray)
         ) {
-            Button(onClick = {
-                libraryViewModel.pickFiles()
-            }) {
+            Button(
+                onClick = {
+                    libraryViewModel.pickFiles()
+                    // coroutineScope.launch {
+                    //     libraryViewModel.processFiles(context)
+                    // }
+                    Log.d("MusicFilePicker", "-TEST-")
+                },
+                modifier = Modifier
+                    .align(Alignment.Center)
+            ) {
                 Text("Select Folder")
             }
         }
-    } else {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(columns), // Dynamically set columns based on orientation
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            items(authors) { author ->
-                AuthorTile(author = author.name, onClick = {
-                    navController.navigate("albums/${author.name}")
-                })
-            }
-        }
     }
-}
 
-@Composable
-fun AuthorTile(author: String, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        modifier = Modifier
-            .width(120.dp) // Adjust the width of the tile
-            .height(140.dp), // Adjust the height of the tile
-        shape = RectangleShape // Keeps sharp, square edges
-    ) {
+
+    @Composable
+    fun RecorderView() {
         Box(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.Black),
             contentAlignment = Alignment.Center
         ) {
-            val nameParts = author.split(" ", limit = 2) // Split name into parts
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = nameParts.getOrNull(0) ?: "", // First name or empty if not available
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = nameParts.getOrNull(1) ?: "", // Surname or empty if not available
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center
-                )
-            }
+            Text(
+                text = "Dyktafon",
+                color = Color.White,
+                fontSize = 42.sp
+            )
         }
     }
-}
 
-@Composable
-fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryViewModel, author: String) {
-    val albums by libraryViewModel.getAlbumsByAuthor(author).collectAsState(initial = emptyList())
+    @Composable
+    fun AlbumView() {
+        val songTags = libraryViewModel.libraryState.collectAsState(initial = emptyList())
 
-    LazyVerticalGrid(
-        columns = GridCells.Fixed(3),
-        modifier = Modifier.fillMaxSize(),
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
-    ) {
-        items(albums) { album ->
-            AlbumTile(album = album.title, onClick = {
-                navController.navigate("songs/${album.title}")
-            })
-        }
-    }
-}
-
-@Composable
-fun AlbumTile(album: String, onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        modifier = Modifier
-            .width(120.dp)
-            .height(140.dp), // Increased height for full names
-        shape = RectangleShape
-    ) {
         Box(
-            modifier = Modifier.fillMaxSize(),
-            contentAlignment = Alignment.Center
+            modifier = Modifier
+                .fillMaxSize()
+                .background(Color.White),
+            contentAlignment = Alignment.TopCenter
         ) {
-            val nameParts = album.split(" ", limit = 2) // Split album name into parts
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+            LazyColumn(
+                modifier = Modifier.padding(16.dp)
             ) {
-                Text(
-                    text = nameParts.getOrNull(0) ?: "", // First line or empty if not available
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center
-                )
-                Text(
-                    text = nameParts.getOrNull(1) ?: "", // Second line or empty if not available
-                    style = MaterialTheme.typography.bodyMedium,
-                    textAlign = TextAlign.Center
-                )
+                item {
+                    Text(
+                        text = "Lista Utworów",
+                        color = Color.Black,
+                        fontSize = 42.sp,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                }
+
+                if (songTags.value.isEmpty()) {
+                    item {
+                        Text(
+                            text = "Brak danych do wyświetlenia",
+                            fontSize = 18.sp,
+                            color = Color.Gray
+                        )
+                    }
+                } else {
+                    items(songTags.value.size) { index ->
+                        val song = songTags.value[index]
+                        songTags.value
+                        Box(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp)
+                                .clip(RoundedCornerShape(8.dp))
+                                .border(1.dp, Color.Black, RoundedCornerShape(8.dp))
+                                .background(Color(0xff3aa8c1))
+                                .padding(8.dp)
+                        ) {
+                            Text(
+                                text = buildString {
+                                    // append("Album: ${song.album ?: "Unknown"}\n")
+                                    // append("Wykonawca: ${song.artists ?: "Unknown"}\n")
+                                    // append("Tytuł: ${song.title ?: "Unknown"}\n")
+                                    // append("Rok Wydania: ${null ?: "Unknown"}")
+                                },
+                                fontSize = 18.sp,
+                                color = Color.DarkGray
+                            )
+                        }
+                    }
+                }
             }
         }
     }
-}
 
-@Composable
-fun SongsScreen(navController: NavHostController, libraryViewModel: LibraryViewModel, album: String) {
-    val songs by libraryViewModel.getSongsByAlbum(album).collectAsState(initial = emptyList())
-
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        items(songs) { song ->
-            SongItem(song = song)
-        }
-    }
-}
-
-@Composable
-fun SongItem(song: Song) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .background(Color.LightGray, RectangleShape)
-            .padding(16.dp)
-    ) {
+    @Composable
+    fun Greeting(name: String, modifier: Modifier = Modifier) {
         Text(
-            text = song.title ?: "Unknown Song",
-            style = MaterialTheme.typography.bodyLarge
+            text = "Hello $name!",
+            modifier = modifier
         )
     }
+
+    @Preview(showBackground = true)
+    @Composable
+    fun GreetingPreview() {
+        RaptorTheme {
+            Greeting("Android")
+        }
+    }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        libraryViewModel = LibraryViewModel(application)
+        super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
+        setContent {
+            RaptorTheme {
+                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    Surface(modifier = Modifier.fillMaxSize().padding(innerPadding), color = MaterialTheme.colorScheme.background) {
+                        SwipeControl()
+                    }
+                }
+            }
+        }
+    }
 }
+

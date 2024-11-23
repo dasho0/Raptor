@@ -11,7 +11,6 @@ import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
 import com.example.raptor.database.relations.AlbumWithAuthors
 import com.example.raptor.database.relations.AuthorWithAlbums
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface LogicDao {
@@ -29,17 +28,6 @@ interface LogicDao {
 
     @Query("SELECT * FROM Author")
     fun getAllAuthors(): List<Author>
-
-    @Query("SELECT * FROM Author")
-    fun getAllAuthorsFlow(): Flow<List<Author>>
-
-    @Transaction
-    @Query("""
-        SELECT a.* FROM Album a
-        INNER JOIN AlbumAuthorCrossRef c ON a.albumId = c.albumId
-        WHERE c.name = :author
-    """)
-    fun getAlbumsByAuthor(author: String): Flow<List<Album>>
 
     // Get an album with its authors
     @Transaction
