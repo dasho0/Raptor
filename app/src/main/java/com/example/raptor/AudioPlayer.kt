@@ -47,26 +47,37 @@ class AudioPlayer(val context: Context) {
 
                     playbackState.value = if(isPlaying)
                         PlaybackStates.STATE_PLAYING else PlaybackStates.STATE_PAUSED
+                    Log.d(AudioPlayer::class.simpleName, "Playback: ${playbackState
+                        .value.name}")
                 }
 
                 override fun onPlaybackStateChanged(playbackState: Int) {
-                    Log.d(AudioPlayer::class.simpleName, "Playback State: ${playbackState}")
-
                     when(playbackState) {
                         Player.STATE_BUFFERING -> {
+                            Log.d(AudioPlayer::class.simpleName, "Playback: ${
+                                PlaybackStates
+                                .STATE_BUFFERING}")
                             this@AudioPlayer.playbackState.value = PlaybackStates.STATE_BUFFERING
                         }
 
                         Player.STATE_ENDED -> {
-                            Log.d(AudioPlayer::class.simpleName, "Playback State ended")
+                            Log.d(AudioPlayer::class.simpleName, "Playback: ${
+                                PlaybackStates
+                                .STATE_ENDED.name}")
                             this@AudioPlayer.playbackState.value = PlaybackStates.STATE_ENDED
                         }
 
                         Player.STATE_IDLE -> {
+                            Log.d(AudioPlayer::class.simpleName, "Playback: ${
+                                PlaybackStates
+                                .STATE_IDLE.name}")
                             this@AudioPlayer.playbackState.value = PlaybackStates.STATE_IDLE
                         }
 
                         Player.STATE_READY -> {
+                            Log.d(AudioPlayer::class.simpleName, "Playback: ${
+                                PlaybackStates
+                                .STATE_READY.name}")
                             this@AudioPlayer.playbackState.value = PlaybackStates.STATE_READY
                         }
                     }
