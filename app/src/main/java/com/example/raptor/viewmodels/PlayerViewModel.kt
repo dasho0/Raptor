@@ -1,11 +1,7 @@
 package com.example.raptor.viewmodels
 
-import android.R
 import android.annotation.SuppressLint
 import android.app.Application
-import android.util.Log
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.lifecycle.AndroidViewModel
 import com.example.raptor.AudioPlayer
 import com.example.raptor.database.entities.Song
@@ -32,12 +28,10 @@ class PlayerViewModel @Inject constructor (application: Application) : AndroidVi
         fileUri = "content://com.android.externalstorage.documents/tree/14ED-2303%3AMusic/document/14ED-2303%3AMusic%2F06.%20Knife's%20Edge.flac"
     )
 
-    //TODO: https://gist.github.com/rubenquadros/f40488218b5fce8461b5f39905b3dae5
     val progressBarPosition: Flow<Float> = flow {
         while(true) {
             assert((audioPlayer.currentPosition / audioPlayer.currentDuration) <= 1)
             emit(audioPlayer.currentPosition.toFloat() / audioPlayer.currentDuration.toFloat())
-
             delay(200)
         }
     }
@@ -67,18 +61,24 @@ class PlayerViewModel @Inject constructor (application: Application) : AndroidVi
         }
 
     fun onProgressBarMoved(tapPosition: Float) {
+        if(audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_IDLE) {
+            throw(NotImplementedError())
+        }
+
         assert(tapPosition * audioPlayer.currentDuration <= audioPlayer.currentDuration)
+
         audioPlayer.changeCurrentPosition((tapPosition * audioPlayer.currentDuration).toLong())
     }
 
-    fun playPauseSong(song: Song) {
+    fun playPauseRestartSong(song: Song) {
         if(
             audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_IDLE ||
-            audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_ENDED ||
             audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_PAUSED
         )
             audioPlayer.playSong(tempSong)
-        else
+        else if(audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_PLAYING)
             audioPlayer.pause()
+        else
+            audioPlayer.restartCurrentPlayback()
     }
 }

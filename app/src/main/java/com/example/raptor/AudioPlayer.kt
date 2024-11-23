@@ -123,6 +123,11 @@ class AudioPlayer(val context: Context) {
 
     }
 
+    fun restartCurrentPlayback() {
+        player.seekTo(0)
+        player.play()
+    }
+
     fun pause() {
         assert(playbackState.value == PlaybackStates.STATE_PLAYING)
         assert(isPlayingInternal)
