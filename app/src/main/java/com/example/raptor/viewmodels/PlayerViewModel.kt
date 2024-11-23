@@ -2,6 +2,11 @@ package com.example.raptor.viewmodels
 
 import android.annotation.SuppressLint
 import android.app.Application
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.PauseCircleFilled
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.Replay
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.AndroidViewModel
 import com.example.raptor.AudioPlayer
 import com.example.raptor.database.entities.Song
@@ -21,6 +26,40 @@ class PlayerViewModel @Inject constructor (application: Application) : AndroidVi
     private val context = application.applicationContext
     private val audioPlayer = AudioPlayer(context)
 
+    private val iconFromState = object {
+        private var lastIconState = Icons.Filled.PlayArrow
+
+        // TODO: should probably just turn this into a map
+        fun getFrom(state: AudioPlayer.PlaybackStates): ImageVector  {
+            when(state) {
+                AudioPlayer.PlaybackStates.STATE_BUFFERING,
+                AudioPlayer.PlaybackStates.STATE_READY, -> {
+                    return lastIconState
+                }
+                AudioPlayer.PlaybackStates.STATE_ENDED -> {
+                    return Icons.Filled.Replay.also {
+                        lastIconState = it
+                    }
+                }
+                AudioPlayer.PlaybackStates.STATE_IDLE -> {
+                    return Icons.Filled.PlayArrow.also {
+                        lastIconState = it
+                    }
+                }
+                AudioPlayer.PlaybackStates.STATE_PLAYING -> {
+                    return Icons.Filled.PauseCircleFilled.also {
+                        lastIconState = it
+                    }
+                }
+                AudioPlayer.PlaybackStates.STATE_PAUSED -> {
+                    return Icons.Filled.PlayArrow.also {
+                        lastIconState = it
+                    }
+                }
+            }
+        }
+    }
+
     private val tempSong = Song(
         songId = 0L,
         title = "Test123",
@@ -36,28 +75,9 @@ class PlayerViewModel @Inject constructor (application: Application) : AndroidVi
         }
     }
 
-    val buttonText = audioPlayer.playbackState
-        .map { state -> String
-            when(state) {
-                AudioPlayer.PlaybackStates.STATE_BUFFERING -> {
-                    String()
-                }
-                AudioPlayer.PlaybackStates.STATE_ENDED -> {
-                    "Powtórz piosenkę"
-                }
-                AudioPlayer.PlaybackStates.STATE_IDLE -> {
-                    "Zagraj piosenkę"
-                }
-                AudioPlayer.PlaybackStates.STATE_READY -> {
-                    String()
-                }
-                AudioPlayer.PlaybackStates.STATE_PLAYING -> {
-                    "Zapauzuj piosenkę"
-                }
-                AudioPlayer.PlaybackStates.STATE_PAUSED -> {
-                    "Odpauzuj piosenkę"
-                }
-            }
+    val currentIconImage = audioPlayer.playbackState
+        .map {
+            iconFromState.getFrom(it)
         }
 
     fun onProgressBarMoved(tapPosition: Float) {
@@ -73,7 +93,8 @@ class PlayerViewModel @Inject constructor (application: Application) : AndroidVi
     fun playPauseRestartSong(song: Song) {
         if(
             audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_IDLE ||
-            audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_PAUSED
+            audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_PAUSED ||
+            audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_READY
         )
             audioPlayer.playSong(tempSong)
         else if(audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_PLAYING)
