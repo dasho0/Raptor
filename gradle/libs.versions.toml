@@ -24,6 +24,8 @@ androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", versi
 androidx-media3-extractor = { module = "androidx.media3:media3-extractor", version.ref = "mediaVersion" }
 androidx-media3-ui = { module = "androidx.media3:media3-ui", version.ref = "mediaVersion" }
 
+material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomRuntime" }

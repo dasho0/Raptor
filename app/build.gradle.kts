@@ -84,6 +84,8 @@ dependencies {
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.extractor)
 
+    implementation(libs.material.icons.extended)
+
     ksp("androidx.room:room-compiler:$roomVersion")
 
     implementation(libs.androidx.hilt.navigation.compose)
