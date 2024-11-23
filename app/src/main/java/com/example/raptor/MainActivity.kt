@@ -128,7 +128,6 @@ fun AuthorTile(author: String, onClick: () -> Unit) {
                 )
                 Text(
                     text = nameParts.getOrNull(1) ?: "", // Surname or empty if not available
-                    // FIXME: co jak autor ma 3 różne człony w nazwie albo więcej
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center
                 )
@@ -180,8 +179,6 @@ fun AlbumTile(album: String, onClick: () -> Unit) {
                 )
                 Text(
                     text = nameParts.getOrNull(1) ?: "", // Second line or empty if not available
-                    // FIXME: przy nazwach albumu to juz wgl sensu nie ma jak one maja jeszcze
-                    //  wiecej czlonow
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center
                 )
