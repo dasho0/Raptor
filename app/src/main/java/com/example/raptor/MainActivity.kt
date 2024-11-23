@@ -78,10 +78,6 @@ class MainActivity : ComponentActivity() {
     fun AuthorsView() {
         val context = LocalContext.current
         libraryViewModel.PrepareFilePicker()
-
-        val playerViewModel = PlayerViewModel(application)
-
-        val isPlaying by remember { playerViewModel.isPlaying }
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -214,7 +210,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun SongPlayUI(application: Application) {
     val playerViewModel = hiltViewModel<PlayerViewModel>()
-    val isPlaying by playerViewModel.isPlaying
+
+    val buttonText by playerViewModel.buttonText
+        .collectAsState(String())
+
     val progressBarPosition by playerViewModel.progressBarPosition
         .collectAsState(initial = 0)
 
@@ -229,14 +228,14 @@ fun SongPlayUI(application: Application) {
             modifier = Modifier.fillMaxHeight()
         ) {
             Button(
-                colors = ButtonDefaults.buttonColors(
-                    if(isPlaying) Color.Blue else Color.Red
-                ),
+                // colors = ButtonDefaults.buttonColors(
+                //     if(isPlaying) Color.Blue else Color.Red
+                // ),
                 onClick = {
                     playerViewModel.playPauseSong(Song(0, null, null, null))
                 }
             ) {
-                Text(text = if(isPlaying) "Zapauzuj piosenkę" else "Zagraj piosenkę")
+                Text(text = buttonText)
             }
 
             Column(

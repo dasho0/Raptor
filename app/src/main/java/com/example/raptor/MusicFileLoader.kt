@@ -11,13 +11,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
 import kotlinx.coroutines.flow.MutableStateFlow
 
-//TODO: make this a singleton somehow
-
 // this class is probably temporary. The intention is for it to scan the folder (maybe
 // recursively sometime) and then prepare the data to feed it to some other database class.
 class MusicFileLoader(val context: Context) {
     data class SongFile(val filename: String, val uri: Uri, val mimeType: String)
-    public var songFileList = MutableStateFlow<List<SongFile>>(emptyList())
+    var songFileList = MutableStateFlow<List<SongFile>>(emptyList())
         private set
 
     private lateinit var launcher : ManagedActivityResultLauncher<Uri?, Uri?>
