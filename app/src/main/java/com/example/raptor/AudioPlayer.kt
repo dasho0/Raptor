@@ -37,7 +37,7 @@ class AudioPlayer(val context: Context) {
                 override fun onIsPlayingChanged(isPlaying: Boolean) {
                     Log.d(AudioPlayer::class.simpleName, if (isPlaying) "player is playing $song"
                     else "player is not playing")
-                    uiState.isPlaying.value = isPlaying
+                    isPlayingUI.value = isPlaying
                 }
 
                 override fun onPlaybackStateChanged(playbackState: Int) {
@@ -47,17 +47,16 @@ class AudioPlayer(val context: Context) {
         )
     }
 
-    data class UIState(
-        val isPlaying: MutableState<Boolean> = mutableStateOf(false)
-    )
-
-    val uiState = UIState()
     private val isPlayingInternal get() = player.isPlaying
+
+    val isPlayingUI: MutableState<Boolean> = mutableStateOf(false)
+    val currentPosition get() = player.currentPosition
+    val currentDuration get() = player.duration
 
     fun playSong(song: Song) {
         assert(isPlayingInternal == false)
         assert(!player.isPlaying)
-        assert(uiState.isPlaying.value == isPlayingInternal)
+        assert(isPlayingUI.value == isPlayingInternal)
         Log.d(javaClass.simpleName, "calling playSong")
 
         updateListeners(song)
@@ -77,11 +76,16 @@ class AudioPlayer(val context: Context) {
     }
 
     fun pause() {
-        assert(uiState.isPlaying.value == true)
+        assert(isPlayingUI.value == true)
         assert(isPlayingInternal)
-        assert(uiState.isPlaying.value == isPlayingInternal)
+        assert(isPlayingUI.value == isPlayingInternal)
 
         Log.d(javaClass.simpleName, "calling pause")
         player.pause()
+
+    }
+
+    fun changeCurrentPosition(time: Long) {
+        player.seekTo(time)
     }
 }
