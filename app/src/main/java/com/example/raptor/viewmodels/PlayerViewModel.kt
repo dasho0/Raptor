@@ -71,7 +71,7 @@ class PlayerViewModel @Inject constructor (application: Application) : AndroidVi
         while(true) {
             assert((audioPlayer.currentPosition / audioPlayer.currentDuration) <= 1)
             emit(audioPlayer.currentPosition.toFloat() / audioPlayer.currentDuration.toFloat())
-            delay(200)
+            delay(33)
         }
     }
 
