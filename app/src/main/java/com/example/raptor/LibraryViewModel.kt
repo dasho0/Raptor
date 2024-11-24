@@ -17,6 +17,8 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
+import com.example.raptor.database.entities.Album
+import kotlinx.coroutines.flow.Flow
 
 class LibraryViewModel(application: Application): AndroidViewModel(application) {
     @SuppressLint("StaticFieldLeak")
@@ -31,24 +33,21 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
 
     val authors = databaseManager.fetchAuthors()
 
-    fun getAlbumsByAuthor(author: String) = databaseManager.fetchAlbumsByAuthor(author)
+    fun getAlbumsByAuthor(author: String): Flow<List<Album>> {
+        return databaseManager.fetchAlbumsByAuthor(author)
+    }
 
-    fun getSongsByAlbum(album: String) = databaseManager.fetchSongsByAlbum(album)
-
-
-    private val fileProcessingFlow = picker.songFileList
-        .map { fileList -> tagExtractor.extractTags(fileList, context) }
-        .onEach {
-            databaseManager.populateDatabase(it as List<TagExtractor.SongTags>)
-        }
-        .flowOn(Dispatchers.IO)
+    fun getSongsByAlbum(album: String): Flow<List<com.example.raptor.database.entities.Song>> {
+        return databaseManager.fetchSongsByAlbum(album)
+    }
 
     val libraryState = databaseManager.fetchAllSongs()
 
     init {
         viewModelScope.launch {
-            fileProcessingFlow.collect {
-                Log.d("${javaClass.simpleName}", "Collecting flow from file picker")
+            picker.songFileList.collect { fileList ->
+                val tags = tagExtractor.extractTags(fileList, context)
+                databaseManager.populateDatabase(tags as List<TagExtractor.SongTags>)
             }
         }
     }

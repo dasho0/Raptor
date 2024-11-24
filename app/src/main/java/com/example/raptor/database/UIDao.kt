@@ -15,35 +15,13 @@ interface UIDao {
     @Query("SELECT * FROM Song")
     fun getAllSongs(): Flow<List<Song>>
 
-    // Get an album with its songs
     @Transaction
     @Query("SELECT * FROM album WHERE albumId = :albumId")
-    fun getAlbumWithSongs(albumId: Long): Flow<List<AlbumWithSongs>>
+    fun getAlbumWithSongs(albumId: Long): Flow<AlbumWithSongs>
 
-    @Query("SELECT * FROM album WHERE albumId = :albumId")
-    fun getAlbumById(albumId: Long): Flow<Album>
-
-    // Get an album with its authors
-    @Transaction
-    @Query("SELECT * FROM album WHERE albumId = :albumId")
-    fun getAlbumWithAuthors(albumId: Long): Flow<List<AlbumWithAuthors>>
-
-    @Transaction
-    @Query("""
-        SELECT s.* FROM Song s
-        INNER JOIN Album a ON s.albumId = a.albumId
-        WHERE a.title = :album
-    """)
-    fun getSongsByAlbum(album: String): Flow<List<Song>>
+    @Query("SELECT * FROM Song WHERE albumId = :albumId")
+    fun getSongsByAlbumId(albumId: Long): Flow<List<Song>>
 
     @Query("SELECT * FROM Author")
     fun getAllAuthorsFlow(): Flow<List<Author>>
-
-    @Transaction
-    @Query("""
-        SELECT a.* FROM Album a
-        INNER JOIN AlbumAuthorCrossRef c ON a.albumId = c.albumId
-        WHERE c.name = :author
-    """)
-    fun getAlbumsByAuthor(author: String): Flow<List<Album>>
 }

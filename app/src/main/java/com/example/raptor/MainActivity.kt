@@ -139,7 +139,8 @@ fun AuthorTile(author: String, onClick: () -> Unit) {
 
 @Composable
 fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryViewModel, author: String) {
-    val albums by libraryViewModel.getAlbumsByAuthor(author).collectAsState(initial = emptyList())
+    val albumsFlow = libraryViewModel.getAlbumsByAuthor(author)
+    val albums by albumsFlow.collectAsState(initial = emptyList())
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
@@ -192,7 +193,8 @@ fun AlbumTile(album: String, onClick: () -> Unit) {
 
 @Composable
 fun SongsScreen(navController: NavHostController, libraryViewModel: LibraryViewModel, album: String) {
-    val songs by libraryViewModel.getSongsByAlbum(album).collectAsState(initial = emptyList())
+    val songsFlow = libraryViewModel.getSongsByAlbum(album)
+    val songs by songsFlow.collectAsState(initial = emptyList())
 
     LazyColumn(
         modifier = Modifier
