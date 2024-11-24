@@ -33,9 +33,9 @@ class DatabaseManager(context: Context) {
         return emptyFlow()
     }
 
-    fun fetchAuthors(): Flow<List<Author>> = database.logicDao().getAllAuthorsFlow()
+    fun fetchAuthors(): Flow<List<Author>> = database.uiDao().getAllAuthorsFlow()
 
-    fun fetchAlbumsByAuthor(author: String): Flow<List<Album>> = database.logicDao().getAlbumsByAuthor(author)
+    fun fetchAlbumsByAuthor(author: String): Flow<List<Album>> = database.uiDao().getAlbumsByAuthor(author)
 
     fun fetchSongsByAlbum(album: String): Flow<List<Song>> = database.uiDao().getSongsByAlbum(album)
 
