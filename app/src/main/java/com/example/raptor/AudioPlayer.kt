@@ -140,4 +140,8 @@ class AudioPlayer(val context: Context) {
     fun changeCurrentPosition(time: Long) {
         player.seekTo(time)
     }
+
+    fun releasePlayer() {
+        player.release()
+    }
 }

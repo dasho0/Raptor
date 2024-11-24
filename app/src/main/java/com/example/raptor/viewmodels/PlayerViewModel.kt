@@ -102,4 +102,10 @@ class PlayerViewModel @Inject constructor (application: Application) : AndroidVi
         else
             audioPlayer.restartCurrentPlayback()
     }
+
+    override fun onCleared() {
+        super.onCleared()
+
+        audioPlayer.releasePlayer()
+    }
 }
