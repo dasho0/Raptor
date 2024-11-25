@@ -24,6 +24,8 @@ import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import com.example.raptor.database.entities.Song
 import com.example.raptor.ui.theme.RaptorTheme
 
@@ -53,9 +55,13 @@ fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
             val author = backStackEntry.arguments?.getString("author") ?: ""
             AlbumsScreen(navController, libraryViewModel, author)
         }
-        composable("songs/{album}") { backStackEntry ->
-            val albumId = backStackEntry.arguments?.getInt("album")
-            SongsScreen(navController, libraryViewModel, albumId!!.toLong())
+        composable(
+            route = "songs/{album}",
+            arguments = listOf(navArgument("album") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val albumId = backStackEntry.arguments?.getLong("album")
+            assert(albumId != 0L)
+            SongsScreen(navController, libraryViewModel, albumId!!) //FIXME: we ball
         }
     }
 }
@@ -153,6 +159,7 @@ fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryView
         items(albums) { album ->
             AlbumTile(albumName = album.title, onClick = {
                 Log.d(javaClass.simpleName, "Album id passed to navhost: ${album.albumId}")
+                assert(album.albumId != 0L)
                 navController.navigate("songs/${album.albumId}")
             })
         }
