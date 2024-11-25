@@ -8,6 +8,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Replay
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import com.example.raptor.AudioPlayer
 import com.example.raptor.database.entities.Song
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,15 +18,8 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-// this has to use dependency injection
-//TODO: since we now use dep injection we can stop passing application around and rely on
-// localContext in each composable function
 @HiltViewModel
-class PlayerViewModel @Inject constructor (application: Application) : AndroidViewModel(application) {
-    @SuppressLint("StaticFieldLeak")
-    private val context = application.applicationContext
-    private val audioPlayer = AudioPlayer(context)
-
+class PlayerViewModel @Inject constructor(private val audioPlayer: AudioPlayer) : ViewModel() {
     private val iconFromState = object {
         private var lastIconState = Icons.Filled.PlayArrow
 

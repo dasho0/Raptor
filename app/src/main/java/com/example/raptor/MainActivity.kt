@@ -32,7 +32,6 @@ import com.example.raptor.database.entities.Song
 import com.example.raptor.screens.SongPlayUI
 import com.example.raptor.ui.theme.RaptorTheme
 import com.example.raptor.viewmodels.LibraryViewModel
-import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -50,7 +49,7 @@ class MainActivity : ComponentActivity() {
 //  restricted to the corresponding screens. This function should either have it's own viewmodel
 //  or simply direct access to the db.
 @Composable
-fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
+fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel<LibraryViewModel>()) {
     val navController = rememberNavController()
 
     NavHost(
@@ -224,7 +223,7 @@ fun SongsScreen(
     navController: NavHostController, libraryViewModel: LibraryViewModel, albumId:
     Long?
 ) {
-    assert(albumId != null)
+   assert(albumId != null)
 
     val songs by libraryViewModel.getSongsByAlbum(albumId!!).collectAsState(initial = emptyList())
 
@@ -241,7 +240,7 @@ fun SongsScreen(
 }
 
 @Composable
-fun SongItem(song: Song, navController: NavHostController) {
+fun SongItem(song: Song) {
     Box(
         modifier = Modifier
             .fillMaxWidth()

@@ -9,11 +9,14 @@ import androidx.activity.compose.ManagedActivityResultLauncher
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
+import javax.inject.Inject
 
 // this class is probably temporary. The intention is for it to scan the folder (maybe
 // recursively sometime) and then prepare the data to feed it to some other database class.
-class MusicFileLoader(val context: Context) {
+class MusicFileLoader
+    @Inject constructor( @ApplicationContext private val context: Context) {
     data class SongFile(val filename: String, val uri: Uri, val mimeType: String)
     var songFileList = MutableStateFlow<List<SongFile>>(emptyList())
         private set

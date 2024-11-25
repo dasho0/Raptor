@@ -9,10 +9,12 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.MetadataRetriever
 import androidx.media3.extractor.metadata.vorbis.VorbisComment
+import dagger.hilt.android.qualifiers.ApplicationContext
+import javax.inject.Inject
 
 //this class handles metadata extraction from a list of music files
 
-class TagExtractor() {
+class TagExtractor @Inject constructor(@ApplicationContext private val context: Context) {
     data class SongInfo(
         val artists: List<String>?,
         val albumArtists: List<String>?,
@@ -68,7 +70,7 @@ class TagExtractor() {
     }
 
     @OptIn(UnstableApi::class)
-    fun extractTags(fileList: List<MusicFileLoader.SongFile>, context: Context): List<Any> {
+    fun extractTags(fileList: List<MusicFileLoader.SongFile>): List<Any> {
 
         val tagsList = mutableListOf<SongInfo>()
 
