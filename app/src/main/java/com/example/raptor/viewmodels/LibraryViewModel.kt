@@ -16,6 +16,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
+import androidx.lifecycle.ViewModel
 import com.example.raptor.database.entities.Album
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -23,14 +24,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LibraryViewModel @Inject constructor(
-    application: Application,
-    val databaseManager: DatabaseManager
-): AndroidViewModel(application) {
-    @SuppressLint("StaticFieldLeak")
-    private val context = application.applicationContext //this is bad practice
-    // i think
-    private val picker = MusicFileLoader(context)
-    private val tagExtractor = TagExtractor()
+    val picker: MusicFileLoader,
+    val databaseManager: DatabaseManager,
+    val tagExtractor: TagExtractor,
+): ViewModel() {
 
     private val _folderSelected = mutableStateOf(false)
     val folderSelected: State<Boolean> get() = _folderSelected
@@ -43,7 +40,7 @@ class LibraryViewModel @Inject constructor(
 
 
     private val fileProcessingFlow = picker.songFileList
-        .map { fileList -> tagExtractor.extractTags(fileList, context) }
+        .map { fileList -> tagExtractor.extractTags(fileList) }
         .onEach {
             databaseManager.populateDatabase(it as List<TagExtractor.SongInfo>)
         }
