@@ -16,7 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import androidx.compose.ui.platform.LocalConfiguration
@@ -25,13 +24,14 @@ import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.navigation.NavHost
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.raptor.database.entities.Song
 import com.example.raptor.screens.SongPlayUI
 import com.example.raptor.ui.theme.RaptorTheme
 import com.example.raptor.viewmodels.LibraryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -240,7 +240,7 @@ fun SongsScreen(
 }
 
 @Composable
-fun SongItem(song: Song) {
+fun SongItem(song: Song, navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
