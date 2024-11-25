@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 //this class handles metadata extraction from a list of music files
 
-class TagExtractor @Inject constructor(@ApplicationContext val context: Context) {
+class TagExtractor @Inject constructor(@ApplicationContext private val context: Context) {
     data class SongInfo(
         val artists: List<String>?,
         val albumArtists: List<String>?,

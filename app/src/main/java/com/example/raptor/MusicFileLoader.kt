@@ -16,7 +16,7 @@ import javax.inject.Inject
 // this class is probably temporary. The intention is for it to scan the folder (maybe
 // recursively sometime) and then prepare the data to feed it to some other database class.
 class MusicFileLoader
-    @Inject constructor( @ApplicationContext val context: Context) {
+    @Inject constructor( @ApplicationContext private val context: Context) {
     data class SongFile(val filename: String, val uri: Uri, val mimeType: String)
     var songFileList = MutableStateFlow<List<SongFile>>(emptyList())
         private set

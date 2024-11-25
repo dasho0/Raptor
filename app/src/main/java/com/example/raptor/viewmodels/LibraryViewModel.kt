@@ -24,9 +24,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LibraryViewModel @Inject constructor(
-    val picker: MusicFileLoader,
-    val databaseManager: DatabaseManager,
-    val tagExtractor: TagExtractor,
+    private val picker: MusicFileLoader,
+    private val databaseManager: DatabaseManager,
+    private val tagExtractor: TagExtractor,
 ): ViewModel() {
 
     private val _folderSelected = mutableStateOf(false)
