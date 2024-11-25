@@ -24,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.raptor.database.entities.Song
@@ -52,7 +53,7 @@ fun MediaControls(playerViewModel: PlayerViewModel) {
 }
 
 @Composable
-fun SongPlayUI(application: Application) {
+fun SongPlayUI() {
     val playerViewModel = hiltViewModel<PlayerViewModel>()
 
     val buttonText by playerViewModel.currentIconImage

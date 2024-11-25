@@ -22,14 +22,19 @@ import androidx.navigation.compose.*
 import androidx.compose.ui.platform.LocalConfiguration
 import android.content.res.Configuration
 import android.util.Log
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.navigation.NavHost
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.raptor.database.entities.Song
+import com.example.raptor.screens.SongPlayUI
 import com.example.raptor.ui.theme.RaptorTheme
 import com.example.raptor.viewmodels.LibraryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,6 +46,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+// FIXME: libraryViewModel has no place being here and it should be removed. it's usage should be
+//  restricted to the corresponding screens. This function should either have it's own viewmodel
+//  or simply direct access to the db.
 @Composable
 fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
     val navController = rememberNavController()
@@ -63,6 +71,15 @@ fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
             val albumId = backStackEntry.arguments?.getLong("album")
             assert(albumId != 0L)
             SongsScreen(navController, libraryViewModel, albumId)
+        }
+
+        composable(
+            route = "player/{songId}",
+            arguments = listOf(navArgument("songId") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val songId = backStackEntry.arguments?.getLong("songId")
+            assert(songId != 0L)
+            SongPlayUI()
         }
     }
 }
@@ -218,19 +235,24 @@ fun SongsScreen(
         verticalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(songs) { song ->
-            SongItem(song = song)
+            SongItem(song = song, navController)
         }
     }
 }
 
 @Composable
-fun SongItem(song: Song) {
+fun SongItem(song: Song, navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .background(Color.LightGray, RectangleShape)
             .padding(16.dp)
+            .clickable(onClick = {
+                Log.d("SongsScreen", "Clicked on song: $song")
+
+                navController.navigate("player/${song.songId}")
+            })
     ) {
         Text(
             text = song.title ?: "Unknown Song",
