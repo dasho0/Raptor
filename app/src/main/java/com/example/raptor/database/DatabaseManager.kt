@@ -33,19 +33,17 @@ class DatabaseManager @Inject constructor(
         }
     }
 
-    fun fetchAuthorsFlow(): Flow<List<Author>> = database.uiDao().getAllAuthorsFlow()
+    fun collectAuthorsFlow(): Flow<List<Author>> = database.uiDao().getAllAuthorsFlow()
 
-    fun fetchAlbumsByAuthorFlow(authorName: String): Flow<List<Album>> {
+    fun collectAlbumsByAuthorFlow(authorName: String): Flow<List<Album>> {
         return database.uiDao().getAuthorWithAlbums(authorName)
             .map { it.albums }
     }
 
-    fun fetchSongsByAlbumFlow(albumId: Long): Flow<List<Song>> {
+    fun collectSongsByAlbumFlow(albumId: Long): Flow<List<Song>> {
         return database.uiDao().getAlbumWithSongs(albumId)
             .map { it.songs }
     }
-
-
 
     fun populateDatabase(songs: List<TagExtractor.SongInfo>) {
         assert(Thread.currentThread().name != "main")
