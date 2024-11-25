@@ -77,7 +77,7 @@ fun MainScreenContent(navController: NavHostController, libraryViewModel: Librar
     Column(modifier = Modifier.fillMaxSize()) {
         TopAppBar(
             title = { Text("Raptor") },
-
+            modifier = Modifier.background(Color.Magenta), //Zły nie działa
             actions = {
                 IconButton(onClick = { expanded.value = true }) {
                     Icon(Icons.Default.MoreVert, contentDescription = "Menu")
