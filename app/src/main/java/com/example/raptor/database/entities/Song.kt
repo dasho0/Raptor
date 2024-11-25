@@ -1,10 +1,10 @@
 package com.example.raptor.database.entities
 
+import android.net.Uri
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import androidx.room.Index
-import org.jetbrains.annotations.NotNull
 
 @Entity(
     foreignKeys = [
@@ -21,5 +21,6 @@ import org.jetbrains.annotations.NotNull
 data class Song(
     @PrimaryKey(autoGenerate = true) val songId: Long = 0,
     val title: String?,
-    val albumId: Long?
+    val albumId: Long?,
+    val fileUri: String?,
 )

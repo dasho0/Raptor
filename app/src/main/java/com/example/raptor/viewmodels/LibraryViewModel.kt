@@ -1,4 +1,4 @@
-package com.example.raptor
+package com.example.raptor.viewmodels
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -7,6 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.raptor.MusicFileLoader
+import com.example.raptor.TagExtractor
 import com.example.raptor.database.DatabaseManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
@@ -36,7 +38,7 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     private val fileProcessingFlow = picker.songFileList
         .map { fileList -> tagExtractor.extractTags(fileList, context) }
         .onEach {
-            databaseManager.populateDatabase(it as List<TagExtractor.SongTags>)
+            databaseManager.populateDatabase(it as List<TagExtractor.SongInfo>)
         }
         .flowOn(Dispatchers.IO)
 

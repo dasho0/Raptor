@@ -41,7 +41,7 @@ class DatabaseManager(context: Context) {
 
 
 
-    fun populateDatabase(songs: List<TagExtractor.SongTags>) {
+    fun populateDatabase(songs: List<TagExtractor.SongInfo>) {
         assert(Thread.currentThread().name != "main")
 
         val dao = database.logicDao()
@@ -102,7 +102,8 @@ class DatabaseManager(context: Context) {
 
                 dao.insertSong(Song(
                     title = song.title,
-                    albumId = correctAlbum?.albumId
+                    albumId = correctAlbum?.albumId,
+                    fileUri = song.fileUri.toString(),
                 ))
             }
         }
