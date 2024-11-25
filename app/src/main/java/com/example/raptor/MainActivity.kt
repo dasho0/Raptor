@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import android.content.res.Configuration
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import com.example.raptor.database.entities.Album
 import com.example.raptor.database.entities.Song
 import com.example.raptor.ui.theme.RaptorTheme
 
@@ -137,6 +138,7 @@ fun AuthorTile(author: String, onClick: () -> Unit) {
     }
 }
 
+// TODO: make a separate viewmodel for this screen
 @Composable
 fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryViewModel, author: String) {
     val albums by libraryViewModel.getAlbumsByAuthor(author).collectAsState(initial = emptyList())
@@ -190,8 +192,9 @@ fun AlbumTile(album: String, onClick: () -> Unit) {
     }
 }
 
+// TODO: make a separate viewmodel for this screen
 @Composable
-fun SongsScreen(navController: NavHostController, libraryViewModel: LibraryViewModel, album: String) {
+fun SongsScreen(navController: NavHostController, libraryViewModel: LibraryViewModel, album: Album) {
     val songs by libraryViewModel.getSongsByAlbum(album).collectAsState(initial = emptyList())
 
     LazyColumn(

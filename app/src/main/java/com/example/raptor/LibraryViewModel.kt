@@ -14,9 +14,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.setValue
 
 class LibraryViewModel(application: Application): AndroidViewModel(application) {
     @SuppressLint("StaticFieldLeak")
@@ -29,11 +26,11 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
     private val _folderSelected = mutableStateOf(false)
     val folderSelected: State<Boolean> get() = _folderSelected
 
-    val authors = databaseManager.fetchAuthors()
+    val authors = databaseManager.fetchAuthorsFlow()
 
-    fun getAlbumsByAuthor(author: String) = databaseManager.fetchAlbumsByAuthor(author)
+    fun getAlbumsByAuthor(author: String) = databaseManager.fetchAlbumsByAuthorFlow(author)
 
-    fun getSongsByAlbum(album: String) = databaseManager.fetchSongsByAlbum(album)
+    fun getSongsByAlbum(albumId: Long) = databaseManager.fetchSongsByAlbumFlow(albumId)
 
 
     private val fileProcessingFlow = picker.songFileList
@@ -42,8 +39,6 @@ class LibraryViewModel(application: Application): AndroidViewModel(application) 
             databaseManager.populateDatabase(it as List<TagExtractor.SongTags>)
         }
         .flowOn(Dispatchers.IO)
-
-    val libraryState = databaseManager.fetchAllSongs()
 
     init {
         viewModelScope.launch {

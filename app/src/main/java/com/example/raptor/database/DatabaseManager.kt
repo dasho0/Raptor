@@ -10,7 +10,7 @@ import com.example.raptor.database.entities.AlbumAuthorCrossRef
 import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.emptyFlow
+import kotlinx.coroutines.flow.map
 import java.io.File
 
 class DatabaseManager(context: Context) {
@@ -27,17 +27,17 @@ class DatabaseManager(context: Context) {
         }
     }
 
-    fun fetchAllSongs(): Flow<List<Song>> { //TODO: should change this to something more universal
-        Log.d(javaClass.simpleName, "Collecting songs on thread ${Thread.currentThread().name}")
-        // return database.logicDao().getAllSongs()
-        return emptyFlow()
+    fun fetchAuthorsFlow(): Flow<List<Author>> = database.uiDao().getAllAuthorsFlow()
+
+    fun fetchAlbumsByAuthorFlow(authorName: String): Flow<List<Album>> {
+        return database.uiDao().getAuthorWithAlbums(authorName)
+            .map { it.albums }
     }
 
-    fun fetchAuthors(): Flow<List<Author>> = database.uiDao().getAllAuthorsFlow()
-
-    fun fetchAlbumsByAuthor(author: String): Flow<List<Album>> = database.uiDao().getAlbumsByAuthor(author)
-
-    fun fetchSongsByAlbum(album: String): Flow<List<Song>> = database.uiDao().getSongsByAlbum(album)
+    fun fetchSongsByAlbumFlow(albumId: Long): Flow<List<Song>> {
+        return database.uiDao().getAlbumWithSongs(albumId)
+            .map { it.songs }
+    }
 
 
 
