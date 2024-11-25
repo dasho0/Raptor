@@ -16,21 +16,28 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
+import com.example.raptor.database.entities.Album
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import javax.inject.Inject
 
-class LibraryViewModel(application: Application): AndroidViewModel(application) {
+@HiltViewModel
+class LibraryViewModel @Inject constructor(
+    application: Application,
+    val databaseManager: DatabaseManager
+): AndroidViewModel(application) {
     @SuppressLint("StaticFieldLeak")
     private val context = application.applicationContext //this is bad practice
     // i think
     private val picker = MusicFileLoader(context)
     private val tagExtractor = TagExtractor()
-    private val databaseManager = DatabaseManager(context)
 
     private val _folderSelected = mutableStateOf(false)
     val folderSelected: State<Boolean> get() = _folderSelected
 
     val authors = databaseManager.fetchAuthorsFlow()
 
-    fun getAlbumsByAuthor(author: String) = databaseManager.fetchAlbumsByAuthorFlow(author)
+    fun getAlbumsByAuthor(author: String)= databaseManager.fetchAlbumsByAuthorFlow(author)
 
     fun getSongsByAlbum(albumId: Long) = databaseManager.fetchSongsByAlbumFlow(albumId)
 

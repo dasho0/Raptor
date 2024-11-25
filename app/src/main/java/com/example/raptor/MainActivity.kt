@@ -29,7 +29,12 @@ import androidx.navigation.navArgument
 import com.example.raptor.database.entities.Song
 import com.example.raptor.ui.theme.RaptorTheme
 import com.example.raptor.viewmodels.LibraryViewModel
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.hilt.navigation.compose.hiltViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +47,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
+fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel<LibraryViewModel>()) {
     val navController = rememberNavController()
 
     NavHost(
@@ -149,6 +154,7 @@ fun AuthorTile(author: String, onClick: () -> Unit) {
 @Composable
 fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryViewModel, author: String) {
     val albums by libraryViewModel.getAlbumsByAuthor(author).collectAsState(initial = emptyList())
+    val test = libraryViewModel.getAlbumsByAuthor(author)
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
