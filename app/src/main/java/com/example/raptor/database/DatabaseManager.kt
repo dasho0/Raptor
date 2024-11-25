@@ -9,11 +9,17 @@ import com.example.raptor.database.entities.Album
 import com.example.raptor.database.entities.AlbumAuthorCrossRef
 import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.io.File
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DatabaseManager(context: Context) {
+@Singleton
+class DatabaseManager @Inject constructor(
+    @ApplicationContext context: Context
+) {
     private val database: LibraryDb = Room.databaseBuilder(
         context,
         LibraryDb::class.java, "Library"
