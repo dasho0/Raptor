@@ -24,6 +24,8 @@ import android.content.res.Configuration
 import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.navigation.NavType
 import androidx.navigation.navArgument
 import com.example.raptor.database.entities.Song
@@ -43,6 +45,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
     val navController = rememberNavController()
+
 
     NavHost(
         navController = navController,
@@ -66,50 +69,70 @@ fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenContent(navController: NavHostController, libraryViewModel: LibraryViewModel) {
-    libraryViewModel.PrepareFilePicker() // Ensures launcher is ready
+    val expanded = remember { mutableStateOf(false) }
 
-    val folderSelected by libraryViewModel.folderSelected
-    val authors by libraryViewModel.authors.collectAsState(initial = emptyList())
-    val configuration = LocalConfiguration.current
+    Column(modifier = Modifier.fillMaxSize()) {
+        TopAppBar(
+            title = { Text("Raptor") },
 
-    // Determine the number of columns based on orientation
-    val columns = if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-        4 // 4 tiles in a row for horizontal mode
-    } else {
-        3 // 3 tiles in a row for vertical mode
-    }
-
-    if (!folderSelected) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Gray),
-            contentAlignment = Alignment.Center
-        ) {
-            Button(onClick = {
-                libraryViewModel.pickFiles()
-            }) {
-                Text("Select Folder")
+            actions = {
+                IconButton(onClick = { expanded.value = true }) {
+                    Icon(Icons.Default.MoreVert, contentDescription = "Menu")
+                }
+                DropdownMenu(
+                    expanded = expanded.value,
+                    onDismissRequest = { expanded.value = false }
+                ) {
+                    DropdownMenuItem(
+                        text = { Text("Select Folder") },
+                        onClick = {
+                            libraryViewModel.pickFiles()
+                            expanded.value = false
+                        }
+                    )
+                }
             }
+        )
+        libraryViewModel.PrepareFilePicker() // Ensures launcher is ready
+
+        val folderSelected by libraryViewModel.folderSelected
+        val authors by libraryViewModel.authors.collectAsState(initial = emptyList())
+        val configuration = LocalConfiguration.current
+
+        // Determine the number of columns based on orientation
+        val columns = if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            4 // 4 tiles in a row for horizontal mode
+        } else {
+            3 // 3 tiles in a row for vertical mode
         }
-    } else {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(columns), // Dynamically set columns based on orientation
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            items(authors) { author ->
-                AuthorTile(author = author.name, onClick = {
-                    navController.navigate("albums/${author.name}")
-                })
+
+        if (!folderSelected) {
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(Color.Gray),
+            )
+        } else {
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(columns), // Dynamically set columns based on orientation
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                items(authors) { author ->
+                    AuthorTile(author = author.name, onClick = {
+                        navController.navigate("albums/${author.name}")
+                    })
+                }
             }
         }
     }
 }
+
 
 @Composable
 fun AuthorTile(author: String, onClick: () -> Unit) {
