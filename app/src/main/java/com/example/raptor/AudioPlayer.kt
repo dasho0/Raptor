@@ -9,9 +9,11 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.exoplayer.ExoPlayer
 import com.example.raptor.database.entities.Song
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
+import javax.inject.Inject
 
-class AudioPlayer(val context: Context) {
+class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
     private val player = ExoPlayer.Builder(context).build().apply {
         setAudioAttributes(
             AudioAttributes.Builder()
