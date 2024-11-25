@@ -62,7 +62,7 @@ fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
         ) { backStackEntry ->
             val albumId = backStackEntry.arguments?.getLong("album")
             assert(albumId != 0L)
-            SongsScreen(navController, libraryViewModel, albumId!!) //FIXME: we ball
+            SongsScreen(navController, libraryViewModel, albumId)
         }
     }
 }
@@ -207,7 +207,7 @@ fun SongsScreen(
     navController: NavHostController, libraryViewModel: LibraryViewModel, albumId:
     Long?
 ) {
-   assert(albumId != null)
+    assert(albumId != null)
 
     val songs by libraryViewModel.getSongsByAlbum(albumId!!).collectAsState(initial = emptyList())
 
