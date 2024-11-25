@@ -21,9 +21,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.*
 import androidx.compose.ui.platform.LocalConfiguration
 import android.content.res.Configuration
+import android.util.Log
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import com.example.raptor.database.entities.Album
 import com.example.raptor.database.entities.Song
 import com.example.raptor.ui.theme.RaptorTheme
 
@@ -54,8 +54,8 @@ fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
             AlbumsScreen(navController, libraryViewModel, author)
         }
         composable("songs/{album}") { backStackEntry ->
-            val album = backStackEntry.arguments?.getString("album") ?: ""
-            SongsScreen(navController, libraryViewModel, album)
+            val albumId = backStackEntry.arguments?.getInt("album")
+            SongsScreen(navController, libraryViewModel, albumId!!.toLong())
         }
     }
 }
@@ -151,15 +151,16 @@ fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryView
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         items(albums) { album ->
-            AlbumTile(album = album.title, onClick = {
-                navController.navigate("songs/${album.title}")
+            AlbumTile(albumName = album.title, onClick = {
+                Log.d(javaClass.simpleName, "Album id passed to navhost: ${album.albumId}")
+                navController.navigate("songs/${album.albumId}")
             })
         }
     }
 }
 
 @Composable
-fun AlbumTile(album: String, onClick: () -> Unit) {
+fun AlbumTile(albumName: String, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         modifier = Modifier
@@ -171,7 +172,7 @@ fun AlbumTile(album: String, onClick: () -> Unit) {
             modifier = Modifier.fillMaxSize(),
             contentAlignment = Alignment.Center
         ) {
-            val nameParts = album.split(" ", limit = 2) // Split album name into parts
+            val nameParts = albumName.split(" ", limit = 2) // Split album name into parts
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -194,8 +195,13 @@ fun AlbumTile(album: String, onClick: () -> Unit) {
 
 // TODO: make a separate viewmodel for this screen
 @Composable
-fun SongsScreen(navController: NavHostController, libraryViewModel: LibraryViewModel, album: Album) {
-    val songs by libraryViewModel.getSongsByAlbum(album).collectAsState(initial = emptyList())
+fun SongsScreen(
+    navController: NavHostController, libraryViewModel: LibraryViewModel, albumId:
+    Long?
+) {
+   assert(albumId != null)
+
+    val songs by libraryViewModel.getSongsByAlbum(albumId!!).collectAsState(initial = emptyList())
 
     LazyColumn(
         modifier = Modifier

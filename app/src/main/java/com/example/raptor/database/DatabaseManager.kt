@@ -85,13 +85,13 @@ class DatabaseManager(context: Context) {
                 Log.d(javaClass.simpleName, "Album artists: ${song.albumArtists}")
 
                 val albumWithAuthorCandidates = dao
-                    .getAlbumsByName(song.album.toString())
-                    ?.map { it.albumId }
-                    ?.map { dao.getAlbumWithAuthors(it) }
+                    .getAlbumsByTitle(song.album.toString())
+                    .map { it.albumId }
+                    .map { dao.getAlbumWithAuthors(it) }
                 Log.d(javaClass.simpleName, "$albumWithAuthorCandidates")
 
                 var correctAlbum: Album? = null
-                albumWithAuthorCandidates?.fastForEach {
+                albumWithAuthorCandidates.fastForEach {
                     Log.d(javaClass.simpleName, "${song.albumArtists}, ${it.authors}")
                     //FIXME: theese guys shouldn't be ordered, will have to refactor a bunch of
                     // stuff with sets instead of lists
