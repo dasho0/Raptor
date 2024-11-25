@@ -1,11 +1,8 @@
 package com.example.raptor.viewmodels
 
-import android.annotation.SuppressLint
-import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.raptor.MusicFileLoader
 import com.example.raptor.TagExtractor
@@ -17,9 +14,7 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
-import com.example.raptor.database.entities.Album
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,11 +27,11 @@ class LibraryViewModel @Inject constructor(
     private val _folderSelected = mutableStateOf(false)
     val folderSelected: State<Boolean> get() = _folderSelected
 
-    val authors = databaseManager.fetchAuthorsFlow()
+    val authors = databaseManager.collectAuthorsFlow()
 
-    fun getAlbumsByAuthor(author: String)= databaseManager.fetchAlbumsByAuthorFlow(author)
+    fun getAlbumsByAuthor(author: String)= databaseManager.collectAlbumsByAuthorFlow(author)
 
-    fun getSongsByAlbum(albumId: Long) = databaseManager.fetchSongsByAlbumFlow(albumId)
+    fun getSongsByAlbum(albumId: Long) = databaseManager.collectSongsByAlbumFlow(albumId)
 
 
     private val fileProcessingFlow = picker.songFileList

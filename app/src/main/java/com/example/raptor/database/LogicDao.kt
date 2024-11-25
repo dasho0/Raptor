@@ -48,4 +48,7 @@ interface LogicDao {
 
     @Query("SELECT * FROM AlbumAuthorCrossRef WHERE albumId = :albumId AND name = :authorName LIMIT 1")
     fun getCrossRefByAlbumAndAuthor(albumId: Long, authorName: String): AlbumAuthorCrossRef?
+
+    @Query("SELECT * FROM Song WHERE songId = :songId")
+    fun getSongfromId(songId: Long): Song
 }

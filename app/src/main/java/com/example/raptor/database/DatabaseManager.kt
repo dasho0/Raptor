@@ -45,6 +45,14 @@ class DatabaseManager @Inject constructor(
             .map { it.songs }
     }
 
+    fun collectSong(songId: Long): Flow<Song> {
+        return database.uiDao().collectSongFromId(songId)
+    }
+
+    fun getSong(songId: Long): Song {
+        return database.logicDao().getSongfromId(songId)
+    }
+
     fun populateDatabase(songs: List<TagExtractor.SongInfo>) {
         assert(Thread.currentThread().name != "main")
 

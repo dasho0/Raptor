@@ -78,7 +78,8 @@ fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel<LibraryViewMod
         ) { backStackEntry ->
             val songId = backStackEntry.arguments?.getLong("songId")
             assert(songId != 0L)
-            SongPlayUI()
+
+            SongPlayUI(songId!!) //FIXME: we ball
         }
     }
 }

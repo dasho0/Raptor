@@ -109,6 +109,8 @@ class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
         assert(playbackState.value != PlaybackStates.STATE_PLAYING)
         Log.d(javaClass.simpleName, "calling playSong")
 
+        Log.d(AudioPlayer::class.simpleName, "Song uri: ${song.fileUri}")
+
         updateListeners(song)
 
         if(player.currentMediaItem.hashCode() != MediaItem.fromUri(song.fileUri!!.toUri())
