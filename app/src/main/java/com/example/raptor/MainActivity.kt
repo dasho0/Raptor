@@ -337,7 +337,10 @@ fun SongItem(song: Song, navController: NavHostController) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .background(MaterialTheme.colorScheme.surface, RectangleShape)
+            .background(
+                color = MaterialTheme.colorScheme.secondaryContainer,
+                shape = MaterialTheme.shapes.medium
+            )
             .padding(16.dp)
             .clickable(onClick = {
                 Log.d("SongsScreen", "Clicked on song: $song")
