@@ -53,6 +53,15 @@ class DatabaseManager @Inject constructor(
         return database.logicDao().getSongfromId(songId)
     }
 
+    fun collectAuthorsOfSong(song: Song?): Flow<List<Author>> {
+        return database.uiDao().getAlbumWithAuthors(song?.albumId)
+            .map { it.authors }
+    }
+
+    fun collectAlbum(albumId: Long?): Flow<Album> {
+        return database.uiDao().getAlbumById(albumId)
+    }
+
     fun populateDatabase(songs: List<TagExtractor.SongInfo>) {
         assert(Thread.currentThread().name != "main")
 
