@@ -86,7 +86,7 @@ class MainActivity : ComponentActivity(), SensorEventListener {
             val lightLevel = event.values[0]
             val maxLightLevel = lightSensor?.maximumRange ?: 10000f
 
-            _isDarkTheme.value = lightLevel < 0.5 * maxLightLevel
+            _isDarkTheme.value = lightLevel < 0.4 * maxLightLevel
         }
     }
 
