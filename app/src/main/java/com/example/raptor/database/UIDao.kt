@@ -4,7 +4,6 @@ import androidx.room.Dao
 import androidx.room.Query
 import androidx.room.Transaction
 import com.example.raptor.database.entities.Album
-import com.example.raptor.database.entities.AlbumAuthorCrossRef
 import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
 import com.example.raptor.database.relations.AlbumWithAuthors
@@ -26,12 +25,12 @@ interface UIDao {
     fun getAlbumWithSongs(albumId: Long): Flow<AlbumWithSongs>
 
     @Query("SELECT * FROM album WHERE albumId = :albumId")
-    fun getAlbumById(albumId: Long): Flow<Album>
+    fun getAlbumById(albumId: Long?): Flow<Album>
 
     // Get an album with its authors
     @Transaction
     @Query("SELECT * FROM album WHERE albumId = :albumId")
-    fun getAlbumWithAuthors(albumId: Long): Flow<List<AlbumWithAuthors>>
+    fun getAlbumWithAuthors(albumId: Long?): Flow<AlbumWithAuthors>
 
     @Query("SELECT * FROM Author")
     fun getAllAuthorsFlow(): Flow<List<Author>>

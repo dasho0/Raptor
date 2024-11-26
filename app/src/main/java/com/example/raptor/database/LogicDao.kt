@@ -20,7 +20,7 @@ interface LogicDao {
     @Insert
     fun insertAlbum(album: Album): Long
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAuthor(author: Author)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

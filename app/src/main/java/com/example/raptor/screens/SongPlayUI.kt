@@ -13,6 +13,7 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Slider
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -55,21 +56,23 @@ fun SongPlayUI(songId: Long) {
             .fillMaxSize()
             .background(Color.DarkGray)
     ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Bottom),
-            modifier = Modifier
-                .fillMaxHeight()
-                .padding(bottom = 16.dp)
-        ) {
-            Slider(
-                value = progressBarPosition.toFloat(),
-                onValueChange = { playerViewModel.onProgressBarMoved(it) },
-                enabled = true
-            )
+           Text("test", modifier = Modifier.align(Alignment.Center))
 
-            MediaControls(playerViewModel)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Bottom),
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .padding(bottom = 16.dp)
+            ) {
+                Slider(
+                    value = progressBarPosition.toFloat(),
+                    onValueChange = { playerViewModel.onProgressBarMoved(it) },
+                    enabled = true
+                )
 
+                MediaControls(playerViewModel)
+
+            }
         }
     }
-}

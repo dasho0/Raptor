@@ -5,8 +5,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PauseCircleFilled
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Replay
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
@@ -18,12 +16,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -66,8 +61,7 @@ class PlayerViewModel @Inject constructor(
         }
     }
 
-    private val songFetcher = databaseManager.collectSong(savedStateHandle["songId"]!!) // FIXME:we ball
-    private var currentSong: MutableStateFlow<Song?> = MutableStateFlow(null)
+    private val currentSong: MutableStateFlow<Song?> = MutableStateFlow(null)
 
     val progressBarPosition: Flow<Float> = flow {
         while(true) {
@@ -81,6 +75,10 @@ class PlayerViewModel @Inject constructor(
         .map {
             iconFromState.getFrom(it)
         }
+
+    val currentSongTitle = MutableStateFlow(currentSong.value?.title)
+    val currentSongArtists = databaseManager.collectAuthorsOfSong(currentSong.value)
+    val currentSongAlbum = databaseManager.collectAlbum(currentSong.value?.albumId)
 
     fun onProgressBarMoved(tapPosition: Float) {
         if(audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_IDLE) {

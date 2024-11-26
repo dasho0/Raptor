@@ -114,9 +114,9 @@ class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
         updateListeners(song)
 
         if(player.currentMediaItem.hashCode() != MediaItem.fromUri(song.fileUri!!.toUri())
-                .hashCode()) {
+                 .hashCode()) { //FIXME: we ball
             player.apply {
-                setMediaItem(MediaItem.fromUri(song.fileUri!!.toUri())) //FIXME: we ball
+                setMediaItem(MediaItem.fromUri(song.fileUri.toUri()))
                 prepare()
             }
 
