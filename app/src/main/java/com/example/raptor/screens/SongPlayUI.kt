@@ -1,5 +1,6 @@
 package com.example.raptor.screens
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.raptor.viewmodels.PlayerViewModel
 
@@ -45,19 +47,43 @@ fun MediaControls(playerViewModel: PlayerViewModel,) {
 }
 
 @Composable
+fun CurrentSongInfo(title: String?, artists: String?, modifier: Modifier) {
+    Column(
+        modifier = modifier
+    ) {
+        Text(
+            title?: "Unknown",
+            color = Color.White,
+            fontSize = 24.sp,
+        )
+        Text(
+            artists ?: "Unknown",
+            color = Color.White,
+            fontSize = 16.sp
+        )
+    }
+}
+
+@SuppressLint("StateFlowValueCalledInComposition")
+@Composable
 fun SongPlayUI(songId: Long) {
     val playerViewModel = hiltViewModel<PlayerViewModel>()
 
     val progressBarPosition by playerViewModel.progressBarPosition
         .collectAsState(initial = 0)
+    val title by playerViewModel.currentSongTitle.collectAsState("Unknown")
+    val artists by playerViewModel.currentSongArtists.collectAsState("Unknown")
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Color.DarkGray)
     ) {
-           Text("test", modifier = Modifier.align(Alignment.Center))
-
+        CurrentSongInfo(title, artists,
+            modifier = Modifier
+                .align(Alignment.Center)
+                .padding(horizontal = 10.dp)
+        )
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Bottom),

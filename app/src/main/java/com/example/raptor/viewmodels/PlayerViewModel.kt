@@ -6,18 +6,23 @@ import androidx.compose.material.icons.filled.PauseCircleFilled
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Replay
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.util.fastJoinToString
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.room.util.joinIntoString
 import com.example.raptor.AudioPlayer
 import com.example.raptor.database.DatabaseManager
 import com.example.raptor.database.entities.Song
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -76,8 +81,15 @@ class PlayerViewModel @Inject constructor(
             iconFromState.getFrom(it)
         }
 
-    val currentSongTitle = MutableStateFlow(currentSong.value?.title)
-    val currentSongArtists = databaseManager.collectAuthorsOfSong(currentSong.value)
+    val currentSongTitle = currentSong.map { it?.title }
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val currentSongArtists = currentSong.flatMapMerge() {
+        databaseManager.collectAuthorsOfSong(it)
+    }.map {
+        it?.map {
+            it.name
+        }?.fastJoinToString(", ")
+    }
     val currentSongAlbum = databaseManager.collectAlbum(currentSong.value?.albumId)
 
     fun onProgressBarMoved(tapPosition: Float) {

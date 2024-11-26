@@ -30,7 +30,7 @@ interface UIDao {
     // Get an album with its authors
     @Transaction
     @Query("SELECT * FROM album WHERE albumId = :albumId")
-    fun getAlbumWithAuthors(albumId: Long?): Flow<AlbumWithAuthors>
+    fun getAlbumWithAuthors(albumId: Long?): Flow<AlbumWithAuthors?>
 
     @Query("SELECT * FROM Author")
     fun getAllAuthorsFlow(): Flow<List<Author>>

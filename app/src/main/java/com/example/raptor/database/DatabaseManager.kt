@@ -53,9 +53,10 @@ class DatabaseManager @Inject constructor(
         return database.logicDao().getSongfromId(songId)
     }
 
-    fun collectAuthorsOfSong(song: Song?): Flow<List<Author>> {
+    fun collectAuthorsOfSong(song: Song?): Flow<List<Author>?> {
+        Log.d(javaClass.simpleName, "Collecting authors of song: $song")
         return database.uiDao().getAlbumWithAuthors(song?.albumId)
-            .map { it.authors }
+                .map { it?.authors }
     }
 
     fun collectAlbum(albumId: Long?): Flow<Album> {
