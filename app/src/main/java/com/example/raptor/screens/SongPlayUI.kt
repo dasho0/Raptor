@@ -8,10 +8,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -24,20 +26,26 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.raptor.viewmodels.PlayerViewModel
 
 @Composable
-fun MediaControls(playerViewModel: PlayerViewModel,) {
+fun MediaControls(playerViewModel: PlayerViewModel) {
     val mainButtonImage by playerViewModel
         .currentIconImage
         .collectAsState(Icons.Filled.PlayArrow)
 
     Row(
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+        verticalAlignment = Alignment.CenterVertically
     ) {
-        IconButton(onClick = {
-            playerViewModel.playPauseRestartCurrentSong()
-        }) {
+        IconButton(
+            onClick = {
+                playerViewModel.playPauseRestartCurrentSong()
+            },
+            modifier = Modifier.size(64.dp)
+        ) {
             Icon(
                 imageVector = mainButtonImage,
-                contentDescription = "Play Button"
+                contentDescription = "Play Button",
+                modifier = Modifier.size(48.dp),
+                tint = MaterialTheme.colorScheme.onBackground
             )
         }
     }
@@ -53,23 +61,24 @@ fun SongPlayUI(songId: Long) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.DarkGray)
+            .background(MaterialTheme.colorScheme.background)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Bottom),
+            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Bottom),
             modifier = Modifier
                 .fillMaxHeight()
-                .padding(bottom = 16.dp)
+                .padding(bottom = 64.dp)
         ) {
             Slider(
                 value = progressBarPosition.toFloat(),
                 onValueChange = { playerViewModel.onProgressBarMoved(it) },
-                enabled = true
+                enabled = true,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp)
             )
 
             MediaControls(playerViewModel)
-
         }
     }
 }
