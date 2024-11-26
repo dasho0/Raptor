@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.raptor.viewmodels.PlayerViewModel
+import java.nio.file.WatchEvent
 
 @Composable
 fun MediaControls(playerViewModel: PlayerViewModel) {
@@ -87,6 +88,12 @@ fun SongPlayUI(songId: Long) {
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
+        CurrentSongInfo(
+            title,
+            artists,
+            modifier = Modifier
+                .align(Alignment.Center)
+        )
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Bottom),
