@@ -9,11 +9,17 @@ import com.example.raptor.database.entities.Album
 import com.example.raptor.database.entities.AlbumAuthorCrossRef
 import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.io.File
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class DatabaseManager(context: Context) {
+@Singleton
+class DatabaseManager @Inject constructor(
+    @ApplicationContext context: Context
+) {
     private val database: LibraryDb = Room.databaseBuilder(
         context,
         LibraryDb::class.java, "Library"
@@ -27,21 +33,27 @@ class DatabaseManager(context: Context) {
         }
     }
 
-    fun fetchAuthorsFlow(): Flow<List<Author>> = database.uiDao().getAllAuthorsFlow()
+    fun collectAuthorsFlow(): Flow<List<Author>> = database.uiDao().getAllAuthorsFlow()
 
-    fun fetchAlbumsByAuthorFlow(authorName: String): Flow<List<Album>> {
+    fun collectAlbumsByAuthorFlow(authorName: String): Flow<List<Album>> {
         return database.uiDao().getAuthorWithAlbums(authorName)
             .map { it.albums }
     }
 
-    fun fetchSongsByAlbumFlow(albumId: Long): Flow<List<Song>> {
+    fun collectSongsByAlbumFlow(albumId: Long): Flow<List<Song>> {
         return database.uiDao().getAlbumWithSongs(albumId)
             .map { it.songs }
     }
 
+    fun collectSong(songId: Long): Flow<Song> {
+        return database.uiDao().collectSongFromId(songId)
+    }
 
+    fun getSong(songId: Long): Song {
+        return database.logicDao().getSongfromId(songId)
+    }
 
-    fun populateDatabase(songs: List<TagExtractor.SongTags>) {
+    fun populateDatabase(songs: List<TagExtractor.SongInfo>) {
         assert(Thread.currentThread().name != "main")
 
         val dao = database.logicDao()
@@ -102,7 +114,8 @@ class DatabaseManager(context: Context) {
 
                 dao.insertSong(Song(
                     title = song.title,
-                    albumId = correctAlbum?.albumId
+                    albumId = correctAlbum?.albumId,
+                    fileUri = song.fileUri.toString(),
                 ))
             }
         }

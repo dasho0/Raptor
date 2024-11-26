@@ -1,12 +1,11 @@
-package com.example.raptor
+package com.example.raptor.viewmodels
 
-import android.annotation.SuppressLint
-import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.raptor.MusicFileLoader
+import com.example.raptor.TagExtractor
 import com.example.raptor.database.DatabaseManager
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
@@ -14,29 +13,31 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
+import androidx.lifecycle.ViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class LibraryViewModel(application: Application): AndroidViewModel(application) {
-    @SuppressLint("StaticFieldLeak")
-    private val context = application.applicationContext //this is bad practice
-    // i think
-    private val picker = MusicFileLoader(context)
-    private val tagExtractor = TagExtractor()
-    private val databaseManager = DatabaseManager(context)
+@HiltViewModel
+class LibraryViewModel @Inject constructor(
+    private val picker: MusicFileLoader,
+    private val databaseManager: DatabaseManager,
+    private val tagExtractor: TagExtractor,
+): ViewModel() {
 
     private val _folderSelected = mutableStateOf(false)
     val folderSelected: State<Boolean> get() = _folderSelected
 
-    val authors = databaseManager.fetchAuthorsFlow()
+    val authors = databaseManager.collectAuthorsFlow()
 
-    fun getAlbumsByAuthor(author: String) = databaseManager.fetchAlbumsByAuthorFlow(author)
+    fun getAlbumsByAuthor(author: String)= databaseManager.collectAlbumsByAuthorFlow(author)
 
-    fun getSongsByAlbum(albumId: Long) = databaseManager.fetchSongsByAlbumFlow(albumId)
+    fun getSongsByAlbum(albumId: Long) = databaseManager.collectSongsByAlbumFlow(albumId)
 
 
     private val fileProcessingFlow = picker.songFileList
-        .map { fileList -> tagExtractor.extractTags(fileList, context) }
+        .map { fileList -> tagExtractor.extractTags(fileList) }
         .onEach {
-            databaseManager.populateDatabase(it as List<TagExtractor.SongTags>)
+            databaseManager.populateDatabase(it as List<TagExtractor.SongInfo>)
         }
         .flowOn(Dispatchers.IO)
 

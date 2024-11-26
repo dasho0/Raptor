@@ -1,6 +1,8 @@
 [versions]
 accompanistPager = "0.24.13-rc"
 agp = "8.7.2"
+hiltAndroid = "2.51.1"
+hiltNavigationCompose = "1.2.0"
 kotlin = "2.0.21"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -19,13 +21,19 @@ navigationCompose = "2.8.4"
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
+androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "mediaVersion" }
 androidx-media3-extractor = { module = "androidx.media3:media3-extractor", version.ref = "mediaVersion" }
 androidx-media3-ui = { module = "androidx.media3:media3-ui", version.ref = "mediaVersion" }
 
+material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-room-testing = { module = "androidx.room:room-testing", version.ref = "roomRuntime" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "hiltAndroid" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
+hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

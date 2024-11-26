@@ -2,7 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.compose.compiler)
-    id("com.google.devtools.ksp") version "2.0.21-1.0.26"
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -23,14 +24,28 @@ android {
     }
 
     buildTypes {
-        release {
-            isMinifyEnabled = false
+        getByName("release") {
+            // Enables code shrinking, obfuscation, and optimization for only
+            // your project's release build type. Make sure to use a build
+            // variant with `isDebuggable=false`.
+            isMinifyEnabled = true
+
+            // Enables resource shrinking, which is performed by the
+            // Android Gradle plugin.
+            isShrinkResources = true
+
             proguardFiles(
+                // Includes the default ProGuard rules files that are packaged with
+                // the Android Gradle plugin. To learn more, go to the section about
+                // R8 configuration files.
                 getDefaultProguardFile("proguard-android-optimize.txt"),
+
+                // Includes a local, custom Proguard rules file
                 "proguard-rules.pro"
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -85,5 +100,12 @@ dependencies {
     implementation(libs.androidx.media3.ui)
     implementation(libs.androidx.media3.extractor)
 
+    implementation(libs.material.icons.extended)
+
     ksp("androidx.room:room-compiler:$roomVersion")
+
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
+    ksp(libs.dagger.compiler)
 }

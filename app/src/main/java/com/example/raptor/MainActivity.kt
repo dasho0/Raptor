@@ -28,14 +28,20 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.compose.foundation.clickable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
 import com.example.raptor.database.entities.Song
+import com.example.raptor.screens.SongPlayUI
 import com.example.raptor.ui.theme.RaptorTheme
+import com.example.raptor.viewmodels.LibraryViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+
+@AndroidEntryPoint
 class MainActivity : ComponentActivity(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
     private var lightSensor: Sensor? = null
@@ -45,7 +51,6 @@ class MainActivity : ComponentActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Initialize sensor manager and light sensor
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
 
@@ -76,24 +81,25 @@ class MainActivity : ComponentActivity(), SensorEventListener {
         sensorManager.unregisterListener(this)
     }
 
-    // Sensor controls (light intensity)
     override fun onSensorChanged(event: SensorEvent?) {
         if (event?.sensor?.type == Sensor.TYPE_LIGHT) {
             val lightLevel = event.values[0]
             val maxLightLevel = lightSensor?.maximumRange ?: 10000f
 
-            // Updates theme based on light level being below or above 50% of maximum
             _isDarkTheme.value = lightLevel < 0.5 * maxLightLevel
         }
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // No implementation needed
+        // Nothing here!
     }
 }
 
+// FIXME: libraryViewModel has no place being here and it should be removed. it's usage should be
+//  restricted to the corresponding screens. This function should either have it's own viewmodel
+//  or simply direct access to the db.
 @Composable
-fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
+fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel<LibraryViewModel>()) {
     val navController = rememberNavController()
 
     NavHost(
@@ -113,7 +119,18 @@ fun MainScreen(libraryViewModel: LibraryViewModel = viewModel()) {
         ) { backStackEntry ->
             val albumId = backStackEntry.arguments?.getLong("album")
             assert(albumId != 0L)
-            SongsScreen(navController, libraryViewModel, albumId!!)
+
+            SongsScreen(navController, libraryViewModel, albumId)
+        }
+
+        composable(
+            route = "player/{songId}",
+            arguments = listOf(navArgument("songId") { type = NavType.LongType })
+        ) { backStackEntry ->
+            val songId = backStackEntry.arguments?.getLong("songId")
+            assert(songId != 0L)
+
+            SongPlayUI(songId!!) //FIXME: we ball
         }
     }
 }
@@ -192,9 +209,9 @@ fun AuthorTile(author: String, onClick: () -> Unit) {
     Button(
         onClick = onClick,
         modifier = Modifier
-            .width(120.dp) // Adjust the width of the tile
-            .height(140.dp), // Adjust the height of the tile
-        shape = RectangleShape, // Keeps sharp, square edges
+            .width(120.dp)
+            .height(140.dp),
+        shape = RectangleShape,
         colors = ButtonDefaults.buttonColors(
             containerColor = MaterialTheme.colorScheme.primary
         )
@@ -208,13 +225,13 @@ fun AuthorTile(author: String, onClick: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = nameParts.getOrNull(0) ?: "", // First name or empty if not available
+                    text = nameParts.getOrNull(0) ?: "",
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colorScheme.onPrimary
                 )
                 Text(
-                    text = nameParts.getOrNull(1) ?: "", // Surname or empty if not available
+                    text = nameParts.getOrNull(1) ?: "",
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colorScheme.onPrimary
@@ -272,13 +289,13 @@ fun AlbumTile(albumName: String, onClick: () -> Unit) {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = nameParts.getOrNull(0) ?: "", // First line or empty if not available
+                    text = nameParts.getOrNull(0) ?: "",
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colorScheme.onPrimary
                 )
                 Text(
-                    text = nameParts.getOrNull(1) ?: "", // Second line or empty if not available
+                    text = nameParts.getOrNull(1) ?: "",
                     style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
                     color = MaterialTheme.colorScheme.onPrimary
@@ -308,20 +325,25 @@ fun SongsScreen(
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
             items(songs) { song ->
-                SongItem(song = song)
+                SongItem(song = song, navController)
             }
         }
     }
 }
 
 @Composable
-fun SongItem(song: Song) {
+fun SongItem(song: Song, navController: NavHostController) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .background(MaterialTheme.colorScheme.surface, RectangleShape)
             .padding(16.dp)
+            .clickable(onClick = {
+                Log.d("SongsScreen", "Clicked on song: $song")
+
+                navController.navigate("player/${song.songId}")
+            })
     ) {
         Text(
             text = song.title ?: "Unknown Song",

@@ -17,6 +17,9 @@ interface UIDao {
     @Query("SELECT * FROM Song")
     fun getAllSongs(): Flow<List<Song>>
 
+    @Query("SELECT * FROM Song WHERE songId = :songId")
+    fun collectSongFromId(songId: Long): Flow<Song> // does this really need to be a flow?
+
     // Get an album with its songs
     @Transaction
     @Query("SELECT * FROM album WHERE albumId = :albumId")
