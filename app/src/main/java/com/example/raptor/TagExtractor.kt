@@ -27,7 +27,8 @@ class TagExtractor @Inject constructor(
         val title: String?,
         val releaseDate: String?,
         val album: String?,
-        val fileUri: Uri?
+        val fileUri: Uri?,
+        val coverUri: Uri?,
 )
 
     @OptIn(UnstableApi::class)
@@ -64,7 +65,7 @@ class TagExtractor @Inject constructor(
                 }
             }
 
-            imageManager.extractAlbumimage(uri,
+            val coverUri = imageManager.extractAlbumimage(uri,
                 entryMap["ALBUMARTIST"] as List<String>,
                 entryMap["ALBUM"] as String
             )
@@ -75,7 +76,8 @@ class TagExtractor @Inject constructor(
                 title = entryMap["TITLE"] as? String?,
                 album = entryMap["ALBUM"] as String?,
                 releaseDate = entryMap["DATE"] as? String?,
-                fileUri = uri
+                fileUri = uri,
+                coverUri = coverUri,
             )
         }
     }

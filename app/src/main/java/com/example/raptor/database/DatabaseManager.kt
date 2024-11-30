@@ -81,16 +81,21 @@ class DatabaseManager @Inject constructor(
         }
 
         fun addAlbumsAndRelations() {
+            // FIXME: xdddddddd
             val distinctAlbumArtistsList = songs
-                .map { Pair(it.album, it.albumArtists) }
+                .map { Triple(it.album, it.albumArtists, it.coverUri) }
                 .distinct()
             Log.d(javaClass.simpleName, "Distinct artists set: $distinctAlbumArtistsList")
 
             distinctAlbumArtistsList.fastForEach {
                 val albumTitle = it.first.toString()
                 val artists = it.second
+                val coverUri = it.third
 
-                val albumId = dao.insertAlbum(Album(title = albumTitle))
+                val albumId = dao.insertAlbum(Album(
+                    title = albumTitle,
+                    coverUri = coverUri.toString(),
+                ))
 
                 artists?.fastForEach {
                     dao.insertAlbumAuthorCrossRef(AlbumAuthorCrossRef(
