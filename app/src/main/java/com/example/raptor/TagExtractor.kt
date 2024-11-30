@@ -1,6 +1,8 @@
 package com.example.raptor
 
 import android.content.Context
+import android.graphics.BitmapFactory
+import android.media.MediaMetadataRetriever
 import android.net.Uri
 import androidx.media3.common.Metadata
 import android.util.Log
@@ -8,13 +10,17 @@ import androidx.annotation.OptIn
 import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.MetadataRetriever
+import androidx.media3.extractor.metadata.flac.PictureFrame
 import androidx.media3.extractor.metadata.vorbis.VorbisComment
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 //this class handles metadata extraction from a list of music files
 
-class TagExtractor @Inject constructor(@ApplicationContext private val context: Context) {
+class TagExtractor @Inject constructor(
+    @ApplicationContext private val context: Context,
+    private val imageManager: ImageManager
+) {
     data class SongInfo(
         val artists: List<String>?,
         val albumArtists: List<String>?,
@@ -57,6 +63,11 @@ class TagExtractor @Inject constructor(@ApplicationContext private val context: 
                     }
                 }
             }
+
+            imageManager.extractAlbumimage(uri,
+                entryMap["ALBUMARTIST"] as List<String>,
+                entryMap["ALBUM"] as String
+            )
 
             SongInfo(
                 artists = entryMap["ARTIST"] as? List<String>?,
