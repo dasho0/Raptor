@@ -102,10 +102,13 @@ class PlayerViewModel @Inject constructor(
     val currentSongAlbum = currentSong.flatMapMerge() {
         databaseManager.collectAlbum(it?.albumId)
     }
+
+    // FIXME: this is gigascuffed but touching it breaks everything, no you can't change this if
+    // to a let, trust me
     val currentCover = currentSongAlbum.map {
         Log.d(PlayerViewModel::class.simpleName, "Collecting bitmap with album: $it")
         if (it != null && it.coverUri != null) {
-            context.contentResolver.openInputStream(Uri.parse(it.coverUri)).let {
+            context.contentResolver.openInputStream(Uri.parse(it.coverUri)).use {
                 BitmapFactory.decodeStream(it)
                     .asImageBitmap()
             }
