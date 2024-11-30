@@ -1,10 +1,16 @@
 package com.example.raptor.viewmodels
 
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.media.effect.EffectContext
+import android.net.Uri
 import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PauseCircleFilled
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Replay
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.util.fastJoinToString
 import androidx.lifecycle.SavedStateHandle
@@ -15,6 +21,7 @@ import com.example.raptor.AudioPlayer
 import com.example.raptor.database.DatabaseManager
 import com.example.raptor.database.entities.Song
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -30,6 +37,7 @@ import javax.inject.Inject
 class PlayerViewModel @Inject constructor(
     private val audioPlayer: AudioPlayer,
     private val databaseManager: DatabaseManager,
+    @ApplicationContext private val context: Context,
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val iconFromState = object {
@@ -90,7 +98,21 @@ class PlayerViewModel @Inject constructor(
             it.name
         }?.fastJoinToString(", ")
     }
-    val currentSongAlbum = databaseManager.collectAlbum(currentSong.value?.albumId)
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val currentSongAlbum = currentSong.flatMapMerge() {
+        databaseManager.collectAlbum(it?.albumId)
+    }
+    val currentCover = currentSongAlbum.map {
+        Log.d(PlayerViewModel::class.simpleName, "Collecting bitmap with album: $it")
+        if (it != null && it.coverUri != null) {
+            context.contentResolver.openInputStream(Uri.parse(it.coverUri)).let {
+                BitmapFactory.decodeStream(it)
+                    .asImageBitmap()
+            }
+        } else {
+            ImageBitmap(1,1,)
+        }
+    }
 
     fun onProgressBarMoved(tapPosition: Float) {
         if(audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_IDLE) {

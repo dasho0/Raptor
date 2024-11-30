@@ -1,6 +1,8 @@
 package com.example.raptor.screens
 
 import android.annotation.SuppressLint
+import android.graphics.Bitmap
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,6 +25,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -56,10 +60,15 @@ fun MediaControls(playerViewModel: PlayerViewModel) {
 }
 
 @Composable
-fun CurrentSongInfo(title: String?, artists: String?, modifier: Modifier) {
+fun CurrentSongInfo(title: String?, artists: String?, cover: ImageBitmap, modifier: Modifier) {
     Column(
         modifier = modifier
     ) {
+        Image(
+            bitmap = cover,
+            contentDescription = "Album Art"
+        )
+
         Text(
             title?: "Unknown",
             color = Color.White,
@@ -82,6 +91,7 @@ fun SongPlayUI(songId: Long) {
         .collectAsState(initial = 0)
     val title by playerViewModel.currentSongTitle.collectAsState("Unknown")
     val artists by playerViewModel.currentSongArtists.collectAsState("Unknown")
+    val cover by playerViewModel.currentCover.collectAsState(ImageBitmap(1,1))
 
     Box(
         modifier = Modifier
@@ -91,6 +101,7 @@ fun SongPlayUI(songId: Long) {
         CurrentSongInfo(
             title,
             artists,
+            cover,
             modifier = Modifier
                 .align(Alignment.Center)
         )
