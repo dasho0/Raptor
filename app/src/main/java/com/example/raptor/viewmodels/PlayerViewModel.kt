@@ -41,6 +41,8 @@ class PlayerViewModel @Inject constructor(
     private val databaseManager: DatabaseManager,
     private val imageManager: ImageManager,
     @ApplicationContext private val context: Context,
+    // TODO: it would be better to get rid of the handle and use assisted DI instead - would fix
+    //  some dumb flow collection errors too
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val iconFromState = object {
@@ -93,6 +95,7 @@ class PlayerViewModel @Inject constructor(
         }
 
     val currentSongTitle = currentSong.map { it?.title }
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val currentSongArtists = currentSong.flatMapMerge() {
         databaseManager.collectAuthorsOfSong(it)
@@ -155,8 +158,9 @@ class PlayerViewModel @Inject constructor(
         viewModelScope.launch {
             databaseManager.collectSong(savedStateHandle["songId"]!!).collect {
                 currentSong.value = it
+                assert(currentSong.value != null)
+                playPauseRestartCurrentSong()
             }  // FIXME:we ball
         }
-
     }
 }
