@@ -32,8 +32,11 @@ import androidx.navigation.NavHostController
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
@@ -41,8 +44,10 @@ import com.example.raptor.database.entities.Album
 import com.example.raptor.database.entities.Song
 import com.example.raptor.screens.SongPlayUI
 import com.example.raptor.ui.theme.RaptorTheme
-import com.example.raptor.viewmodels.LibraryViewModel
+import com.example.raptor.viewmodels.AlbumTileViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.coroutines.EmptyCoroutineContext.get
+import com.example.raptor.viewmodels.LibraryViewModel
 
 
 @AndroidEntryPoint
@@ -263,43 +268,49 @@ fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryView
         ) {
             items(albums) { album ->
                 AlbumTile(
-                    albumName = album.title,
-                    cover = ImageBitmap(100, 100),
-                    modifier = Modifier,
+                    album = album,
                     onClick = {
-                    Log.d("MainActivity", "Album id passed to navhost: ${album.albumId}")
-                    assert(album.albumId != 0L)
-                    navController.navigate("songs/${album.albumId}")
-                })
+                        Log.d("MainActivity", "Album id passed to navhost: ${album.albumId}")
+                        assert(album.albumId != 0L)
+                        navController.navigate("songs/${album.albumId}")
+                    },
+
+                    modifier = Modifier,
+                )
             }
         }
     }
 }
 
 @Composable
-fun AlbumTile(albumName: String, cover: ImageBitmap, onClick: () -> Unit, modifier: Modifier) {
+fun AlbumTile(album: Album, onClick: () -> Unit, modifier: Modifier) {
+    val tileViewModel = hiltViewModel<AlbumTileViewModel, AlbumTileViewModel.Factory>(
+        creationCallback = { factory ->
+            factory.create(album)
+        }
+    )
+
+    val albumName = tileViewModel.title
+    val cover = tileViewModel.cover
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
         Button(
             onClick = onClick,
             modifier = Modifier
-                .width(120.dp)
-                .height(120.dp), // Increased height for full names
+                .size(110.dp),
             shape = RectangleShape,
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primary
             )
         ) {
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    bitmap = cover,
-                    contentDescription = "$albumName cover"
-                )
-            }
+            Image(
+                bitmap = cover,
+                contentDescription = "$albumName cover",
+                Modifier.scale(1.4f)
+            )
+
         }
 
         Spacer(modifier.height(4.dp))
