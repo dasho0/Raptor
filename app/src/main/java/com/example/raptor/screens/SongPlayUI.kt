@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -80,7 +81,6 @@ fun CurrentSongInfo(title: String?, artists: String?, cover: ImageBitmap, modifi
         Spacer(modifier = modifier.height(8.dp))
 
         Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = modifier.width(300.dp)
         ) {
             Text(
