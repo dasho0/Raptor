@@ -13,8 +13,15 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.State
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
+import com.example.raptor.ImageManager
+import com.example.raptor.database.entities.Album
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.awaitCancellation
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,6 +29,7 @@ class LibraryViewModel @Inject constructor(
     private val picker: MusicFileLoader,
     private val databaseManager: DatabaseManager,
     private val tagExtractor: TagExtractor,
+    private val imageManager: ImageManager
 ): ViewModel() {
 
     private val _folderSelected = mutableStateOf(false)
@@ -29,10 +37,13 @@ class LibraryViewModel @Inject constructor(
 
     val authors = databaseManager.collectAuthorsFlow()
 
-    fun getAlbumsByAuthor(author: String)= databaseManager.collectAlbumsByAuthorFlow(author)
+    fun collectAlbumsByAuthor(author: String)= databaseManager.collectAlbumsByAuthorFlow(author)
 
-    fun getSongsByAlbum(albumId: Long) = databaseManager.collectSongsByAlbumFlow(albumId)
+    fun collectSongsByAlbum(albumId: Long) = databaseManager.collectSongsByAlbumFlow(albumId)
 
+    fun collectAlbumCover(album: Album) = flow<ImageBitmap> {
+        imageManager.collectBitmapFromUri(album.coverUri?.toUri())
+    }
 
     private val fileProcessingFlow = picker.songFileList
         .map { fileList -> tagExtractor.extractTags(fileList) }

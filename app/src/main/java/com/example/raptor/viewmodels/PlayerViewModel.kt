@@ -109,6 +109,7 @@ class PlayerViewModel @Inject constructor(
 
     // FIXME: this is gigascuffed but touching it breaks everything, no you can't change this if
     // to a let, trust me
+    @OptIn(ExperimentalCoroutinesApi::class)
     val currentCover = currentSongAlbum.map {
         Log.d(javaClass.simpleName, "Collecting bitmap with album: $it")
         if(it != null) {
@@ -154,6 +155,7 @@ class PlayerViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             databaseManager.collectSong(savedStateHandle["songId"]!!).collect {
+                Log.d(javaClass.simpleName, "Player listening for song: $it")
                 currentSong.value = it
             }  // FIXME:we ball
         }

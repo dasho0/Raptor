@@ -11,6 +11,8 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.util.fastJoinToString
 import androidx.core.net.toUri
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import java.io.File
 import javax.inject.Inject
 
@@ -27,8 +29,9 @@ class ImageManager @Inject constructor(@ApplicationContext private val context: 
         retriever.setDataSource(context, uri)
         val pictureBytes = retriever.embeddedPicture
 
-        val bitmapFile = File(context.filesDir,
-                artistNames.fastJoinToString(";") + ":$albumName"
+        val bitmapFile = File(
+            context.filesDir,
+            artistNames.fastJoinToString(";") + ":$albumName"
         )
 
         pictureBytes?.let {
@@ -43,12 +46,14 @@ class ImageManager @Inject constructor(@ApplicationContext private val context: 
     fun collectBitmapFromUri(uri: Uri?): ImageBitmap {
         Log.d(javaClass.simpleName, "Collecting bitmap with uri: $uri")
         if(uri != null) {
-            context.contentResolver.openInputStream(Uri.parse(uri.toString())).use {
-                return BitmapFactory.decodeStream(it)
-                    .asImageBitmap()
+            context.contentResolver.openInputStream(Uri.parse(uri.toString()))?.use {
+                Log.d(ImageManager::class.simpleName, "Collecting form stream: $it")
+                BitmapFactory.decodeStream(it)
+                    ?.asImageBitmap()
             }
         } else {
-            return ImageBitmap(1,1,)
+            ImageBitmap(1, 1,)
         }
+        return ImageBitmap(1, 1,)
     }
 }
