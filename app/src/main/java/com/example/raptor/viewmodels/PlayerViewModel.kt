@@ -122,10 +122,6 @@ class PlayerViewModel @Inject constructor(
     }
 
     fun onProgressBarMoved(tapPosition: Float) {
-        if(audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_IDLE) {
-            throw(NotImplementedError())
-        }
-
         assert(tapPosition * audioPlayer.currentDuration <= audioPlayer.currentDuration)
 
         audioPlayer.changeCurrentPosition((tapPosition * audioPlayer.currentDuration).toLong())
