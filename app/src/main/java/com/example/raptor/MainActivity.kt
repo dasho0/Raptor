@@ -37,6 +37,8 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStore
+import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
@@ -266,7 +268,7 @@ fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryView
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(albums) { album ->
+            items(albums, key = { it.albumId }) { album ->
                 AlbumTile(
                     album = album,
                     onClick = {
@@ -284,14 +286,11 @@ fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryView
 
 @Composable
 fun AlbumTile(album: Album, onClick: () -> Unit, modifier: Modifier) {
-    val tileViewModel = hiltViewModel<AlbumTileViewModel, AlbumTileViewModel.Factory>(
-        creationCallback = { factory ->
-            factory.create(album)
-        }
-    )
+    Log.d("UI", "Album passed to AlbumTile: $album")
 
-    val albumName = tileViewModel.title
-    val cover = tileViewModel.cover
+    val albumName by remember { mutableStateOf(album.title) }
+    // Log.d("UI", "album from viewmodel???: $albumName")
+    val cover = ImageBitmap(1,1)
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
