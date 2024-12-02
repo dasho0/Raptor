@@ -43,13 +43,16 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
 import com.example.raptor.database.entities.Album
+import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
 import com.example.raptor.screens.SongPlayUI
 import com.example.raptor.ui.theme.RaptorTheme
 import com.example.raptor.viewmodels.AlbumTileViewModel
+import com.example.raptor.viewmodels.AlbumsScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlin.coroutines.EmptyCoroutineContext.get
 import com.example.raptor.viewmodels.LibraryViewModel
+import kotlinx.coroutines.flow.combine
 
 
 @AndroidEntryPoint
@@ -122,7 +125,7 @@ fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel<LibraryViewMod
         }
         composable("albums/{author}") { backStackEntry ->
             val author = backStackEntry.arguments?.getString("author") ?: ""
-            AlbumsScreen(navController, libraryViewModel, author)
+            AlbumsScreen(navController, author)
         }
         composable(
             route = "songs/{album}",
@@ -253,8 +256,15 @@ fun AuthorTile(author: String, onClick: () -> Unit) {
 }
 
 @Composable
-fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryViewModel, author: String) {
-    val albums by libraryViewModel.getAlbumsByAuthor(author).collectAsState(initial = emptyList())
+fun AlbumsScreen(
+    navController: NavHostController,
+    author: String,
+) {
+    val viewModel: AlbumsScreenViewModel = hiltViewModel<AlbumsScreenViewModel, AlbumsScreenViewModel.Factory>(
+        creationCallback = { it.create(author) }
+    )
+
+    val albumsAndCovers by viewModel.albumsAndCovers.collectAsState(emptyList())
 
     Box(
         modifier = Modifier
@@ -268,9 +278,13 @@ fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryView
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            items(albums, key = { it.albumId }) { album ->
+            items(albumsAndCovers, key = { it.first.albumId }) { pair ->
+                val album = pair.first
+                val cover = pair.second
+
                 AlbumTile(
-                    album = album,
+                    albumName = album.title,
+                    cover = cover,
                     onClick = {
                         Log.d("MainActivity", "Album id passed to navhost: ${album.albumId}")
                         assert(album.albumId != 0L)
@@ -285,13 +299,7 @@ fun AlbumsScreen(navController: NavHostController, libraryViewModel: LibraryView
 }
 
 @Composable
-fun AlbumTile(album: Album, onClick: () -> Unit, modifier: Modifier) {
-    Log.d("UI", "Album passed to AlbumTile: $album")
-
-    val albumName by remember { mutableStateOf(album.title) }
-    // Log.d("UI", "album from viewmodel???: $albumName")
-    val cover = ImageBitmap(1,1)
-
+fun AlbumTile(albumName: String, cover: ImageBitmap, onClick: () -> Unit, modifier: Modifier) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {

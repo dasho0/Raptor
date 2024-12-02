@@ -12,7 +12,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 
-@Deprecated("this will be removed")
+@Deprecated("this will be removed and AlbumsScreenViewModel will be used instead")
 @HiltViewModel(assistedFactory = AlbumTileViewModel.Factory::class)
 class AlbumTileViewModel @AssistedInject constructor(
     @Assisted album: Album,
