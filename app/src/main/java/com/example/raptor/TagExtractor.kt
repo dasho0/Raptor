@@ -59,7 +59,11 @@ class TagExtractor @Inject constructor(
                     }
 
                     else -> {
-                        assert(!entryMap.containsKey(key))
+                        // assert(!entryMap.containsKey(key))
+                        if(entryMap.containsKey(key)) {
+                            Log.w(javaClass.simpleName, "Unhandled duplicate key: $key")
+                            continue
+                        }
                         entryMap[key] = value
                     }
                 }
