@@ -101,6 +101,9 @@ dependencies {
     implementation(libs.androidx.media3.extractor)
 
     implementation(libs.material.icons.extended)
+    implementation("androidx.appcompat:appcompat:1.7.0")
+
+    implementation("androidx.biometric:biometric:1.2.0-alpha05")
 
     ksp("androidx.room:room-compiler:$roomVersion")
 
