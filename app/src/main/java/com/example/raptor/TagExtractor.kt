@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.media3.common.Metadata
 import android.util.Log
 import androidx.annotation.OptIn
+import androidx.compose.ui.util.fastForEach
 import androidx.media3.common.MediaItem
 import androidx.media3.common.util.UnstableApi
 import androidx.media3.exoplayer.MetadataRetriever
@@ -14,6 +15,7 @@ import androidx.media3.extractor.metadata.flac.PictureFrame
 import androidx.media3.extractor.metadata.vorbis.VorbisComment
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
+import kotlin.reflect.typeOf
 
 //this class handles metadata extraction from a list of music files
 
@@ -33,57 +35,65 @@ class TagExtractor @Inject constructor(
 
     @OptIn(UnstableApi::class)
     private fun buildSongInfo(metadata: Metadata, uri: Uri?): SongInfo {
-        return metadata.let {
-            val metadataList = mutableListOf<Metadata.Entry>()
-            for(i in 0 until it.length()) {
-                metadataList.add(it.get(i))
-            }
-            Log.d("${javaClass.simpleName}", "Metadata list: $metadataList")
+        val metadataList = mutableListOf<Metadata.Entry>()
+        for(i in 0 until metadata.length()) {
+            metadataList.add(metadata.get(i))
+        }
+        Log.d("${javaClass.simpleName}", "Metadata list: $metadataList")
 
-            // the last element `picture` screws up the logic and it only has a mimetype value
-            // which i think is useless
-            val entryMap: MutableMap<String?, Any?> = mutableMapOf()
+        // the last element `picture` screws up the logic and it only has a mimetype value
+        // which i think is useless
+        val entryMap: MutableMap<String?, Any?> = mutableMapOf()
 
-            for(_entry in metadataList.take(metadataList.size - 1)) {
-                val entry = _entry as? VorbisComment
-                val key = entry?.key
-                val value = entry?.value
+        metadataList.take(metadataList.size - 1).fastForEach { entry ->
+            when(entry) {
+                is VorbisComment -> {
+                    val key = entry.key
+                    val value = entry.value
+                    when(key) {
+                        "ALBUMARTIST", "ARTIST" -> {
+                            if(!entryMap.containsKey(key)) {
+                                entryMap[key] = mutableListOf<String?>(value)
+                            } else {
+                                (entryMap[key] as? MutableList<String?>)?.add(value)
+                            }
+                        }
 
-                when(key) {
-                    "ALBUMARTIST", "ARTIST" -> {
-                        if(!entryMap.containsKey(key)) {
-                            entryMap[key] = mutableListOf<String?>(value)
-                        } else {
-                            (entryMap[key] as? MutableList<String?>)?.add(value)
+                        else -> {
+                            // assert(!entryMap.containsKey(key))
+                            if(entryMap.containsKey(key)) {
+                                Log.w(javaClass.simpleName, "Unhandled duplicate key: $key")
+                            }
+                            entryMap[key] = value
                         }
                     }
+                }
 
-                    else -> {
-                        // assert(!entryMap.containsKey(key))
-                        if(entryMap.containsKey(key)) {
-                            Log.w(javaClass.simpleName, "Unhandled duplicate key: $key")
-                            continue
-                        }
-                        entryMap[key] = value
-                    }
+                else -> {
+                    Log.w(javaClass.simpleName,
+                        "Unhendled tag format: ${entry::class.simpleName}, file: $entry")
+                    return SongInfo(
+                        null, null, null,null, null, null, null
+                    )
                 }
             }
 
-            val coverUri = imageManager.extractAlbumimage(uri,
-                entryMap["ALBUMARTIST"] as List<String>,
-                entryMap["ALBUM"] as String
-            )
-
-            SongInfo(
-                artists = entryMap["ARTIST"] as? List<String>?,
-                albumArtists = entryMap["ALBUMARTIST"] as? List<String>?,
-                title = entryMap["TITLE"] as? String?,
-                album = entryMap["ALBUM"] as String?,
-                releaseDate = entryMap["DATE"] as? String?,
-                fileUri = uri,
-                coverUri = coverUri,
-            )
         }
+
+        val coverUri = imageManager.extractAlbumimage(uri,
+            entryMap["ALBUMARTIST"] as List<String>,
+            entryMap["ALBUM"] as String
+        )
+
+        return SongInfo(
+            artists = entryMap["ARTIST"] as? List<String>?,
+            albumArtists = entryMap["ALBUMARTIST"] as? List<String>?,
+            title = entryMap["TITLE"] as? String?,
+            album = entryMap["ALBUM"] as String?,
+            releaseDate = entryMap["DATE"] as? String?,
+            fileUri = uri,
+            coverUri = coverUri,
+        )
     }
 
     @OptIn(UnstableApi::class)
