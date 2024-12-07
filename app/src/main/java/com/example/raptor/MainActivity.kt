@@ -448,4 +448,3 @@ fun AuthenticationScreen(onAuthenticate: () -> Unit) {
         }
     }
 }
-}
