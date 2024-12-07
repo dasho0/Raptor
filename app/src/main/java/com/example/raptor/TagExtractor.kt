@@ -16,6 +16,7 @@ import androidx.media3.extractor.metadata.id3.Id3Decoder
 import androidx.media3.extractor.metadata.id3.Id3Frame
 import androidx.media3.extractor.metadata.id3.TextInformationFrame
 import androidx.media3.extractor.metadata.vorbis.VorbisComment
+import com.example.raptor.database.entities.Song
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import kotlin.math.log
@@ -94,13 +95,38 @@ class TagExtractor @Inject constructor(
             }
 
             is Id3Frame -> {
+                val entryMap: MutableMap<String, List<String>> = mutableMapOf()
                 metadataList.fastForEach {
                     val entry = it as Id3Frame
                     Log.d(javaClass.simpleName, "Id3 metadata: $entry")
 
+                    when(entry) {
+                        is TextInformationFrame -> {
+                            entryMap[entry.id] = entry.values
+                        }
+
+                        else -> {
+                            Log.w(javaClass.simpleName, "Unimplemented id3 frame: $entry")
+                        }
+                    }
                 }
 
-                return TODO("Implement id3 return")
+                val coverUri = imageManager.extractAlbumimage(
+                    uri,
+                   entryMap["TPE2"]?: emptyList(),
+                    entryMap["TALB"]?.get(0).toString()
+
+                )
+
+                return SongInfo(
+                    artists = entryMap["TPE1"],
+                    albumArtists = entryMap["TPE2"],
+                    title = entryMap["TIT2"]?.get(0),
+                    releaseDate = entryMap["TDA"]?.get(0),
+                    album = entryMap["TALB"]?.get(0),
+                    fileUri = uri,
+                    coverUri = coverUri
+                )
             }
 
             else -> {
