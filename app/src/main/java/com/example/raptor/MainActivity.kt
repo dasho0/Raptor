@@ -8,11 +8,12 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -28,13 +29,14 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.FragmentActivity
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelStore
@@ -54,16 +56,19 @@ import kotlin.coroutines.EmptyCoroutineContext.get
 import com.example.raptor.viewmodels.LibraryViewModel
 import kotlinx.coroutines.flow.combine
 
-
 @AndroidEntryPoint
-class MainActivity : ComponentActivity(), SensorEventListener {
+class MainActivity : FragmentActivity(), SensorEventListener {
     private lateinit var sensorManager: SensorManager
     private var lightSensor: Sensor? = null
     private val _isDarkTheme = mutableStateOf(false)
     private val isDarkTheme: State<Boolean> = _isDarkTheme
 
+    private val _isAuthenticated = mutableStateOf(false)
+    private val isAuthenticated: State<Boolean> = _isAuthenticated
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val biometricAuthenticator = BiometricAuthenticator(this)
 
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
@@ -72,15 +77,42 @@ class MainActivity : ComponentActivity(), SensorEventListener {
 
         setContent {
             val darkTheme by isDarkTheme
+            val authenticated by isAuthenticated
             RaptorTheme(darkTheme = darkTheme) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    MainScreen()
+                    if (authenticated) {
+                        MainScreen()
+                    } else {
+                        AuthenticationScreen(
+                            onAuthenticate = {
+                                promptBiometricAuthentication(biometricAuthenticator)
+                            }
+                        )
+                    }
                 }
             }
         }
+    }
+
+    private fun promptBiometricAuthentication(biometricAuthenticator: BiometricAuthenticator) {
+        biometricAuthenticator.PromptBiometricAuth(
+            title = "Authentication Required",
+            subtitle = "Please authenticate to proceed",
+            negativeButtonText = "Cancel",
+            fragmentActivity = this,
+            onSuccess = {
+                runOnUiThread {
+                    _isAuthenticated.value = true
+                }
+            },
+            onFailed = {
+            },
+            onError = { errorCode, errorString ->
+            }
+        )
     }
 
     override fun onResume() {
@@ -109,11 +141,9 @@ class MainActivity : ComponentActivity(), SensorEventListener {
     }
 }
 
-// FIXME: libraryViewModel has no place being here and it should be removed. it's usage should be
-//  restricted to the corresponding screens. This function should either have it's own viewmodel
-//  or simply direct access to the db.
+// MainScreen function included here
 @Composable
-fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel<LibraryViewModel>()) {
+fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel()) {
     val navController = rememberNavController()
 
     NavHost(
@@ -391,4 +421,31 @@ fun SongItem(song: Song, navController: NavHostController) {
             color = MaterialTheme.colorScheme.onSurface
         )
     }
+}
+
+@Composable
+fun AuthenticationScreen(onAuthenticate: () -> Unit) {
+    LaunchedEffect(Unit) {
+        onAuthenticate()
+    }
+    Box(modifier = Modifier.fillMaxSize()) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 64.dp, start = 16.dp, end = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(
+                text = "Please authenticate to proceed",
+                style = MaterialTheme.typography.bodyLarge,
+                textAlign = TextAlign.Center
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Button(onClick = { onAuthenticate() }) {
+                Text("Retry")
+            }
+        }
+    }
+}
 }
