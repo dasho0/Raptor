@@ -1,20 +1,29 @@
 package com.example.raptor.viewmodels
 
+import android.content.Context
+import android.graphics.BitmapFactory
+import android.media.effect.EffectContext
+import android.net.Uri
 import android.util.Log
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PauseCircleFilled
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Replay
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.util.fastJoinToString
+import androidx.core.net.toUri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.util.joinIntoString
 import com.example.raptor.AudioPlayer
+import com.example.raptor.ImageManager
 import com.example.raptor.database.DatabaseManager
 import com.example.raptor.database.entities.Song
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -30,6 +39,10 @@ import javax.inject.Inject
 class PlayerViewModel @Inject constructor(
     private val audioPlayer: AudioPlayer,
     private val databaseManager: DatabaseManager,
+    private val imageManager: ImageManager,
+    @ApplicationContext private val context: Context,
+    // TODO: it would be better to get rid of the handle and use assisted DI instead - would fix
+    //  some dumb flow collection errors too
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     private val iconFromState = object {
@@ -82,6 +95,7 @@ class PlayerViewModel @Inject constructor(
         }
 
     val currentSongTitle = currentSong.map { it?.title }
+
     @OptIn(ExperimentalCoroutinesApi::class)
     val currentSongArtists = currentSong.flatMapMerge() {
         databaseManager.collectAuthorsOfSong(it)
@@ -90,13 +104,24 @@ class PlayerViewModel @Inject constructor(
             it.name
         }?.fastJoinToString(", ")
     }
-    val currentSongAlbum = databaseManager.collectAlbum(currentSong.value?.albumId)
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    val currentSongAlbum = currentSong.flatMapMerge() {
+        databaseManager.collectAlbum(it?.albumId)
+    }
+
+    // FIXME: this is gigascuffed but touching it breaks everything, no you can't change this if
+    // to a let, trust me
+    val currentCover = currentSongAlbum.map {
+        Log.d(javaClass.simpleName, "Collecting bitmap with album: $it")
+        if(it != null) {
+            imageManager.collectBitmapFromUri(it.coverUri?.toUri())
+        } else {
+            ImageBitmap(1,1)
+        }
+    }
 
     fun onProgressBarMoved(tapPosition: Float) {
-        if(audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_IDLE) {
-            throw(NotImplementedError())
-        }
-
         assert(tapPosition * audioPlayer.currentDuration <= audioPlayer.currentDuration)
 
         audioPlayer.changeCurrentPosition((tapPosition * audioPlayer.currentDuration).toLong())
@@ -129,8 +154,9 @@ class PlayerViewModel @Inject constructor(
         viewModelScope.launch {
             databaseManager.collectSong(savedStateHandle["songId"]!!).collect {
                 currentSong.value = it
+                assert(currentSong.value != null)
+                playPauseRestartCurrentSong()
             }  // FIXME:we ball
         }
-
     }
 }

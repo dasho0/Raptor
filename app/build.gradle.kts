@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.raptor"
-        minSdk = 24
+        minSdk = 28
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -106,6 +106,9 @@ dependencies {
     implementation("androidx.biometric:biometric:1.2.0-alpha05")
 
     ksp("androidx.room:room-compiler:$roomVersion")
+
+    implementation(libs.androidx.paging.runtime)
+    implementation(libs.androidx.paging.compose)
 
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)

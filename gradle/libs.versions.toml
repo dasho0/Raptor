@@ -14,6 +14,7 @@ lifecycleRuntimeKtx = "2.8.6"
 activityCompose = "1.9.2"
 composeBom = "2024.04.01"
 mediaVersion = "1.4.1"
+pagingRuntime = "3.3.4"
 roomRuntime = "2.6.1"
 storage = "1.5.0"
 navigationRuntimeKtx = "2.8.4"
@@ -31,6 +32,8 @@ androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", versi
 androidx-media3-extractor = { module = "androidx.media3:media3-extractor", version.ref = "mediaVersion" }
 androidx-media3-ui = { module = "androidx.media3:media3-ui", version.ref = "mediaVersion" }
 
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingRuntime" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pagingRuntime" }
 material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
