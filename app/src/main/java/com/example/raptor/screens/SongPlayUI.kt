@@ -1,18 +1,15 @@
 package com.example.raptor.screens
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -29,17 +26,13 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.room.util.TableInfo
 import com.example.raptor.viewmodels.PlayerViewModel
-import java.nio.file.WatchEvent
 
 @Composable
 fun MediaControls(playerViewModel: PlayerViewModel) {
@@ -100,7 +93,7 @@ fun CurrentSongInfo(title: String?, artists: String?, cover: ImageBitmap, modifi
 
 @SuppressLint("StateFlowValueCalledInComposition")
 @Composable
-fun SongPlayUI(songId: Long) {
+fun SongPlayUI(songId: Long, backgroundPainter: Painter) {
     val playerViewModel = hiltViewModel<PlayerViewModel>()
 
     val progressBarPosition by playerViewModel.progressBarPosition

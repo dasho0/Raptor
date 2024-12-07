@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,29 +31,22 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
-import com.example.raptor.database.entities.Album
-import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
 import com.example.raptor.screens.SongPlayUI
 import com.example.raptor.ui.theme.RaptorTheme
-import com.example.raptor.viewmodels.AlbumTileViewModel
 import com.example.raptor.viewmodels.AlbumsScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.coroutines.EmptyCoroutineContext.get
 import com.example.raptor.viewmodels.LibraryViewModel
-import kotlinx.coroutines.flow.combine
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 
 @AndroidEntryPoint
 class MainActivity : FragmentActivity(), SensorEventListener {
@@ -145,49 +137,60 @@ class MainActivity : FragmentActivity(), SensorEventListener {
 @Composable
 fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel()) {
     val navController = rememberNavController()
+    val backgroundPainter: Painter = painterResource(R.drawable.persona_rings_background)
 
-    NavHost(
-        navController = navController,
-        startDestination = "main"
+    Surface(
+        modifier = Modifier
+            .fillMaxSize()
+            .paint( painter = painterResource(id = R.drawable.persona_rings_background) )
     ) {
-        composable("main") {
-            MainScreenContent(navController, libraryViewModel)
-        }
-        composable("albums/{author}") { backStackEntry ->
-            val author = backStackEntry.arguments?.getString("author") ?: ""
-            AlbumsScreen(navController, author)
-        }
-        composable(
-            route = "songs/{album}",
-            arguments = listOf(navArgument("album") { type = NavType.LongType })
-        ) { backStackEntry ->
-            val albumId = backStackEntry.arguments?.getLong("album")
-            assert(albumId != 0L)
+        NavHost(
+            navController = navController,
+            startDestination = "main"
+        ) {
+            composable("main") {
+                MainScreenContent(navController, libraryViewModel, backgroundPainter)
+            }
+            composable("albums/{author}") { backStackEntry ->
+                val author = backStackEntry.arguments?.getString("author") ?: ""
+                AlbumsScreen(navController, author, backgroundPainter)
+            }
+            composable(
+                route = "songs/{album}",
+                arguments = listOf(navArgument("album") { type = NavType.LongType })
+            ) { backStackEntry ->
+                val albumId = backStackEntry.arguments?.getLong("album")
+                assert(albumId != 0L)
 
-            SongsScreen(navController, libraryViewModel, albumId)
-        }
+                SongsScreen(navController, libraryViewModel, albumId, backgroundPainter)
+            }
+            composable(
+                route = "player/{songId}",
+                arguments = listOf(navArgument("songId") { type = NavType.LongType })
+            ) { backStackEntry ->
+                val songId = backStackEntry.arguments?.getLong("songId")
+                assert(songId != 0L)
 
-        composable(
-            route = "player/{songId}",
-            arguments = listOf(navArgument("songId") { type = NavType.LongType })
-        ) { backStackEntry ->
-            val songId = backStackEntry.arguments?.getLong("songId")
-            assert(songId != 0L)
-
-            SongPlayUI(songId!!) //FIXME: we ball
+                SongPlayUI(songId!!, backgroundPainter) //FIXME: we ball
+            }
         }
     }
 }
 
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun MainScreenContent(navController: NavHostController, libraryViewModel: LibraryViewModel) {
+fun MainScreenContent(
+    navController: NavHostController,
+    libraryViewModel: LibraryViewModel,
+    backgroundPainter: Painter
+) {
     val expanded = remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background) // Set background color here
+            .paint( painter = painterResource(id = R.drawable.persona_rings_background) ) // Set background color here
     ) {
         TopAppBar(
             title = { Text("Raptor") },
@@ -226,14 +229,14 @@ fun MainScreenContent(navController: NavHostController, libraryViewModel: Librar
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background),
+                    .paint( painter = painterResource(id = R.drawable.persona_rings_background) ),
             )
         } else {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(columns), // Dynamically set columns based on orientation
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background), // Set background color here
+                    .paint( painter = painterResource(id = R.drawable.persona_rings_background) ), // Set background color here
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
                 horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -289,6 +292,7 @@ fun AuthorTile(author: String, onClick: () -> Unit) {
 fun AlbumsScreen(
     navController: NavHostController,
     author: String,
+    backgroundPainter: Painter,
 ) {
     val viewModel: AlbumsScreenViewModel = hiltViewModel<AlbumsScreenViewModel, AlbumsScreenViewModel.Factory>(
         creationCallback = { it.create(author) }
@@ -299,7 +303,7 @@ fun AlbumsScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background) // Set background color here
+            .paint( painter = painterResource(id = R.drawable.persona_rings_background) ) // Set background color here
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
@@ -374,7 +378,10 @@ fun AlbumTile(albumName: String, cover: ImageBitmap, onClick: () -> Unit, modifi
 
 @Composable
 fun SongsScreen(
-    navController: NavHostController, libraryViewModel: LibraryViewModel, albumId: Long?
+    navController: NavHostController,
+    libraryViewModel: LibraryViewModel,
+    albumId: Long?,
+    backgroundPainter: Painter
 ) {
     assert(albumId != null)
 
@@ -447,5 +454,4 @@ fun AuthenticationScreen(onAuthenticate: () -> Unit) {
             }
         }
     }
-}
 }
