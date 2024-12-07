@@ -390,7 +390,7 @@ fun SongsScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background) // Set background color here
+            .paint( painter = painterResource(id = R.drawable.persona_rings_background) ) // Set background color here
     ) {
         LazyColumn(
             modifier = Modifier
