@@ -42,6 +42,7 @@ import com.example.raptor.viewmodels.PlayerViewModel
 import java.nio.file.WatchEvent
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.runtime.*
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 
 @Composable
@@ -78,6 +79,8 @@ fun CurrentSongInfo(title: String?, artists: String?, cover: ImageBitmap, modifi
         androidx.compose.foundation.Image(
             bitmap = cover,
             contentDescription = "Album Art",
+            modifier = Modifier.size(300.dp),
+            contentScale = ContentScale.Crop
         )
 
         Spacer(modifier = modifier.height(8.dp))
@@ -89,14 +92,14 @@ fun CurrentSongInfo(title: String?, artists: String?, cover: ImageBitmap, modifi
                 title ?: "Unknown",
                 color = textColor,
                 fontSize = 24.sp,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Left
             )
 
             Text(
                 artists ?: "Unknown",
                 color = textColor,
                 fontSize = 16.sp,
-                textAlign = TextAlign.Center
+                textAlign = TextAlign.Left
             )
         }
     }
