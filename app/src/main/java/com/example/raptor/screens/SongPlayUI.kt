@@ -40,12 +40,13 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.room.util.TableInfo
 import com.example.raptor.viewmodels.PlayerViewModel
 import java.nio.file.WatchEvent
+import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.runtime.*
+import androidx.compose.ui.text.style.TextAlign
 
 @Composable
 fun MediaControls(playerViewModel: PlayerViewModel) {
-    val mainButtonImage by playerViewModel
-        .currentIconImage
-        .collectAsState(Icons.Filled.PlayArrow)
+    val mainButtonImage by playerViewModel.currentIconImage.collectAsState(initial = Icons.Filled.PlayArrow)
 
     Row(
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -69,11 +70,12 @@ fun MediaControls(playerViewModel: PlayerViewModel) {
 
 @Composable
 fun CurrentSongInfo(title: String?, artists: String?, cover: ImageBitmap, modifier: Modifier) {
+    val textColor = MaterialTheme.colorScheme.onBackground
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
+        androidx.compose.foundation.Image(
             bitmap = cover,
             contentDescription = "Album Art",
         )
@@ -84,15 +86,17 @@ fun CurrentSongInfo(title: String?, artists: String?, cover: ImageBitmap, modifi
             modifier = modifier.width(300.dp)
         ) {
             Text(
-                title?: "Unknown",
-                color = Color.White,
+                title ?: "Unknown",
+                color = textColor,
                 fontSize = 24.sp,
+                textAlign = TextAlign.Center
             )
 
             Text(
                 artists ?: "Unknown",
-                color = Color.White,
+                color = textColor,
                 fontSize = 16.sp,
+                textAlign = TextAlign.Center
             )
         }
     }
@@ -103,17 +107,18 @@ fun CurrentSongInfo(title: String?, artists: String?, cover: ImageBitmap, modifi
 fun SongPlayUI(songId: Long) {
     val playerViewModel = hiltViewModel<PlayerViewModel>()
 
-    val progressBarPosition by playerViewModel.progressBarPosition
-        .collectAsState(initial = 0)
+    val progressBarPosition by playerViewModel.progressBarPosition.collectAsState(initial = 0f)
     val title by playerViewModel.currentSongTitle.collectAsState("Unknown")
     val artists by playerViewModel.currentSongArtists.collectAsState("Unknown")
     val cover by playerViewModel.currentCover.collectAsState(ImageBitmap(1,1))
+    val waveform by playerViewModel.currentWaveform.collectAsState(emptyList())
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.background)
     ) {
+        // Display cover and track info in the center
         CurrentSongInfo(
             title,
             artists,
@@ -121,6 +126,8 @@ fun SongPlayUI(songId: Long) {
             modifier = Modifier
                 .align(Alignment.Center)
         )
+
+        // Waveform and controls at the bottom
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Bottom),
@@ -128,14 +135,15 @@ fun SongPlayUI(songId: Long) {
                 .fillMaxHeight()
                 .padding(bottom = 64.dp)
         ) {
-            Slider(
-                value = progressBarPosition.toFloat(),
-                onValueChange = { playerViewModel.onProgressBarMoved(it) },
-                enabled = true,
+            WaveformSeekBar(
+                waveform = waveform,
+                progress = progressBarPosition,
                 modifier = Modifier
                     .padding(horizontal = 16.dp)
+                    .fillMaxWidth()
+                    .height(80.dp),
+                onProgressChanged = { playerViewModel.onProgressBarMoved(it) }
             )
-
             MediaControls(playerViewModel)
         }
     }
