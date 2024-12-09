@@ -119,10 +119,10 @@ fun WaveformSeekBar(
             )
 
             drawLine(
-                color = progressLineColor,
+                color = progressLineColor.copy(alpha = 0.5f),
                 start = Offset(frontX, 0f),
                 end = Offset(frontX, height),
-                strokeWidth = 4.dp.toPx()
+                strokeWidth = 2.dp.toPx()
             )
         }
     }
