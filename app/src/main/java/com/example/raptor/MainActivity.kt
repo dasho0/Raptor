@@ -45,7 +45,6 @@ import com.example.raptor.ui.theme.RaptorTheme
 import com.example.raptor.viewmodels.AlbumsScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.raptor.viewmodels.LibraryViewModel
-import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 
 @AndroidEntryPoint
@@ -137,23 +136,18 @@ class MainActivity : FragmentActivity(), SensorEventListener {
 @Composable
 fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel()) {
     val navController = rememberNavController()
-    val backgroundPainter: Painter = painterResource(R.drawable.persona_rings_background)
 
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .paint( painter = painterResource(id = R.drawable.persona_rings_background) )
-    ) {
+
         NavHost(
             navController = navController,
             startDestination = "main"
         ) {
             composable("main") {
-                MainScreenContent(navController, libraryViewModel, backgroundPainter)
+                MainScreenContent(navController, libraryViewModel)
             }
             composable("albums/{author}") { backStackEntry ->
                 val author = backStackEntry.arguments?.getString("author") ?: ""
-                AlbumsScreen(navController, author, backgroundPainter)
+                AlbumsScreen(navController, author)
             }
             composable(
                 route = "songs/{album}",
@@ -162,7 +156,7 @@ fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel()) {
                 val albumId = backStackEntry.arguments?.getLong("album")
                 assert(albumId != 0L)
 
-                SongsScreen(navController, libraryViewModel, albumId, backgroundPainter)
+                SongsScreen(navController, libraryViewModel, albumId)
             }
             composable(
                 route = "player/{songId}",
@@ -171,27 +165,21 @@ fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel()) {
                 val songId = backStackEntry.arguments?.getLong("songId")
                 assert(songId != 0L)
 
-                SongPlayUI(songId!!, backgroundPainter) //FIXME: we ball
+                SongPlayUI(songId!!) //FIXME: we ball
             }
         }
     }
-}
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreenContent(
     navController: NavHostController,
-    libraryViewModel: LibraryViewModel,
-    backgroundPainter: Painter
+    libraryViewModel: LibraryViewModel
 ) {
     val expanded = remember { mutableStateOf(false) }
 
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .paint( painter = painterResource(id = R.drawable.persona_rings_background) ) // Set background color here
-    ) {
         TopAppBar(
             title = { Text("Raptor") },
             actions = {
@@ -249,7 +237,7 @@ fun MainScreenContent(
             }
         }
     }
-}
+
 
 @Composable
 fun AuthorTile(author: String, onClick: () -> Unit) {
@@ -292,7 +280,6 @@ fun AuthorTile(author: String, onClick: () -> Unit) {
 fun AlbumsScreen(
     navController: NavHostController,
     author: String,
-    backgroundPainter: Painter,
 ) {
     val viewModel: AlbumsScreenViewModel = hiltViewModel<AlbumsScreenViewModel, AlbumsScreenViewModel.Factory>(
         creationCallback = { it.create(author) }
@@ -380,8 +367,7 @@ fun AlbumTile(albumName: String, cover: ImageBitmap, onClick: () -> Unit, modifi
 fun SongsScreen(
     navController: NavHostController,
     libraryViewModel: LibraryViewModel,
-    albumId: Long?,
-    backgroundPainter: Painter
+    albumId: Long?
 ) {
     assert(albumId != null)
 
