@@ -3,6 +3,7 @@ accompanistPager = "0.24.13-rc"
 agp = "8.7.2"
 biometric = "1.2.0"
 biometricVersion = "1.4.0-alpha02"
+documentfile = "1.0.1"
 hiltAndroid = "2.51.1"
 hiltNavigationCompose = "1.2.0"
 kotlin = "2.0.21"
@@ -27,6 +28,7 @@ androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "b
 androidx-biometric-v140alpha02 = { module = "androidx.biometric:biometric", version.ref = "biometricVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 
+androidx-documentfile = { module = "androidx.documentfile:documentfile", version.ref = "documentfile" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-media3-exoplayer = { module = "androidx.media3:media3-exoplayer", version.ref = "mediaVersion" }
 androidx-media3-extractor = { module = "androidx.media3:media3-extractor", version.ref = "mediaVersion" }

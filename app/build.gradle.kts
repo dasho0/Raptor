@@ -110,7 +110,7 @@ dependencies {
     implementation(libs.androidx.paging.runtime)
     implementation(libs.androidx.paging.compose)
 
-    implementation("androidx.documentfile:documentfile:1.0.1")
+    implementation(libs.androidx.documentfile)
 
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.hilt.android)
