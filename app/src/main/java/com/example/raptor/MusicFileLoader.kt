@@ -30,6 +30,7 @@ class MusicFileLoader
 
         fun visit(uri: Uri) {
             val root = DocumentFile.fromTreeUri(context, uri)
+            Log.d(javaClass.simpleName, "Visiting dir: ${root?.name}")
             val childDirs = root?.listFiles()?.filter { it.isDirectory }
 
             childDirs?.fastForEach { visit(it.uri) }
@@ -46,11 +47,14 @@ class MusicFileLoader
                     )
                 }
 
-            Log.d(javaClass.simpleName, "Visited dir $root, songs: $songFiles")
+            Log.d(javaClass.simpleName, "Visited dir ${root?.name}, songs: ${songFiles?.map { it
+                .filename 
+            }}")
 
             _songFiles.addAll(songFiles?: emptyList())
 
         }
+
         visit(treeUri)
 
         return _songFiles
