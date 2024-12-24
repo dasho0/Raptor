@@ -36,7 +36,7 @@ class MusicFileLoader
 
             val songFiles = root?.listFiles()
                 ?.filter {
-                    it.type?.slice(0..4) != "audio"
+                    it.type?.slice(0..4) == "audio"
                 }
                 ?.map {
                     SongFile(
@@ -68,53 +68,8 @@ class MusicFileLoader
                         Intent.FLAG_GRANT_WRITE_URI_PERMISSION
                 contentResolver.takePersistableUriPermission(treeUri, permissions)
 
-                traverseDirs(treeUri)
-
-                Log.d("FolderPicker", "Selected: $it")
-
-                val childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(
-                    treeUri,
-                    DocumentsContract.getTreeDocumentId(treeUri)
-                )
-
-                Log.d("FolderPicker", "Children: $childrenUri")
-
-                contentResolver.query(
-                    childrenUri,
-                    arrayOf(
-                        DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-                        DocumentsContract.Document.COLUMN_DOCUMENT_ID,
-                        DocumentsContract.Document.COLUMN_MIME_TYPE,
-                        DocumentsContract.Document.MIME_TYPE_DIR
-                    ),
-                    null,
-                    null,
-                    null
-                )?.use { cursor ->
-                    var _songFiles = mutableListOf<SongFile>()
-
-                    while(cursor.moveToNext()) {
-                        if(cursor.getString(2).slice(0..4) != "audio") { continue } // of course
-                        // google cant design a good API and of course it has 6 year old bugs in
-                        // it, so mimetype filtering has to be done manually
-
-                        _songFiles.add(SongFile(
-                            cursor.getString(0),
-                            DocumentsContract.buildDocumentUriUsingTree(
-                                treeUri,
-                                cursor.getString(1)
-                            ),
-                            cursor.getString(2))
-                        )
-
-                        Log.d("MusicFilePicker", "Music File: ${_songFiles.last().filename}, " +
-                                "ID: ${_songFiles.last().uri}," +
-                                "Type: ${_songFiles.last().mimeType}"
-                        )
-                    }
-
-                    songFileList.value = _songFiles
-                }
+                Log.d(javaClass.simpleName, "Selected: $it")
+                songFileList.value = traverseDirs(treeUri)
             }
         }
     }
