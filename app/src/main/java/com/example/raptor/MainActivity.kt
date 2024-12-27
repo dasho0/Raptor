@@ -56,16 +56,16 @@ import kotlin.coroutines.EmptyCoroutineContext.get
 import com.example.raptor.viewmodels.LibraryViewModel
 import kotlinx.coroutines.flow.combine
 
+lateinit var sensorManager: SensorManager
+var lightSensor: Sensor? = null
+val _isDarkTheme = mutableStateOf(false)
+val isDarkTheme: State<Boolean> = _isDarkTheme
+
+val _isAuthenticated = mutableStateOf(false)
+val isAuthenticated: State<Boolean> = _isAuthenticated
+
 @AndroidEntryPoint
 class MainActivity : FragmentActivity(), SensorEventListener {
-    private lateinit var sensorManager: SensorManager
-    private var lightSensor: Sensor? = null
-    private val _isDarkTheme = mutableStateOf(false)
-    private val isDarkTheme: State<Boolean> = _isDarkTheme
-
-    private val _isAuthenticated = mutableStateOf(false)
-    private val isAuthenticated: State<Boolean> = _isAuthenticated
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val biometricAuthenticator = BiometricAuthenticator(this)
