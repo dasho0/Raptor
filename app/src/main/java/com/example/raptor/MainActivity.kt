@@ -10,7 +10,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -32,29 +31,20 @@ import androidx.compose.ui.unit.dp
 import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStore
-import androidx.lifecycle.ViewModelStoreOwner
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
-import com.example.raptor.database.entities.Album
-import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
 import com.example.raptor.screens.SongPlayUI
 import com.example.raptor.ui.theme.RaptorTheme
 import com.example.raptor.viewmodels.AlbumTileViewModel
 import com.example.raptor.viewmodels.AlbumsScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.coroutines.EmptyCoroutineContext.get
 import com.example.raptor.viewmodels.LibraryViewModel
-import kotlinx.coroutines.flow.combine
 
 @AndroidEntryPoint
 class MainActivity : FragmentActivity(), SensorEventListener {
@@ -137,11 +127,9 @@ class MainActivity : FragmentActivity(), SensorEventListener {
     }
 
     override fun onAccuracyChanged(sensor: Sensor?, accuracy: Int) {
-        // Nothing here!
     }
 }
 
-// MainScreen function included here
 @Composable
 fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel()) {
     val navController = rememberNavController()

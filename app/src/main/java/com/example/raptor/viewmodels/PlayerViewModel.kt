@@ -1,8 +1,6 @@
 package com.example.raptor.viewmodels
 
 import android.content.Context
-import android.graphics.BitmapFactory
-import android.media.effect.EffectContext
 import android.net.Uri
 import android.util.Log
 import androidx.compose.material.icons.Icons
@@ -10,14 +8,12 @@ import androidx.compose.material.icons.filled.PauseCircleFilled
 import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Replay
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.util.fastJoinToString
 import androidx.core.net.toUri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.util.joinIntoString
 import com.example.raptor.AudioPlayer
 import com.example.raptor.ImageManager
 import com.example.raptor.database.DatabaseManager
@@ -31,9 +27,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapMerge
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.transform
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import kotlinx.coroutines.flow.*
 
 @HiltViewModel
 class PlayerViewModel @Inject constructor(
@@ -47,31 +43,30 @@ class PlayerViewModel @Inject constructor(
 ) : ViewModel() {
     private val iconFromState = object {
         private var lastIconState = Icons.Filled.PlayArrow
-
         // TODO: should probably just turn this into a map
         fun getFrom(state: AudioPlayer.PlaybackStates): ImageVector  {
-            when(state) {
+            return when(state) {
                 AudioPlayer.PlaybackStates.STATE_BUFFERING,
-                AudioPlayer.PlaybackStates.STATE_READY, -> {
-                    return lastIconState
+                AudioPlayer.PlaybackStates.STATE_READY -> {
+                    lastIconState
                 }
                 AudioPlayer.PlaybackStates.STATE_ENDED -> {
-                    return Icons.Filled.Replay.also {
+                    Icons.Filled.Replay.also {
                         lastIconState = it
                     }
                 }
                 AudioPlayer.PlaybackStates.STATE_IDLE -> {
-                    return Icons.Filled.PlayArrow.also {
+                    Icons.Filled.PlayArrow.also {
                         lastIconState = it
                     }
                 }
                 AudioPlayer.PlaybackStates.STATE_PLAYING -> {
-                    return Icons.Filled.PauseCircleFilled.also {
+                    Icons.Filled.PauseCircleFilled.also {
                         lastIconState = it
                     }
                 }
                 AudioPlayer.PlaybackStates.STATE_PAUSED -> {
-                    return Icons.Filled.PlayArrow.also {
+                    Icons.Filled.PlayArrow.also {
                         lastIconState = it
                     }
                 }
@@ -83,8 +78,10 @@ class PlayerViewModel @Inject constructor(
 
     val progressBarPosition: Flow<Float> = flow {
         while(true) {
-            assert((audioPlayer.currentPosition / audioPlayer.currentDuration) <= 1)
-            emit(audioPlayer.currentPosition.toFloat() / audioPlayer.currentDuration.toFloat())
+            val duration = audioPlayer.currentDuration
+            val pos = audioPlayer.currentPosition
+            val fraction = if (duration > 0) (pos.toFloat() / duration.toFloat()) else 0f
+            emit(fraction.coerceIn(0f, 1f))
             delay(33)
         }
     }
@@ -97,21 +94,16 @@ class PlayerViewModel @Inject constructor(
     val currentSongTitle = currentSong.map { it?.title }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val currentSongArtists = currentSong.flatMapMerge() {
-        databaseManager.collectAuthorsOfSong(it)
-    }.map {
-        it?.map {
-            it.name
-        }?.fastJoinToString(", ")
-    }
+    val currentSongArtists = currentSong.flatMapMerge { databaseManager.collectAuthorsOfSong(it) }
+        .map {
+            it?.map { a -> a.name }?.fastJoinToString(", ")
+        }
 
     @OptIn(ExperimentalCoroutinesApi::class)
-    val currentSongAlbum = currentSong.flatMapMerge() {
+    val currentSongAlbum = currentSong.flatMapMerge {
         databaseManager.collectAlbum(it?.albumId)
     }
 
-    // FIXME: this is gigascuffed but touching it breaks everything, no you can't change this if
-    // to a let, trust me
     val currentCover = currentSongAlbum.map {
         Log.d(javaClass.simpleName, "Collecting bitmap with album: $it")
         if(it != null) {
@@ -121,42 +113,56 @@ class PlayerViewModel @Inject constructor(
         }
     }
 
-    fun onProgressBarMoved(tapPosition: Float) {
-        assert(tapPosition * audioPlayer.currentDuration <= audioPlayer.currentDuration)
+    private val _currentWaveform = MutableStateFlow<List<Float>>(emptyList())
+    val currentWaveform: StateFlow<List<Float>> = _currentWaveform
 
-        audioPlayer.changeCurrentPosition((tapPosition * audioPlayer.currentDuration).toLong())
+    fun onProgressBarMoved(tapPosition: Float) {
+        val duration = audioPlayer.currentDuration
+        audioPlayer.changeCurrentPosition((tapPosition * duration).toLong())
     }
 
     fun playPauseRestartCurrentSong() {
-        if(
-            audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_IDLE ||
-            audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_PAUSED ||
-            audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_READY
-        ) {
-            Log.d(javaClass.simpleName, "Playing: $currentSong")
-            currentSong.value?.let {
-                audioPlayer.playSong(it)
+        when (audioPlayer.playbackState.value) {
+            AudioPlayer.PlaybackStates.STATE_IDLE,
+            AudioPlayer.PlaybackStates.STATE_PAUSED,
+            AudioPlayer.PlaybackStates.STATE_READY -> {
+                currentSong.value?.let {
+                    audioPlayer.playSong(it)
+                }
             }
+            AudioPlayer.PlaybackStates.STATE_PLAYING -> {
+                audioPlayer.pause()
+            }
+            AudioPlayer.PlaybackStates.STATE_ENDED -> {
+                audioPlayer.restartCurrentPlayback()
+            }
+            else -> {}
         }
-        else if(audioPlayer.playbackState.value == AudioPlayer.PlaybackStates.STATE_PLAYING)
-            audioPlayer.pause()
-        else
-            audioPlayer.restartCurrentPlayback()
     }
 
     override fun onCleared() {
         super.onCleared()
-
         audioPlayer.releasePlayer()
+    }
+
+
+    private fun loadSongWaveform(uri: Uri) {
+        viewModelScope.launch {
+            val waveform = extractWaveformDataFromUri(context, uri)
+            _currentWaveform.value = waveform
+        }
     }
 
     init {
         viewModelScope.launch {
             databaseManager.collectSong(savedStateHandle["songId"]!!).collect {
                 currentSong.value = it
-                assert(currentSong.value != null)
+                it?.fileUri?.let { fileStr ->
+                    val fileUri = fileStr.toUri()
+                    loadSongWaveform(fileUri)
+                }
                 playPauseRestartCurrentSong()
-            }  // FIXME:we ball
+            }
         }
     }
 }
