@@ -120,3 +120,12 @@ dependencies {
 
     dokkaPlugin(libs.android.documentation.plugin)
 }
+
+tasks.register("buildWithDokka") {
+    description = "Builds the project and generates documentation using Dokka."
+    group = "build"
+
+    dependsOn("build")
+    dependsOn("dokkaHtml")
+}
+
