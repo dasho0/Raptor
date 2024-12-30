@@ -42,7 +42,7 @@ class DatabaseManager @Inject constructor(
     /**
      * Collects a flow of all authors from the database.
      *
-     * @return A [Flow] emitting a list of [Author] objects.
+     * @return A Flow emitting a list of Author objects.
      */
     fun collectAuthorsFlow(): Flow<List<Author>> = database.uiDao().getAllAuthorsFlow()
 
@@ -50,7 +50,7 @@ class DatabaseManager @Inject constructor(
      * Collects a flow of albums by a specific author from the database.
      *
      * @param authorName The name of the author whose albums are to be collected.
-     * @return A [Flow] emitting a list of [Album] objects.
+     * @return A Flow emitting a list of Album objects.
      */
     fun collectAlbumsByAuthorFlow(authorName: String): Flow<List<Album>> {
         return database.uiDao().getAuthorWithAlbums(authorName)
@@ -61,7 +61,7 @@ class DatabaseManager @Inject constructor(
      * Collects a flow of songs by a specific album from the database.
      *
      * @param albumId The ID of the album whose songs are to be collected.
-     * @return A [Flow] emitting a list of [Song] objects.
+     * @return A Flow emitting a list of Song objects.
      */
     fun collectSongsByAlbumFlow(albumId: Long): Flow<List<Song>> {
         return database.uiDao().getAlbumWithSongs(albumId)
@@ -72,7 +72,7 @@ class DatabaseManager @Inject constructor(
      * Collects a flow of a specific song from the database.
      *
      * @param songId The ID of the song to be collected.
-     * @return A [Flow] emitting a [Song] object.
+     * @return A Flow emitting a Song object.
      */
     fun collectSong(songId: Long): Flow<Song> {
         return database.uiDao().collectSongFromId(songId)
@@ -82,7 +82,7 @@ class DatabaseManager @Inject constructor(
      * Retrieves a specific song from the database.
      *
      * @param songId The ID of the song to be retrieved.
-     * @return A [Song] object.
+     * @return A Song object.
      */
     fun getSong(songId: Long): Song {
         return database.logicDao().getSongfromId(songId)
@@ -91,8 +91,8 @@ class DatabaseManager @Inject constructor(
     /**
      * Collects a flow of authors of a specific song from the database.
      *
-     * @param song The [Song] object whose authors are to be collected.
-     * @return A [Flow] emitting a list of [Author] objects or null.
+     * @param song The Song object whose authors are to be collected.
+     * @return A Flow emitting a list of Author objects or null.
      */
     fun collectAuthorsOfSong(song: Song?): Flow<List<Author>?> {
         Log.d(javaClass.simpleName, "Collecting authors of song: $song")
@@ -104,16 +104,15 @@ class DatabaseManager @Inject constructor(
      * Collects a flow of a specific album from the database.
      *
      * @param albumId The ID of the album to be collected.
-     * @return A [Flow] emitting an [Album] object.
+     * @return A Flow emitting an Album object.
      */
     fun collectAlbum(albumId: Long?): Flow<Album> {
         return database.uiDao().getAlbumById(albumId)
     }
 
     /**
-     * Populate the database with a list of [TagExtractor.SongInfo]
+     * Populate the database with a list of `SongInfo`
      */
-
     fun populateDatabase(songs: List<TagExtractor.SongInfo>) {
         assert(Thread.currentThread().name != "main")
 
