@@ -12,6 +12,11 @@ import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.map
 
+/**
+ * `ViewModel` used for the albums screen
+ *
+ * @param currentAuthor Author whose albums to display
+ */
 @HiltViewModel(assistedFactory = AlbumsScreenViewModel.Factory::class)
 class AlbumsScreenViewModel @AssistedInject constructor(
     @Assisted currentAuthor: String,
@@ -23,6 +28,9 @@ class AlbumsScreenViewModel @AssistedInject constructor(
         fun create(author: String): AlbumsScreenViewModel
     }
 
+    /**
+     * Flow of a pair of `Album` objects and bitmaps of their covers
+     */
     val albumsAndCovers = database.collectAlbumsByAuthorFlow(currentAuthor)
         .map { it.map { album ->
             Pair<Album, ImageBitmap>(album, imageManager.getBitmapFromAppStorage(album.coverUri?.toUri()))
