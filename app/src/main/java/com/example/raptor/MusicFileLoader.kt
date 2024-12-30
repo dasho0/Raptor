@@ -15,11 +15,24 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
-// this class is probably temporary. The intention is for it to scan the folder (maybe
-// recursively sometime) and then prepare the data to feed it to some other database class.
+/**
+ * Handles the loading of music files in a given directory and its subdirectories as well as
+ * launching a file picker instance
+ */
 class MusicFileLoader
 @Inject constructor( @ApplicationContext private val context: Context) {
+    /**
+     * Dataclass representing a song file
+     *
+     * @param filename Name of the file
+     * @param uri `Uri` corresponding to the file
+     * @param mimeType The type of the file
+     */
     data class SongFile(val filename: String, val uri: Uri, val mimeType: String)
+
+    /**
+     * Observable list of `SongFile` currently loaded
+     */
     var songFileList = MutableStateFlow<List<SongFile>>(emptyList())
         private set
 
@@ -60,6 +73,11 @@ class MusicFileLoader
         return _songFiles
     }
 
+    /**
+     * \@Composable function that prepares the file picker launcher
+     *
+     * Must be called before `launch()`
+     */
     @Composable
     fun PrepareFilePicker() {
         val contentResolver = context.contentResolver
@@ -78,6 +96,9 @@ class MusicFileLoader
         }
     }
 
+    /**
+     * Launches the file picker
+     */
     fun launch() {
         launcher.launch(null)
     }
