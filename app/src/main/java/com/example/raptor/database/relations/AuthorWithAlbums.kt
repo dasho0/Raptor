@@ -7,6 +7,9 @@ import com.example.raptor.database.entities.Album
 import com.example.raptor.database.entities.AlbumAuthorCrossRef
 import com.example.raptor.database.entities.Author
 
+/**
+ * Relation between 1 `Author` and `N` `Albums`
+ */
 data class AuthorWithAlbums(
     @Embedded val author: Author,
     @Relation(

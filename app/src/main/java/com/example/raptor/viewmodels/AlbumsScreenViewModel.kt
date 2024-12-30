@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.example.raptor.ImageManager
 import com.example.raptor.database.DatabaseManager
 import com.example.raptor.database.entities.Album
-import com.example.raptor.database.entities.Author
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -26,9 +25,9 @@ class AlbumsScreenViewModel @AssistedInject constructor(
 
     val albumsAndCovers = database.collectAlbumsByAuthorFlow(currentAuthor)
         .map { it.map { album ->
-            Pair<Album, ImageBitmap>(album, imageManager.collectBitmapFromUri(album.coverUri?.toUri()))
+            Pair<Album, ImageBitmap>(album, imageManager.getBitmapFromAppStorage(album.coverUri?.toUri()))
         }}
     // val covers = albums.map { it.map { album ->
-    //     imageManager.collectBitmapFromUri(album.coverUri?.toUri())
+    //     imageManager.getBitmapFromAppStorage(album.coverUri?.toUri())
     // }}
 }
