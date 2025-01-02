@@ -13,6 +13,11 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 
+/**
+ * This class handles audio playback in the media player, by wrapping around an `ExoPlayer` instance
+ *
+ * It handles the logic of media controls, what song to play, at what time, etc.
+ */
 class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
     private val player = ExoPlayer.Builder(context).build().apply {
         setAudioAttributes(
@@ -90,9 +95,18 @@ class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
 
     private val isPlayingInternal get() = player.isPlaying
 
+    /**
+     * Gets the current playback position of currently playing song in milliseconds
+     */
     val currentPosition get() = player.currentPosition
+    /*
+     * Gets the duration of the currently playing song in milliseconds
+     */
     val currentDuration get() = player.duration
 
+    /**
+     * Enum describing all states that the player can be in
+     */
     enum class PlaybackStates {
         STATE_BUFFERING,
         STATE_ENDED,
@@ -101,8 +115,19 @@ class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
         STATE_PLAYING,
         STATE_PAUSED,
     }
+
+    /**
+     * Gets the current playback state of the player, as described in `PlaybackStates`
+     */
     val playbackState = MutableStateFlow(PlaybackStates.STATE_IDLE)
 
+    /**
+     * Plays a given `Song` and sets it as the current song
+     *
+     * Player can't be in the playing state at the time of calling.
+     *
+     * @param song `Song` to play
+     */
     fun playSong(song: Song) {
         assert(isPlayingInternal == false)
         assert(!player.isPlaying)
@@ -127,11 +152,19 @@ class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
 
     }
 
+    /**
+     * Restarts playback from the beginning of the current song
+     */
     fun restartCurrentPlayback() {
         player.seekTo(0)
         player.play()
     }
 
+    /**
+     * Pauses the currently playing song
+     *
+     * Player must be in the playing state when calling
+     */
     fun pause() {
         assert(playbackState.value == PlaybackStates.STATE_PLAYING)
         assert(isPlayingInternal)
@@ -141,6 +174,11 @@ class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
 
     }
 
+    /**
+     * Changes the timeline position of the playback to some value in milliseconds
+     *
+     * @param time value in milliseconds to change playback to
+     */
     fun changeSong(song: Song) {
         player.stop()
         playSong(song)
@@ -150,6 +188,11 @@ class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
         player.seekTo(time)
     }
 
+    /**
+     * Releases the internal `ExoPlayer` object
+     *
+     * Must be called in order to free memory, when an object of this class is no longer used
+     */
     fun releasePlayer() {
         player.release()
     }
