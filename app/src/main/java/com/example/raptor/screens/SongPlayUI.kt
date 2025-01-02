@@ -41,6 +41,8 @@ import androidx.room.util.TableInfo
 import com.example.raptor.viewmodels.PlayerViewModel
 import java.nio.file.WatchEvent
 import androidx.compose.material.icons.filled.PlayArrow
+import androidx.compose.material.icons.filled.SkipNext
+import androidx.compose.material.icons.filled.SkipPrevious
 import androidx.compose.runtime.*
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
@@ -54,6 +56,16 @@ fun MediaControls(playerViewModel: PlayerViewModel) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
+            onClick = {}
+        ) {
+            Icon(
+                imageVector = Icons.Filled.SkipPrevious,
+                contentDescription = "Backward Track",
+                modifier = Modifier.size(42.dp)
+            )
+        }
+
+        IconButton(
             onClick = {
                 playerViewModel.playPauseRestartCurrentSong()
             },
@@ -64,6 +76,16 @@ fun MediaControls(playerViewModel: PlayerViewModel) {
                 contentDescription = "Play Button",
                 modifier = Modifier.size(48.dp),
                 tint = MaterialTheme.colorScheme.onBackground
+            )
+        }
+
+        IconButton(
+            onClick = {}
+        ) {
+            Icon(
+                imageVector = Icons.Filled.SkipNext,
+                contentDescription = "Forward Track",
+                modifier = Modifier.size(42.dp)
             )
         }
     }
