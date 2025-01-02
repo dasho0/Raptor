@@ -29,5 +29,6 @@ data class Song(
     @PrimaryKey(autoGenerate = true) val songId: Long = 0,
     val title: String?,
     val albumId: Long?,
+    val trackNumber: Int?,
     val fileUri: String?,
 )
