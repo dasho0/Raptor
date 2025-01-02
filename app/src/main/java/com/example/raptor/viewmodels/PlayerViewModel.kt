@@ -11,10 +11,8 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.util.fastJoinToString
 import androidx.core.net.toUri
-import androidx.core.util.Pools
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.example.raptor.AudioPlayer
 import com.example.raptor.ImageManager
@@ -33,7 +31,6 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlinx.coroutines.flow.*
-import kotlin.math.log
 
 /**
  * Viewmodel for the player screen
@@ -89,7 +86,6 @@ class PlayerViewModel @Inject constructor(
     private val currentSong: MutableStateFlow<Song?> = MutableStateFlow(null)
 
     private var songsInCurrentAlbum: List<Song>? = null
-    private var songsInCurrentAlbumFlow: List<Song>? = null
 
     /**
      * Flow that represents the position of the playback progress bar
@@ -153,6 +149,12 @@ class PlayerViewModel @Inject constructor(
      */
     val currentWaveform: StateFlow<List<Float>> = _currentWaveform
 
+    private val _toast = MutableSharedFlow<String>()
+    /**
+     * This property handles toast sent by the viewmodel in case of an exception or user error
+     */
+    val toast = _toast.asSharedFlow()
+
     /**
      * Handle the user tapping on the progress bar and change the playback position
      */
@@ -202,7 +204,9 @@ class PlayerViewModel @Inject constructor(
                 val songsPlaylist = songsInCurrentAlbum.sortedBy { it.trackNumber }
                 if(isForward) {
                     if(songsInCurrentAlbum.last().songId == song.songId) {
-                        TODO()
+                        viewModelScope.launch() {
+                            _toast.emit("The song ${song.title} is the last song in the album.")
+                        }
                         return
                     }
 

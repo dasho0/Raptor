@@ -2,6 +2,8 @@ package com.example.raptor.screens
 
 import android.annotation.SuppressLint
 import android.graphics.Bitmap
+import android.view.Gravity
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -45,7 +47,10 @@ import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.material.icons.filled.SkipPrevious
 import androidx.compose.runtime.*
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.LifecycleCoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 fun MediaControls(playerViewModel: PlayerViewModel) {
@@ -131,12 +136,20 @@ fun CurrentSongInfo(title: String?, artists: String?, cover: ImageBitmap, modifi
 @Composable
 fun SongPlayUI(songId: Long) {
     val playerViewModel = hiltViewModel<PlayerViewModel>()
+    val context = LocalContext.current
 
     val progressBarPosition by playerViewModel.progressBarPosition.collectAsState(initial = 0f)
     val title by playerViewModel.currentSongTitle.collectAsState("Unknown")
     val artists by playerViewModel.currentSongArtists.collectAsState("Unknown")
     val cover by playerViewModel.currentCover.collectAsState(ImageBitmap(1,1))
     val waveform by playerViewModel.currentWaveform.collectAsState(emptyList())
+
+    LaunchedEffect(Unit) {
+        playerViewModel.toast.collect() {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+
+        }
+    }
 
     Box(
         modifier = Modifier
