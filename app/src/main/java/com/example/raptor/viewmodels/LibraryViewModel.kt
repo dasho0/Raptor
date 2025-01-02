@@ -26,7 +26,7 @@ class LibraryViewModel @Inject constructor(
     private val picker: MusicFileLoader,
     private val databaseManager: DatabaseManager,
     private val tagExtractor: TagExtractor,
-): ViewModel() {
+) : ViewModel() {
 
     private val _folderSelected = mutableStateOf(false)
 

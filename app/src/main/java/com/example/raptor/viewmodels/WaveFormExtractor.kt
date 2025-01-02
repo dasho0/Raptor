@@ -13,6 +13,7 @@ import kotlin.math.sqrt
 suspend fun extractWaveformDataFromUri(context: Context, uri: Uri): List<Float> = withContext(Dispatchers.IO) {
     val extractor = MediaExtractor()
     val result = mutableListOf<Float>()
+
     try {
         extractor.setDataSource(context, uri, null)
         var audioTrackIndex = -1
@@ -31,74 +32,92 @@ suspend fun extractWaveformDataFromUri(context: Context, uri: Uri): List<Float> 
 
         extractor.selectTrack(audioTrackIndex)
         val format = extractor.getTrackFormat(audioTrackIndex)
-        val mime = format.getString(MediaFormat.KEY_MIME)!!
+        val mime = format.getString(MediaFormat.KEY_MIME) ?: return@withContext emptyList<Float>()
 
         val decoder = MediaCodec.createDecoderByType(mime)
         decoder.configure(format, null, null, 0)
         decoder.start()
 
-        val inputBuffers = decoder.inputBuffers
-        val bufferInfo = MediaCodec.BufferInfo()
+        var inputEOS = false
+        var outputEOS = false
 
+        val bufferInfo = MediaCodec.BufferInfo()
         val targetFrameCount = 500
         var framesDecoded = 0
-        var done = false
 
-        while (!done && framesDecoded < targetFrameCount) {
-            val inputBufferIndex = decoder.dequeueInputBuffer(10000)
-            if (inputBufferIndex >= 0) {
-                val inputBuffer = inputBuffers[inputBufferIndex]
-                val sampleSize = extractor.readSampleData(inputBuffer, 0)
-                if (sampleSize < 0) {
-                    decoder.queueInputBuffer(
-                        inputBufferIndex,
-                        0,
-                        0,
-                        0,
-                        MediaCodec.BUFFER_FLAG_END_OF_STREAM
-                    )
-                    done = true
-                } else {
-                    val presentationTimeUs = extractor.sampleTime
-                    decoder.queueInputBuffer(
-                        inputBufferIndex,
-                        0,
-                        sampleSize,
-                        presentationTimeUs,
-                        0
-                    )
-                    extractor.advance()
+        val inputBuffers = decoder.inputBuffers
+
+        while (!outputEOS && framesDecoded < targetFrameCount) {
+            if (!inputEOS) {
+                val inputBufferIndex = decoder.dequeueInputBuffer(10_000)
+                if (inputBufferIndex >= 0) {
+                    val inputBuffer = inputBuffers[inputBufferIndex]
+                    inputBuffer.clear()
+
+                    val sampleSize = extractor.readSampleData(inputBuffer, 0)
+                    if (sampleSize < 0) {
+                        decoder.queueInputBuffer(
+                            inputBufferIndex,
+                            0,
+                            0,
+                            0,
+                            MediaCodec.BUFFER_FLAG_END_OF_STREAM
+                        )
+                        inputEOS = true
+                        Log.d("AudioWaveformExtractor", "Input EOS reached")
+                    } else {
+                        val presentationTimeUs = extractor.sampleTime
+                        decoder.queueInputBuffer(
+                            inputBufferIndex,
+                            0,
+                            sampleSize,
+                            presentationTimeUs,
+                            0
+                        )
+                        // Advance to the next sample
+                        extractor.advance()
+                    }
                 }
             }
+            val outputBufferIndex = decoder.dequeueOutputBuffer(bufferInfo, 10_000)
 
-            when (val outputBufferIndex = decoder.dequeueOutputBuffer(bufferInfo, 10000)) {
-                MediaCodec.INFO_TRY_AGAIN_LATER -> {}
-                MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED -> {}
-                MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {}
-                else -> {
-                    if (outputBufferIndex >= 0) {
-                        val outputBuffer = decoder.getOutputBuffer(outputBufferIndex) ?: continue
+            when {
+                outputBufferIndex == MediaCodec.INFO_TRY_AGAIN_LATER -> {
+                }
+                outputBufferIndex == MediaCodec.INFO_OUTPUT_FORMAT_CHANGED -> {
+                    val newFormat = decoder.outputFormat
+                    Log.d("AudioWaveformExtractor","New format: $newFormat")
+                }
+                outputBufferIndex == MediaCodec.INFO_OUTPUT_BUFFERS_CHANGED -> {
+                }
+                outputBufferIndex >= 0 -> {
+                    val outputBuffer = decoder.getOutputBuffer(outputBufferIndex)
+                    if (outputBuffer != null && bufferInfo.size > 0) {
                         val outData = ByteArray(bufferInfo.size)
                         outputBuffer.get(outData)
                         outputBuffer.clear()
 
                         val shorts = ShortArray(outData.size / 2)
                         for (i in shorts.indices) {
-                            shorts[i] = ((outData[i*2+1].toInt() shl 8) or
-                                    (outData[i*2].toInt() and 0xFF)).toShort()
+                            val lo = outData[i * 2].toInt() and 0xFF
+                            val hi = outData[i * 2 + 1].toInt()
+                            shorts[i] = ((hi shl 8) or lo).toShort()
                         }
 
                         var sum = 0.0
                         for (sample in shorts) {
-                            sum += (sample * sample).toDouble()
+                            sum += sample * sample
                         }
                         val rms = sqrt(sum / shorts.size)
                         val amplitude = (rms / 32767.0).toFloat().coerceIn(0f,1f)
-
                         result.add(amplitude)
                         framesDecoded++
+                    }
 
-                        decoder.releaseOutputBuffer(outputBufferIndex, false)
+                    decoder.releaseOutputBuffer(outputBufferIndex, false)
+                    if ((bufferInfo.flags and MediaCodec.BUFFER_FLAG_END_OF_STREAM) != 0) {
+                        outputEOS = true
+                        Log.d("AudioWaveformExtractor", "Output EOS reached")
                     }
                 }
             }
@@ -108,7 +127,6 @@ suspend fun extractWaveformDataFromUri(context: Context, uri: Uri): List<Float> 
         decoder.release()
         extractor.release()
 
-        // Pad the result if fewer than targetFrameCount frames were decoded
         if (result.size < targetFrameCount) {
             while (result.size < targetFrameCount) {
                 result.add(0f)
