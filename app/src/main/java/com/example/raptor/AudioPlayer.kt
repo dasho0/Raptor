@@ -141,6 +141,11 @@ class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
 
     }
 
+    fun changeSong(song: Song) {
+        player.stop()
+        playSong(song)
+    }
+
     fun changeCurrentPosition(time: Long) {
         player.seekTo(time)
     }

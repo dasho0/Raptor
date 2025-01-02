@@ -113,6 +113,13 @@ class PlayerViewModel @Inject constructor(
         }
     }
 
+    private fun loadSongWaveform(uri: Uri) {
+        viewModelScope.launch {
+            val waveform = extractWaveformDataFromUri(context, uri)
+            _currentWaveform.value = waveform
+        }
+    }
+
     private val _currentWaveform = MutableStateFlow<List<Float>>(emptyList())
     val currentWaveform: StateFlow<List<Float>> = _currentWaveform
 
@@ -140,17 +147,17 @@ class PlayerViewModel @Inject constructor(
         }
     }
 
+    fun skipTrack(isForward: Boolean) {
+        currentSong.value?.let {song ->
+            if(isForward) {
+
+            }
+        }
+    }
+
     override fun onCleared() {
         super.onCleared()
         audioPlayer.releasePlayer()
-    }
-
-
-    private fun loadSongWaveform(uri: Uri) {
-        viewModelScope.launch {
-            val waveform = extractWaveformDataFromUri(context, uri)
-            _currentWaveform.value = waveform
-        }
     }
 
     init {
