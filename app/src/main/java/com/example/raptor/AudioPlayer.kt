@@ -175,15 +175,21 @@ class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
     }
 
     /**
-     * Changes the timeline position of the playback to some value in milliseconds
+     * Changes the currently playing song
      *
-     * @param time value in milliseconds to change playback to
+     * @param song song to change to
      */
     fun changeSong(song: Song) {
         player.stop()
         playSong(song)
+        player.seekTo(0)
     }
 
+    /**
+     * Changes the timeline position of the playback to some value in milliseconds
+     *
+     * @param time value in milliseconds to change playback to
+     */
     fun changeCurrentPosition(time: Long) {
         player.seekTo(time)
     }

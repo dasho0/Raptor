@@ -11,8 +11,10 @@ import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.util.fastJoinToString
 import androidx.core.net.toUri
+import androidx.core.util.Pools
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewModelScope
 import com.example.raptor.AudioPlayer
 import com.example.raptor.ImageManager
@@ -20,6 +22,7 @@ import com.example.raptor.database.DatabaseManager
 import com.example.raptor.database.entities.Song
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
@@ -30,6 +33,7 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlinx.coroutines.flow.*
+import kotlin.math.log
 
 /**
  * Viewmodel for the player screen
@@ -46,28 +50,33 @@ class PlayerViewModel @Inject constructor(
 ) : ViewModel() {
     private val iconFromState = object {
         private var lastIconState = Icons.Filled.PlayArrow
+
         // TODO: should probably just turn this into a map
-        fun getFrom(state: AudioPlayer.PlaybackStates): ImageVector  {
+        fun getFrom(state: AudioPlayer.PlaybackStates): ImageVector {
             return when(state) {
                 AudioPlayer.PlaybackStates.STATE_BUFFERING,
                 AudioPlayer.PlaybackStates.STATE_READY -> {
                     lastIconState
                 }
+
                 AudioPlayer.PlaybackStates.STATE_ENDED -> {
                     Icons.Filled.Replay.also {
                         lastIconState = it
                     }
                 }
+
                 AudioPlayer.PlaybackStates.STATE_IDLE -> {
                     Icons.Filled.PlayArrow.also {
                         lastIconState = it
                     }
                 }
+
                 AudioPlayer.PlaybackStates.STATE_PLAYING -> {
                     Icons.Filled.PauseCircleFilled.also {
                         lastIconState = it
                     }
                 }
+
                 AudioPlayer.PlaybackStates.STATE_PAUSED -> {
                     Icons.Filled.PlayArrow.also {
                         lastIconState = it
@@ -79,6 +88,9 @@ class PlayerViewModel @Inject constructor(
 
     private val currentSong: MutableStateFlow<Song?> = MutableStateFlow(null)
 
+    private var songsInCurrentAlbum: List<Song>? = null
+    private var songsInCurrentAlbumFlow: List<Song>? = null
+
     /**
      * Flow that represents the position of the playback progress bar
      */
@@ -86,7 +98,7 @@ class PlayerViewModel @Inject constructor(
         while(true) {
             val duration = audioPlayer.currentDuration
             val pos = audioPlayer.currentPosition
-            val fraction = if (duration > 0) (pos.toFloat() / duration.toFloat()) else 0f
+            val fraction = if(duration > 0) (pos.toFloat() / duration.toFloat()) else 0f
             emit(fraction.coerceIn(0f, 1f))
             delay(33)
         }
@@ -130,14 +142,15 @@ class PlayerViewModel @Inject constructor(
         if(it != null) {
             imageManager.getBitmapFromAppStorage(it.coverUri?.toUri())
         } else {
-            ImageBitmap(1,1)
+            ImageBitmap(1, 1)
         }
     }
+
+    private val _currentWaveform = MutableStateFlow<List<Float>>(emptyList())
 
     /**
      * Observable list of points corresponding to the height of each point on the waveform
      */
-    private val _currentWaveform = MutableStateFlow<List<Float>>(emptyList())
     val currentWaveform: StateFlow<List<Float>> = _currentWaveform
 
     /**
@@ -157,7 +170,7 @@ class PlayerViewModel @Inject constructor(
      * If the playback is stopped, the playback will restart
      */
     fun playPauseRestartCurrentSong() {
-        when (audioPlayer.playbackState.value) {
+        when(audioPlayer.playbackState.value) {
             AudioPlayer.PlaybackStates.STATE_IDLE,
             AudioPlayer.PlaybackStates.STATE_PAUSED,
             AudioPlayer.PlaybackStates.STATE_READY -> {
@@ -165,20 +178,38 @@ class PlayerViewModel @Inject constructor(
                     audioPlayer.playSong(it)
                 }
             }
+
             AudioPlayer.PlaybackStates.STATE_PLAYING -> {
                 audioPlayer.pause()
             }
+
             AudioPlayer.PlaybackStates.STATE_ENDED -> {
                 audioPlayer.restartCurrentPlayback()
             }
+
             else -> {}
         }
     }
 
     fun skipTrack(isForward: Boolean) {
-        currentSong.value?.let {song ->
-            if(isForward) {
+        Log.d(javaClass.simpleName, "Changing song...")
+        currentSong.value?.let { song ->
+            if(song.trackNumber == null) {
+                TODO()
+            }
 
+            songsInCurrentAlbum?.let { songsInCurrentAlbum ->
+                val songsPlaylist = songsInCurrentAlbum.sortedBy { it.trackNumber }
+                if(isForward) {
+                    if(songsInCurrentAlbum.last().songId == song.songId) {
+                        TODO()
+                        return
+                    }
+
+                    val nextSong = songsPlaylist[song.trackNumber]
+                    audioPlayer.changeSong(nextSong)
+                    Log.d(javaClass.simpleName, "Changed song to: $song")
+                }
             }
         }
     }
@@ -201,13 +232,31 @@ class PlayerViewModel @Inject constructor(
      */
     init {
         viewModelScope.launch {
+//            songsInCurrentAlbumFlow.collect()
             databaseManager.collectSong(savedStateHandle["songId"]!!).collect {
                 currentSong.value = it
-                it?.fileUri?.let { fileStr ->
+                it.fileUri?.let { fileStr ->
                     val fileUri = fileStr.toUri()
                     loadSongWaveform(fileUri)
                 }
                 playPauseRestartCurrentSong()
+            }
+        }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            currentSong.collect() {
+                Log.d(javaClass.simpleName, "collecting currentSong")
+                Log.d(javaClass.simpleName, "Gay init raw ${databaseManager.getAlbumWithSongs(it
+                    ?.albumId)}")
+                Log.d(javaClass.simpleName, "Gay init ${it}")
+                songsInCurrentAlbum = databaseManager.getAlbumWithSongs(it?.albumId)?.songs
+                val test = databaseManager.getAlbumWithSongs(it?.albumId)?.songs
+                databaseManager.getAlbumWithSongs(it?.songId)?.songs?.map {
+                    Log.d(javaClass.simpleName, "map, $it")
+                }
+                Log.d(javaClass.simpleName, "Gay init test $test")
+                Log.d(javaClass.simpleName, " Gay init sca $songsInCurrentAlbum")
+
             }
         }
     }

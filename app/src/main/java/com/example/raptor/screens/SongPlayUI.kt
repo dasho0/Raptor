@@ -80,7 +80,7 @@ fun MediaControls(playerViewModel: PlayerViewModel) {
         }
 
         IconButton(
-            onClick = {}
+            onClick = { playerViewModel.skipTrack(true) }
         ) {
             Icon(
                 imageVector = Icons.Filled.SkipNext,
