@@ -203,15 +203,19 @@ class PlayerViewModel @Inject constructor(
 
             songsInCurrentAlbum?.let { songsInCurrentAlbum ->
                 val songsPlaylist = songsInCurrentAlbum.sortedBy { it.trackNumber }
+
                 if(isForward) {
-                    if(songsInCurrentAlbum.last().songId == song.songId) {
+                    if(songsPlaylist.last().songId == song.songId) {
                         viewModelScope.launch() {
                             _toast.emit("The song ${song.title} is the last song in the album.")
                         }
                         return
                     }
 
-                    val nextSong = songsPlaylist[song.trackNumber] // this is actually the next
+                    //O(n), but have to take into account if the user doesn't have all songs
+                    // in an album. And i'm not using a BST
+                    val nextSong =
+                        songsPlaylist[songsPlaylist.indexOfFirst { it.songId == song.songId } + 1]
                     // track
                     audioPlayer.changeSong(nextSong)
                     Log.d(javaClass.simpleName, "Changed song to: $song")
@@ -228,8 +232,10 @@ class PlayerViewModel @Inject constructor(
                             return
                         }
 
-                        val prevSong = songsPlaylist[song.trackNumber - 2] // this is actually
-                        // the previous track
+                        //O(n), but have to take into account if the user doesn't have all songs
+                        // in an album. And i'm not using a BST
+                        val prevSong =
+                            songsPlaylist[songsPlaylist.indexOfFirst { it.songId == song.songId } - 1]
                         audioPlayer.changeSong(prevSong)
 
                         currentSong.value = prevSong
