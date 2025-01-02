@@ -30,7 +30,7 @@ class TagExtractor @Inject constructor(
 ) {
     data class SongInfo(
         val artists: List<String>?,
-        val albumArtists: List<String>?,
+        val albumArtists: List<String>,
         val title: String?,
         val releaseDate: String?,
         val album: String?,
@@ -48,6 +48,10 @@ class TagExtractor @Inject constructor(
 
         when(metadataList[0]) {
             is VorbisComment -> {
+                fun handleMissingTags(map: MutableMap<String?, Any?>) {
+                    if(map["ALBUMARTIST"] == null) map["ALBUMARTIST"] = List<String>(1,{"Unknown"} )
+                }
+
                 val entryMap: MutableMap<String?, Any?> = mutableMapOf()
 
                 // the last element `picture` screws up the logic and it only has a mimetype value
@@ -77,6 +81,8 @@ class TagExtractor @Inject constructor(
                     }
                 }
 
+                handleMissingTags(entryMap)
+
                 val coverUri = imageManager.extractAlbumimage(
                     uri,
                     entryMap["ALBUMARTIST"] as List<String>,
@@ -85,7 +91,7 @@ class TagExtractor @Inject constructor(
 
                 return SongInfo(
                     artists = entryMap["ARTIST"] as? List<String>?,
-                    albumArtists = entryMap["ALBUMARTIST"] as? List<String>?,
+                    albumArtists = entryMap["ALBUMARTIST"] as List<String>,
                     title = entryMap["TITLE"] as? String?,
                     album = entryMap["ALBUM"] as String?,
                     releaseDate = entryMap["DATE"] as? String?,
@@ -95,6 +101,10 @@ class TagExtractor @Inject constructor(
             }
 
             is Id3Frame -> {
+                fun handleMissingTags(map: MutableMap<String, List<String>>) {
+                    if(map["TPE2"] == null) map["TPE2"] = List<String>(1,{"Unknown"} )
+                }
+
                 val entryMap: MutableMap<String, List<String>> = mutableMapOf()
                 metadataList.fastForEach {
                     val entry = it as Id3Frame
@@ -111,6 +121,8 @@ class TagExtractor @Inject constructor(
                     }
                 }
 
+                handleMissingTags(entryMap)
+
                 val coverUri = imageManager.extractAlbumimage(
                     uri,
                    entryMap["TPE2"]?: emptyList(),
@@ -120,7 +132,7 @@ class TagExtractor @Inject constructor(
 
                 return SongInfo(
                     artists = entryMap["TPE1"],
-                    albumArtists = entryMap["TPE2"],
+                    albumArtists = entryMap["TPE2"] as List<String>,
                     title = entryMap["TIT2"]?.get(0),
                     releaseDate = entryMap["TDA"]?.get(0),
                     album = entryMap["TALB"]?.get(0),
@@ -138,7 +150,7 @@ class TagExtractor @Inject constructor(
                 }
 
                 return SongInfo(
-                    null, null, null, null, null, null, null
+                    null, mutableListOf("Unknown"), null, null, null, null, null
                 )
             }
         }

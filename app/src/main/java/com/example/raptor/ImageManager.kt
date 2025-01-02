@@ -12,6 +12,7 @@ import androidx.compose.ui.util.fastJoinToString
 import androidx.core.net.toUri
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.io.File
+import java.io.FileNotFoundException
 import javax.inject.Inject
 
 class ImageManager @Inject constructor(@ApplicationContext private val context: Context) {
@@ -43,9 +44,14 @@ class ImageManager @Inject constructor(@ApplicationContext private val context: 
     fun collectBitmapFromUri(uri: Uri?): ImageBitmap {
         Log.d(javaClass.simpleName, "Collecting bitmap with uri: $uri")
         if(uri != null) {
-            context.contentResolver.openInputStream(Uri.parse(uri.toString())).use {
-                return BitmapFactory.decodeStream(it)
-                    .asImageBitmap()
+            try {
+                context.contentResolver.openInputStream(Uri.parse(uri.toString())).use {
+                    return BitmapFactory.decodeStream(it)
+                        .asImageBitmap()
+                }
+            } catch(e: FileNotFoundException) {
+                Log.e(javaClass.simpleName, "Can't parse thumbnail at: $uri")
+                return ImageBitmap(1,1)
             }
         } else {
             return ImageBitmap(1,1,)
