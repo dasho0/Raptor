@@ -209,6 +209,8 @@ class PlayerViewModel @Inject constructor(
                     val nextSong = songsPlaylist[song.trackNumber]
                     audioPlayer.changeSong(nextSong)
                     Log.d(javaClass.simpleName, "Changed song to: $song")
+
+                    currentSong.value = nextSong
                 }
             }
         }
