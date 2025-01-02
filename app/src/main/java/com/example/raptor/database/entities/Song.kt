@@ -6,6 +6,13 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import androidx.room.Index
 
+/**
+ * Dataclass corresponding to the [Song] entity in the database.
+ *
+ * @param songId Primary key
+ * @param title Song title
+ * @param albumId Foreign key of [Album]
+ */
 @Entity(
     foreignKeys = [
         ForeignKey(

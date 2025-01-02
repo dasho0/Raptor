@@ -22,12 +22,26 @@ import javax.inject.Inject
 import kotlin.math.log
 import kotlin.reflect.typeOf
 
-//this class handles metadata extraction from a list of music files
+/**
+ * This class handles metadata extraction from a collection of `SongFile`. It will also copy all
+ * album covers to app storage
+ */
 
 class TagExtractor @Inject constructor(
     @ApplicationContext private val context: Context,
     private val imageManager: ImageManager
 ) {
+    /**
+     * Dataclass representing the tags a song has.
+     *
+     * @param artists A list of artist names that authored the song
+     * @param album A list of artist names that authored the album of the song
+     * @param title The title of the song
+     * @param releaseDate A string representing the release date of the song
+     * @param albumArtists The title of the album of the song
+     * @param fileUri `Uri` of the song
+     * @param coverUri `Uri` of the song cover art, in app storage
+     */
     data class SongInfo(
         val artists: List<String>?,
         val albumArtists: List<String>,
@@ -156,10 +170,15 @@ class TagExtractor @Inject constructor(
         }
     }
 
-
+    /**
+     * Extracts the tags and album covers to app storage of a list of `SongFile`
+     *
+     * @param fileList List of `SongFile`, each element should have it's data extracted
+     *
+     * @return List of `SongInfo` corresponding to each input song file
+     */
     @OptIn(UnstableApi::class)
-    fun extractTags(fileList: List<MusicFileLoader.SongFile>): List<Any> {
-
+    fun extractTags(fileList: List<MusicFileLoader.SongFile>): List<SongInfo> {
         val tagsList = mutableListOf<SongInfo>()
 
         for(file in fileList) {

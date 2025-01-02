@@ -1,6 +1,7 @@
 [versions]
 accompanistPager = "0.24.13-rc"
 agp = "8.7.2"
+androidDocumentationPlugin = "2.0.0"
 biometric = "1.2.0"
 biometricVersion = "1.4.0-alpha02"
 documentfile = "1.0.1"
@@ -24,6 +25,7 @@ biometricKtx = "1.1.0"
 
 [libraries]
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
+android-documentation-plugin = { module = "org.jetbrains.dokka:android-documentation-plugin", version.ref = "androidDocumentationPlugin" }
 androidx-biometric = { module = "androidx.biometric:biometric", version.ref = "biometric" }
 androidx-biometric-v140alpha02 = { module = "androidx.biometric:biometric", version.ref = "biometricVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
