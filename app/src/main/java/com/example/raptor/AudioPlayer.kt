@@ -96,10 +96,10 @@ class AudioPlayer @Inject constructor(@ApplicationContext context: Context) {
     private val isPlayingInternal get() = player.isPlaying
 
     /**
-     * Gets the current playback position of currently playing song in milliseconds
+     * Gets the current playback position of the currently playing song in milliseconds
      */
     val currentPosition get() = player.currentPosition
-    /*
+    /**
      * Gets the duration of the currently playing song in milliseconds
      */
     val currentDuration get() = player.duration

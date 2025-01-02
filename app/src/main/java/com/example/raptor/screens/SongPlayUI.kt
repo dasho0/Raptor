@@ -61,11 +61,11 @@ fun MediaControls(playerViewModel: PlayerViewModel) {
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = {}
+            onClick = { playerViewModel.skipTrack(false) }
         ) {
             Icon(
                 imageVector = Icons.Filled.SkipPrevious,
-                contentDescription = "Backward Track",
+                contentDescription = "Skip Backward",
                 modifier = Modifier.size(42.dp)
             )
         }
@@ -89,7 +89,7 @@ fun MediaControls(playerViewModel: PlayerViewModel) {
         ) {
             Icon(
                 imageVector = Icons.Filled.SkipNext,
-                contentDescription = "Forward Track",
+                contentDescription = "Skip Forward",
                 modifier = Modifier.size(42.dp)
             )
         }

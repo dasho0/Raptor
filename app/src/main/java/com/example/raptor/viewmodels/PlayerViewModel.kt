@@ -14,6 +14,7 @@ import androidx.core.net.toUri
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.media3.exoplayer.audio.OggOpusAudioPacketizer
 import com.example.raptor.AudioPlayer
 import com.example.raptor.ImageManager
 import com.example.raptor.database.DatabaseManager
@@ -210,11 +211,32 @@ class PlayerViewModel @Inject constructor(
                         return
                     }
 
-                    val nextSong = songsPlaylist[song.trackNumber]
+                    val nextSong = songsPlaylist[song.trackNumber] // this is actually the next
+                    // track
                     audioPlayer.changeSong(nextSong)
                     Log.d(javaClass.simpleName, "Changed song to: $song")
 
                     currentSong.value = nextSong
+                } else {
+                    Log.d(javaClass.simpleName, "Playback ${audioPlayer.currentPosition.toFloat() / 
+                            audioPlayer.currentDuration} through the song")
+                    if(audioPlayer.currentPosition.toFloat() / audioPlayer.currentDuration <= 0.1) {
+                        if(songsInCurrentAlbum.first().songId == song.songId) {
+                            viewModelScope.launch() {
+                                _toast.emit("The song ${song.title} is the first song in the album.")
+                            }
+                            return
+                        }
+
+                        val prevSong = songsPlaylist[song.trackNumber - 2] // this is actually
+                        // the previous track
+                        audioPlayer.changeSong(prevSong)
+
+                        currentSong.value = prevSong
+                        return
+                    }
+
+                    audioPlayer.changeCurrentPosition(0)
                 }
             }
         }
