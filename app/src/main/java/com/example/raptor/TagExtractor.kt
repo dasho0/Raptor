@@ -48,6 +48,7 @@ class TagExtractor @Inject constructor(
         val title: String?,
         val releaseDate: String?,
         val album: String?,
+        val trackNumber: Int?,
         val fileUri: Uri?,
         val coverUri: Uri?,
     )
@@ -110,8 +111,12 @@ class TagExtractor @Inject constructor(
                     album = entryMap["ALBUM"] as String?,
                     releaseDate = entryMap["DATE"] as? String?,
                     fileUri = uri,
+                    trackNumber = (entryMap["TRACKNUMBER"] as? String?)?.toInt(),
                     coverUri = coverUri,
-                )
+                ).also {
+                    Log.d(javaClass.simpleName, "Vorbis Song: $it")
+                }
+
             }
 
             is Id3Frame -> {
@@ -151,8 +156,13 @@ class TagExtractor @Inject constructor(
                     releaseDate = entryMap["TDA"]?.get(0),
                     album = entryMap["TALB"]?.get(0),
                     fileUri = uri,
+                    trackNumber = entryMap["TRCK"]?.get(0)?.let {
+                        return@let it.takeWhile { it != '/' }.toInt()
+                    },
                     coverUri = coverUri
-                )
+                ).also {
+                    Log.d(javaClass.simpleName, "id3 Song: $it")
+                }
             }
 
             else -> {
@@ -164,7 +174,7 @@ class TagExtractor @Inject constructor(
                 }
 
                 return SongInfo(
-                    null, mutableListOf("Unknown"), null, null, null, null, null
+                    null, mutableListOf("Unknown"), null, null, null, null, null, null
                 )
             }
         }

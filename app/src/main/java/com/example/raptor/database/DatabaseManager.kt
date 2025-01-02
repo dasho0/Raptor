@@ -9,6 +9,7 @@ import com.example.raptor.database.entities.Album
 import com.example.raptor.database.entities.AlbumAuthorCrossRef
 import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
+import com.example.raptor.database.relations.AlbumWithSongs
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -88,6 +89,9 @@ class DatabaseManager @Inject constructor(
         return database.logicDao().getSongfromId(songId)
     }
 
+    fun getAlbumWithSongs(albumId: Long?): AlbumWithSongs? {
+        return database.logicDao().getAlbumWithSongs(albumId)
+    }
     /**
      * Collects a flow of authors of a specific song from the database.
      *
@@ -180,6 +184,7 @@ class DatabaseManager @Inject constructor(
                 dao.insertSong(Song(
                     title = song.title,
                     albumId = correctAlbum?.albumId,
+                    trackNumber = song.trackNumber,
                     fileUri = song.fileUri.toString(),
                 ))
             }

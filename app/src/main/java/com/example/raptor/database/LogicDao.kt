@@ -10,6 +10,7 @@ import com.example.raptor.database.entities.AlbumAuthorCrossRef
 import com.example.raptor.database.entities.Author
 import com.example.raptor.database.entities.Song
 import com.example.raptor.database.relations.AlbumWithAuthors
+import com.example.raptor.database.relations.AlbumWithSongs
 import com.example.raptor.database.relations.AuthorWithAlbums
 
 @Dao
@@ -51,4 +52,8 @@ interface LogicDao {
 
     @Query("SELECT * FROM Song WHERE songId = :songId")
     fun getSongfromId(songId: Long): Song
+
+    @Transaction
+    @Query("SELECT * FROM album WHERE albumId = :albumId")
+    fun getAlbumWithSongs(albumId: Long?): AlbumWithSongs?
 }
