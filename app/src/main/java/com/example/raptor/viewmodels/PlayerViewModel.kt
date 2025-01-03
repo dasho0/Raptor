@@ -198,7 +198,11 @@ class PlayerViewModel @Inject constructor(
         Log.d(javaClass.simpleName, "Changing song...")
         currentSong.value?.let { song ->
             if(song.trackNumber == null) {
-                TODO()
+                viewModelScope.launch() {
+                    _toast.emit("Song doesn't have a corresponding track number.")
+                }
+
+                return
             }
 
             songsInCurrentAlbum?.let { songsInCurrentAlbum ->
