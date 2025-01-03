@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import androidx.compose.runtime.State
 import androidx.lifecycle.ViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -29,11 +28,6 @@ class LibraryViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _folderSelected = mutableStateOf(false)
-
-    /**
-     * Folder selected by the user with the file picker
-     */
-    val folderSelected: State<Boolean> get() = _folderSelected
 
     /**
      * All authors in the database. Used for displaying author tiles
@@ -67,7 +61,7 @@ class LibraryViewModel @Inject constructor(
     }
 
     /**
-     * @see  MusicFileLoader.PrepareFilePicker
+     * @see MusicFileLoader.PrepareFilePicker
      */
     @Composable
     fun PrepareFilePicker() {

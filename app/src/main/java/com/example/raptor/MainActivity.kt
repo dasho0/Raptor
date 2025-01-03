@@ -34,6 +34,7 @@ import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
@@ -172,6 +173,14 @@ fun MainScreen(libraryViewModel: LibraryViewModel = hiltViewModel()) {
 fun MainScreenContent(navController: NavHostController, libraryViewModel: LibraryViewModel) {
     val expanded = remember { mutableStateOf(false) }
 
+    libraryViewModel.PrepareFilePicker()
+
+    val authors by libraryViewModel.authors.collectAsState(initial = emptyList())
+    val configuration = LocalConfiguration.current
+
+    Log.d("UI", "Authors in db: $authors")
+    Text("TEST: $authors", color = Color.White)
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -197,11 +206,6 @@ fun MainScreenContent(navController: NavHostController, libraryViewModel: Librar
                 }
             },
         )
-        libraryViewModel.PrepareFilePicker() // Ensures launcher is ready
-
-        val folderSelected by libraryViewModel.folderSelected
-        val authors by libraryViewModel.authors.collectAsState(initial = emptyList())
-        val configuration = LocalConfiguration.current
 
         // Determine the number of columns based on orientation
         val columns = if (configuration.orientation == Configuration.ORIENTATION_LANDSCAPE) {
@@ -210,27 +214,19 @@ fun MainScreenContent(navController: NavHostController, libraryViewModel: Librar
             3 // 3 tiles in a row for vertical mode
         }
 
-        if (!folderSelected) {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background),
-            )
-        } else {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(columns), // Dynamically set columns based on orientation
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.background), // Set background color here
-                contentPadding = PaddingValues(16.dp),
-                verticalArrangement = Arrangement.spacedBy(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
-            ) {
-                items(authors) { author ->
-                    AuthorTile(author = author.name, onClick = {
-                        navController.navigate("albums/${author.name}")
-                    })
-                }
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(columns), // Dynamically set columns based on orientation
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colorScheme.background), // Set background color here
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            items(authors) { author ->
+                AuthorTile(author = author.name, onClick = {
+                    navController.navigate("albums/${author.name}")
+                })
             }
         }
     }
