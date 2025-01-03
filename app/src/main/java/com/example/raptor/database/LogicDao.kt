@@ -56,4 +56,8 @@ interface LogicDao {
     @Transaction
     @Query("SELECT * FROM album WHERE albumId = :albumId")
     fun getAlbumWithSongs(albumId: Long?): AlbumWithSongs?
+
+    @Transaction
+    @Query("DELETE FROM sqlite_sequence")
+    fun clearKeyIndex()
 }

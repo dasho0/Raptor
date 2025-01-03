@@ -25,20 +25,20 @@ import javax.inject.Singleton
  */
 @Singleton
 class DatabaseManager @Inject constructor(
-    @ApplicationContext context: Context
+    @ApplicationContext val context: Context
 ) {
     private val database: LibraryDb = Room.databaseBuilder(
         context,
         LibraryDb::class.java, "Library"
     ).build()
 
-    init {
-        val dbFile = File(context.getDatabasePath("Library").absolutePath)
-
-        if (dbFile.exists()) {
-            dbFile.delete()
-        }
-    }
+//    init {
+//        val dbFile = File(context.getDatabasePath("Library").absolutePath)
+//
+//        if (dbFile.exists()) {
+//            dbFile.delete()
+//        }
+//    }
 
     /**
      * Collects a flow of all authors from the database.
@@ -121,6 +121,11 @@ class DatabaseManager @Inject constructor(
         assert(Thread.currentThread().name != "main")
 
         val dao = database.logicDao()
+        if(songs.isNotEmpty()) { // FIXME: Patchwork fix for dup albums
+            Log.d(javaClass.simpleName,"Clearing database, songs list: $songs")
+            database.clearAllTables()
+            dao.clearKeyIndex()
+        }
 
         fun addAuthors() {
             songs.fastForEach { song ->
