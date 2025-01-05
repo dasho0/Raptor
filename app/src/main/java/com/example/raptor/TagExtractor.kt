@@ -194,7 +194,6 @@ class TagExtractor @Inject constructor(
         for(file in fileList) {
             val mediaItem = MediaItem.fromUri("${file.uri}")
 
-// Retrieve metadata asynchronously
             //FIXME: probably shouldnt block the thread with get() every time a song is scanned
             // but whatever, im not syncing this thing manually
             val trackGroups = MetadataRetriever.retrieveMetadata(context, mediaItem).get()
