@@ -33,9 +33,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.res.painterResource
 import androidx.navigation.NavType
 import androidx.navigation.compose.*
 import androidx.navigation.navArgument
@@ -46,6 +48,7 @@ import com.example.raptor.viewmodels.AlbumTileViewModel
 import com.example.raptor.viewmodels.AlbumsScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.raptor.viewmodels.LibraryViewModel
+import androidx.compose.ui.draw.paint
 
 lateinit var sensorManager: SensorManager
 var lightSensor: Sensor? = null
@@ -73,7 +76,7 @@ class MainActivity : FragmentActivity(), SensorEventListener {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
-                ) {
+                ){
                     if (authenticated) {
                         MainScreen()
                     } else {
@@ -218,7 +221,7 @@ fun MainScreenContent(navController: NavHostController, libraryViewModel: Librar
             columns = GridCells.Fixed(columns), // Dynamically set columns based on orientation
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colorScheme.background), // Set background color here
+                .paint( painter = painterResource(id = R.drawable.trans_background) ), // Set background color here
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -283,7 +286,7 @@ fun AlbumsScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background) // Set background color here
+            .paint( painter = painterResource(id = R.drawable.trans_background) ), // Set background color here
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
@@ -367,7 +370,7 @@ fun SongsScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background) // Set background color here
+            .paint( painter = painterResource(id = R.drawable.trans_background) ), // Set background color here
     ) {
         LazyColumn(
             modifier = Modifier
