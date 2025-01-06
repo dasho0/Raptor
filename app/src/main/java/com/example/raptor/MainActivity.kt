@@ -221,7 +221,7 @@ fun MainScreenContent(navController: NavHostController, libraryViewModel: Librar
             columns = GridCells.Fixed(columns), // Dynamically set columns based on orientation
             modifier = Modifier
                 .fillMaxSize()
-                .paint( painter = painterResource(id = R.drawable.trans_background) ), // Set background color here
+                .paint( painter = painterResource(id = R.drawable.tans_background_a) ), // Set background color here
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -286,7 +286,7 @@ fun AlbumsScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .paint( painter = painterResource(id = R.drawable.trans_background) ), // Set background color here
+            .paint( painter = painterResource(id = R.drawable.tans_background_a) ), // Set background color here
     ) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
@@ -370,7 +370,7 @@ fun SongsScreen(
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .paint( painter = painterResource(id = R.drawable.trans_background) ), // Set background color here
+            .paint( painter = painterResource(id = R.drawable.tans_background_a) ), // Set background color here
     ) {
         LazyColumn(
             modifier = Modifier
