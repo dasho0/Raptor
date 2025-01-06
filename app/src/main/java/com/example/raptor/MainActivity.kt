@@ -335,37 +335,38 @@ fun AlbumsScreen(
                     alignment = Alignment.Center
                 ),
         ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
             ) {
-                Image(
-                    bitmap = selectedAlbum!!.second,
-                    contentDescription = "${selectedAlbum!!.first.title} cover",
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier
-                        .size(200.dp)
-                )
-                Column(
-                    horizontalAlignment = Alignment.Start,
-                    verticalArrangement = Arrangement.Top,
-                    modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxWidth()
+                        .padding(16.dp)
                 ) {
+                    Image(
+                        bitmap = selectedAlbum!!.second,
+                        contentDescription = "${selectedAlbum!!.first.title} cover",
+                        modifier = Modifier
+                            .size(200.dp)
+                            .weight(1f)
+                    )
                     Text(
                         text = selectedAlbum!!.first.title,
                         style = MaterialTheme.typography.headlineMedium,
                         textAlign = TextAlign.Start,
                         color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.padding(bottom = 16.dp)
-                    )
-                    SongsScreen(
-                        navController = navController,
-                        libraryViewModel = hiltViewModel(),
-                        albumId = selectedAlbum!!.first.albumId
+                        modifier = Modifier
+                            .padding(start = 16.dp)
+                            .weight(1f)
                     )
                 }
+                SongsScreen(
+                    navController = navController,
+                    libraryViewModel = hiltViewModel(),
+                    albumId = selectedAlbum!!.first.albumId
+                )
             }
         }
     }
