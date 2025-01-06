@@ -32,6 +32,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.draw.scale
@@ -49,6 +50,8 @@ import com.example.raptor.viewmodels.AlbumsScreenViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import com.example.raptor.viewmodels.LibraryViewModel
 import androidx.compose.ui.draw.paint
+import androidx.compose.ui.layout.ContentScale
+import com.example.raptor.database.entities.Album
 
 lateinit var sensorManager: SensorManager
 var lightSensor: Sensor? = null
@@ -221,7 +224,11 @@ fun MainScreenContent(navController: NavHostController, libraryViewModel: Librar
             columns = GridCells.Fixed(columns), // Dynamically set columns based on orientation
             modifier = Modifier
                 .fillMaxSize()
-                .paint( painter = painterResource(id = R.drawable.tans_background_a) ), // Set background color here
+                .paint(
+                    painter = painterResource(id = R.drawable.tans_background_a),
+                    contentScale = ContentScale.Crop, // Rozciąga obraz w sposób zachowujący proporcje
+                    alignment = Alignment.Center     // Wyśrodkowanie obrazu
+                ),
             contentPadding = PaddingValues(16.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
@@ -282,38 +289,133 @@ fun AlbumsScreen(
     )
 
     val albumsAndCovers by viewModel.albumsAndCovers.collectAsState(emptyList())
+    var selectedAlbum by rememberSaveable { mutableStateOf<Pair<Album, ImageBitmap>?>(null) }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .paint( painter = painterResource(id = R.drawable.tans_background_a) ), // Set background color here
-    ) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(3),
-            modifier = Modifier.fillMaxSize(),
-            contentPadding = PaddingValues(16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-            horizontalArrangement = Arrangement.spacedBy(16.dp)
+    if (selectedAlbum == null) {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .paint(
+                    painter = painterResource(id = R.drawable.tans_background_a),
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.Center
+                ),
         ) {
-            items(albumsAndCovers, key = { it.first.albumId }) { pair ->
-                val album = pair.first
-                val cover = pair.second
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(3),
+                modifier = Modifier.fillMaxSize(),
+                contentPadding = PaddingValues(16.dp),
+                verticalArrangement = Arrangement.spacedBy(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                items(albumsAndCovers, key = { it.first.albumId }) { pair ->
+                    val album = pair.first
+                    val cover = pair.second
 
-                AlbumTile(
-                    albumName = album.title,
-                    cover = cover,
-                    onClick = {
-                        Log.d("MainActivity", "Album id passed to navhost: ${album.albumId}")
-                        assert(album.albumId != 0L)
-                        navController.navigate("songs/${album.albumId}")
-                    },
-
-                    modifier = Modifier,
+                    AlbumTile(
+                        albumName = album.title,
+                        cover = cover,
+                        onClick = {
+                            Log.d("MainActivity", "Album id passed to navhost: ${album.albumId}")
+                            assert(album.albumId != 0L)
+                            selectedAlbum = pair
+                        },
+                        modifier = Modifier,
+                    )
+                }
+            }
+        }
+    } else {
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .paint(
+                    painter = painterResource(id = R.drawable.tans_background_a),
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.Center
+                ),
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                Image(
+                    bitmap = selectedAlbum!!.second,
+                    contentDescription = "${selectedAlbum!!.first.title} cover",
+                    modifier = Modifier
+                        .size(200.dp)
                 )
+                Column(
+                    horizontalAlignment = Alignment.Start,
+                    verticalArrangement = Arrangement.Top,
+                    modifier = Modifier
+                        .fillMaxSize()
+                ) {
+                    Text(
+                        text = selectedAlbum!!.first.title,
+                        style = MaterialTheme.typography.headlineMedium,
+                        textAlign = TextAlign.Start,
+                        color = MaterialTheme.colorScheme.onSurface,
+                        modifier = Modifier.padding(bottom = 16.dp)
+                    )
+                    SongsScreen(
+                        navController = navController,
+                        libraryViewModel = hiltViewModel(),
+                        albumId = selectedAlbum!!.first.albumId
+                    )
+                }
             }
         }
     }
 }
+
+@Composable
+fun SongsScreen(
+    navController: NavHostController, libraryViewModel: LibraryViewModel, albumId: Long?
+) {
+    assert(albumId != null)
+
+    val songs by libraryViewModel.getSongsByAlbum(albumId!!).collectAsState(initial = emptyList())
+
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        items(songs) { song ->
+            SongItem(song = song, navController)
+        }
+    }
+}
+
+@Composable
+fun SongItem(song: Song, navController: NavHostController) {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(8.dp)
+            .background(
+                color = MaterialTheme.colorScheme.secondaryContainer,
+                shape = MaterialTheme.shapes.medium
+            )
+            .padding(16.dp)
+            .clickable(onClick = {
+                Log.d("SongsScreen", "Clicked on song: $song")
+
+                navController.navigate("player/${song.songId}")
+            })
+    ) {
+        Text(
+            text = song.title ?: "Unknown Song",
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    }
+}
+
 
 @Composable
 fun AlbumTile(albumName: String, cover: ImageBitmap, onClick: () -> Unit, modifier: Modifier) {
@@ -358,58 +460,6 @@ fun AlbumTile(albumName: String, cover: ImageBitmap, onClick: () -> Unit, modifi
         }
     }
 }
-
-@Composable
-fun SongsScreen(
-    navController: NavHostController, libraryViewModel: LibraryViewModel, albumId: Long?
-) {
-    assert(albumId != null)
-
-    val songs by libraryViewModel.getSongsByAlbum(albumId!!).collectAsState(initial = emptyList())
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .paint( painter = painterResource(id = R.drawable.tans_background_a) ), // Set background color here
-    ) {
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(songs) { song ->
-                SongItem(song = song, navController)
-            }
-        }
-    }
-}
-
-@Composable
-fun SongItem(song: Song, navController: NavHostController) {
-    Box(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(8.dp)
-            .background(
-                color = MaterialTheme.colorScheme.secondaryContainer,
-                shape = MaterialTheme.shapes.medium
-            )
-            .padding(16.dp)
-            .clickable(onClick = {
-                Log.d("SongsScreen", "Clicked on song: $song")
-
-                navController.navigate("player/${song.songId}")
-            })
-    ) {
-        Text(
-            text = song.title ?: "Unknown Song",
-            style = MaterialTheme.typography.bodyLarge,
-            color = MaterialTheme.colorScheme.onSurface
-        )
-    }
-}
-
 @Composable
 fun AuthenticationScreen(onAuthenticate: () -> Unit) {
     LaunchedEffect(Unit) {
