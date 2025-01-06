@@ -326,62 +326,106 @@ fun AlbumsScreen(
             }
         }
     } else {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .paint(
-                    painter = painterResource(id = R.drawable.tans_background_a),
-                    contentScale = ContentScale.Crop,
-                    alignment = Alignment.Center
-                ),
-        ) {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp)
-                ) {
-                    Image(
-                        bitmap = selectedAlbum!!.second,
-                        contentDescription = "${selectedAlbum!!.first.title} cover",
-                        modifier = Modifier
-                            .size(200.dp)
-                            .weight(1f)
-                    )
-                    Text(
-                        text = selectedAlbum!!.first.title,
-                        style = MaterialTheme.typography.headlineMedium,
-                        textAlign = TextAlign.Start,
-                        color = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier
-                            .padding(start = 16.dp)
-                            .weight(1f)
-                    )
-                }
-                SongsScreen(
-                    navController = navController,
-                    libraryViewModel = hiltViewModel(),
-                    albumId = selectedAlbum!!.first.albumId
-                )
-            }
+        if (isPortrait()) {
+            PortraitView(selectedAlbum = selectedAlbum!!, navController = navController)
+        } else {
+            LandscapeView(selectedAlbum = selectedAlbum!!, navController = navController)
         }
     }
 }
 
 @Composable
+fun PortraitView(selectedAlbum: Pair<Album, ImageBitmap>, navController: NavHostController) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxSize().paint(
+            painter = painterResource(id = R.drawable.tans_background_a),
+            contentScale = ContentScale.Crop,
+            alignment = Alignment.Center
+        ),
+
+    ) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Image(
+                bitmap = selectedAlbum.second,
+                contentDescription = "${selectedAlbum.first.title} cover",
+                modifier = Modifier
+                    .size(200.dp)
+                    .weight(1f)
+            )
+            Text(
+                text = selectedAlbum.first.title,
+                style = MaterialTheme.typography.headlineMedium,
+                textAlign = TextAlign.Start,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier
+                    .padding(start = 16.dp)
+                    .weight(1f)
+            )
+        }
+        SongsScreen(
+            navController = navController,
+            libraryViewModel = hiltViewModel(),
+            albumId = selectedAlbum.first.albumId
+        )
+    }
+}
+
+@Composable
+fun LandscapeView(selectedAlbum: Pair<Album, ImageBitmap>, navController: NavHostController) {
+    Row(
+        modifier = Modifier.fillMaxSize().paint(
+            painter = painterResource(id = R.drawable.tans_background_a),
+            contentScale = ContentScale.Crop,
+            alignment = Alignment.Center
+        ),
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .padding(16.dp)
+                .weight(1f)
+        ) {
+            Image(
+                bitmap = selectedAlbum.second,
+                contentDescription = "${selectedAlbum.first.title} cover",
+                modifier = Modifier.size(200.dp)
+            )
+            Text(
+                text = selectedAlbum.first.title,
+                style = MaterialTheme.typography.headlineMedium,
+                textAlign = TextAlign.Center,
+                color = MaterialTheme.colorScheme.onSurface,
+                modifier = Modifier.padding(vertical = 16.dp)
+            )
+        }
+        SongsScreen(
+            navController = navController,
+            libraryViewModel = hiltViewModel(),
+            albumId = selectedAlbum.first.albumId,
+            modifier = Modifier.weight(2f)
+        )
+    }
+}
+
+@Composable
 fun SongsScreen(
-    navController: NavHostController, libraryViewModel: LibraryViewModel, albumId: Long?
+    navController: NavHostController,
+    libraryViewModel: LibraryViewModel,
+    albumId: Long?,
+    modifier: Modifier = Modifier
 ) {
     assert(albumId != null)
 
     val songs by libraryViewModel.getSongsByAlbum(albumId!!).collectAsState(initial = emptyList())
 
     LazyColumn(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(8.dp)
@@ -417,6 +461,11 @@ fun SongItem(song: Song, navController: NavHostController) {
     }
 }
 
+@Composable
+fun isPortrait(): Boolean {
+    val configuration = LocalConfiguration.current
+    return configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+}
 
 @Composable
 fun AlbumTile(albumName: String, cover: ImageBitmap, onClick: () -> Unit, modifier: Modifier) {
