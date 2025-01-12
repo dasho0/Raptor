@@ -24,33 +24,32 @@ import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Slider
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
-import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.text.style.LineHeightStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.room.util.TableInfo
 import com.example.raptor.viewmodels.PlayerViewModel
-import java.nio.file.WatchEvent
-import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.SkipNext
 import androidx.compose.material.icons.filled.SkipPrevious
 import androidx.compose.runtime.*
+import androidx.compose.ui.draw.paint
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.lifecycle.LifecycleCoroutineScope
-import kotlinx.coroutines.launch
+
+import androidx.compose.foundation.layout.*
+
+import androidx.compose.material3.*
+
+import androidx.navigation.compose.*
+import com.example.raptor.R
 
 @Composable
 fun MediaControls(playerViewModel: PlayerViewModel) {
@@ -152,9 +151,14 @@ fun SongPlayUI(songId: Long) {
     }
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background)
+        modifier = Modifier.run {
+            fillMaxSize()
+                .paint(
+                    painter = painterResource(id = R.drawable.tans3),
+                    contentScale = ContentScale.Crop, // Rozciąga obraz w sposób zachowujący proporcje
+                    alignment = Alignment.Center     // Wyśrodkowanie obrazu
+                )
+        }
     ) {
         // Display cover and track info in the center
         CurrentSongInfo(

@@ -225,7 +225,7 @@ fun MainScreenContent(navController: NavHostController, libraryViewModel: Librar
             modifier = Modifier
                 .fillMaxSize()
                 .paint(
-                    painter = painterResource(id = R.drawable.tans_background_a),
+                    painter = painterResource(id = R.drawable.tans3),
                     contentScale = ContentScale.Crop, // Rozciąga obraz w sposób zachowujący proporcje
                     alignment = Alignment.Center     // Wyśrodkowanie obrazu
                 ),
@@ -296,7 +296,7 @@ fun AlbumsScreen(
             modifier = Modifier
                 .fillMaxSize()
                 .paint(
-                    painter = painterResource(id = R.drawable.tans_background_a),
+                    painter = painterResource(id = R.drawable.tans3),
                     contentScale = ContentScale.Crop,
                     alignment = Alignment.Center
                 ),
@@ -339,7 +339,7 @@ fun PortraitView(selectedAlbum: Pair<Album, ImageBitmap>, navController: NavHost
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier.fillMaxSize().paint(
-            painter = painterResource(id = R.drawable.tans_background_a),
+            painter = painterResource(id = R.drawable.tans3),
             contentScale = ContentScale.Crop,
             alignment = Alignment.Center
         ),
@@ -380,7 +380,7 @@ fun PortraitView(selectedAlbum: Pair<Album, ImageBitmap>, navController: NavHost
 fun LandscapeView(selectedAlbum: Pair<Album, ImageBitmap>, navController: NavHostController) {
     Row(
         modifier = Modifier.fillMaxSize().paint(
-            painter = painterResource(id = R.drawable.tans_background_a),
+            painter = painterResource(id = R.drawable.tans3),
             contentScale = ContentScale.Crop,
             alignment = Alignment.Center
         ),
