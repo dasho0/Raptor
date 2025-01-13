@@ -1,0 +1,38 @@
+\doxysection{Library\+View\+Model.\+kt File Reference}
+\hypertarget{LibraryViewModel_8kt}{}\label{LibraryViewModel_8kt}\index{LibraryViewModel.kt@{LibraryViewModel.kt}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{AlbumsScreenViewModel_8kt_a8adddc108920ac5af8d78cf1ae78c4e8}{Hilt\+View\+Model}} class Library\+View\+Model Inject \mbox{\hyperlink{LibraryViewModel_8kt_ab05f89f3ab0ae176f35f8ada00cef4c0}{constructor}} (private val picker\+:\+Music\+File\+Loader, private val database\+Manager\+:\+Database\+Manager, private val tag\+Extractor\+:\+Tag\+Extractor,)
+\begin{DoxyCompactList}\small\item\em Viewmodel presenting the starting, author screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{LibraryViewModel_8kt_ab05f89f3ab0ae176f35f8ada00cef4c0}\index{LibraryViewModel.kt@{LibraryViewModel.kt}!constructor@{constructor}}
+\index{constructor@{constructor}!LibraryViewModel.kt@{LibraryViewModel.kt}}
+\doxysubsubsection{\texorpdfstring{constructor()}{constructor()}}
+{\footnotesize\ttfamily \label{LibraryViewModel_8kt_ab05f89f3ab0ae176f35f8ada00cef4c0} 
+\mbox{\hyperlink{AlbumsScreenViewModel_8kt_a8adddc108920ac5af8d78cf1ae78c4e8}{Hilt\+View\+Model}} class Library\+View\+Model Inject constructor (\begin{DoxyParamCaption}\item[{private val picker\+:\+Music\+File\+Loader}]{}{, }\item[{private val database\+Manager\+:\+Database\+Manager}]{}{, }\item[{private val tag\+Extractor\+:\+Tag\+Extractor}]{}{}\end{DoxyParamCaption})}
+
+
+
+Viewmodel presenting the starting, author screen. 
+
+Also handles user interaction with the file picker All authors in the database. Used for displaying author tiles
+
+Gets a list of songs in a given album
+
+
+\begin{DoxyParams}{Parameters}
+{\em album\+Id} & Id of the album \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Flow of a list of {\ttfamily Song}
+\end{DoxyReturn}
+Initialize the flow used by the file picker
+
+\begin{DoxySeeAlso}{See also}
+Music\+File\+Loader.\+Prepare\+File\+Picker
+\end{DoxySeeAlso}
+Launch the file picker

@@ -1,0 +1,5 @@
+PWD /home/mattys/skrypty-i-syfy/studia/rok2/android/Raptor2/docs/latex
+INPUT /usr/share/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1FragmentC_1_1Builder.tex
+OUTPUT interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1FragmentC_1_1Builder.log

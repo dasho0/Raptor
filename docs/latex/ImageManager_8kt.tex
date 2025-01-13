@@ -1,0 +1,44 @@
+\doxysection{Image\+Manager.\+kt File Reference}
+\hypertarget{ImageManager_8kt}{}\label{ImageManager_8kt}\index{ImageManager.kt@{ImageManager.kt}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+class Image\+Manager Inject \mbox{\hyperlink{ImageManager_8kt_a84598ac79b5adffbe4688a964a2fbc9b}{constructor}} (@Application\+Context private val context\+:\+Context)
+\begin{DoxyCompactList}\small\item\em Handles the extraction of album images from app storage and provides images from app storage to the rest of the program. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{ImageManager_8kt_a84598ac79b5adffbe4688a964a2fbc9b}\index{ImageManager.kt@{ImageManager.kt}!constructor@{constructor}}
+\index{constructor@{constructor}!ImageManager.kt@{ImageManager.kt}}
+\doxysubsubsection{\texorpdfstring{constructor()}{constructor()}}
+{\footnotesize\ttfamily \label{ImageManager_8kt_a84598ac79b5adffbe4688a964a2fbc9b} 
+class Image\+Manager Inject constructor (\begin{DoxyParamCaption}\item[{@Application\+Context private val context\+:\+Context}]{}{}\end{DoxyParamCaption})}
+
+
+
+Handles the extraction of album images from app storage and provides images from app storage to the rest of the program. 
+
+Extracts the image directly from some audio file and copies it into app storage
+
+
+\begin{DoxyParams}{Parameters}
+{\em uri} & Image URI \\
+\hline
+{\em artist\+Names} & List of names of the composers of the file \\
+\hline
+{\em album\+Name} & Name of the album of the file\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+URI of the file created in app storage or {\ttfamily null}
+\end{DoxyReturn}
+Retrieves a image bitmap in local storage
+
+
+\begin{DoxyParams}{Parameters}
+{\em uri} & URI of the image file from local storage \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Image\+Bitmap from storage or blank bitmap
+\end{DoxyReturn}

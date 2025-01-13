@@ -1,0 +1,11 @@
+# Fdb version 4
+["pdflatex"] 1736778542.28897 "classhilt__aggregated__deps_1_1__com__example__raptor__MainActivity__GeneratedInjector.tex" "classhilt__aggregated__deps_1_1__com__example__raptor__MainActivity__GeneratedInjector.pdf" "classhilt__aggregated__deps_1_1__com__example__raptor__MainActivity__GeneratedInjector" 1736778542.35298 2
+  "/usr/share/texmf-dist/web2c/texmf.cnf" 1736268207 41588 b43d3e860a4f94167ee1e725ff526a72 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1736343341 10437523 c2e1d640569b94b6b8bd6805b3594dc3 ""
+  "classhilt__aggregated__deps_1_1__com__example__raptor__MainActivity__GeneratedInjector.aux" 1736778542.28795 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "classhilt__aggregated__deps_1_1__com__example__raptor__MainActivity__GeneratedInjector.tex" 1736774723.50874 733 2da335915118500b9dbdb9b30e50bf2b ""
+  (generated)
+  "classhilt__aggregated__deps_1_1__com__example__raptor__MainActivity__GeneratedInjector.aux"
+  "classhilt__aggregated__deps_1_1__com__example__raptor__MainActivity__GeneratedInjector.log"
+  "classhilt__aggregated__deps_1_1__com__example__raptor__MainActivity__GeneratedInjector.pdf"
+  (rewritten before read)

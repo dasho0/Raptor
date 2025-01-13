@@ -1,0 +1,5 @@
+PWD /home/mattys/skrypty-i-syfy/studia/rok2/android/Raptor2/docs/latex
+INPUT /usr/share/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT dir_5e7c7a4297199155130ed4eee4b46d03.tex
+OUTPUT dir_5e7c7a4297199155130ed4eee4b46d03.log

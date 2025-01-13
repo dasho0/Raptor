@@ -1,0 +1,11 @@
+# Fdb version 4
+["pdflatex"] 1736778543.1643 "debug_2com_2example_2raptor_2Raptor__ComponentTreeDeps_8java.tex" "debug_2com_2example_2raptor_2Raptor__ComponentTreeDeps_8java.pdf" "debug_2com_2example_2raptor_2Raptor__ComponentTreeDeps_8java" 1736778543.22794 2
+  "/usr/share/texmf-dist/web2c/texmf.cnf" 1736268207 41588 b43d3e860a4f94167ee1e725ff526a72 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1736343341 10437523 c2e1d640569b94b6b8bd6805b3594dc3 ""
+  "debug_2com_2example_2raptor_2Raptor__ComponentTreeDeps_8java.aux" 1736778543.16295 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "debug_2com_2example_2raptor_2Raptor__ComponentTreeDeps_8java.tex" 1736774722.10973 9663 a87da9bd2c547967ade4cadec7b98d74 ""
+  (generated)
+  "debug_2com_2example_2raptor_2Raptor__ComponentTreeDeps_8java.aux"
+  "debug_2com_2example_2raptor_2Raptor__ComponentTreeDeps_8java.log"
+  "debug_2com_2example_2raptor_2Raptor__ComponentTreeDeps_8java.pdf"
+  (rewritten before read)

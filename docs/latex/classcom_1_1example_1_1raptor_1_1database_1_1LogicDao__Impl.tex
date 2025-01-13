@@ -1,0 +1,532 @@
+\doxysection{com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl Class Reference}
+\hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl}{}\label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+Inheritance diagram for com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.025641cm]{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa}{Logic\+Dao\+\_\+\+Impl}} (@Non\+Null final Room\+Database \+\_\+\+\_\+db)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4}{insert\+Song}} (final Song song)
+\item 
+long \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8}{insert\+Album}} (final Album album)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20}{insert\+Author}} (final Author author)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8}{insert\+Album\+Author\+Cross\+Ref}} (final Album\+Author\+Cross\+Ref album\+Author\+Cross\+Ref)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5}{clear\+Key\+Index}} ()
+\item 
+List$<$ Author $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39}{get\+All\+Authors}} ()
+\item 
+Album\+With\+Authors \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527}{get\+Album\+With\+Authors}} (final long album\+Id)
+\item 
+Author\+With\+Albums \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5}{get\+Author\+With\+Albums}} (final String name)
+\item 
+Author \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10}{get\+Author}} (final String name)
+\item 
+List$<$ Album $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298}{get\+Albums\+By\+Title}} (final String title)
+\item 
+Album \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2}{get\+Album\+By\+Title}} (final String title)
+\item 
+Album\+Author\+Cross\+Ref \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21}{get\+Cross\+Ref\+By\+Album\+And\+Author}} (final long album\+Id, final String author\+Name)
+\item 
+Song \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a}{get\+Songfrom\+Id}} (final long song\+Id)
+\item 
+Album\+With\+Songs \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c}{get\+Album\+With\+Songs}} (final Long album\+Id)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa}{Logic\+Dao\+\_\+\+Impl}} (@Non\+Null final Room\+Database \+\_\+\+\_\+db)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4}{insert\+Song}} (final Song song)
+\item 
+long \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8}{insert\+Album}} (final Album album)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20}{insert\+Author}} (final Author author)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8}{insert\+Album\+Author\+Cross\+Ref}} (final Album\+Author\+Cross\+Ref album\+Author\+Cross\+Ref)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5}{clear\+Key\+Index}} ()
+\item 
+List$<$ Author $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39}{get\+All\+Authors}} ()
+\item 
+Album\+With\+Authors \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527}{get\+Album\+With\+Authors}} (final long album\+Id)
+\item 
+Author\+With\+Albums \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5}{get\+Author\+With\+Albums}} (final String name)
+\item 
+Author \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10}{get\+Author}} (final String name)
+\item 
+List$<$ Album $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298}{get\+Albums\+By\+Title}} (final String title)
+\item 
+Album \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2}{get\+Album\+By\+Title}} (final String title)
+\item 
+Album\+Author\+Cross\+Ref \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21}{get\+Cross\+Ref\+By\+Album\+And\+Author}} (final long album\+Id, final String author\+Name)
+\item 
+Song \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a}{get\+Songfrom\+Id}} (final long song\+Id)
+\item 
+Album\+With\+Songs \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c}{get\+Album\+With\+Songs}} (final Long album\+Id)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa}{Logic\+Dao\+\_\+\+Impl}} (@Non\+Null final Room\+Database \+\_\+\+\_\+db)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4}{insert\+Song}} (final Song song)
+\item 
+long \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8}{insert\+Album}} (final Album album)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20}{insert\+Author}} (final Author author)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8}{insert\+Album\+Author\+Cross\+Ref}} (final Album\+Author\+Cross\+Ref album\+Author\+Cross\+Ref)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5}{clear\+Key\+Index}} ()
+\item 
+List$<$ Author $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39}{get\+All\+Authors}} ()
+\item 
+Album\+With\+Authors \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527}{get\+Album\+With\+Authors}} (final long album\+Id)
+\item 
+Author\+With\+Albums \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5}{get\+Author\+With\+Albums}} (final String name)
+\item 
+Author \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10}{get\+Author}} (final String name)
+\item 
+List$<$ Album $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298}{get\+Albums\+By\+Title}} (final String title)
+\item 
+Album \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2}{get\+Album\+By\+Title}} (final String title)
+\item 
+Album\+Author\+Cross\+Ref \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21}{get\+Cross\+Ref\+By\+Album\+And\+Author}} (final long album\+Id, final String author\+Name)
+\item 
+Song \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a}{get\+Songfrom\+Id}} (final long song\+Id)
+\item 
+Album\+With\+Songs \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c}{get\+Album\+With\+Songs}} (final Long album\+Id)
+\item 
+\mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa}{Logic\+Dao\+\_\+\+Impl}} (@Non\+Null final Room\+Database \+\_\+\+\_\+db)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4}{insert\+Song}} (final Song song)
+\item 
+long \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8}{insert\+Album}} (final Album album)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20}{insert\+Author}} (final Author author)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8}{insert\+Album\+Author\+Cross\+Ref}} (final Album\+Author\+Cross\+Ref album\+Author\+Cross\+Ref)
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5}{clear\+Key\+Index}} ()
+\item 
+List$<$ Author $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39}{get\+All\+Authors}} ()
+\item 
+Album\+With\+Authors \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527}{get\+Album\+With\+Authors}} (final long album\+Id)
+\item 
+Author\+With\+Albums \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5}{get\+Author\+With\+Albums}} (final String name)
+\item 
+Author \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10}{get\+Author}} (final String name)
+\item 
+List$<$ Album $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298}{get\+Albums\+By\+Title}} (final String title)
+\item 
+Album \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2}{get\+Album\+By\+Title}} (final String title)
+\item 
+Album\+Author\+Cross\+Ref \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21}{get\+Cross\+Ref\+By\+Album\+And\+Author}} (final long album\+Id, final String author\+Name)
+\item 
+Song \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a}{get\+Songfrom\+Id}} (final long song\+Id)
+\item 
+Album\+With\+Songs \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c}{get\+Album\+With\+Songs}} (final Long album\+Id)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static List$<$ Class$<$?$>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8}{get\+Required\+Converters}} ()
+\item 
+static List$<$ Class$<$?$>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8}{get\+Required\+Converters}} ()
+\item 
+static List$<$ Class$<$?$>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8}{get\+Required\+Converters}} ()
+\item 
+static List$<$ Class$<$?$>$ $>$ \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8}{get\+Required\+Converters}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!LogicDao\_Impl@{LogicDao\_Impl}}
+\index{LogicDao\_Impl@{LogicDao\_Impl}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{LogicDao\_Impl()}{LogicDao\_Impl()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa} 
+com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+Logic\+Dao\+\_\+\+Impl (\begin{DoxyParamCaption}\item[{@Non\+Null final Room\+Database}]{\+\_\+\+\_\+db}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!LogicDao\_Impl@{LogicDao\_Impl}}
+\index{LogicDao\_Impl@{LogicDao\_Impl}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{LogicDao\_Impl()}{LogicDao\_Impl()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa} 
+com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+Logic\+Dao\+\_\+\+Impl (\begin{DoxyParamCaption}\item[{@Non\+Null final Room\+Database}]{\+\_\+\+\_\+db}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!LogicDao\_Impl@{LogicDao\_Impl}}
+\index{LogicDao\_Impl@{LogicDao\_Impl}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{LogicDao\_Impl()}{LogicDao\_Impl()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa} 
+com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+Logic\+Dao\+\_\+\+Impl (\begin{DoxyParamCaption}\item[{@Non\+Null final Room\+Database}]{\+\_\+\+\_\+db}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!LogicDao\_Impl@{LogicDao\_Impl}}
+\index{LogicDao\_Impl@{LogicDao\_Impl}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{LogicDao\_Impl()}{LogicDao\_Impl()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a18175a811316704e3456f24b391cf7fa} 
+com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+Logic\+Dao\+\_\+\+Impl (\begin{DoxyParamCaption}\item[{@Non\+Null final Room\+Database}]{\+\_\+\+\_\+db}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!clearKeyIndex@{clearKeyIndex}}
+\index{clearKeyIndex@{clearKeyIndex}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{clearKeyIndex()}{clearKeyIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+clear\+Key\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!clearKeyIndex@{clearKeyIndex}}
+\index{clearKeyIndex@{clearKeyIndex}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{clearKeyIndex()}{clearKeyIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+clear\+Key\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!clearKeyIndex@{clearKeyIndex}}
+\index{clearKeyIndex@{clearKeyIndex}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{clearKeyIndex()}{clearKeyIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+clear\+Key\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!clearKeyIndex@{clearKeyIndex}}
+\index{clearKeyIndex@{clearKeyIndex}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{clearKeyIndex()}{clearKeyIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_acf2537a4be54e9ce007f526bb6a6a0d5} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+clear\+Key\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumByTitle@{getAlbumByTitle}}
+\index{getAlbumByTitle@{getAlbumByTitle}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumByTitle()}{getAlbumByTitle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2} 
+Album com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+By\+Title (\begin{DoxyParamCaption}\item[{final String}]{title}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumByTitle@{getAlbumByTitle}}
+\index{getAlbumByTitle@{getAlbumByTitle}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumByTitle()}{getAlbumByTitle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2} 
+Album com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+By\+Title (\begin{DoxyParamCaption}\item[{final String}]{title}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumByTitle@{getAlbumByTitle}}
+\index{getAlbumByTitle@{getAlbumByTitle}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumByTitle()}{getAlbumByTitle()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2} 
+Album com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+By\+Title (\begin{DoxyParamCaption}\item[{final String}]{title}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumByTitle@{getAlbumByTitle}}
+\index{getAlbumByTitle@{getAlbumByTitle}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumByTitle()}{getAlbumByTitle()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a07d143bc18325fdab0323f7ac22ff2c2} 
+Album com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+By\+Title (\begin{DoxyParamCaption}\item[{final String}]{title}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumsByTitle@{getAlbumsByTitle}}
+\index{getAlbumsByTitle@{getAlbumsByTitle}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumsByTitle()}{getAlbumsByTitle()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298} 
+List$<$ Album $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Albums\+By\+Title (\begin{DoxyParamCaption}\item[{final String}]{title}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumsByTitle@{getAlbumsByTitle}}
+\index{getAlbumsByTitle@{getAlbumsByTitle}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumsByTitle()}{getAlbumsByTitle()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298} 
+List$<$ Album $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Albums\+By\+Title (\begin{DoxyParamCaption}\item[{final String}]{title}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumsByTitle@{getAlbumsByTitle}}
+\index{getAlbumsByTitle@{getAlbumsByTitle}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumsByTitle()}{getAlbumsByTitle()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298} 
+List$<$ Album $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Albums\+By\+Title (\begin{DoxyParamCaption}\item[{final String}]{title}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumsByTitle@{getAlbumsByTitle}}
+\index{getAlbumsByTitle@{getAlbumsByTitle}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumsByTitle()}{getAlbumsByTitle()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa300bb73edf6c07dc0d86564cd6f5298} 
+List$<$ Album $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Albums\+By\+Title (\begin{DoxyParamCaption}\item[{final String}]{title}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumWithAuthors@{getAlbumWithAuthors}}
+\index{getAlbumWithAuthors@{getAlbumWithAuthors}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumWithAuthors()}{getAlbumWithAuthors()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527} 
+Album\+With\+Authors com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+With\+Authors (\begin{DoxyParamCaption}\item[{final long}]{album\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumWithAuthors@{getAlbumWithAuthors}}
+\index{getAlbumWithAuthors@{getAlbumWithAuthors}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumWithAuthors()}{getAlbumWithAuthors()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527} 
+Album\+With\+Authors com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+With\+Authors (\begin{DoxyParamCaption}\item[{final long}]{album\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumWithAuthors@{getAlbumWithAuthors}}
+\index{getAlbumWithAuthors@{getAlbumWithAuthors}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumWithAuthors()}{getAlbumWithAuthors()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527} 
+Album\+With\+Authors com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+With\+Authors (\begin{DoxyParamCaption}\item[{final long}]{album\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumWithAuthors@{getAlbumWithAuthors}}
+\index{getAlbumWithAuthors@{getAlbumWithAuthors}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumWithAuthors()}{getAlbumWithAuthors()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1a5ae042c8b48ef51891af2d5d499527} 
+Album\+With\+Authors com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+With\+Authors (\begin{DoxyParamCaption}\item[{final long}]{album\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumWithSongs@{getAlbumWithSongs}}
+\index{getAlbumWithSongs@{getAlbumWithSongs}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumWithSongs()}{getAlbumWithSongs()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c} 
+Album\+With\+Songs com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+With\+Songs (\begin{DoxyParamCaption}\item[{final Long}]{album\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumWithSongs@{getAlbumWithSongs}}
+\index{getAlbumWithSongs@{getAlbumWithSongs}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumWithSongs()}{getAlbumWithSongs()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c} 
+Album\+With\+Songs com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+With\+Songs (\begin{DoxyParamCaption}\item[{final Long}]{album\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumWithSongs@{getAlbumWithSongs}}
+\index{getAlbumWithSongs@{getAlbumWithSongs}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumWithSongs()}{getAlbumWithSongs()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c} 
+Album\+With\+Songs com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+With\+Songs (\begin{DoxyParamCaption}\item[{final Long}]{album\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAlbumWithSongs@{getAlbumWithSongs}}
+\index{getAlbumWithSongs@{getAlbumWithSongs}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAlbumWithSongs()}{getAlbumWithSongs()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a857c3ca361f9b4434bb92adcb6a1584c} 
+Album\+With\+Songs com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Album\+With\+Songs (\begin{DoxyParamCaption}\item[{final Long}]{album\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAllAuthors@{getAllAuthors}}
+\index{getAllAuthors@{getAllAuthors}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAllAuthors()}{getAllAuthors()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39} 
+List$<$ Author $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+All\+Authors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAllAuthors@{getAllAuthors}}
+\index{getAllAuthors@{getAllAuthors}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAllAuthors()}{getAllAuthors()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39} 
+List$<$ Author $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+All\+Authors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAllAuthors@{getAllAuthors}}
+\index{getAllAuthors@{getAllAuthors}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAllAuthors()}{getAllAuthors()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39} 
+List$<$ Author $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+All\+Authors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAllAuthors@{getAllAuthors}}
+\index{getAllAuthors@{getAllAuthors}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAllAuthors()}{getAllAuthors()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a930595e7cb6ab94706d57eb1144cbc39} 
+List$<$ Author $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+All\+Authors (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAuthor@{getAuthor}}
+\index{getAuthor@{getAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAuthor()}{getAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10} 
+Author com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Author (\begin{DoxyParamCaption}\item[{final String}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAuthor@{getAuthor}}
+\index{getAuthor@{getAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAuthor()}{getAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10} 
+Author com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Author (\begin{DoxyParamCaption}\item[{final String}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAuthor@{getAuthor}}
+\index{getAuthor@{getAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAuthor()}{getAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10} 
+Author com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Author (\begin{DoxyParamCaption}\item[{final String}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAuthor@{getAuthor}}
+\index{getAuthor@{getAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAuthor()}{getAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a7f23075b118a002222ed8f1b4fcd8b10} 
+Author com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Author (\begin{DoxyParamCaption}\item[{final String}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAuthorWithAlbums@{getAuthorWithAlbums}}
+\index{getAuthorWithAlbums@{getAuthorWithAlbums}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAuthorWithAlbums()}{getAuthorWithAlbums()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5} 
+Author\+With\+Albums com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Author\+With\+Albums (\begin{DoxyParamCaption}\item[{final String}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAuthorWithAlbums@{getAuthorWithAlbums}}
+\index{getAuthorWithAlbums@{getAuthorWithAlbums}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAuthorWithAlbums()}{getAuthorWithAlbums()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5} 
+Author\+With\+Albums com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Author\+With\+Albums (\begin{DoxyParamCaption}\item[{final String}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAuthorWithAlbums@{getAuthorWithAlbums}}
+\index{getAuthorWithAlbums@{getAuthorWithAlbums}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAuthorWithAlbums()}{getAuthorWithAlbums()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5} 
+Author\+With\+Albums com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Author\+With\+Albums (\begin{DoxyParamCaption}\item[{final String}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getAuthorWithAlbums@{getAuthorWithAlbums}}
+\index{getAuthorWithAlbums@{getAuthorWithAlbums}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getAuthorWithAlbums()}{getAuthorWithAlbums()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_afe0c0d164db76d163295314fbd1bd8d5} 
+Author\+With\+Albums com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Author\+With\+Albums (\begin{DoxyParamCaption}\item[{final String}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getCrossRefByAlbumAndAuthor@{getCrossRefByAlbumAndAuthor}}
+\index{getCrossRefByAlbumAndAuthor@{getCrossRefByAlbumAndAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getCrossRefByAlbumAndAuthor()}{getCrossRefByAlbumAndAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21} 
+Album\+Author\+Cross\+Ref com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Cross\+Ref\+By\+Album\+And\+Author (\begin{DoxyParamCaption}\item[{final long}]{album\+Id}{, }\item[{final String}]{author\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getCrossRefByAlbumAndAuthor@{getCrossRefByAlbumAndAuthor}}
+\index{getCrossRefByAlbumAndAuthor@{getCrossRefByAlbumAndAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getCrossRefByAlbumAndAuthor()}{getCrossRefByAlbumAndAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21} 
+Album\+Author\+Cross\+Ref com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Cross\+Ref\+By\+Album\+And\+Author (\begin{DoxyParamCaption}\item[{final long}]{album\+Id}{, }\item[{final String}]{author\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getCrossRefByAlbumAndAuthor@{getCrossRefByAlbumAndAuthor}}
+\index{getCrossRefByAlbumAndAuthor@{getCrossRefByAlbumAndAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getCrossRefByAlbumAndAuthor()}{getCrossRefByAlbumAndAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21} 
+Album\+Author\+Cross\+Ref com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Cross\+Ref\+By\+Album\+And\+Author (\begin{DoxyParamCaption}\item[{final long}]{album\+Id}{, }\item[{final String}]{author\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getCrossRefByAlbumAndAuthor@{getCrossRefByAlbumAndAuthor}}
+\index{getCrossRefByAlbumAndAuthor@{getCrossRefByAlbumAndAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getCrossRefByAlbumAndAuthor()}{getCrossRefByAlbumAndAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_abe50d3f7ff2a460ad7c5ec4314155f21} 
+Album\+Author\+Cross\+Ref com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Cross\+Ref\+By\+Album\+And\+Author (\begin{DoxyParamCaption}\item[{final long}]{album\+Id}{, }\item[{final String}]{author\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getRequiredConverters@{getRequiredConverters}}
+\index{getRequiredConverters@{getRequiredConverters}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getRequiredConverters()}{getRequiredConverters()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8} 
+static List$<$ Class$<$?$>$ $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Required\+Converters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getRequiredConverters@{getRequiredConverters}}
+\index{getRequiredConverters@{getRequiredConverters}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getRequiredConverters()}{getRequiredConverters()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8} 
+static List$<$ Class$<$?$>$ $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Required\+Converters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getRequiredConverters@{getRequiredConverters}}
+\index{getRequiredConverters@{getRequiredConverters}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getRequiredConverters()}{getRequiredConverters()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8} 
+static List$<$ Class$<$?$>$ $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Required\+Converters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getRequiredConverters@{getRequiredConverters}}
+\index{getRequiredConverters@{getRequiredConverters}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getRequiredConverters()}{getRequiredConverters()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aca2735c8637009e846f3adce11174ec8} 
+static List$<$ Class$<$?$>$ $>$ com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Required\+Converters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getSongfromId@{getSongfromId}}
+\index{getSongfromId@{getSongfromId}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getSongfromId()}{getSongfromId()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a} 
+Song com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Songfrom\+Id (\begin{DoxyParamCaption}\item[{final long}]{song\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getSongfromId@{getSongfromId}}
+\index{getSongfromId@{getSongfromId}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getSongfromId()}{getSongfromId()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a} 
+Song com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Songfrom\+Id (\begin{DoxyParamCaption}\item[{final long}]{song\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getSongfromId@{getSongfromId}}
+\index{getSongfromId@{getSongfromId}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getSongfromId()}{getSongfromId()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a} 
+Song com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Songfrom\+Id (\begin{DoxyParamCaption}\item[{final long}]{song\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!getSongfromId@{getSongfromId}}
+\index{getSongfromId@{getSongfromId}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{getSongfromId()}{getSongfromId()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a5283c9d8cebcdd3d01b9bdd0da846d4a} 
+Song com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+get\+Songfrom\+Id (\begin{DoxyParamCaption}\item[{final long}]{song\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAlbum@{insertAlbum}}
+\index{insertAlbum@{insertAlbum}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAlbum()}{insertAlbum()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8} 
+long com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Album (\begin{DoxyParamCaption}\item[{final Album}]{album}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAlbum@{insertAlbum}}
+\index{insertAlbum@{insertAlbum}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAlbum()}{insertAlbum()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8} 
+long com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Album (\begin{DoxyParamCaption}\item[{final Album}]{album}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAlbum@{insertAlbum}}
+\index{insertAlbum@{insertAlbum}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAlbum()}{insertAlbum()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8} 
+long com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Album (\begin{DoxyParamCaption}\item[{final Album}]{album}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAlbum@{insertAlbum}}
+\index{insertAlbum@{insertAlbum}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAlbum()}{insertAlbum()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_aa9ec0959542a0cbd00dd3a96f3cb49e8} 
+long com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Album (\begin{DoxyParamCaption}\item[{final Album}]{album}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAlbumAuthorCrossRef@{insertAlbumAuthorCrossRef}}
+\index{insertAlbumAuthorCrossRef@{insertAlbumAuthorCrossRef}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAlbumAuthorCrossRef()}{insertAlbumAuthorCrossRef()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Album\+Author\+Cross\+Ref (\begin{DoxyParamCaption}\item[{final Album\+Author\+Cross\+Ref}]{album\+Author\+Cross\+Ref}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAlbumAuthorCrossRef@{insertAlbumAuthorCrossRef}}
+\index{insertAlbumAuthorCrossRef@{insertAlbumAuthorCrossRef}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAlbumAuthorCrossRef()}{insertAlbumAuthorCrossRef()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Album\+Author\+Cross\+Ref (\begin{DoxyParamCaption}\item[{final Album\+Author\+Cross\+Ref}]{album\+Author\+Cross\+Ref}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAlbumAuthorCrossRef@{insertAlbumAuthorCrossRef}}
+\index{insertAlbumAuthorCrossRef@{insertAlbumAuthorCrossRef}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAlbumAuthorCrossRef()}{insertAlbumAuthorCrossRef()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Album\+Author\+Cross\+Ref (\begin{DoxyParamCaption}\item[{final Album\+Author\+Cross\+Ref}]{album\+Author\+Cross\+Ref}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAlbumAuthorCrossRef@{insertAlbumAuthorCrossRef}}
+\index{insertAlbumAuthorCrossRef@{insertAlbumAuthorCrossRef}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAlbumAuthorCrossRef()}{insertAlbumAuthorCrossRef()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a1b5b813bae753e92e24c7bfb22a525a8} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Album\+Author\+Cross\+Ref (\begin{DoxyParamCaption}\item[{final Album\+Author\+Cross\+Ref}]{album\+Author\+Cross\+Ref}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAuthor@{insertAuthor}}
+\index{insertAuthor@{insertAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAuthor()}{insertAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Author (\begin{DoxyParamCaption}\item[{final Author}]{author}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAuthor@{insertAuthor}}
+\index{insertAuthor@{insertAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAuthor()}{insertAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Author (\begin{DoxyParamCaption}\item[{final Author}]{author}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAuthor@{insertAuthor}}
+\index{insertAuthor@{insertAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAuthor()}{insertAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Author (\begin{DoxyParamCaption}\item[{final Author}]{author}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertAuthor@{insertAuthor}}
+\index{insertAuthor@{insertAuthor}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertAuthor()}{insertAuthor()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a6700681014e34a74dd1eb5c39fa02c20} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Author (\begin{DoxyParamCaption}\item[{final Author}]{author}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertSong@{insertSong}}
+\index{insertSong@{insertSong}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertSong()}{insertSong()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Song (\begin{DoxyParamCaption}\item[{final Song}]{song}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertSong@{insertSong}}
+\index{insertSong@{insertSong}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertSong()}{insertSong()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Song (\begin{DoxyParamCaption}\item[{final Song}]{song}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertSong@{insertSong}}
+\index{insertSong@{insertSong}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertSong()}{insertSong()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Song (\begin{DoxyParamCaption}\item[{final Song}]{song}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4}\index{com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}!insertSong@{insertSong}}
+\index{insertSong@{insertSong}!com.example.raptor.database.LogicDao\_Impl@{com.example.raptor.database.LogicDao\_Impl}}
+\doxysubsubsection{\texorpdfstring{insertSong()}{insertSong()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classcom_1_1example_1_1raptor_1_1database_1_1LogicDao__Impl_a4c88b75a5ee23fdae988257a667b70e4} 
+void com.\+example.\+raptor.\+database.\+Logic\+Dao\+\_\+\+Impl.\+insert\+Song (\begin{DoxyParamCaption}\item[{final Song}]{song}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+

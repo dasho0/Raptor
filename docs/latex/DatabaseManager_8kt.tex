@@ -1,0 +1,86 @@
+\doxysection{Database\+Manager.\+kt File Reference}
+\hypertarget{DatabaseManager_8kt}{}\label{DatabaseManager_8kt}\index{DatabaseManager.kt@{DatabaseManager.kt}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Singleton class Database\+Manager Inject \mbox{\hyperlink{DatabaseManager_8kt_ad854b3e4f09c8e2bf5e9caa9c15ad80f}{constructor}} ( @Application\+Context val context\+:\+Context)
+\begin{DoxyCompactList}\small\item\em This class serves as an intermediary between the application database and the rest of the application. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{DatabaseManager_8kt_ad854b3e4f09c8e2bf5e9caa9c15ad80f}\index{DatabaseManager.kt@{DatabaseManager.kt}!constructor@{constructor}}
+\index{constructor@{constructor}!DatabaseManager.kt@{DatabaseManager.kt}}
+\doxysubsubsection{\texorpdfstring{constructor()}{constructor()}}
+{\footnotesize\ttfamily \label{DatabaseManager_8kt_ad854b3e4f09c8e2bf5e9caa9c15ad80f} 
+Singleton class Database\+Manager Inject constructor (\begin{DoxyParamCaption}\item[{ @Application\+Context val context\+:\+Context}]{}{}\end{DoxyParamCaption})}
+
+
+
+This class serves as an intermediary between the application database and the rest of the application. 
+
+This class is a singleton Collects a flow of all authors from the database.
+
+\begin{DoxyReturn}{Returns}
+A Flow emitting a list of Author objects.
+\end{DoxyReturn}
+Collects a flow of albums by a specific author from the database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em author\+Name} & The name of the author whose albums are to be collected. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Flow emitting a list of Album objects.
+\end{DoxyReturn}
+Collects a flow of songs by a specific album from the database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em album\+Id} & The ID of the album whose songs are to be collected. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Flow emitting a list of Song objects.
+\end{DoxyReturn}
+Collects a flow of a specific song from the database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em song\+Id} & The ID of the song to be collected. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Flow emitting a Song object.
+\end{DoxyReturn}
+Retrieves a specific song from the database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em song\+Id} & The ID of the song to be retrieved. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Song object.
+\end{DoxyReturn}
+Collects a flow of authors of a specific song from the database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em song} & The Song object whose authors are to be collected. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Flow emitting a list of Author objects or null.
+\end{DoxyReturn}
+Collects a flow of a specific album from the database.
+
+
+\begin{DoxyParams}{Parameters}
+{\em album\+Id} & The ID of the album to be collected. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A Flow emitting an Album object.
+\end{DoxyReturn}
+Populate the database with a list of {\ttfamily Song\+Info}

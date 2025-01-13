@@ -1,0 +1,161 @@
+\begin{theindex}
+
+  \item {Album.kt}, \hyperpage{13}
+  \item {AlbumAuthorCrossRef.kt}, \hyperpage{13}
+  \item {AlbumsScreen}
+    \subitem {MainActivity.kt}, \hyperpage{15}
+  \item {AlbumsScreenViewModel.kt}, \hyperpage{20}
+    \subitem {HiltViewModel}, \hyperpage{20}
+  \item {AlbumTileViewModel.kt}, \hyperpage{20}
+  \item {AlbumWithAuthors.kt}, \hyperpage{14}
+  \item {AlbumWithSongs.kt}, \hyperpage{14}
+  \item {AudioPlayer.kt}, \hyperpage{9}
+    \subitem {constructor}, \hyperpage{10}
+  \item {AuthenticationScreen}
+    \subitem {MainActivity.kt}, \hyperpage{15}
+  \item {Author.kt}, \hyperpage{13}
+  \item {AuthorTile}
+    \subitem {MainActivity.kt}, \hyperpage{16}
+  \item {AuthorWithAlbums.kt}, \hyperpage{14}
+
+  \indexspace
+
+  \item {BiometricAuthenticationStatus}
+    \subitem {BiometricAuthenticator.kt}, \hyperpage{11}
+  \item {BiometricAuthenticator}
+    \subitem {BiometricAuthenticator.kt}, \hyperpage{11}
+  \item {BiometricAuthenticator.kt}, \hyperpage{11}
+    \subitem {BiometricAuthenticationStatus}, \hyperpage{11}
+    \subitem {BiometricAuthenticator}, \hyperpage{11}
+
+  \indexspace
+
+  \item {Color.kt}, \hyperpage{20}
+  \item {constructor}
+    \subitem {AudioPlayer.kt}, \hyperpage{10}
+    \subitem {DatabaseManager.kt}, \hyperpage{12}
+    \subitem {ImageManager.kt}, \hyperpage{14}
+    \subitem {LibraryViewModel.kt}, \hyperpage{20}
+    \subitem {MusicFileLoader.kt}, \hyperpage{17}
+    \subitem {PlayerViewModel.kt}, \hyperpage{21}
+    \subitem {TagExtractor.kt}, \hyperpage{19}
+  \item {CurrentSongInfo}
+    \subitem {SongPlayUI.kt}, \hyperpage{18}
+
+  \indexspace
+
+  \item {Database}
+    \subitem {LibraryDb.kt}, \hyperpage{14}
+  \item {DatabaseManager.kt}, \hyperpage{12}
+    \subitem {constructor}, \hyperpage{12}
+
+  \indexspace
+
+  \item {ExampleInstrumentedTest.kt}, \hyperpage{9}
+    \subitem {RunWith}, \hyperpage{9}
+  \item {ExampleUnitTest}, \hyperpage{7}
+  \item {ExampleUnitTest.kt}, \hyperpage{22}
+  \item {extractWaveformDataFromUri}
+    \subitem {WaveFormExtractor.kt}, \hyperpage{22}
+
+  \indexspace
+
+  \item {HiltViewModel}
+    \subitem {AlbumsScreenViewModel.kt}, \hyperpage{20}
+
+  \indexspace
+
+  \item {ImageManager.kt}, \hyperpage{14}
+    \subitem {constructor}, \hyperpage{14}
+  \item {isPortrait}
+    \subitem {MainActivity.kt}, \hyperpage{16}
+
+  \indexspace
+
+  \item {LandscapeView}
+    \subitem {MainActivity.kt}, \hyperpage{16}
+  \item {LibraryDb.kt}, \hyperpage{13}
+    \subitem {Database}, \hyperpage{14}
+  \item {LibraryViewModel.kt}, \hyperpage{20}
+    \subitem {constructor}, \hyperpage{20}
+  \item {LogicDao}, \hyperpage{7}
+  \item {LogicDao.kt}, \hyperpage{14}
+
+  \indexspace
+
+  \item {MainActivity.kt}, \hyperpage{15}
+    \subitem {AlbumsScreen}, \hyperpage{15}
+    \subitem {AuthenticationScreen}, \hyperpage{15}
+    \subitem {AuthorTile}, \hyperpage{16}
+    \subitem {isPortrait}, \hyperpage{16}
+    \subitem {LandscapeView}, \hyperpage{16}
+    \subitem {MainScreen}, \hyperpage{16}
+    \subitem {MainScreenContent}, \hyperpage{16}
+    \subitem {PortraitView}, \hyperpage{16}
+    \subitem {SensorEventListener}, \hyperpage{17}
+    \subitem {sensorManager}, \hyperpage{17}
+    \subitem {SongItem}, \hyperpage{16}
+    \subitem {SongsScreen}, \hyperpage{16}
+  \item {MainScreen}
+    \subitem {MainActivity.kt}, \hyperpage{16}
+  \item {MainScreenContent}
+    \subitem {MainActivity.kt}, \hyperpage{16}
+  \item {MediaControls}
+    \subitem {SongPlayUI.kt}, \hyperpage{18}
+  \item {MusicFileLoader.kt}, \hyperpage{17}
+    \subitem {constructor}, \hyperpage{17}
+
+  \indexspace
+
+  \item {PlayerViewModel.kt}, \hyperpage{21}
+    \subitem {constructor}, \hyperpage{21}
+  \item {PortraitView}
+    \subitem {MainActivity.kt}, \hyperpage{16}
+
+  \indexspace
+
+  \item {Raptor}, \hyperpage{7}
+  \item {Raptor.kt}, \hyperpage{18}
+  \item {RunWith}
+    \subitem {ExampleInstrumentedTest.kt}, \hyperpage{9}
+
+  \indexspace
+
+  \item {SensorEventListener}
+    \subitem {MainActivity.kt}, \hyperpage{17}
+  \item {sensorManager}
+    \subitem {MainActivity.kt}, \hyperpage{17}
+  \item {Song.kt}, \hyperpage{13}
+  \item {SongItem}
+    \subitem {MainActivity.kt}, \hyperpage{16}
+  \item {SongPlayUI.kt}, \hyperpage{18}
+    \subitem {CurrentSongInfo}, \hyperpage{18}
+    \subitem {MediaControls}, \hyperpage{18}
+    \subitem {SuppressLint}, \hyperpage{18}
+  \item {SongsScreen}
+    \subitem {MainActivity.kt}, \hyperpage{16}
+  \item {SuppressLint}
+    \subitem {SongPlayUI.kt}, \hyperpage{18}
+
+  \indexspace
+
+  \item {TagExtractor.kt}, \hyperpage{19}
+    \subitem {constructor}, \hyperpage{19}
+  \item {Theme.kt}, \hyperpage{20}
+  \item {Type.kt}, \hyperpage{20}
+
+  \indexspace
+
+  \item {UIDao}, \hyperpage{7}
+  \item {UIDao.kt}, \hyperpage{14}
+
+  \indexspace
+
+  \item {WaveFormExtractor.kt}, \hyperpage{22}
+    \subitem {extractWaveformDataFromUri}, \hyperpage{22}
+  \item {WaveformSeekBar}
+    \subitem {WaveFormSeekBar.kt}, \hyperpage{19}
+  \item {WaveFormSeekBar.kt}, \hyperpage{18}
+    \subitem {WaveformSeekBar}, \hyperpage{19}
+
+\end{theindex}

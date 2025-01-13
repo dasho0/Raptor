@@ -1,0 +1,110 @@
+\doxysection{Main\+Activity.\+kt File Reference}
+\hypertarget{MainActivity_8kt}{}\label{MainActivity_8kt}\index{MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+Composable fun \mbox{\hyperlink{MainActivity_8kt_a0b24a0d20d9ad1b88a492ac36a151345}{Main\+Screen}} (library\+View\+Model\+:\+Library\+View\+Model=hilt\+View\+Model())
+\item 
+Composable fun \mbox{\hyperlink{MainActivity_8kt_a0bda2bc8c49dfc54e4b4ab9a3e5fcb96}{Main\+Screen\+Content}} (nav\+Controller\+:\+Nav\+Host\+Controller, library\+View\+Model\+:\+Library\+View\+Model)
+\item 
+Composable fun \mbox{\hyperlink{MainActivity_8kt_a4fc74b4db458c83779ed6ca69cf10586}{Author\+Tile}} (author\+:\+String, on\+Click\+:() -\/$>$ Unit)
+\item 
+Composable fun \mbox{\hyperlink{MainActivity_8kt_afa15f3c107b30dc496deaae589e643b7}{Albums\+Screen}} (nav\+Controller\+:\+Nav\+Host\+Controller, author\+:\+String,)
+\item 
+Composable fun \mbox{\hyperlink{MainActivity_8kt_a90eb33af17d6fe7524336d0569408241}{Portrait\+View}} (selected\+Album\+:\+Pair$<$ Album, Image\+Bitmap $>$, nav\+Controller\+:\+Nav\+Host\+Controller)
+\item 
+Composable fun \mbox{\hyperlink{MainActivity_8kt_ab758b9631a16afb9c667553b294ff331}{Landscape\+View}} (selected\+Album\+:\+Pair$<$ Album, Image\+Bitmap $>$, nav\+Controller\+:\+Nav\+Host\+Controller)
+\item 
+Composable fun \mbox{\hyperlink{MainActivity_8kt_ab4cec0eb9017bff08225056ca8633c65}{Songs\+Screen}} (nav\+Controller\+:\+Nav\+Host\+Controller, library\+View\+Model\+:\+Library\+View\+Model, album\+Id\+:\+Long?, modifier\+:\+Modifier=Modifier)
+\item 
+Composable fun \mbox{\hyperlink{MainActivity_8kt_a886137eca0837bb0cf725d2164713a36}{Song\+Item}} (song\+:\+Song, nav\+Controller\+:\+Nav\+Host\+Controller)
+\item 
+Composable fun \mbox{\hyperlink{MainActivity_8kt_a4eabb5d7fb982fccf3a85c10e2dc82d1}{is\+Portrait}} ()
+\item 
+Composable fun \mbox{\hyperlink{MainActivity_8kt_adabbefd87b1ccefda7483bda9186f447}{Authentication\+Screen}} (on\+Authenticate\+:() -\/$>$ Unit)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+lateinit var \mbox{\hyperlink{MainActivity_8kt_a7c98a525f8a0107bc87740c2d85c07e4}{sensor\+Manager}}
+\item 
+lateinit var \mbox{\hyperlink{MainActivity_8kt_af1b05ae188ffe5e8df4298a24d019296}{Sensor\+Event\+Listener}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{MainActivity_8kt_afa15f3c107b30dc496deaae589e643b7}\index{MainActivity.kt@{MainActivity.kt}!AlbumsScreen@{AlbumsScreen}}
+\index{AlbumsScreen@{AlbumsScreen}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{AlbumsScreen()}{AlbumsScreen()}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_afa15f3c107b30dc496deaae589e643b7} 
+Composable fun Albums\+Screen (\begin{DoxyParamCaption}\item[{nav\+Controller\+:\+Nav\+Host\+Controller}]{}{, }\item[{author\+:\+String}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MainActivity_8kt_adabbefd87b1ccefda7483bda9186f447}\index{MainActivity.kt@{MainActivity.kt}!AuthenticationScreen@{AuthenticationScreen}}
+\index{AuthenticationScreen@{AuthenticationScreen}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{AuthenticationScreen()}{AuthenticationScreen()}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_adabbefd87b1ccefda7483bda9186f447} 
+Composable fun Authentication\+Screen (\begin{DoxyParamCaption}\item[{on\+Authenticate\+:() -\/$>$}]{Unit}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MainActivity_8kt_a4fc74b4db458c83779ed6ca69cf10586}\index{MainActivity.kt@{MainActivity.kt}!AuthorTile@{AuthorTile}}
+\index{AuthorTile@{AuthorTile}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{AuthorTile()}{AuthorTile()}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_a4fc74b4db458c83779ed6ca69cf10586} 
+Composable fun Author\+Tile (\begin{DoxyParamCaption}\item[{author\+:\+String}]{}{, }\item[{on\+Click\+:() -\/$>$}]{Unit}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MainActivity_8kt_a4eabb5d7fb982fccf3a85c10e2dc82d1}\index{MainActivity.kt@{MainActivity.kt}!isPortrait@{isPortrait}}
+\index{isPortrait@{isPortrait}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{isPortrait()}{isPortrait()}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_a4eabb5d7fb982fccf3a85c10e2dc82d1} 
+Composable fun is\+Portrait (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MainActivity_8kt_ab758b9631a16afb9c667553b294ff331}\index{MainActivity.kt@{MainActivity.kt}!LandscapeView@{LandscapeView}}
+\index{LandscapeView@{LandscapeView}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{LandscapeView()}{LandscapeView()}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_ab758b9631a16afb9c667553b294ff331} 
+Composable fun Landscape\+View (\begin{DoxyParamCaption}\item[{selected\+Album\+:\+Pair$<$ Album, Image\+Bitmap $>$}]{}{, }\item[{nav\+Controller\+:\+Nav\+Host\+Controller}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MainActivity_8kt_a0b24a0d20d9ad1b88a492ac36a151345}\index{MainActivity.kt@{MainActivity.kt}!MainScreen@{MainScreen}}
+\index{MainScreen@{MainScreen}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{MainScreen()}{MainScreen()}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_a0b24a0d20d9ad1b88a492ac36a151345} 
+Composable fun Main\+Screen (\begin{DoxyParamCaption}\item[{library\+View\+Model\+:\+Library\+View\+Model}]{}{ = {\ttfamily hiltViewModel()}}\end{DoxyParamCaption})}
+
+\Hypertarget{MainActivity_8kt_a0bda2bc8c49dfc54e4b4ab9a3e5fcb96}\index{MainActivity.kt@{MainActivity.kt}!MainScreenContent@{MainScreenContent}}
+\index{MainScreenContent@{MainScreenContent}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{MainScreenContent()}{MainScreenContent()}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_a0bda2bc8c49dfc54e4b4ab9a3e5fcb96} 
+Composable fun Main\+Screen\+Content (\begin{DoxyParamCaption}\item[{nav\+Controller\+:\+Nav\+Host\+Controller}]{}{, }\item[{library\+View\+Model\+:\+Library\+View\+Model}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MainActivity_8kt_a90eb33af17d6fe7524336d0569408241}\index{MainActivity.kt@{MainActivity.kt}!PortraitView@{PortraitView}}
+\index{PortraitView@{PortraitView}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{PortraitView()}{PortraitView()}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_a90eb33af17d6fe7524336d0569408241} 
+Composable fun Portrait\+View (\begin{DoxyParamCaption}\item[{selected\+Album\+:\+Pair$<$ Album, Image\+Bitmap $>$}]{}{, }\item[{nav\+Controller\+:\+Nav\+Host\+Controller}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MainActivity_8kt_a886137eca0837bb0cf725d2164713a36}\index{MainActivity.kt@{MainActivity.kt}!SongItem@{SongItem}}
+\index{SongItem@{SongItem}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{SongItem()}{SongItem()}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_a886137eca0837bb0cf725d2164713a36} 
+Composable fun Song\+Item (\begin{DoxyParamCaption}\item[{song\+:\+Song}]{}{, }\item[{nav\+Controller\+:\+Nav\+Host\+Controller}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{MainActivity_8kt_ab4cec0eb9017bff08225056ca8633c65}\index{MainActivity.kt@{MainActivity.kt}!SongsScreen@{SongsScreen}}
+\index{SongsScreen@{SongsScreen}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{SongsScreen()}{SongsScreen()}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_ab4cec0eb9017bff08225056ca8633c65} 
+Composable fun Songs\+Screen (\begin{DoxyParamCaption}\item[{nav\+Controller\+:\+Nav\+Host\+Controller}]{}{, }\item[{library\+View\+Model\+:\+Library\+View\+Model}]{}{, }\item[{album\+Id\+:\+Long?}]{}{, }\item[{modifier\+:\+Modifier}]{}{ = {\ttfamily Modifier}}\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\Hypertarget{MainActivity_8kt_af1b05ae188ffe5e8df4298a24d019296}\index{MainActivity.kt@{MainActivity.kt}!SensorEventListener@{SensorEventListener}}
+\index{SensorEventListener@{SensorEventListener}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{SensorEventListener}{SensorEventListener}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_af1b05ae188ffe5e8df4298a24d019296} 
+lateinit var Sensor\+Event\+Listener}
+
+\Hypertarget{MainActivity_8kt_a7c98a525f8a0107bc87740c2d85c07e4}\index{MainActivity.kt@{MainActivity.kt}!sensorManager@{sensorManager}}
+\index{sensorManager@{sensorManager}!MainActivity.kt@{MainActivity.kt}}
+\doxysubsubsection{\texorpdfstring{sensorManager}{sensorManager}}
+{\footnotesize\ttfamily \label{MainActivity_8kt_a7c98a525f8a0107bc87740c2d85c07e4} 
+lateinit var sensor\+Manager}
+

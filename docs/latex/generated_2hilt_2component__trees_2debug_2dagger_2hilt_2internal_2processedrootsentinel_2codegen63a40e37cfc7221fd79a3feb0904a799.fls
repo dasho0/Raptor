@@ -1,0 +1,5 @@
+PWD /home/mattys/skrypty-i-syfy/studia/rok2/android/Raptor2/docs/latex
+INPUT /usr/share/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT generated_2hilt_2component__trees_2debug_2dagger_2hilt_2internal_2processedrootsentinel_2codegen63a40e37cfc7221fd79a3feb0904a799.tex
+OUTPUT generated_2hilt_2component__trees_2debug_2dagger_2hilt_2internal_2processedrootsentinel_2codegen63a40e37cfc7221fd79a3feb0904a799.log

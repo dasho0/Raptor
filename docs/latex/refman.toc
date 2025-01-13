@@ -1,0 +1,91 @@
+\@ifundefined {etoctocstyle}{\let \etoc@startlocaltoc \@gobble \let \etoc@settocdepth \@gobble \let \etoc@depthtag \@gobble \let \etoc@setlocaltop \@gobble }{}
+\contentsline {chapter}{\numberline {1}Hierarchical Index}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Class Hierarchy}{1}{section.1.1}%
+\contentsline {chapter}{\numberline {2}Class Index}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Class List}{3}{section.2.1}%
+\contentsline {chapter}{\numberline {3}File Index}{5}{chapter.3}%
+\contentsline {section}{\numberline {3.1}File List}{5}{section.3.1}%
+\contentsline {chapter}{\numberline {4}Class Documentation}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Example\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Unit\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Test Class Reference}{7}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Detailed Description}{7}{subsection.4.1.1}%
+\contentsline {section}{\numberline {4.2}Logic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dao Interface Reference}{7}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Raptor Class Reference}{7}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Detailed Description}{7}{subsection.4.3.1}%
+\contentsline {section}{\numberline {4.4}UIDao Interface Reference}{7}{section.4.4}%
+\contentsline {chapter}{\numberline {5}File Documentation}{9}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Example\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Instrumented\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Test.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{9}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Function Documentation}{9}{subsection.5.1.1}%
+\contentsline {subsubsection}{\numberline {5.1.1.1}RunWith()}{9}{subsubsection.5.1.1.1}%
+\contentsline {section}{\numberline {5.2}Audio\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Player.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{9}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Function Documentation}{10}{subsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.1.1}constructor()}{10}{subsubsection.5.2.1.1}%
+\contentsline {section}{\numberline {5.3}Biometric\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Authenticator.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{11}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Function Documentation}{11}{subsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.1.1}BiometricAuthenticationStatus()}{11}{subsubsection.5.3.1.1}%
+\contentsline {subsubsection}{\numberline {5.3.1.2}BiometricAuthenticator()}{11}{subsubsection.5.3.1.2}%
+\contentsline {section}{\numberline {5.4}Database\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Manager.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{12}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Function Documentation}{12}{subsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.1.1}constructor()}{12}{subsubsection.5.4.1.1}%
+\contentsline {section}{\numberline {5.5}Album.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{13}{section.5.5}%
+\contentsline {section}{\numberline {5.6}Album\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Author\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Cross\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Ref.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{13}{section.5.6}%
+\contentsline {section}{\numberline {5.7}Author.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{13}{section.5.7}%
+\contentsline {section}{\numberline {5.8}Song.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{13}{section.5.8}%
+\contentsline {section}{\numberline {5.9}Library\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Db.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{13}{section.5.9}%
+\contentsline {subsection}{\numberline {5.9.1}Function Documentation}{14}{subsection.5.9.1}%
+\contentsline {subsubsection}{\numberline {5.9.1.1}Database()}{14}{subsubsection.5.9.1.1}%
+\contentsline {section}{\numberline {5.10}Logic\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Dao.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{14}{section.5.10}%
+\contentsline {section}{\numberline {5.11}Album\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}With\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Authors.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{14}{section.5.11}%
+\contentsline {section}{\numberline {5.12}Album\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}With\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Songs.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{14}{section.5.12}%
+\contentsline {section}{\numberline {5.13}Author\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}With\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Albums.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{14}{section.5.13}%
+\contentsline {section}{\numberline {5.14}UIDao.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{14}{section.5.14}%
+\contentsline {section}{\numberline {5.15}Image\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Manager.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{14}{section.5.15}%
+\contentsline {subsection}{\numberline {5.15.1}Function Documentation}{14}{subsection.5.15.1}%
+\contentsline {subsubsection}{\numberline {5.15.1.1}constructor()}{14}{subsubsection.5.15.1.1}%
+\contentsline {section}{\numberline {5.16}Main\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Activity.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{15}{section.5.16}%
+\contentsline {subsection}{\numberline {5.16.1}Function Documentation}{15}{subsection.5.16.1}%
+\contentsline {subsubsection}{\numberline {5.16.1.1}AlbumsScreen()}{15}{subsubsection.5.16.1.1}%
+\contentsline {subsubsection}{\numberline {5.16.1.2}AuthenticationScreen()}{16}{subsubsection.5.16.1.2}%
+\contentsline {subsubsection}{\numberline {5.16.1.3}AuthorTile()}{16}{subsubsection.5.16.1.3}%
+\contentsline {subsubsection}{\numberline {5.16.1.4}isPortrait()}{16}{subsubsection.5.16.1.4}%
+\contentsline {subsubsection}{\numberline {5.16.1.5}LandscapeView()}{16}{subsubsection.5.16.1.5}%
+\contentsline {subsubsection}{\numberline {5.16.1.6}MainScreen()}{16}{subsubsection.5.16.1.6}%
+\contentsline {subsubsection}{\numberline {5.16.1.7}MainScreenContent()}{16}{subsubsection.5.16.1.7}%
+\contentsline {subsubsection}{\numberline {5.16.1.8}PortraitView()}{16}{subsubsection.5.16.1.8}%
+\contentsline {subsubsection}{\numberline {5.16.1.9}SongItem()}{16}{subsubsection.5.16.1.9}%
+\contentsline {subsubsection}{\numberline {5.16.1.10}SongsScreen()}{17}{subsubsection.5.16.1.10}%
+\contentsline {subsection}{\numberline {5.16.2}Variable Documentation}{17}{subsection.5.16.2}%
+\contentsline {subsubsection}{\numberline {5.16.2.1}SensorEventListener}{17}{subsubsection.5.16.2.1}%
+\contentsline {subsubsection}{\numberline {5.16.2.2}sensorManager}{17}{subsubsection.5.16.2.2}%
+\contentsline {section}{\numberline {5.17}Music\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}File\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Loader.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{17}{section.5.17}%
+\contentsline {subsection}{\numberline {5.17.1}Function Documentation}{17}{subsection.5.17.1}%
+\contentsline {subsubsection}{\numberline {5.17.1.1}constructor()}{17}{subsubsection.5.17.1.1}%
+\contentsline {section}{\numberline {5.18}Raptor.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{18}{section.5.18}%
+\contentsline {section}{\numberline {5.19}Song\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Play\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}UI.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{18}{section.5.19}%
+\contentsline {subsection}{\numberline {5.19.1}Function Documentation}{18}{subsection.5.19.1}%
+\contentsline {subsubsection}{\numberline {5.19.1.1}CurrentSongInfo()}{18}{subsubsection.5.19.1.1}%
+\contentsline {subsubsection}{\numberline {5.19.1.2}MediaControls()}{18}{subsubsection.5.19.1.2}%
+\contentsline {subsubsection}{\numberline {5.19.1.3}SuppressLint()}{18}{subsubsection.5.19.1.3}%
+\contentsline {section}{\numberline {5.20}Wave\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Form\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Seek\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Bar.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{18}{section.5.20}%
+\contentsline {subsection}{\numberline {5.20.1}Function Documentation}{19}{subsection.5.20.1}%
+\contentsline {subsubsection}{\numberline {5.20.1.1}WaveformSeekBar()}{19}{subsubsection.5.20.1.1}%
+\contentsline {section}{\numberline {5.21}Tag\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Extractor.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{19}{section.5.21}%
+\contentsline {subsection}{\numberline {5.21.1}Function Documentation}{19}{subsection.5.21.1}%
+\contentsline {subsubsection}{\numberline {5.21.1.1}constructor()}{19}{subsubsection.5.21.1.1}%
+\contentsline {section}{\numberline {5.22}Color.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{20}{section.5.22}%
+\contentsline {section}{\numberline {5.23}Theme.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{20}{section.5.23}%
+\contentsline {section}{\numberline {5.24}Type.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{20}{section.5.24}%
+\contentsline {section}{\numberline {5.25}Albums\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Screen\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}View\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{20}{section.5.25}%
+\contentsline {subsection}{\numberline {5.25.1}Function Documentation}{20}{subsection.5.25.1}%
+\contentsline {subsubsection}{\numberline {5.25.1.1}HiltViewModel()}{20}{subsubsection.5.25.1.1}%
+\contentsline {section}{\numberline {5.26}Album\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Tile\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}View\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{20}{section.5.26}%
+\contentsline {section}{\numberline {5.27}Library\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}View\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{20}{section.5.27}%
+\contentsline {subsection}{\numberline {5.27.1}Function Documentation}{20}{subsection.5.27.1}%
+\contentsline {subsubsection}{\numberline {5.27.1.1}constructor()}{20}{subsubsection.5.27.1.1}%
+\contentsline {section}{\numberline {5.28}Player\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}View\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Model.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{21}{section.5.28}%
+\contentsline {subsection}{\numberline {5.28.1}Function Documentation}{21}{subsection.5.28.1}%
+\contentsline {subsubsection}{\numberline {5.28.1.1}constructor()}{21}{subsubsection.5.28.1.1}%
+\contentsline {section}{\numberline {5.29}Wave\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Form\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Extractor.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{22}{section.5.29}%
+\contentsline {subsection}{\numberline {5.29.1}Function Documentation}{22}{subsection.5.29.1}%
+\contentsline {subsubsection}{\numberline {5.29.1.1}extractWaveformDataFromUri()}{22}{subsubsection.5.29.1.1}%
+\contentsline {section}{\numberline {5.30}Example\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Unit\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}Test.\discretionary {\mbox {\scriptsize $\hookleftarrow $}}{}{}kt File Reference}{22}{section.5.30}%
+\contentsline {chapter}{Index}{23}{section*.22}%

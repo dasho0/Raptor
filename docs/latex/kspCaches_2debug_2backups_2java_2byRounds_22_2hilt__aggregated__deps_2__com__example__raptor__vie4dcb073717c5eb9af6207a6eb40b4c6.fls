@@ -1,0 +1,5 @@
+PWD /home/mattys/skrypty-i-syfy/studia/rok2/android/Raptor2/docs/latex
+INPUT /usr/share/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT kspCaches_2debug_2backups_2java_2byRounds_22_2hilt__aggregated__deps_2__com__example__raptor__vie4dcb073717c5eb9af6207a6eb40b4c6.tex
+OUTPUT kspCaches_2debug_2backups_2java_2byRounds_22_2hilt__aggregated__deps_2__com__example__raptor__vie4dcb073717c5eb9af6207a6eb40b4c6.log
