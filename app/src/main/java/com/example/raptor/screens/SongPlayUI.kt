@@ -1,15 +1,11 @@
 package com.example.raptor.screens
 
 import android.annotation.SuppressLint
-import android.graphics.Bitmap
-import android.view.Gravity
 import android.widget.Toast
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -43,12 +39,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-
-import androidx.compose.foundation.layout.*
-
-import androidx.compose.material3.*
-
-import androidx.navigation.compose.*
 import com.example.raptor.R
 
 @Composable
@@ -146,47 +136,66 @@ fun SongPlayUI(songId: Long) {
     LaunchedEffect(Unit) {
         playerViewModel.toast.collect() {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
-
         }
     }
 
-    Box(
+    BoxWithConstraints(
         modifier = Modifier.run {
             fillMaxSize()
                 .paint(
                     painter = painterResource(id = R.drawable.tans3),
-                    contentScale = ContentScale.Crop, // Rozciąga obraz w sposób zachowujący proporcje
-                    alignment = Alignment.Center     // Wyśrodkowanie obrazu
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.Center
                 )
         }
     ) {
-        // Display cover and track info in the center
-        CurrentSongInfo(
-            title,
-            artists,
-            cover,
-            modifier = Modifier
-                .align(Alignment.Center)
-        )
-
-        // Waveform and controls at the bottom
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Bottom),
-            modifier = Modifier
-                .fillMaxHeight()
-                .padding(bottom = 64.dp)
-        ) {
-            WaveformSeekBar(
-                waveform = waveform,
-                progress = progressBarPosition,
-                modifier = Modifier
-                    .padding(horizontal = 16.dp)
-                    .fillMaxWidth()
-                    .height(80.dp),
-                onProgressChanged = { playerViewModel.onProgressBarMoved(it) }
-            )
-            MediaControls(playerViewModel)
+        if (maxWidth < maxHeight) {
+            // Portrait mode
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                CurrentSongInfo(title, artists, cover, modifier = Modifier)
+                Spacer(modifier = Modifier.height(16.dp))
+                MediaControls(playerViewModel)
+                Spacer(modifier = Modifier.height(16.dp))
+                WaveformSeekBar(
+                    waveform = waveform,
+                    progress = progressBarPosition,
+                    modifier = Modifier
+                        .padding(horizontal = 16.dp)
+                        .fillMaxWidth()
+                        .height(80.dp),
+                    onProgressChanged = { playerViewModel.onProgressBarMoved(it) }
+                )
+            }
+        } else {
+            // Landscape mode
+            Row(
+                modifier = Modifier.fillMaxSize(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                CurrentSongInfo(title, artists, cover, modifier = Modifier.align(Alignment.CenterVertically))
+                Column(
+                    modifier = Modifier.weight(1f),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Spacer(modifier = Modifier.height(20.dp))
+                    WaveformSeekBar(
+                        waveform = waveform,
+                        progress = progressBarPosition,
+                        modifier = Modifier
+                            .padding(horizontal = 16.dp)
+                            .fillMaxWidth()
+                            .height(80.dp),
+                        onProgressChanged = { playerViewModel.onProgressBarMoved(it) }
+                    )
+                    MediaControls(playerViewModel)
+                }
+            }
         }
     }
 }
