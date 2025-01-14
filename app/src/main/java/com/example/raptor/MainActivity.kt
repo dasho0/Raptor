@@ -292,7 +292,7 @@ fun AlbumsScreen(
     var selectedAlbum by rememberSaveable { mutableStateOf<Pair<Album, ImageBitmap>?>(null) }
 
     if (selectedAlbum == null) {
-        Box(
+        BoxWithConstraints(
             modifier = Modifier
                 .fillMaxSize()
                 .paint(
@@ -301,8 +301,10 @@ fun AlbumsScreen(
                     alignment = Alignment.Center
                 ),
         ) {
+            val columns = if (maxWidth < maxHeight) 3 else 5
+
             LazyVerticalGrid(
-                columns = GridCells.Fixed(3),
+                columns = GridCells.Fixed(columns),
                 modifier = Modifier.fillMaxSize(),
                 contentPadding = PaddingValues(16.dp),
                 verticalArrangement = Arrangement.spacedBy(16.dp),
