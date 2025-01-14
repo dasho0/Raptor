@@ -1,0 +1,11 @@
+# Fdb version 4
+["pdflatex"] 1736778540.15849 "AudioPlayer_8kt.tex" "AudioPlayer_8kt.pdf" "AudioPlayer_8kt" 1736778540.22937 2
+  "/usr/share/texmf-dist/web2c/texmf.cnf" 1736268207 41588 b43d3e860a4f94167ee1e725ff526a72 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1736343341 10437523 c2e1d640569b94b6b8bd6805b3594dc3 ""
+  "AudioPlayer_8kt.aux" 1736778540.15694 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "AudioPlayer_8kt.tex" 1736778484.37878 142 b6fd92e38dd2c8e9ee7d1af33ac7d503 ""
+  (generated)
+  "AudioPlayer_8kt.aux"
+  "AudioPlayer_8kt.log"
+  "AudioPlayer_8kt.pdf"
+  (rewritten before read)

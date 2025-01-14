@@ -1,0 +1,38 @@
+\doxysection{Music\+File\+Loader.\+kt File Reference}
+\hypertarget{MusicFileLoader_8kt}{}\label{MusicFileLoader_8kt}\index{MusicFileLoader.kt@{MusicFileLoader.kt}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+class Music\+File\+Loader Inject \mbox{\hyperlink{MusicFileLoader_8kt_a757590051ef86ee9751e48d7951a98ab}{constructor}} ( @Application\+Context private val context\+:\+Context)
+\begin{DoxyCompactList}\small\item\em Handles the loading of music files in a given directory and its subdirectories as well as launching a file picker instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{MusicFileLoader_8kt_a757590051ef86ee9751e48d7951a98ab}\index{MusicFileLoader.kt@{MusicFileLoader.kt}!constructor@{constructor}}
+\index{constructor@{constructor}!MusicFileLoader.kt@{MusicFileLoader.kt}}
+\doxysubsubsection{\texorpdfstring{constructor()}{constructor()}}
+{\footnotesize\ttfamily \label{MusicFileLoader_8kt_a757590051ef86ee9751e48d7951a98ab} 
+class Music\+File\+Loader Inject constructor (\begin{DoxyParamCaption}\item[{ @Application\+Context private val context\+:\+Context}]{}{}\end{DoxyParamCaption})}
+
+
+
+Handles the loading of music files in a given directory and its subdirectories as well as launching a file picker instance. 
+
+Dataclass representing a song file
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Name of the file \\
+\hline
+{\em uri} & {\ttfamily Uri} corresponding to the file \\
+\hline
+{\em mime\+Type} & The type of the file\\
+\hline
+\end{DoxyParams}
+Observable list of {\ttfamily Song\+File} currently loaded
+
+@Composable function that prepares the file picker launcher
+
+Must be called before {\ttfamily launch()}
+
+Launches the file picker

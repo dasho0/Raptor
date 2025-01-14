@@ -1,0 +1,105 @@
+\doxysection{/home/mattys/skrypty-\/i-\/syfy/studia/rok2/android/\+Raptor2/app/build/generated/hilt/component\+\_\+sources/debug/com/example/raptor/\+Raptor\+\_\+\+Hilt\+Components.java File Reference}
+\hypertarget{debug_2com_2example_2raptor_2Raptor__HiltComponents_8java}{}\label{debug_2com_2example_2raptor_2Raptor__HiltComponents_8java}\index{/home/mattys/skrypty-\/i-\/syfy/studia/rok2/android/Raptor2/app/build/generated/hilt/component\_sources/debug/com/example/raptor/Raptor\_HiltComponents.java@{/home/mattys/skrypty-\/i-\/syfy/studia/rok2/android/Raptor2/app/build/generated/hilt/component\_sources/debug/com/example/raptor/Raptor\_HiltComponents.java}}
+{\ttfamily import com.\+example.\+raptor.\+viewmodels.\+Album\+Tile\+View\+Model\+\_\+\+Hilt\+Modules;}\newline
+{\ttfamily import com.\+example.\+raptor.\+viewmodels.\+Albums\+Screen\+View\+Model\+\_\+\+Hilt\+Modules;}\newline
+{\ttfamily import com.\+example.\+raptor.\+viewmodels.\+Library\+View\+Model\+\_\+\+Hilt\+Modules;}\newline
+{\ttfamily import com.\+example.\+raptor.\+viewmodels.\+Player\+View\+Model\+\_\+\+Hilt\+Modules;}\newline
+{\ttfamily import dagger.\+Binds;}\newline
+{\ttfamily import dagger.\+Component;}\newline
+{\ttfamily import dagger.\+Module;}\newline
+{\ttfamily import dagger.\+Subcomponent;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+components.\+Activity\+Component;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+components.\+Activity\+Retained\+Component;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+components.\+Fragment\+Component;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+components.\+Service\+Component;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+components.\+View\+Component;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+components.\+View\+Model\+Component;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+components.\+View\+With\+Fragment\+Component;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+flags.\+Fragment\+Get\+Context\+Fix;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+flags.\+Hilt\+Wrapper\+\_\+\+Fragment\+Get\+Context\+Fix\+\_\+\+Fragment\+Get\+Context\+Fix\+Module;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+builders.\+Activity\+Component\+Builder;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+builders.\+Activity\+Retained\+Component\+Builder;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+builders.\+Fragment\+Component\+Builder;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+builders.\+Service\+Component\+Builder;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+builders.\+View\+Component\+Builder;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+builders.\+View\+Model\+Component\+Builder;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+builders.\+View\+With\+Fragment\+Component\+Builder;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+lifecycle.\+Default\+View\+Model\+Factories;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+lifecycle.\+Hilt\+View\+Model\+Factory;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+lifecycle.\+Hilt\+Wrapper\+\_\+\+Default\+View\+Model\+Factories\+\_\+\+Activity\+Module;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+lifecycle.\+Hilt\+Wrapper\+\_\+\+Hilt\+View\+Model\+Factory\+\_\+\+Activity\+Creator\+Entry\+Point;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+lifecycle.\+Hilt\+Wrapper\+\_\+\+Hilt\+View\+Model\+Factory\+\_\+\+View\+Model\+Module;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+managers.\+Activity\+Component\+Manager;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+managers.\+Fragment\+Component\+Manager;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+managers.\+Hilt\+Wrapper\+\_\+\+Activity\+Retained\+Component\+Manager\+\_\+\+Activity\+Retained\+Component\+Builder\+Entry\+Point;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+managers.\+Hilt\+Wrapper\+\_\+\+Activity\+Retained\+Component\+Manager\+\_\+\+Activity\+Retained\+Lifecycle\+Entry\+Point;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+managers.\+Hilt\+Wrapper\+\_\+\+Activity\+Retained\+Component\+Manager\+\_\+\+Lifecycle\+Module;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+managers.\+Hilt\+Wrapper\+\_\+\+Saved\+State\+Handle\+Module;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+managers.\+Service\+Component\+Manager;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+managers.\+View\+Component\+Manager;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+modules.\+Application\+Context\+Module;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+internal.\+modules.\+Hilt\+Wrapper\+\_\+\+Activity\+Module;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+scopes.\+Activity\+Retained\+Scoped;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+scopes.\+Activity\+Scoped;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+scopes.\+Fragment\+Scoped;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+scopes.\+Service\+Scoped;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+scopes.\+View\+Model\+Scoped;}\newline
+{\ttfamily import dagger.\+hilt.\+android.\+scopes.\+View\+Scoped;}\newline
+{\ttfamily import dagger.\+hilt.\+components.\+Singleton\+Component;}\newline
+{\ttfamily import dagger.\+hilt.\+internal.\+Generated\+Component;}\newline
+{\ttfamily import dagger.\+hilt.\+migration.\+Disable\+Install\+In\+Check;}\newline
+{\ttfamily import javax.\+inject.\+Singleton;}\newline
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classcom_1_1example_1_1raptor_1_1Raptor__HiltComponents}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components}}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ServiceCBuilderModule}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+Service\+CBuilder\+Module}}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ActivityRetainedCBuilderModule}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+Activity\+Retained\+CBuilder\+Module}}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ActivityCBuilderModule}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+Activity\+CBuilder\+Module}}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ViewModelCBuilderModule}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+View\+Model\+CBuilder\+Module}}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ViewCBuilderModule}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+View\+CBuilder\+Module}}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1FragmentCBuilderModule}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+Fragment\+CBuilder\+Module}}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ViewWithFragmentCBuilderModule}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+View\+With\+Fragment\+CBuilder\+Module}}
+\item 
+class {\bfseries com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+SingletonC}
+\item 
+class {\bfseries com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+ServiceC}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ServiceC_1_1Builder}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+Service\+C.\+Builder}}
+\item 
+class {\bfseries com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+Activity\+RetainedC}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ActivityRetainedC_1_1Builder}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+Activity\+Retained\+C.\+Builder}}
+\item 
+class {\bfseries com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+ActivityC}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ActivityC_1_1Builder}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+Activity\+C.\+Builder}}
+\item 
+class {\bfseries com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+View\+ModelC}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ViewModelC_1_1Builder}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+View\+Model\+C.\+Builder}}
+\item 
+class {\bfseries com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+ViewC}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ViewC_1_1Builder}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+View\+C.\+Builder}}
+\item 
+class {\bfseries com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+FragmentC}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1FragmentC_1_1Builder}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+Fragment\+C.\+Builder}}
+\item 
+class {\bfseries com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+View\+With\+FragmentC}
+\item 
+interface \mbox{\hyperlink{interfacecom_1_1example_1_1raptor_1_1Raptor__HiltComponents_1_1ViewWithFragmentC_1_1Builder}{com.\+example.\+raptor.\+Raptor\+\_\+\+Hilt\+Components.\+View\+With\+Fragment\+C.\+Builder}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Packages}
+\begin{DoxyCompactItemize}
+\item 
+package \mbox{\hyperlink{namespacecom_1_1example_1_1raptor}{com.\+example.\+raptor}}
+\end{DoxyCompactItemize}

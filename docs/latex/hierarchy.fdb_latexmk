@@ -1,0 +1,11 @@
+# Fdb version 4
+["pdflatex"] 1736778556.45136 "hierarchy.tex" "hierarchy.pdf" "hierarchy" 1736778556.51227 2
+  "/usr/share/texmf-dist/web2c/texmf.cnf" 1736268207 41588 b43d3e860a4f94167ee1e725ff526a72 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1736343341 10437523 c2e1d640569b94b6b8bd6805b3594dc3 ""
+  "hierarchy.aux" 1736778556.44999 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "hierarchy.tex" 1736774723.52174 25823 bc46ae82d2a42d545a1e7c4adb26ee99 ""
+  (generated)
+  "hierarchy.aux"
+  "hierarchy.log"
+  "hierarchy.pdf"
+  (rewritten before read)

@@ -1,0 +1,49 @@
+\doxysection{Tag\+Extractor.\+kt File Reference}
+\hypertarget{TagExtractor_8kt}{}\label{TagExtractor_8kt}\index{TagExtractor.kt@{TagExtractor.kt}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+class Tag\+Extractor Inject \mbox{\hyperlink{TagExtractor_8kt_af35264b9689c99997f93aa29dd5bb6e5}{constructor}} ( @Application\+Context private val context\+:\+Context, private val image\+Manager\+:\+Image\+Manager)
+\begin{DoxyCompactList}\small\item\em This class handles metadata extraction from a collection of {\ttfamily Song\+File}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{TagExtractor_8kt_af35264b9689c99997f93aa29dd5bb6e5}\index{TagExtractor.kt@{TagExtractor.kt}!constructor@{constructor}}
+\index{constructor@{constructor}!TagExtractor.kt@{TagExtractor.kt}}
+\doxysubsubsection{\texorpdfstring{constructor()}{constructor()}}
+{\footnotesize\ttfamily \label{TagExtractor_8kt_af35264b9689c99997f93aa29dd5bb6e5} 
+class Tag\+Extractor Inject constructor (\begin{DoxyParamCaption}\item[{ @Application\+Context private val context\+:\+Context}]{}{, }\item[{private val image\+Manager\+:\+Image\+Manager}]{}{}\end{DoxyParamCaption})}
+
+
+
+This class handles metadata extraction from a collection of {\ttfamily Song\+File}. 
+
+It will also copy all album covers to app storage Dataclass representing the tags a song has.
+
+
+\begin{DoxyParams}{Parameters}
+{\em artists} & A list of artist names that authored the song \\
+\hline
+{\em album} & A list of artist names that authored the album of the song \\
+\hline
+{\em title} & The title of the song \\
+\hline
+{\em release\+Date} & A string representing the release date of the song \\
+\hline
+{\em album\+Artists} & The title of the album of the song \\
+\hline
+{\em file\+Uri} & {\ttfamily Uri} of the song \\
+\hline
+{\em cover\+Uri} & {\ttfamily Uri} of the song cover art, in app storage\\
+\hline
+\end{DoxyParams}
+Extracts the tags and album covers to app storage of a list of {\ttfamily Song\+File}
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+List} & List of {\ttfamily Song\+File}, each element should have it\textquotesingle{}s data extracted\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+List of {\ttfamily Song\+Info} corresponding to each input song file
+\end{DoxyReturn}

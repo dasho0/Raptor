@@ -1,0 +1,11 @@
+# Fdb version 4
+["pdflatex"] 1736778669.35282 "MainActivity_8kt.tex" "MainActivity_8kt.pdf" "MainActivity_8kt" 1736778669.41262 2
+  "/usr/share/texmf-dist/web2c/texmf.cnf" 1736268207 41588 b43d3e860a4f94167ee1e725ff526a72 ""
+  "/var/lib/texmf/web2c/pdftex/pdflatex.fmt" 1736343341 10437523 c2e1d640569b94b6b8bd6805b3594dc3 ""
+  "MainActivity_8kt.aux" 1736778669.35134 32 3985256e7290058c681f74d7a3565a19 "pdflatex"
+  "MainActivity_8kt.tex" 1736778484.38078 147 109d3e0c8507dc0911d86d7482fbb271 ""
+  (generated)
+  "MainActivity_8kt.aux"
+  "MainActivity_8kt.log"
+  "MainActivity_8kt.pdf"
+  (rewritten before read)

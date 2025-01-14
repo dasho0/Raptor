@@ -1,0 +1,60 @@
+\doxysection{Audio\+Player.\+kt File Reference}
+\hypertarget{AudioPlayer_8kt}{}\label{AudioPlayer_8kt}\index{AudioPlayer.kt@{AudioPlayer.kt}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+class Audio\+Player Inject \mbox{\hyperlink{AudioPlayer_8kt_a15ad0b8d11cadf948d15ae0332dbd2d9}{constructor}} (@Application\+Context context\+:\+Context)
+\begin{DoxyCompactList}\small\item\em This class handles audio playback in the media player, by wrapping around an {\ttfamily Exo\+Player} instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{AudioPlayer_8kt_a15ad0b8d11cadf948d15ae0332dbd2d9}\index{AudioPlayer.kt@{AudioPlayer.kt}!constructor@{constructor}}
+\index{constructor@{constructor}!AudioPlayer.kt@{AudioPlayer.kt}}
+\doxysubsubsection{\texorpdfstring{constructor()}{constructor()}}
+{\footnotesize\ttfamily \label{AudioPlayer_8kt_a15ad0b8d11cadf948d15ae0332dbd2d9} 
+class Audio\+Player Inject constructor (\begin{DoxyParamCaption}\item[{@Application\+Context context\+:\+Context}]{}{}\end{DoxyParamCaption})}
+
+
+
+This class handles audio playback in the media player, by wrapping around an {\ttfamily Exo\+Player} instance. 
+
+It handles the logic of media controls, what song to play, at what time, etc. Gets the current playback position of the currently playing song in milliseconds
+
+Gets the duration of the currently playing song in milliseconds
+
+Enum describing all states that the player can be in
+
+Gets the current playback state of the player, as described in {\ttfamily Playback\+States}
+
+Plays a given {\ttfamily Song} and sets it as the current song
+
+Player can\textquotesingle{}t be in the playing state at the time of calling.
+
+
+\begin{DoxyParams}{Parameters}
+{\em song} & {\ttfamily Song} to play\\
+\hline
+\end{DoxyParams}
+Restarts playback from the beginning of the current song
+
+Pauses the currently playing song
+
+Player must be in the playing state when calling
+
+Changes the currently playing song
+
+
+\begin{DoxyParams}{Parameters}
+{\em song} & song to change to\\
+\hline
+\end{DoxyParams}
+Changes the timeline position of the playback to some value in milliseconds
+
+
+\begin{DoxyParams}{Parameters}
+{\em time} & value in milliseconds to change playback to\\
+\hline
+\end{DoxyParams}
+Releases the internal {\ttfamily Exo\+Player} object
+
+Must be called in order to free memory, when an object of this class is no longer used

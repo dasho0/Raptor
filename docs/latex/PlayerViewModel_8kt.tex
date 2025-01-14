@@ -1,0 +1,43 @@
+\doxysection{Player\+View\+Model.\+kt File Reference}
+\hypertarget{PlayerViewModel_8kt}{}\label{PlayerViewModel_8kt}\index{PlayerViewModel.kt@{PlayerViewModel.kt}}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{AlbumsScreenViewModel_8kt_a8adddc108920ac5af8d78cf1ae78c4e8}{Hilt\+View\+Model}} class Player\+View\+Model Inject \mbox{\hyperlink{PlayerViewModel_8kt_a6e7adaaa8d4bd04d4848ca0a9c35c25e}{constructor}} (private val audio\+Player\+:\+Audio\+Player, private val database\+Manager\+:\+Database\+Manager, private val image\+Manager\+:\+Image\+Manager, @Application\+Context private val context\+:\+Context, saved\+State\+Handle\+:\+Saved\+State\+Handle)
+\begin{DoxyCompactList}\small\item\em Viewmodel for the player screen. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{PlayerViewModel_8kt_a6e7adaaa8d4bd04d4848ca0a9c35c25e}\index{PlayerViewModel.kt@{PlayerViewModel.kt}!constructor@{constructor}}
+\index{constructor@{constructor}!PlayerViewModel.kt@{PlayerViewModel.kt}}
+\doxysubsubsection{\texorpdfstring{constructor()}{constructor()}}
+{\footnotesize\ttfamily \label{PlayerViewModel_8kt_a6e7adaaa8d4bd04d4848ca0a9c35c25e} 
+\mbox{\hyperlink{AlbumsScreenViewModel_8kt_a8adddc108920ac5af8d78cf1ae78c4e8}{Hilt\+View\+Model}} class Player\+View\+Model Inject constructor (\begin{DoxyParamCaption}\item[{private val audio\+Player\+:\+Audio\+Player}]{}{, }\item[{private val database\+Manager\+:\+Database\+Manager}]{}{, }\item[{private val image\+Manager\+:\+Image\+Manager}]{}{, }\item[{ @Application\+Context private val context\+:\+Context}]{}{, }\item[{saved\+State\+Handle\+:\+Saved\+State\+Handle}]{}{}\end{DoxyParamCaption})}
+
+
+
+Viewmodel for the player screen. 
+
+Flow that represents the position of the playback progress bar
+
+Album icon of the currently playing song
+
+Flow with the title of the currently playing song
+
+Flow with the artists of the current song joined into a string
+
+Flow with the {\ttfamily Album} of the current song
+
+Flow with an {\ttfamily Image\+Bitmap} of the cover of the current song
+
+Observable list of points corresponding to the height of each point on the waveform
+
+This property handles toast sent by the viewmodel in case of an exception or user error
+
+Handle the user tapping on the progress bar and change the playback position
+
+Handle the user tapping the center button. Depending on the playback state the behaviour will be different
+
+If the playback is playing, the button will pause If the playback is paused, the playback will resume If the playback is stopped, the playback will restart
+
+Initialize the {\ttfamily current\+Song} Flow
